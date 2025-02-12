@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
 
   return (
     <Wrapper>
-      <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} isOpen={isMenuOpen}>
+      <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} $isOpen={isMenuOpen}>
         <span></span>
         <span></span>
       </MenuButton>
@@ -55,7 +55,7 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-const MenuButton = styled.button<{ isOpen: boolean }>`
+const MenuButton = styled.button<{ $isOpen: boolean }>`
   position: fixed;
   top: 40px;
   right: 40px;
@@ -80,13 +80,13 @@ const MenuButton = styled.button<{ isOpen: boolean }>`
     transform-origin: center;
 
     &:first-child {
-      transform: ${({ isOpen }) =>
-        isOpen ? 'rotate(45deg) translate(6px, 6px)' : 'rotate(0)'};
+      transform: ${({ $isOpen }) =>
+        $isOpen ? 'rotate(45deg) translate(6px, 6px)' : 'rotate(0)'};
     }
 
     &:last-child {
-      transform: ${({ isOpen }) =>
-        isOpen ? 'rotate(-45deg) translate(6px, -6px)' : 'rotate(0)'};
+      transform: ${({ $isOpen }) =>
+        $isOpen ? 'rotate(-45deg) translate(6px, -6px)' : 'rotate(0)'};
     }
   }
 `;
@@ -149,4 +149,4 @@ const MenuItem = styled.div`
   }
 `;
 
-export default Layout; 
+export default Layout;

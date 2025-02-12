@@ -31,7 +31,7 @@ const HomePage = () => {
           Welcome to Roughfts
         </motion.h1>
         <CoverImage
-          src="assets/cover.jpeg"
+          src="/assets/cover.jpeg"
           alt="Cover"
           style={{ transform: `translateY(${offsetY * 0.5}px)` }}
         />
