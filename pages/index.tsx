@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
@@ -5,6 +6,20 @@ import ProductScroll from '../components/ProductScroll';
 import DiagonalSection from '../components/DiagonalSection';
 
 const HomePage = () => {
+  const [offsetY, setOffsetY] = useState(0);
+
+  const handleScroll = () => {
+    setOffsetY(window.pageYOffset);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Layout>
       <HeroSection>
@@ -15,7 +30,11 @@ const HomePage = () => {
         >
           Welcome to Roughfts
         </motion.h1>
-        <CoverImage src="/cover-image.jpg" alt="Cover" />
+        <CoverImage
+          src="/cover-image.jpg"
+          alt="Cover"
+          style={{ transform: `translateY(${offsetY * 0.5}px)` }}
+        />
       </HeroSection>
 
       <ProductScroll />
@@ -62,6 +81,7 @@ const CoverImage = styled.img`
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  will-change: transform;
 `;
 
 const ContactSection = styled.section`
@@ -73,4 +93,4 @@ const ContactSection = styled.section`
   color: white;
 `;
 
-export default HomePage; 
+export default HomePage;
