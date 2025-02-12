@@ -1,35 +1,47 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <Wrapper>
-      <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        <span></span>
+      <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} isOpen={isMenuOpen}>
         <span></span>
         <span></span>
       </MenuButton>
 
       <AnimatePresence>
         {isMenuOpen && (
-          <Menu
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'tween' }}
+          <FullScreenMenu
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <nav>
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-              </ul>
-            </nav>
-          </Menu>
+            <MenuContent
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <nav>
+                <MenuItem>
+                  <Link href="/">HOME</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href="/works">WORKS</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href="/about">ABOUT</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href="/contact">CONTACT</Link>
+                </MenuItem>
+              </nav>
+            </MenuContent>
+          </FullScreenMenu>
         )}
       </AnimatePresence>
 
@@ -43,55 +55,96 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-const MenuButton = styled.button`
+const MenuButton = styled.button<{ isOpen: boolean }>`
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
+  top: 40px;
+  right: 40px;
+  z-index: 1000;
   background: none;
   border: none;
   cursor: pointer;
-  width: 30px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
 
   span {
     display: block;
     width: 100%;
-    height: 2px;
+    height: 1px;
     background: white;
-    margin: 6px 0;
-    transition: 0.3s;
+    transition: 0.5s;
+    transform-origin: center;
+
+    &:first-child {
+      transform: ${({ isOpen }) =>
+        isOpen ? 'rotate(45deg) translate(6px, 6px)' : 'rotate(0)'};
+    }
+
+    &:last-child {
+      transform: ${({ isOpen }) =>
+        isOpen ? 'rotate(-45deg) translate(6px, -6px)' : 'rotate(0)'};
+    }
   }
 `;
 
-const Menu = styled(motion.div)`
+const FullScreenMenu = styled(motion.div)`
   position: fixed;
   top: 0;
-  right: 0;
-  width: 300px;
+  left: 0;
+  width: 100%;
   height: 100vh;
-  background: #111;
-  z-index: 99;
-  padding: 80px 40px;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-  nav ul {
-    list-style: none;
-    padding: 0;
-    
-    li {
-      margin: 20px 0;
-      
-      a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.5rem;
-        transition: 0.3s;
-        
-        &:hover {
-          color: #666;
-        }
-      }
+const MenuContent = styled(motion.div)`
+  text-align: center;
+  
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+`;
+
+const MenuItem = styled.div`
+  margin: 1rem 0;
+  
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 3rem;
+    font-weight: 200;
+    letter-spacing: 0.2em;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      letter-spacing: 0.3em;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: white;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    &:hover::after {
+      width: 100%;
     }
   }
 `;

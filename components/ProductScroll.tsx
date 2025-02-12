@@ -11,15 +11,28 @@ const ProductScroll = () => {
 
   return (
     <ScrollSection>
-      <ProductContainer
-        initial={{ x: -100, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
+      <SectionTitle
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {products.map((product) => (
-          <ProductCard key={product.id}>
-            <img src={product.image} alt={product.name} />
-            <h3>{product.name}</h3>
+        Selected Works
+      </SectionTitle>
+      <ProductContainer>
+        {products.map((product, index) => (
+          <ProductCard
+            key={product.id}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <ImageWrapper>
+              <img src={product.image} alt={product.name} />
+            </ImageWrapper>
+            <ProductInfo>
+              <h3>{product.name}</h3>
+              <ViewButton>View Project</ViewButton>
+            </ProductInfo>
           </ProductCard>
         ))}
       </ProductContainer>
@@ -29,40 +42,89 @@ const ProductScroll = () => {
 
 const ScrollSection = styled.section`
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+  padding: 100px 0;
   background: #000;
 `;
 
-const ProductContainer = styled(motion.div)`
+const SectionTitle = styled(motion.h2)`
+  font-size: 3rem;
+  font-weight: 200;
+  letter-spacing: 0.2em;
+  color: white;
+  text-align: center;
+  margin-bottom: 4rem;
+`;
+
+const ProductContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 0 5vw;
+  max-width: 1400px;
+  margin: 0 auto;
+`;
+
+const ProductCard = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
   gap: 2rem;
-  padding: 2rem;
-  overflow-x: auto;
-  width: 100%;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
+  align-items: center;
+
+  &:nth-child(even) {
+    direction: rtl;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    
+    &:nth-child(even) {
+      direction: ltr;
+    }
   }
 `;
 
-const ProductCard = styled.div`
-  flex: 0 0 300px;
-  background: #111;
-  border-radius: 8px;
+const ImageWrapper = styled.div`
+  position: relative;
+  padding-top: 56.25%;
   overflow: hidden;
-  
+
   img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
   }
-  
+`;
+
+const ProductInfo = styled.div`
+  color: white;
+  padding: 2rem;
+  direction: ltr;
+
   h3 {
-    color: white;
-    padding: 1rem;
-    margin: 0;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+  }
+`;
+
+const ViewButton = styled.button`
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.1em;
+
+  &:hover {
+    background: white;
+    color: black;
   }
 `;
 
