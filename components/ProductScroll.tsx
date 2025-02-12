@@ -43,9 +43,10 @@ const ProductScroll = () => {
 const ScrollSection = styled.section`
   min-height: 100vh;
   padding: 100px 0;
-  background: #000;
+  background: none;
+  position: relative;
+  z-index: 1;
 `;
-
 const SectionTitle = styled(motion.h2)`
   font-size: 3rem;
   font-weight: 200;

@@ -14,7 +14,6 @@ const HomePage = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -37,8 +36,12 @@ const HomePage = () => {
         />
       </HeroSection>
 
+      {/* 背景を追加 */}
+      <ProductScrollBackground />
+
+      {/* プロダクトリスト */}
       <ProductScroll />
-      
+
       <DiagonalSection />
 
       <ContactSection>
@@ -48,12 +51,22 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
         >
           <h2>Let's Connect</h2>
-          {/* Contact form will go here */}
         </motion.div>
       </ContactSection>
     </Layout>
   );
 };
+
+// 追加: 灰色の透明背景
+const ProductScrollBackground = styled.div`
+  position: absolute;
+  top: 100vh;  // HeroSectionの下から開始
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  z-index: 0; // 背景として下に配置
+`;
 
 const HeroSection = styled.section`
   height: 100vh;
@@ -62,7 +75,7 @@ const HeroSection = styled.section`
   justify-content: center;
   align-items: center;
   position: relative;
-  
+
   h1 {
     font-size: 4rem;
     color: white;
