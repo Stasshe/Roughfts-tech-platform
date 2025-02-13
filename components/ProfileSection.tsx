@@ -13,8 +13,9 @@ const Background = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
+    top: 300px;
     width: 100%;
-    height: 350px; /* 高さを増やす */
+    height: 650px; /* 高さを増やす */
     background: black;
     transform: skewY(-10deg);
     z-index: 1;
@@ -23,7 +24,7 @@ const Background = styled.div`
 
 const ProfileContainer = styled.section`
   position: absolute;
-  top: 45%; /* プロフィールの位置を調整 */
+  top: 60%; /* プロフィールの位置を調整 */
   left: 50%;
   transform: translate(-50%, -50%) skewY(-10deg);
   color: white;
