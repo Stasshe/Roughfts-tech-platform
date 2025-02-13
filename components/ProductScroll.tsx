@@ -1,12 +1,22 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import Link from 'next/link';
+import { projects } from '../data/projects';
 
 const ProductScroll = () => {
-  const products = [
-    { id: 1, name: 'Project 1', image: '/project1.jpg' },
-    { id: 2, name: 'Project 2', image: '/project2.jpg' },
-    { id: 3, name: 'Project 3', image: '/project3.jpg' },
-    // Add more products
+  const featuredProjects = [
+    {
+      ...projects['ventus-talk'],
+      shortIntro: 'A high-performance chat application handling 10,000+ messages daily with real-time synchronization and rich features.',
+    },
+    {
+      ...projects['edu-open-4step'],
+      shortIntro: 'A secure web platform providing educational resource access through an innovative four-step verification process.',
+    },
+    {
+      ...projects['shogi-app'],
+      shortIntro: 'A modern Shogi application featuring both online multiplayer and local AI gameplay, built for iPad.',
+    }
   ];
 
   return (
@@ -19,19 +29,27 @@ const ProductScroll = () => {
         Selected Works
       </SectionTitle>
       <ProductContainer>
-        {products.map((product, index) => (
+        {featuredProjects.map((project, index) => (
           <ProductCard
-            key={product.id}
+            key={project.id}
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <ImageWrapper>
-              <img src={product.image} alt={product.name} />
+              <img src={project.images[0]} alt={project.title} />
             </ImageWrapper>
             <ProductInfo>
-              <h3>{product.name}</h3>
-              <ViewButton>View Project</ViewButton>
+              <h3>{project.title}</h3>
+              <Description>{project.shortIntro}</Description>
+              <TechTags>
+                {project.techStack.slice(0, 3).map((tech, i) => (
+                  <TechTag key={i}>{tech}</TechTag>
+                ))}
+              </TechTags>
+              <Link href={`/works/${project.id}`} passHref>
+                <ViewButton>View Project</ViewButton>
+              </Link>
             </ProductInfo>
           </ProductCard>
         ))}
@@ -127,6 +145,28 @@ const ViewButton = styled.button`
     background: white;
     color: black;
   }
+`;
+
+const Description = styled.p`
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+  opacity: 0.8;
+`;
+
+const TechTags = styled.div`
+  display: flex;
+  gap: 0.8rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+`;
+
+const TechTag = styled.span`
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  opacity: 0.8;
 `;
 
 export default ProductScroll; 
