@@ -163,6 +163,12 @@ const MenuItem = styled.div`
       width: 100%;
     }
   }
+
+  @media (max-width: 768px) {
+    a {
+      font-size: 2rem;
+    }
+  }
 `;
 
 const MenuLink = styled.a`
@@ -194,6 +200,10 @@ const MenuLink = styled.a`
 
   &:hover::after {
     width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
   }
 `;
 
