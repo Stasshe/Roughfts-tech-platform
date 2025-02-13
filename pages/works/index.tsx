@@ -2,17 +2,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import Link from 'next/link';
-
-const works = [
-  {
-    id: 'project1',
-    title: 'Project 1',
-    description: 'Description of project 1',
-    image: '/assets/project1.jpg',
-    slug: 'project1'
-  },
-  // Add more works as needed
-];
+import { projects } from '../../data/projects';
 
 const WorksPage = () => {
   return (
@@ -26,18 +16,23 @@ const WorksPage = () => {
           Works
         </motion.h1>
         <WorksGrid>
-          {works.map((work, index) => (
+          {Object.values(projects).map((work, index) => (
             <motion.div
               key={work.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <WorkCard href={`/works/${work.slug}`}>
-                <WorkImage src={work.image} alt={work.title} />
+              <WorkCard href={`/works/${work.id}`}>
+                <WorkImage src={work.images[0]} alt={work.title} />
                 <WorkInfo>
                   <h2>{work.title}</h2>
                   <p>{work.description}</p>
+                  <TechTags>
+                    {work.techStack.slice(0, 3).map((tech, i) => (
+                      <span key={i}>{tech}</span>
+                    ))}
+                  </TechTags>
                 </WorkInfo>
               </WorkCard>
             </motion.div>
@@ -111,6 +106,21 @@ const WorkInfo = styled.div`
     margin: 0;
     opacity: 0.8;
     font-size: 0.9rem;
+  }
+`;
+
+const TechTags = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+
+  span {
+    background: #222;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    opacity: 0.8;
   }
 `;
 
