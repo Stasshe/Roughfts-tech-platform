@@ -3,39 +3,32 @@ import styled from 'styled-components';
 
 const Background = styled.div`
   position: relative;
-  height: 650px; /* 高さを少し増やす */
+  min-height: 450px;
   background: black;
-  transform: skewY(10deg);
   z-index: 2;
-  margin-top: 250px; /* マージンを少し増やす */
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    top: 300px;
-    width: 100%;
-    height: 650px; /* 高さを増やす */
-    background: black;
-    transform: skewY(-10deg);
-    z-index: 1;
+  margin-top: 150px;
+
+  @media (max-width: 768px) {
+    min-height: 100vh; /* スマホ時に高さを高くする */
   }
 `;
 
 const ProfileContainer = styled.section`
   position: absolute;
-  top: 60%; /* プロフィールの位置を調整 */
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) skewY(-10deg);
+  transform: translate(-50%, -50%);
   color: white;
   display: flex;
   align-items: center;
   z-index: 3;
-  
+
   @media (max-width: 768px) {
-    padding: 2rem 1rem;
+    padding: 1rem;
     flex-direction: column;
-    
+    margin-top: 0;
+    top: 60%;
+
     img {
       width: 100%;
       height: auto;
@@ -46,33 +39,38 @@ const ProfileContainer = styled.section`
 `;
 
 const ProfileImage = styled.img`
-  width: 250px; /* 画像の大きさを調整 */
-  height: 250px; /* 画像の大きさを調整 */
-  border-radius: 50%; /* 円形にする */
-  margin-right: 30px; /* 画像とテキストの間に余白を設定 */
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-right: 30px;
 `;
 
 const ProfileInfo = styled.div`
-  margin-left: 30px; /* テキストの左側に余白を追加 */
+  margin-left: 40px;
+
   h1 {
     margin: 0;
     width: 500px;
     font-size: 2.5em;
   }
+
   p {
     margin-top: 10px;
   }
-  
+
   @media (max-width: 768px) {
     width: 100%;
     padding: 0;
-    
-    h2 {
-      font-size: 2rem;
+
+    h1 {
+      font-size: 1.5em;
+      width: auto;
     }
-    
+
     p {
       font-size: 1rem;
+      width: auto;
+      margin: 0 1rem;
     }
   }
 `;

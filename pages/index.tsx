@@ -105,7 +105,7 @@ const HomePage = () => {
             <ContactLinks>
               <a href="https://github.com/Stasshe" target="_blank" rel="noopener noreferrer">GitHub</a>
               <span>•</span>
-              <a href="mailto:your.email@example.com">Email</a>
+              <a href="mailto:egnm9stasshe@gmail.com">Email</a>
             </ContactLinks>
           </ContactInfo>
         </motion.div>

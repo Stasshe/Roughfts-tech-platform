@@ -7,12 +7,6 @@ import { useRouter } from 'next/router';
 const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
-
-  const handleSearch = () => {
-    router.push('/search');
-    setIsMenuOpen(false);
-  };
-
   return (
     <LayoutWrapper>
       <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} $isOpen={isMenuOpen}>
@@ -47,9 +41,7 @@ const Layout = ({ children }) => {
                   <Link href="/about">ABOUT</Link>
                 </MenuItem>
                 <MenuItem>
-                  <MenuLink onClick={handleSearch}>
-                    SEARCH
-                  </MenuLink>
+                  <Link href="/search">SEARCH</Link>
                 </MenuItem>
               </nav>
             </MenuContent>
@@ -73,7 +65,7 @@ const LayoutWrapper = styled.div`
 
 const MenuButton = styled.button<{ $isOpen: boolean }>`
   position: fixed;
-  top: 40px;
+  top: 30px;
   right: 40px;
   z-index: 1000;
   background: none;
@@ -113,7 +105,7 @@ const FullScreenMenu = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(0, 0, 0, 0.85);
   z-index: 999;
   display: flex;
   align-items: center;
@@ -163,12 +155,6 @@ const MenuItem = styled.div`
       width: 100%;
     }
   }
-
-  @media (max-width: 768px) {
-    a {
-      font-size: 2rem;
-    }
-  }
 `;
 
 const MenuLink = styled.a`
@@ -200,10 +186,6 @@ const MenuLink = styled.a`
 
   &:hover::after {
     width: 100%;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
   }
 `;
 
