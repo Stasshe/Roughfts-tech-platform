@@ -2,9 +2,16 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const handleSearch = () => {
+    router.push('/search');
+    setIsMenuOpen(false);
+  };
 
   return (
     <LayoutWrapper>
@@ -38,6 +45,11 @@ const Layout = ({ children }) => {
                 </MenuItem>
                 <MenuItem>
                   <Link href="/about">ABOUT</Link>
+                </MenuItem>
+                <MenuItem>
+                  <MenuLink onClick={handleSearch}>
+                    SEARCH
+                  </MenuLink>
                 </MenuItem>
               </nav>
             </MenuContent>
@@ -150,6 +162,38 @@ const MenuItem = styled.div`
     &:hover::after {
       width: 100%;
     }
+  }
+`;
+
+const MenuLink = styled.a`
+  color: white;
+  text-decoration: none;
+  font-size: 3rem;
+  font-weight: 200;
+  letter-spacing: 0.2em;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  &:hover {
+    letter-spacing: 0.3em;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  &:hover::after {
+    width: 100%;
   }
 `;
 

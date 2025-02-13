@@ -8,45 +8,99 @@ export interface Project {
     details: string[];
   }[];
   images: string[];
+  highlights?: {
+    title: string;
+    value: string;
+    description: string;
+  }[];
+  architecture?: {
+    diagram: string;
+    description: string;
+  };
+  demoVideo?: string;
 }
 
 export const projects: { [key: string]: Project } = {
   'ventus-talk': {
     id: 'ventus-talk',
     title: 'Ventus-Talk',
-    description: 'A lightweight, high-performance chat application built with modern web technologies.',
+    description: 'A high-performance, real-time chat application with advanced features and optimized user experience.',
     techStack: [
       'Firebase Firestore',
       'Express.js',
       'React',
       'Node.js',
       'FCM (Firebase Cloud Messaging)',
-      'Google Drive API'
+      'Google Drive API',
+      'WebSocket',
+      'Service Workers'
     ],
     features: [
       {
-        title: 'Performance',
+        title: 'Core Features',
         details: [
-          'Approximately 10,000 messages per day capacity',
-          'Message update speed of 0.05-0.15 seconds',
-          'Efficient 4MB static site (excluding npm modules)',
-          'Multi-server architecture using 3 Firebase Firestore servers'
+          'Real-time messaging with 0.05-0.15 second update speed',
+          'Multi-server architecture with 3 Firestore servers',
+          'Efficient 4MB static site deployment',
+          'Automatic YouTube link conversion and embedding',
+          'QR code friend addition system',
+          'File sharing with drag & drop support',
+          'Push notifications via Service Workers'
         ]
       },
       {
-        title: 'Features',
+        title: 'User Experience',
         details: [
-          'Real-time messaging with instant updates',
-          'File sharing capabilities (images, videos, documents)',
-          'Secure password management with hashing',
-          'Cross-platform compatibility',
-          'QR code friend addition',
-          'YouTube link embedding with automatic conversion',
-          '15 font variations and 5 theme options'
+          '15 customizable font variations',
+          '5 theme color options',
+          'Responsive design for all devices',
+          'Offline message caching',
+          'Read status indicators',
+          'Message search functionality',
+          'Emoji support and quick reactions'
+        ]
+      },
+      {
+        title: 'Technical Achievements',
+        details: [
+          'Handles 10,000+ messages per day',
+          'Load-balanced database architecture',
+          'Optimized image compression',
+          'Secure password hashing',
+          'Real-time presence detection',
+          'Efficient data synchronization',
+          'Cross-platform compatibility'
         ]
       }
     ],
-    images: ['/assets/ventus-talk-1.jpg', '/assets/ventus-talk-2.jpg']
+    images: [
+      '/assets/ventus-talk/chat-interface.jpg',
+      '/assets/ventus-talk/file-sharing.jpg',
+      '/assets/ventus-talk/theme-customization.jpg',
+      '/assets/ventus-talk/youtube-embed.jpg'
+    ],
+    highlights: [
+      {
+        title: 'Performance',
+        value: '0.05s',
+        description: 'Message update speed'
+      },
+      {
+        title: 'Scale',
+        value: '10K+',
+        description: 'Messages per day'
+      },
+      {
+        title: 'Size',
+        value: '4MB',
+        description: 'Static deployment'
+      }
+    ],
+    architecture: {
+      diagram: '/assets/ventus-talk/architecture.svg',
+      description: 'Multi-server architecture utilizing Firebase Firestore for optimal performance and scalability.'
+    },
+    demoVideo: '/assets/ventus-talk/demo.mp4'
   },
   'shogi-app': {
     id: 'shogi-app',

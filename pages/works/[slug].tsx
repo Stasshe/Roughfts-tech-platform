@@ -1,14 +1,15 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
 import { projects, Project } from '../../data/projects';
+import { useState } from 'react';
 
 const WorkDetailPage = () => {
   const router = useRouter();
   const { slug } = router.query;
-  
   const project: Project | undefined = slug ? projects[slug as string] : undefined;
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   if (!project) {
     return (
@@ -25,6 +26,8 @@ const WorkDetailPage = () => {
     );
   }
 
+  const isVentusTalk = project.id === 'ventus-talk';
+
   return (
     <Layout>
       <WorkContainer>
@@ -36,6 +39,56 @@ const WorkDetailPage = () => {
           <motion.h1>{project.title}</motion.h1>
           <motion.p>{project.description}</motion.p>
         </Header>
+
+        {isVentusTalk && project.highlights && (
+          <HighlightsSection>
+            {project.highlights.map((highlight, index) => (
+              <HighlightCard
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <HighlightValue>{highlight.value}</HighlightValue>
+                <HighlightTitle>{highlight.title}</HighlightTitle>
+                <HighlightDescription>{highlight.description}</HighlightDescription>
+              </HighlightCard>
+            ))}
+          </HighlightsSection>
+        )}
+
+        <ImageGallery>
+          {project.images.map((image, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.2 }}
+              onClick={() => setSelectedImage(image)}
+            >
+              <GalleryImage src={image} alt={`${project.title} screenshot ${index + 1}`} />
+            </motion.div>
+          ))}
+        </ImageGallery>
+
+        {isVentusTalk && project.architecture && (
+          <ArchitectureSection>
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              System Architecture
+            </motion.h2>
+            <motion.img
+              src={project.architecture.diagram}
+              alt="Architecture Diagram"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            />
+            <motion.p>{project.architecture.description}</motion.p>
+          </ArchitectureSection>
+        )}
 
         <TechStack>
           <h2>Technologies Used</h2>
@@ -78,18 +131,42 @@ const WorkDetailPage = () => {
           ))}
         </FeaturesSection>
 
-        <ImageGallery>
-          {project.images.map((image, index) => (
-            <motion.img
-              key={index}
-              src={image}
-              alt={`${project.title} screenshot ${index + 1}`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 + index * 0.2 }}
-            />
-          ))}
-        </ImageGallery>
+        {isVentusTalk && project.demoVideo && (
+          <DemoSection>
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              See it in Action
+            </motion.h2>
+            <motion.video
+              controls
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <source src={project.demoVideo} type="video/mp4" />
+            </motion.video>
+          </DemoSection>
+        )}
+
+        <AnimatePresence>
+          {selectedImage && (
+            <Lightbox
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedImage(null)}
+            >
+              <motion.img
+                src={selectedImage}
+                alt="Enlarged view"
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+              />
+            </Lightbox>
+          )}
+        </AnimatePresence>
       </WorkContainer>
     </Layout>
   );
@@ -198,6 +275,98 @@ const ImageGallery = styled.div`
     height: auto;
     border-radius: 8px;
     object-fit: cover;
+  }
+`;
+
+const HighlightsSection = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+`;
+
+const HighlightCard = styled(motion.div)`
+  background: #111;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+`;
+
+const HighlightValue = styled.div`
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.5rem;
+`;
+
+const HighlightTitle = styled.div`
+  font-size: 1.2rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+`;
+
+const HighlightDescription = styled.div`
+  font-size: 0.9rem;
+  opacity: 0.8;
+`;
+
+const ArchitectureSection = styled.div`
+  margin: 4rem 0;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    margin: 2rem 0;
+  }
+
+  p {
+    opacity: 0.8;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+`;
+
+const DemoSection = styled.div`
+  margin: 4rem 0;
+  text-align: center;
+
+  video {
+    max-width: 100%;
+    margin-top: 2rem;
+    border-radius: 8px;
+  }
+`;
+
+const Lightbox = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+
+  img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+`;
+
+const GalleryImage = styled.img`
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
   }
 `;
 
