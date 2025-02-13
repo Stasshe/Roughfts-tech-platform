@@ -1,5 +1,4 @@
 module.exports = {
-  swcMinify: true,
   compiler: {
     styledComponents: true, // Styled Componentsのサポート
   },
