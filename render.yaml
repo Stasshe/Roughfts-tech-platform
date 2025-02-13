@@ -3,6 +3,6 @@ services:
     name: Roughfts tech platform
     env: static
     staticPublishPath: build
-    buildCommand: npm install && npm run build
+    buildCommand: npm run build
     startCommand: npm run start
     plan: free

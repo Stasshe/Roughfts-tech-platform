@@ -4,7 +4,7 @@ module.exports = {
   },
   webpack: (config) => {
     config.module.rules.push({
-      test: /\.(js|jsx)$/,
+      test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
       use: {
         loader: 'swc-loader',
