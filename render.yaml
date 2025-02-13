@@ -1,8 +1,12 @@
 services:
   - type: web
-    name: Roughfts-tech-platform
-    env: static
-    plan: free
-    staticPublishPath: .next
-    buildCommand: npm run build
-    startCommand: npm run start
+    name: react-static-site
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./out
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

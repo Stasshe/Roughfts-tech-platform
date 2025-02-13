@@ -1,12 +1,11 @@
-const isProd = process.env.NODE_ENV === 'production';
-
-module.exports = {
-  reactStrictMode: true,
-  trailingSlash: true,
-  assetPrefix: isProd ? 'https://roughfts-tech-platform.onrender.com/' : '',
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
   images: {
     unoptimized: true,
   },
+  trailingSlash: true,
+  reactStrictMode: true,
   exportPathMap: async function () {
     return {
       '/': { page: '/' },
@@ -32,9 +31,12 @@ module.exports = {
             },
             externalHelpers: true,
           },
+          sourceMaps: false
         },
       },
     });
     return config;
   }
 };
+
+module.exports = nextConfig;
