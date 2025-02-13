@@ -1,5 +1,4 @@
 module.exports = {
-  basePath: '/portfolio',
   compiler: {
     styledComponents: true, // Styled Componentsのサポート
   },
@@ -23,15 +22,5 @@ module.exports = {
       },
     });
     return config;
-  },
-  exportPathMap: async function (
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
-    return {
-      '/': { page: '/' },
-      '/works': { page: '/works' },
-      '/404': { page: '/404' },
-    };
   },
 };
