@@ -5,13 +5,18 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import ProductScroll from '../components/ProductScroll';
 import DiagonalSection from '../components/DiagonalSection';
-import { ProfileSection } from '../components/ProfileSection'; // Changed to named import
+import { ProfileSection } from '../components/ProfileSection';
 
 const HomePage = () => {
   const [offsetY, setOffsetY] = useState(0);
 
   const handleScroll = () => {
     setOffsetY(window.pageYOffset);
+  };
+
+  const scrollToProfile = () => {
+    const profileSection = document.getElementById('profile-section');
+    profileSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -36,10 +41,24 @@ const HomePage = () => {
           alt="Cover"
           style={{ transform: `translateY(${offsetY * 0.5}px)` }}
         />
+        <ScrollButton
+          onClick={scrollToProfile}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <span>Scroll Down</span>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            ↓
+          </motion.div>
+        </ScrollButton>
       </HeroSection>
 
       {/* プロフィールセクション */}
-      <ProfileSection />
+      <ProfileSection id="profile-section" />
 
       {/* プロダクトリスト */}
       <ProductScroll />
@@ -88,6 +107,29 @@ const CoverImage = styled.img`
   will-change: transform;
 `;
 
+const ScrollButton = styled(motion.button)`
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  
+  span {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+  }
+`;
+
 const ContactSection = styled.section`
   min-height: 100vh;
   display: flex;
@@ -95,6 +137,13 @@ const ContactSection = styled.section`
   justify-content: center;
   background: #000;
   color: white;
+  margin: 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 `;
 
 export default HomePage;

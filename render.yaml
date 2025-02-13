@@ -1,7 +1,7 @@
 services:
   - type: web
     name: react-static-site
-    buildCommand: npm install && npm run build
+    buildCommand: npm run build
     staticPublishPath: ./out
     envVars:
       - key: NODE_VERSION

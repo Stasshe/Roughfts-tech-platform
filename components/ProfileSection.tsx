@@ -51,7 +51,11 @@ const ProfileInfo = styled.div`
   }
 `;
 
-export const ProfileSection = () => {
+interface ProfileSectionProps {
+  id?: string;
+}
+
+export const ProfileSection: React.FC<ProfileSectionProps> = ({ id }) => {
   const paragraphs = [
     "Hi! I'm Roughfts, and this blog is my digital playground where I showcase my coding prowess and share my journey in the tech world.",
     "Here, you'll find in-depth tutorials, tips, and insights on a range of topics including Node.js, Docker, web security, Firebase, and SNS web app development.",
@@ -59,16 +63,18 @@ export const ProfileSection = () => {
   ];
 
   return (
-    <Background>
-      <ProfileContainer>
-        <ProfileImage src="/assets/ico.png" alt="Profile Icon" />
-        <ProfileInfo>
-          <h1>Hi! I'm Roughfts.</h1>
-          {paragraphs.map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
-        </ProfileInfo>
-      </ProfileContainer>
-    </Background>
+    <section id={id}>
+      <Background>
+        <ProfileContainer>
+          <ProfileImage src="/assets/ico.png" alt="Profile Icon" />
+          <ProfileInfo>
+            <h1>Hi! I'm Roughfts.</h1>
+            {paragraphs.map((text, index) => (
+              <p key={index}>{text}</p>
+            ))}
+          </ProfileInfo>
+        </ProfileContainer>
+      </Background>
+    </section>
   );
 };
