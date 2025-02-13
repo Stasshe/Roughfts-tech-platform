@@ -21,7 +21,7 @@ const Background = styled.div`
   }
 `;
 
-const ProfileContainer = styled.div`
+const ProfileContainer = styled.section`
   position: absolute;
   top: 45%; /* プロフィールの位置を調整 */
   left: 50%;
@@ -30,6 +30,18 @@ const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
   z-index: 3;
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    flex-direction: column;
+    
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 300px;
+      margin-bottom: 2rem;
+    }
+  }
 `;
 
 const ProfileImage = styled.img`
@@ -48,6 +60,19 @@ const ProfileInfo = styled.div`
   }
   p {
     margin-top: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    
+    h2 {
+      font-size: 2rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
   }
 `;
 

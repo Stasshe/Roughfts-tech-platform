@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <Wrapper>
+    <LayoutWrapper>
       <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} $isOpen={isMenuOpen}>
         <span></span>
         <span></span>
@@ -46,13 +46,17 @@ const Layout = ({ children }) => {
       </AnimatePresence>
 
       <main>{children}</main>
-    </Wrapper>
+    </LayoutWrapper>
   );
 };
 
-const Wrapper = styled.div`
+const LayoutWrapper = styled.div`
   background: #000;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
 `;
 
 const MenuButton = styled.button<{ $isOpen: boolean }>`
