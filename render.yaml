@@ -4,5 +4,5 @@ services:
     env: static
     plan: free
     staticPublishPath: .next
-    buildCommand: yarn build
-    startCommand: yarn start
+    buildCommand: npm run build
+    startCommand: npm run start
