@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: roughfts guide
+    name: Roughfts tech platform
     env: static
     staticPublishPath: build
     buildCommand: npm install && npm run build
