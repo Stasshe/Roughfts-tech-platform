@@ -34,10 +34,10 @@ const Layout = ({ children }) => {
                   <Link href="/works">WORKS</Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link href="/about">ABOUT</Link>
+                  <Link href="/experience">EXPERIENCES</Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link href="/contact">CONTACT</Link>
+                  <Link href="/about">ABOUT</Link>
                 </MenuItem>
               </nav>
             </MenuContent>

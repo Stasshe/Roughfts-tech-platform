@@ -51,7 +51,7 @@ const ProfileInfo = styled.div`
   }
 `;
 
-const ProfileSection = () => {
+export const ProfileSection = () => {
   const paragraphs = [
     "Hi! I'm Roughfts, and this blog is my digital playground where I showcase my coding prowess and share my journey in the tech world.",
     "Here, you'll find in-depth tutorials, tips, and insights on a range of topics including Node.js, Docker, web security, Firebase, and SNS web app development.",
@@ -72,5 +72,3 @@ const ProfileSection = () => {
     </Background>
   );
 };
-
-export default ProfileSection;

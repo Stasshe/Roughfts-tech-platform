@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import ProductScroll from '../components/ProductScroll';
 import DiagonalSection from '../components/DiagonalSection';
-import ProfileSection from '../components/ProfileSection'; // プロフィールセクションのインポート
+import { ProfileSection } from '../components/ProfileSection'; // Changed to named import
 
 const HomePage = () => {
   const [offsetY, setOffsetY] = useState(0);
