@@ -37,7 +37,7 @@ const HomePage = () => {
       </HeroSection>
 
       {/* 背景を追加 */}
-      <ProductScrollBackground />
+      
 
       {/* プロダクトリスト */}
       <ProductScroll />
@@ -57,16 +57,6 @@ const HomePage = () => {
   );
 };
 
-// 追加: 灰色の透明背景
-const ProductScrollBackground = styled.div`
-  position: absolute;
-  top: 100vh;  // HeroSectionの下から開始
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #000;
-  z-index: 0; // 背景として下に配置
-`;
 
 const HeroSection = styled.section`
   height: 100vh;
