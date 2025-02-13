@@ -3,6 +3,7 @@ module.exports = {
     styledComponents: true, // Styled Componentsのサポート
   },
   webpack: (config) => {
+    config.resolve.extensions.push('.ts', '.tsx'); // ここを追加
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
