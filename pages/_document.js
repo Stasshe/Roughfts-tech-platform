@@ -8,6 +8,7 @@ class MyDocument extends Document {
         <Head>
           <link rel="icon" href="../assets/ico.png" type="image/png" />
           <link rel="apple-touch-icon" href="../assets/ico.png" />
+          <link rel="shortcut icon" href="../assets/ico.png" type="image/png"/>
         </Head>
         <body>
           <Main />
