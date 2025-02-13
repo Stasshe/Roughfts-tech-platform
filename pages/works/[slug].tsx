@@ -40,15 +40,6 @@ const WorkDetailPage = () => {
           <motion.p>{project.description}</motion.p>
         </Header>
 
-        <BackButton
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          onClick={() => router.push('/works')}
-        >
-          ← Back to Works
-        </BackButton>
-
         {isVentusTalk && project.highlights && (
           <HighlightsSection>
             {project.highlights.map((highlight, index) => (
@@ -376,24 +367,6 @@ const GalleryImage = styled.img`
 
   &:hover {
     transform: scale(1.02);
-  }
-`;
-
-const BackButton = styled(motion.button)`
-  background: none;
-  border: none;
-  color: #888;
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: white;
   }
 `;
 
