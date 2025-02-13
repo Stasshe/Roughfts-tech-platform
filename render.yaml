@@ -1,7 +1,1 @@
-services:
-  - type: web
-    name: Roughfts tech platform
-    env: node
-    buildCommand: npm run build
-    startCommand: npm run start
-    plan: free
+
