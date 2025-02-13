@@ -1,4 +1,3 @@
-// index.tsx
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styled from 'styled-components';
@@ -9,9 +8,8 @@ import { ProfileSection } from '../components/ProfileSection';
 
 const HomePage = () => {
   const { scrollY } = useScroll();
-  const coverY = useTransform(scrollY, [0, 1000], [0, 300], {
-    clamp: false
-  });
+  const coverY = useTransform(scrollY, [0, 1000], [0, 300], { clamp: false });
+  const scrollOpacity = useTransform(scrollY, [0, 700], [1, 0], { clamp: true });
 
   const scrollToProfile = () => {
     const profileSection = document.getElementById('profile-section');
@@ -21,30 +19,15 @@ const HomePage = () => {
   return (
     <Layout>
       <HeroSection>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           Welcome to Roughfts
         </motion.h1>
         <motion.div style={{ y: coverY, position: 'absolute', width: '100%', height: '100%' }}>
-          <CoverImage
-            src="/assets/cover.jpeg"
-            alt="Cover"
-          />
+          <CoverImage src="/assets/cover.jpeg" alt="Cover" />
         </motion.div>
-        <ScrollButton
-          onClick={scrollToProfile}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-        >
+        <ScrollButton style={{ opacity: scrollOpacity }} onClick={scrollToProfile}>
           <span>Scroll Down</span>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
+          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
             ↓
           </motion.div>
         </ScrollButton>
@@ -55,11 +38,7 @@ const HomePage = () => {
       <DiagonalSection />
 
       <SkillsSection>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8 }}>
           <h2>Technical Skills</h2>
           <SkillsGrid>
             <SkillCategory>
@@ -67,7 +46,7 @@ const HomePage = () => {
               <ul>
                 <li>React/Next.js</li>
                 <li>TypeScript</li>
-                <li>HTML5/CSS3</li>
+                <li>HTML5/CSS</li>
                 <li>Responsive Design</li>
               </ul>
             </SkillCategory>
@@ -94,16 +73,14 @@ const HomePage = () => {
       </SkillsSection>
 
       <ContactSection>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8 }}>
           <h2>Let's Connect</h2>
           <ContactInfo>
             <p>Interested in collaboration or have a project in mind?</p>
             <ContactLinks>
-              <a href="https://github.com/Stasshe" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://github.com/Stasshe" target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
               <span>•</span>
               <a href="mailto:egnm9stasshe@gmail.com">Email</a>
             </ContactLinks>
