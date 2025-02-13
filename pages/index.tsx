@@ -1,9 +1,11 @@
+// index.tsx
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import ProductScroll from '../components/ProductScroll';
 import DiagonalSection from '../components/DiagonalSection';
+import ProfileSection from '../components/ProfileSection'; // プロフィールセクションのインポート
 
 const HomePage = () => {
   const [offsetY, setOffsetY] = useState(0);
@@ -36,8 +38,8 @@ const HomePage = () => {
         />
       </HeroSection>
 
-      {/* 背景を追加 */}
-      
+      {/* プロフィールセクション */}
+      <ProfileSection />
 
       {/* プロダクトリスト */}
       <ProductScroll />
@@ -56,7 +58,6 @@ const HomePage = () => {
     </Layout>
   );
 };
-
 
 const HeroSection = styled.section`
   height: 100vh;
