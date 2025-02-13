@@ -97,12 +97,12 @@ const MenuButton = styled.button<{ $isOpen: boolean }>`
 
     &:first-child {
       transform: ${({ $isOpen }) =>
-        $isOpen ? 'rotate(45deg) translate(6px, 6px)' : 'rotate(0)'};
+        $isOpen ? 'rotate(45deg) translate(2px, 2px)' : 'rotate(0)'};
     }
 
     &:last-child {
       transform: ${({ $isOpen }) =>
-        $isOpen ? 'rotate(-45deg) translate(6px, -6px)' : 'rotate(0)'};
+        $isOpen ? 'rotate(-45deg) translate(4px, -4px)' : 'rotate(0)'};
     }
   }
 `;
