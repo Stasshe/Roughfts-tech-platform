@@ -146,7 +146,12 @@ export const projects: { [key: string]: Project } = {
         ]
       }
     ],
-    images: ['/assets/shogi-1.jpg', '/assets/shogi-2.jpg']
+    images: [
+      '/assets/IMG_0342.png',
+      '/assets/IMG_0339.png',
+      '/assets/IMG_0345.png',
+      '/assets/IMG_0346.png'
+    ]
   },
   'python-filter': {
     id: 'python-filter',
