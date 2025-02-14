@@ -67,10 +67,10 @@ export const projects: { [key: string]: Project } = {
       }
     ],
     images: [
-      '/assets/prime-cube/gameplay1.png',
-      '/assets/prime-cube/gameplay2.png',
-      '/assets/prime-cube/menu.png',
-      '/assets/prime-cube/results.png'
+      '/assets/prime-cube/IMG_0354.png',
+      '/assets/prime-cube/IMG_0356.png',
+      '/assets/prime-cube/IMG_0355.png',
+      '/assets/prime-cube/IMG_0357.png'
     ],
     highlights: [
       {
