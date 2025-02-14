@@ -158,16 +158,23 @@ const SkillItem = styled(motion.div)`
 
 const PolicySection = styled.div`
   margin-top: 2rem;
+  
 
   h3 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
   }
 
   p {
     font-size: 1.1rem;
     line-height: 1.6;
     opacity: 0.9;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
   }
 
   @media (max-width: 768px) {
