@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
@@ -8,10 +8,13 @@ const LoadingScreen = () => {
   const [contentReady, setContentReady] = useState(false);
 
   useEffect(() => {
+    // Hide the initial content until ready
+    document.getElementById('__next')?.classList.remove('loaded');
+
     // Check if content is loaded quickly
     const contentLoadCheck = setTimeout(() => {
       setContentReady(true);
-    }, 100); // Check if content is ready within 100ms
+    }, 100);
 
     // Check if this is the first visit
     const visited = localStorage.getItem('hasVisited');
@@ -19,80 +22,84 @@ const LoadingScreen = () => {
       setHasVisited(false);
       localStorage.setItem('hasVisited', 'true');
       
-      // Show loading screen for first visit
       const timer = setTimeout(() => {
         setIsLoading(false);
+        document.getElementById('__next')?.classList.add('loaded');
       }, 2500);
+
       return () => {
         clearTimeout(timer);
         clearTimeout(contentLoadCheck);
       };
     } else {
-      // Skip loading screen for returning visitors
       setIsLoading(false);
+      // Show content immediately for returning visitors
+      document.getElementById('__next')?.classList.add('loaded');
     }
 
     return () => clearTimeout(contentLoadCheck);
   }, []);
 
-  // Don't show loading if content is ready quickly or if already visited
+  // Don't render anything if we don't need the loading screen
   if (!isLoading || hasVisited || contentReady) return null;
 
   return (
-    <LoadingWrapper
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <LoadingContent>
-        <LogoContainer>
-          {/* Outer rotating circle */}
-          <motion.div
-            initial={{ rotate: 0, scale: 0 }}
-            animate={{ 
-              rotate: 360,
-              scale: 1
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeOut"
-            }}
-          >
-            <OuterCircle />
-          </motion.div>
+    <AnimatePresence>
+      <LoadingWrapper
+        initial={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <LoadingContent>
+          <LogoContainer>
+            {/* Outer rotating circle */}
+            <motion.div
+              initial={{ rotate: 0, scale: 0 }}
+              animate={{ 
+                rotate: 360,
+                scale: 1
+              }}
+              transition={{
+                duration: 2,
+                ease: "easeOut"
+              }}
+            >
+              <OuterCircle />
+            </motion.div>
 
-          {/* Inner pulsing circle */}
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ 
-              scale: [0.8, 1.2, 0.8],
-            }}
-            transition={{
-              duration: 1.5,
-              ease: "easeInOut",
-              repeat: Infinity,
-            }}
-          >
-            <InnerCircle />
-          </motion.div>
+            {/* Inner pulsing circle */}
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ 
+                scale: [0.8, 1.2, 0.8],
+              }}
+              transition={{
+                duration: 1.5,
+                ease: "easeInOut",
+                repeat: Infinity,
+              }}
+            >
+              <InnerCircle />
+            </motion.div>
 
-          {/* Text animation */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            <WelcomeText>Welcome</WelcomeText>
-          </motion.div>
-        </LogoContainer>
+            {/* Text animation */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              <WelcomeText>Welcome</WelcomeText>
+            </motion.div>
+          </LogoContainer>
 
-        <LoadingBar
-          initial={{ width: "0%" }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-        />
-      </LoadingContent>
-    </LoadingWrapper>
+          <LoadingBar
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+          />
+        </LoadingContent>
+      </LoadingWrapper>
+    </AnimatePresence>
   );
 };
 

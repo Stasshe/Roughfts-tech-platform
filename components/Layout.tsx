@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -14,6 +14,18 @@ const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
   const isSlugPage = router.pathname.includes('[');
+
+  useEffect(() => {
+    // Ensure content is hidden initially
+    document.getElementById('__next')?.classList.remove('loaded');
+    
+    // Show content after a brief delay
+    const showContent = setTimeout(() => {
+      document.getElementById('__next')?.classList.add('loaded');
+    }, 100);
+
+    return () => clearTimeout(showContent);
+  }, []);
 
   return (
     <LayoutWrapper>

@@ -16,6 +16,34 @@ export default function Document() {
         
         {/* Shortcut Icon */}
         <link rel="shortcut icon" href="/assets/ico.png" />
+        
+        {/* Add initial loading styles */}
+        <style>{`
+          body {
+            background: black;
+            margin: 0;
+            padding: 0;
+          }
+          #__next {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          #__next.loaded {
+            opacity: 1;
+          }
+          .initial-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        `}</style>
       </Head>
       <body>
         <Main />
