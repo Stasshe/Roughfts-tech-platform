@@ -21,6 +21,75 @@ export interface Project {
 }
 
 export const projects: { [key: string]: Project } = {
+  'prime-cube': {
+    id: 'prime-cube',
+    title: 'Prime Cube Game',
+    description: 'An educational math game where players tap or slice composite number cubes to split them into prime factors, featuring multiple difficulty levels and combo systems.',
+    techStack: [
+      'Swift',
+      'SpriteKit',
+      'UIKit',
+      'GameplayKit',
+      'CoreAnimation'
+    ],
+    features: [
+      {
+        title: 'Gameplay Mechanics',
+        details: [
+          'Tap-based cube splitting mechanics',
+          'Multiple difficulty modes (Easy, Normal, Special)',
+          'Combo system with score multipliers',
+          'Life system with penalty mechanics',
+          'Real-time prime factorization gameplay',
+          'Hint system for large numbers (80+)',
+          'Score multiplier for quick reactions'
+        ]
+      },
+      {
+        title: 'Game Modes',
+        details: [
+          'Easy Mode: Focus on 2x and 3x multiples',
+          'Normal Mode: Increased difficulty with larger numbers',
+          'Special Mode: Challenge mode with complex numbers',
+          'Custom gravity settings per difficulty level',
+          'Varying cube generation ranges per mode'
+        ]
+      },
+      {
+        title: 'Educational Features',
+        details: [
+          'Prime factorization practice',
+          'Minimum prime factor hints',
+          'Score-based learning feedback',
+          'Progressive difficulty system',
+          'Real-time mathematical problem solving'
+        ]
+      }
+    ],
+    images: [
+      '/assets/prime-cube/gameplay1.png',
+      '/assets/prime-cube/gameplay2.png',
+      '/assets/prime-cube/menu.png',
+      '/assets/prime-cube/results.png'
+    ],
+    highlights: [
+      {
+        title: 'Modes',
+        value: '3',
+        description: 'Difficulty levels'
+      },
+      {
+        title: 'Range',
+        value: '16-3999',
+        description: 'Number range'
+      },
+      {
+        title: 'Time',
+        value: '60-120s',
+        description: 'Game duration'
+      }
+    ]
+  },
   'ventus-talk': {
     id: 'ventus-talk',
     title: 'Ventus-Talk',
