@@ -7,28 +7,20 @@ type Language = 'en' | 'ja';
 
 // Import language-specific content
 import { ventusTalkJa } from '../content/ja/works/ventus-talk';
+import { shogiAppJa } from '../content/ja/works/shogi-app';
+import { pythonFilterJa } from '../content/ja/works/python-filter';
 // Import other Japanese content...
 
 // Map of localized content
 const localizedContent: { [key: string]: { ja: LocalizedContent } } = {
   'ventus-talk': {
-    ja: {
-      title: 'Ventus-Talk',
-      description: '高度な機能と最適化されたユーザーエクスペリエンスを備えたハイパフォーマンスなリアルタイムチャットアプリケーション。',
-      shortIntro: '1日10,000以上のメッセージを処理するリアルタイム同期機能を備えた高性能チャットアプリケーション。',
-      features: [
-        {
-          title: '主要機能',
-          details: [
-            '0.05-0.15秒の更新速度を実現するリアルタイムメッセージング',
-            '3台のFirestoreサーバーによるマルチサーバーアーキテクチャ',
-            // ... other details
-          ]
-        },
-        // ... other feature sections
-      ],
-      // ... other localized content
-    }
+    ja: ventusTalkJa
+  },
+  'shogi-app': {
+    ja: shogiAppJa
+  },
+  'python-filter': {
+    ja: pythonFilterJa
   },
   // Add other projects' localized content
 };
