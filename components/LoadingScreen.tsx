@@ -1,46 +1,43 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const LoadingScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [hasVisited, setHasVisited] = useState(true);
-  const [contentReady, setContentReady] = useState(false);
+  const [hasVisited, setHasVisited] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    // Hide the initial content until ready
     document.getElementById('__next')?.classList.remove('loaded');
 
-    // Check if content is loaded quickly
-    const contentLoadCheck = setTimeout(() => {
-      setContentReady(true);
-    }, 100);
-
-    // every
-    const visited = false;// localStorage.getItem('hasVisited');
-    // If the page is visited for the first time, do this
+    // 初回訪問のチェック
+    const visited = localStorage.getItem('hasVisited');
     if (!visited) {
       setHasVisited(false);
       localStorage.setItem('hasVisited', 'true');
-      
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-        document.getElementById('__next')?.classList.add('loaded');
-      }, 2500);
-
-      return () => {
-        clearTimeout(timer);
-        clearTimeout(contentLoadCheck);
-      };
+    } else {
+      setHasVisited(true);
     }
-    return () => clearTimeout(contentLoadCheck);
-  }, []);
 
-  // Don't render anything if we don't need the loading screen
-  if (!isLoading || hasVisited || contentReady) return null;
+    // ルート (`"/"`) なら 3.7秒、初回訪問なら 1秒、他は 500ms
+    let timeoutDuration = 500;
+    if (router.pathname === '/') timeoutDuration = 1200;
+    else if (!hasVisited) timeoutDuration = 600;
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      document.getElementById('__next')?.classList.add('loaded');
+    }, timeoutDuration);
+
+    return () => clearTimeout(timer);
+  }, [router.pathname]);
+
+  if (!isLoading) return null;
 
   return (
     <AnimatePresence>
+      
       <LoadingWrapper
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -51,14 +48,8 @@ const LoadingScreen = () => {
             {/* Outer rotating circle */}
             <motion.div
               initial={{ rotate: 0, scale: 0 }}
-              animate={{ 
-                rotate: 360,
-                scale: 1
-              }}
-              transition={{
-                duration: 2,
-                ease: "easeOut"
-              }}
+              animate={{ rotate: 360, scale: 1 }}
+              transition={{ duration: 2, ease: "easeOut" }}
             >
               <OuterCircle />
             </motion.div>
@@ -66,14 +57,8 @@ const LoadingScreen = () => {
             {/* Inner pulsing circle */}
             <motion.div
               initial={{ scale: 0.8 }}
-              animate={{ 
-                scale: [0.8, 1.2, 0.8],
-              }}
-              transition={{
-                duration: 1.5,
-                ease: "easeInOut",
-                repeat: Infinity,
-              }}
+              animate={{ scale: [0.8, 1.2, 0.8] }}
+              transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity }}
             >
               <InnerCircle />
             </motion.div>
@@ -166,6 +151,7 @@ const LoadingBar = styled(motion.div)`
   bottom: 20%;
   left: 20%;
   right: 20%;
+  max-width:60%
 `;
 
 export default LoadingScreen; 
