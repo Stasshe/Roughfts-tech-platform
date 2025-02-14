@@ -46,6 +46,16 @@ const AboutPage = () => {
             </motion.div>
           </TextContent>
         </ContentSection>
+        <PolicySection>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <h3>Policy</h3>
+            <p>Fast learning by using AIという私のpolicyです。</p>
+          </motion.div>
+        </PolicySection>
       </AboutContainer>
     </Layout>
   );
@@ -141,4 +151,30 @@ const SkillItem = styled(motion.div)`
   font-size: 0.9rem;
 `;
 
-export default AboutPage; 
+const PolicySection = styled.div`
+  margin-top: 2rem;
+
+  h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+`;
+
+
+export default AboutPage;
