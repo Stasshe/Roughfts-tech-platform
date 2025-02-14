@@ -26,8 +26,6 @@ const WorkDetailPage = () => {
     );
   }
 
-  const isVentusTalk = project.id === 'ventus-talk';
-
   return (
     <Layout>
       <WorkContainer>
@@ -40,7 +38,7 @@ const WorkDetailPage = () => {
           <motion.p>{project.description}</motion.p>
         </Header>
 
-        {isVentusTalk && project.highlights && (
+        {project.highlights && (
           <HighlightsSection>
             {project.highlights.map((highlight, index) => (
               <HighlightCard
@@ -71,7 +69,7 @@ const WorkDetailPage = () => {
           ))}
         </ImageGallery>
 
-        {isVentusTalk && project.architecture && (
+        {project.architecture && (
           <ArchitectureSection>
             <motion.h2
               initial={{ opacity: 0 }}
@@ -131,7 +129,7 @@ const WorkDetailPage = () => {
           ))}
         </FeaturesSection>
 
-        {isVentusTalk && project.demoVideo && (
+        {project.demoVideo && (
           <DemoSection>
             <motion.h2
               initial={{ opacity: 0 }}
@@ -171,6 +169,8 @@ const WorkDetailPage = () => {
     </Layout>
   );
 };
+
+
 
 const WorkContainer = styled.div`
   padding: 6rem 2rem 2rem;
