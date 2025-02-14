@@ -147,10 +147,10 @@ export const projects: { [key: string]: Project } = {
       }
     ],
     images: [
-      '/assets/IMG_0342.png',
-      '/assets/IMG_0339.png',
-      '/assets/IMG_0345.png',
-      '/assets/IMG_0346.png'
+      '/assets/cecon/IMG_0342.png',
+      '/assets/cecon/IMG_0339.png',
+      '/assets/cecon/IMG_0345.png',
+      '/assets/cecon/IMG_0346.png'
     ]
   },
   'python-filter': {
