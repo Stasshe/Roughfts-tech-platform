@@ -43,7 +43,7 @@ export const projects: { [key: string]: Project } = {
           'Efficient 4MB static site deployment',
           'Automatic YouTube link conversion and embedding',
           'QR code friend addition system',
-          'File sharing with drag & drop support',
+          'File sharing support',
           'Push notifications via Service Workers'
         ]
       },
