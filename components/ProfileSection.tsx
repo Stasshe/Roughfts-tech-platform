@@ -28,9 +28,10 @@ const ProfileContainer = styled.section`
     flex-direction: column;
     margin-top: 0;
     img {
-      width: 70vw;
-      height: 70vw;
+      width: 60vw;
+      height: 60vw;
       max-width: 300px;
+      max-height:300px;
       margin-bottom: 2rem;
     }
   }

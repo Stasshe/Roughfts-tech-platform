@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
@@ -19,6 +20,9 @@ const HomePage = () => {
   return (
     <Layout>
       <HeroSection>
+      <Head>
+        <title>Roughfts Tech Platform</title>
+      </Head>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           Welcome to Roughfts
         </motion.h1>
@@ -157,6 +161,7 @@ const ContactSection = styled.section`
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+  text-align:center;
 `;
 
 const SkillsSection = styled.section`
@@ -172,6 +177,9 @@ const SkillsSection = styled.section`
   h2 {
     font-size: 3rem;
     font-weight: 200;
+    width: 80vw;
+    margin-right:auto;
+    margin-left:auto;
     letter-spacing: 0.2em;
     margin-bottom: 4rem;
   }
@@ -214,6 +222,9 @@ const SkillCategory = styled.div`
 
 const ContactInfo = styled.div`
   margin-top: 2rem;
+  margin-right:auto;
+  margin-left:auto;
+  text-align:center;
   
   p {
     font-size: 1.2rem;
@@ -227,6 +238,10 @@ const ContactLinks = styled.div`
   gap: 1rem;
   justify-content: center;
   align-items: center;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  width:60vw;
   
   a {
     color: white;

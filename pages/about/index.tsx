@@ -1,11 +1,15 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
+import Head from 'next/head';
 
 const AboutPage = () => {
   return (
     <Layout>
       <AboutContainer>
+        <Head>
+          <title>About Roughfts</title>
+        </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

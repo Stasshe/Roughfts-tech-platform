@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import Link from 'next/link';
 import { projects } from '../../data/projects';
-
+import Head from 'next/head';
 const WorksPage = () => {
   return (
     <Layout>
       <WorksContainer>
+        <Head>
+          <title>Roughfts Works</title>
+        </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

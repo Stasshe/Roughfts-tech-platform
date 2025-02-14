@@ -20,10 +20,10 @@ const LoadingScreen = () => {
       setHasVisited(true);
     }
 
-    // ルート (`"/"`) なら 3.7秒、初回訪問なら 1秒、他は 500ms
+    
     let timeoutDuration = 500;
     if (router.pathname === '/') timeoutDuration = 1200;
-    else if (!hasVisited) timeoutDuration = 600;
+    else if (!hasVisited) timeoutDuration = 400;
 
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -37,7 +37,6 @@ const LoadingScreen = () => {
 
   return (
     <AnimatePresence>
-      
       <LoadingWrapper
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}

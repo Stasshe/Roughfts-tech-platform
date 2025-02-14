@@ -5,6 +5,7 @@ import Layout from '../../components/Layout';
 import Link from 'next/link';
 import { projects, Project } from '../../data/projects';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 interface Match {
   type: 'project' | 'tech';
@@ -104,6 +105,9 @@ const SearchPage = () => {
   return (
     <Layout>
       <SearchContainer>
+        <Head>
+          <title>Roughfts Search</title>
+        </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

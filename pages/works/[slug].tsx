@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
-import { projects, Project } from '../../data/projects';
+
 import { useState } from 'react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { getWorkContent } from '../../lib/contentManager';
