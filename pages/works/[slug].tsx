@@ -4,14 +4,17 @@ import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
 import { projects, Project } from '../../data/projects';
 import { useState } from 'react';
+import { useLanguage } from '../../lib/LanguageContext';
+import { getWorkContent } from '../../lib/contentManager';
 
 const WorkDetailPage = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const project: Project | undefined = slug ? projects[slug as string] : undefined;
+  const { language } = useLanguage();
+  const work = getWorkContent(slug, language);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  if (!project) {
+  if (!work) {
     return (
       <Layout>
         <WorkContainer>
@@ -34,13 +37,13 @@ const WorkDetailPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h1>{project.title}</motion.h1>
-          <motion.p>{project.description}</motion.p>
+          <motion.h1>{work.title}</motion.h1>
+          <motion.p>{work.description}</motion.p>
         </Header>
 
-        {project.highlights && (
+        {work.highlights && (
           <HighlightsSection>
-            {project.highlights.map((highlight, index) => (
+            {work.highlights.map((highlight, index) => (
               <HighlightCard
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -56,7 +59,7 @@ const WorkDetailPage = () => {
         )}
 
         <ImageGallery>
-          {project.images.map((image, index) => (
+          {work.images.map((image, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -64,12 +67,12 @@ const WorkDetailPage = () => {
               transition={{ delay: index * 0.2 }}
               onClick={() => setSelectedImage(image)}
             >
-              <GalleryImage src={image} alt={`${project.title} screenshot ${index + 1}`} />
+              <GalleryImage src={image} alt={`${work.title} screenshot ${index + 1}`} />
             </motion.div>
           ))}
         </ImageGallery>
 
-        {project.architecture && (
+        {work.architecture && (
           <ArchitectureSection>
             <motion.h2
               initial={{ opacity: 0 }}
@@ -78,20 +81,20 @@ const WorkDetailPage = () => {
               System Architecture
             </motion.h2>
             <motion.img
-              src={project.architecture.diagram}
+              src={work.architecture.diagram}
               alt="Architecture Diagram"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             />
-            <motion.p>{project.architecture.description}</motion.p>
+            <motion.p>{work.architecture.description}</motion.p>
           </ArchitectureSection>
         )}
 
         <TechStack>
           <h2>Technologies Used</h2>
           <TechList>
-            {project.techStack.map((tech, index) => (
+            {work.techStack.map((tech, index) => (
               <motion.li
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
@@ -105,7 +108,7 @@ const WorkDetailPage = () => {
         </TechStack>
 
         <FeaturesSection>
-          {project.features.map((feature, index) => (
+          {work.features.map((feature, index) => (
             <FeatureBlock
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -129,7 +132,7 @@ const WorkDetailPage = () => {
           ))}
         </FeaturesSection>
 
-        {project.demoVideo && (
+        {work.demoVideo && (
           <DemoSection>
             <motion.h2
               initial={{ opacity: 0 }}
@@ -143,7 +146,7 @@ const WorkDetailPage = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <source src={project.demoVideo} type="video/mp4" />
+              <source src={work.demoVideo} type="video/mp4" />
             </motion.video>
           </DemoSection>
         )}
@@ -169,8 +172,6 @@ const WorkDetailPage = () => {
     </Layout>
   );
 };
-
-
 
 const WorkContainer = styled.div`
   padding: 6rem 2rem 2rem;

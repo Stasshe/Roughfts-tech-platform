@@ -1,23 +1,13 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { projects } from '../data/projects';
+import { useLanguage } from '../lib/LanguageContext';
+import { translations } from '../lib/translations';
+import { getAllWorks } from '../lib/contentManager';
 
 const ProductScroll = () => {
-  const featuredProjects = [
-    {
-      ...projects['ventus-talk'],
-      shortIntro: 'A high-performance chat application handling 10,000+ messages daily with real-time synchronization and rich features.',
-    },
-    {
-      ...projects['edu-open-4step'],
-      shortIntro: 'A secure web platform providing educational resource access through an innovative four-step verification process.',
-    },
-    {
-      ...projects['shogi-app'],
-      shortIntro: 'A modern Shogi application featuring both online multiplayer and local AI gameplay, built for iPad.',
-    }
-  ];
+  const { language } = useLanguage();
+  const featuredProjects = getAllWorks(language);
 
   return (
     <ScrollSection>
@@ -26,7 +16,7 @@ const ProductScroll = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Selected Works
+        {translations[language].sections.selectedWorks}
       </SectionTitle>
       <ProductContainer>
         {featuredProjects.map((project, index) => (
@@ -48,7 +38,7 @@ const ProductScroll = () => {
                 ))}
               </TechTags>
               <Link href={`/works/${project.id}`} passHref>
-                <ViewButton>View Project</ViewButton>
+                <ViewButton>{translations[language].buttons.viewProject}</ViewButton>
               </Link>
             </ProductInfo>
           </ProductCard>

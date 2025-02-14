@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import LoadingScreen from './LoadingScreen';
+import { useLanguage } from '../lib/LanguageContext';
+import { translations } from '../lib/translations';
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,6 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
   const isSlugPage = router.pathname.includes('[');
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
     // Ensure content is hidden initially
@@ -43,6 +46,21 @@ const Layout = ({ children }: LayoutProps) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
+            <LanguageSwitcher>
+              <LanguageButton 
+                $active={language === 'en'} 
+                onClick={() => setLanguage('en')}
+              >
+                EN
+              </LanguageButton>
+              <LanguageDivider>/</LanguageDivider>
+              <LanguageButton 
+                $active={language === 'ja'} 
+                onClick={() => setLanguage('ja')}
+              >
+                日本語
+              </LanguageButton>
+            </LanguageSwitcher>
             <MenuContent
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -216,6 +234,33 @@ const MenuLink = styled.a`
   @media (max-width: 768px) {
     font-size: 2rem;
   }
+`;
+
+const LanguageSwitcher = styled.div`
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const LanguageButton = styled.button<{ $active: boolean }>`
+  background: none;
+  border: none;
+  color: ${props => props.$active ? '#fff' : 'rgba(255, 255, 255, 0.5)'};
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 4px 8px;
+  
+  &:hover {
+    color: white;
+  }
+`;
+
+const LanguageDivider = styled.span`
+  color: rgba(255, 255, 255, 0.3);
 `;
 
 export default Layout;

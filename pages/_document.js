@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <meta httpEquiv="content-language" content="en,ja" />
         {/* Favicon */}
         <link rel="icon" href="/assets/ico.png" />
         <link rel="icon" type="image/svg+xml" href="/assets/ico_svg.svg" />
