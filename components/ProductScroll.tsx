@@ -64,6 +64,9 @@ const ScrollSection = styled.section`
   background: none;
   position: relative;
   z-index: 1;
+  @media (max-width: 768px) {
+    padding: 0px 0
+  }
 `;
 const SectionTitle = styled(motion.h2)`
   font-size: 3rem;

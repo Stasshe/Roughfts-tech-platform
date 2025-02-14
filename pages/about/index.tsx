@@ -52,8 +52,10 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <h3>Policy</h3>
-            <p>Fast learning by using AIという私のpolicyです。</p>
+            <h3>Fast Learning</h3>
+            <p>
+              Harness the power of artificial intelligence to accelerate your coding journey. Our smart AI tools provide tailored assistance, offering instant feedback and guidance. From debugging to optimizing code, AI-driven support empowers you to achieve coding proficiency in record time. Dive into the future of coding and watch your skills soar with the most advanced AI support at your fingertips.
+            </p>
           </motion.div>
         </PolicySection>
       </AboutContainer>

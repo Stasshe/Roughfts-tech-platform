@@ -175,6 +175,11 @@ const SkillsSection = styled.section`
     letter-spacing: 0.2em;
     margin-bottom: 4rem;
   }
+  @media (max-width: 768px) {
+    h2{
+      text-align:center;
+    }
+  }
 `;
 
 const SkillsGrid = styled.div`

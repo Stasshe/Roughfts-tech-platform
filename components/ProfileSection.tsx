@@ -9,7 +9,7 @@ const Background = styled.div`
   margin-top: 150px;
 
   @media (max-width: 768px) {
-    min-height: 100vh; /* スマホ時に高さを高くする */
+    min-height: 80vh; /* スマホ時に高さを高くする */
   }
 `;
 
@@ -27,11 +27,9 @@ const ProfileContainer = styled.section`
     padding: 1rem;
     flex-direction: column;
     margin-top: 0;
-    top: 60%;
-
     img {
-      width: 100%;
-      height: auto;
+      width: 70vw;
+      height: 70vw;
       max-width: 300px;
       margin-bottom: 2rem;
     }
@@ -43,10 +41,12 @@ const ProfileImage = styled.img`
   height: 250px;
   border-radius: 50%;
   margin-right: 30px;
+  @media (max-width: 768px) {
+    margin-right:0px;
+  }
 `;
 
 const ProfileInfo = styled.div`
-  margin-left: 40px;
 
   h1 {
     margin: 0;
@@ -55,20 +55,23 @@ const ProfileInfo = styled.div`
   }
 
   p {
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 120%;
     padding: 0;
+    margin-left:0px;
+    text-align: center; /* Center the text */
 
     h1 {
       font-size: 1.5em;
       width: auto;
+      margin-bottom: 1rem; /* Add more space below h1 */
     }
 
     p {
-      font-size: 1rem;
+      font-size: 0.8rem;
       width: auto;
       margin: 0 1rem;
     }

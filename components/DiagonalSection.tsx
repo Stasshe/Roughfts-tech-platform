@@ -53,6 +53,11 @@ const Content = styled(motion.div)`
     font-size: 3rem;
     margin-bottom: 2rem;
   }
+  @media (max-width: 768px) {
+    h2 {
+      text-align:center;
+    }
+  }
 `;
 
 const SkillsList = styled.ul`
@@ -69,6 +74,13 @@ const SkillsList = styled.ul`
     border-radius: 4px;
     text-align: center;
   }
+  @media (max-width: 768px) {
+    gap: 1rem;
+    li {
+      font-size: 1.0rem;
+      padding: 0rem;
+    }
+  } 
 `;
 
 export default DiagonalSection; 
