@@ -199,8 +199,8 @@ export const projects: { [key: string]: Project } = {
       'Filtering',
       'Rest API',
       'Network Protocols',
-      'Web Security'
-      'HTML',
+      'Web Security',
+      'HTML'
     ],
     features: [
       {
