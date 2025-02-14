@@ -5,8 +5,14 @@ import { useEffect, useState } from 'react';
 const LoadingScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasVisited, setHasVisited] = useState(true);
+  const [contentReady, setContentReady] = useState(false);
 
   useEffect(() => {
+    // Check if content is loaded quickly
+    const contentLoadCheck = setTimeout(() => {
+      setContentReady(true);
+    }, 100); // Check if content is ready within 100ms
+
     // Check if this is the first visit
     const visited = localStorage.getItem('hasVisited');
     if (!visited) {
@@ -17,14 +23,20 @@ const LoadingScreen = () => {
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 2500);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(contentLoadCheck);
+      };
     } else {
       // Skip loading screen for returning visitors
       setIsLoading(false);
     }
+
+    return () => clearTimeout(contentLoadCheck);
   }, []);
 
-  if (!isLoading || hasVisited) return null;
+  // Don't show loading if content is ready quickly or if already visited
+  if (!isLoading || hasVisited || contentReady) return null;
 
   return (
     <LoadingWrapper

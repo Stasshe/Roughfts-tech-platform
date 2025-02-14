@@ -8,6 +8,9 @@ services:
         value: 18.17.0
     routes:
       - type: rewrite
+        source: /works
+        destination: /works/index.html
+      - type: rewrite
         source: /works/*
         destination: /works/[slug].html
       - type: rewrite
