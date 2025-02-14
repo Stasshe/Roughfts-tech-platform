@@ -150,7 +150,8 @@ export const projects: { [key: string]: Project } = {
       '/assets/cecon/IMG_0339.png',
       '/assets/cecon/IMG_0345.png',
       '/assets/cecon/IMG_0346.png'
-    ]
+    ],
+    demoVideo: '/assets/cecon/ScreenRecording_02-14-2025 09-49-30_1.mp4'
   },
   'python-filter': {
     id: 'python-filter',
@@ -189,14 +190,17 @@ export const projects: { [key: string]: Project } = {
   },
   'edu-open-4step': {
     id: 'edu-open-4step',
-    title: 'Educational Open 4Step',
+    title: 'Filtering Ignore web site',
     description: 'A web-based platform designed to enhance educational resource accessibility through a four-step verification process.',
-    techStack: [
-      'HTML',
+    techStack: 
       'JavaScript',
+      'Scraping',
       'CSS',
+      'Filtering',
+      'Rest API',
       'Network Protocols',
       'Web Security'
+      'HTML',
     ],
     features: [
       {
@@ -219,7 +223,11 @@ export const projects: { [key: string]: Project } = {
         ]
       }
     ],
-    images: ['/assets/edu-open-1.jpg', '/assets/edu-open-2.jpg']
+    images: [
+      '/assets/edu-open-4step/IMG_0066.jpeg',
+      '/assets/edu-open-4step/IMG_0362.png'
+      '/assets/edu-open-4step/IMG_0363.png'
+    ]
   },
   'bookmarklet-youtube': {
     id: 'bookmarklet-youtube',
