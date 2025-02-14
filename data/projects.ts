@@ -414,5 +414,78 @@ export const projects: { [key: string]: Project } = {
       '/assets/bookmarklet-developer/a.jpg',
       '/assets/bookmarklet-developer/s.jpg'
     ]
+  },
+  'kanji-journey': {
+    id: 'kanji-journey',
+    title: 'Kanji Journey - Reimagined',
+    description: 'A reimagined version of the classic Kanji de GO!, with enhanced visuals and improved difficulty levels for kanji challenges.',
+    techStack: [
+      'Swift',
+      'SpriteKit',
+      'Firebase',
+      'UIKit',
+      'CoreData'
+    ],
+    features: [
+      {
+        title: 'Game Modes',
+        details: [
+          'Tiered mode with progressive difficulty levels',
+          'Unlimited mode for continuous play',
+          'Online leaderboard for each difficulty level using Firebase Realtime Database',
+          'Real-time multiplayer capabilities',
+          'Comprehensive kanji study tools'
+        ]
+      },
+      {
+        title: 'Technical Features',
+        details: [
+          'Real-time game synchronization',
+          'Integrated chat system for players',
+          'Kanji recognition and validation system',
+          'Game state persistence and restoration',
+          'Dynamic difficulty adjustment based on player performance'
+        ]
+      },
+      {
+        title: 'Version History',
+        details: [
+          'v1.0: Initial release with core game features and enhanced visuals',
+          'v1.1: Added online leaderboard',
+          'v1.2: Implemented real-time multiplayer mode',
+          'v1.3: Improved kanji recognition accuracy',
+          'v1.4: Added dynamic difficulty adjustment'
+        ]
+      }
+    ],
+    images: [
+      '/assets/kanji-de-go/IMG_0347.png',
+      '/assets/kanji-de-go/IMG_0350.png',
+      '/assets/kanji-de-go/IMG_0352.png',
+      '/assets/kanji-de-go/IMG_0348.png',
+      '/assets/kanji-de-go/IMG_0353.png'
+    ],
+    highlights: [
+      {
+        title: 'Updates',
+        value: '5+',
+        description: 'Version iterations'
+      },
+      {
+        title: 'Game Modes',
+        value: '2',
+        description: 'Play styles available'
+      },
+      {
+        title: 'Multiplayer',
+        value: 'Real-time',
+        description: 'Play with friends and compete in real-time'
+      }
+    ],
+    architecture: {
+      diagram: '/assets/kanji-journey/architecture.svg',
+      description: 'Client-server architecture with real-time multiplayer support and Firebase Realtime Database integration.'
+    },
+    demoVideo: '/assets/kanji-journey/ScreenRecording_02-14-2025 09-49-30_1.mp4'
   }
 }; 
