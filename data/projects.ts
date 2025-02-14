@@ -375,8 +375,9 @@ export const projects: { [key: string]: Project } = {
       }
     ],
     images: [
-      '/assets/bookmarklet-scraping/d.jpg',
-      '/assets/bookmarklet-scraping/s.jpg'
+      '/assets/bookmarklet/scraping/IMG_0365.png',
+      '/assets/bookmarklet/scraping/IMG_0364.png',
+      '/assets/bookmarklet/scraping/IMG_0366.png'
     ]
   },
   'bookmarklet-developer': {
