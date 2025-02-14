@@ -57,8 +57,10 @@ export function getWorkContent(workId: string, language: Language): WorkContent 
   return mergeWithLocalizedContent(project, language);
 }
 
-export function getAllWorks(language: Language): WorkContent[] {
-  return Object.values(projects).map(project => 
-    mergeWithLocalizedContent(project, language)
-  );
-} 
+const selectedProjects = ['edu-open-4step', 'ventus-talk', 'shogi-app'];
+
+export function getFeaturedWorks(language: Language): WorkContent[] {
+  return Object.values(projects)
+    .filter(project => selectedProjects.includes(project.id))
+    .map(project => mergeWithLocalizedContent(project, language));
+}

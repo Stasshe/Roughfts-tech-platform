@@ -32,8 +32,6 @@ export const translations = {
       home: 'ホーム',
       works: '作品',
       about: 'プロフィール',
-      contact: 'お問い合わせ',
-      language: '言語',
       experiences: '経験',
       search: '検索'
     },
@@ -42,7 +40,7 @@ export const translations = {
       returnToWorks: '作品一覧に戻る'
     },
     sections: {
-      selectedWorks: '選択された作品',
+      selectedWorks: '作品',
       technologies: '使用技術',
       features: '機能',
       seeInAction: 'デモ映像',

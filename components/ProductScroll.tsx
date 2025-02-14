@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { useLanguage } from '../lib/LanguageContext';
 import { translations } from '../lib/translations';
-import { getAllWorks } from '../lib/contentManager';
+import { getFeaturedWorks } from '../lib/contentManager';
 
 const ProductScroll = () => {
   const { language } = useLanguage();
-  const featuredProjects = getAllWorks(language);
+  const featuredProjects = getFeaturedWorks(language);
 
   return (
     <ScrollSection>

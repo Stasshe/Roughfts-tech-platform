@@ -8,16 +8,16 @@ services:
         value: 18.17.0
     routes:
       - type: rewrite
-        source: /works
+        source: /works/
         destination: /works/index.html
       - type: rewrite
         source: /works/*
         destination: /works/[slug].html
       - type: rewrite
-        source: /experiences
+        source: /experiences/
         destination: /experiences/index.html
       - type: rewrite
-        source: /about
+        source: /about/
         destination: /about/index.html
       - type: rewrite
         source: /*

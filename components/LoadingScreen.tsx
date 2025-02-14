@@ -16,8 +16,9 @@ const LoadingScreen = () => {
       setContentReady(true);
     }, 100);
 
-    // Check if this is the first visit
-    const visited = localStorage.getItem('hasVisited');
+    // every
+    const visited = false;// localStorage.getItem('hasVisited');
+    // If the page is visited for the first time, do this
     if (!visited) {
       setHasVisited(false);
       localStorage.setItem('hasVisited', 'true');
@@ -31,12 +32,7 @@ const LoadingScreen = () => {
         clearTimeout(timer);
         clearTimeout(contentLoadCheck);
       };
-    } else {
-      setIsLoading(false);
-      // Show content immediately for returning visitors
-      document.getElementById('__next')?.classList.add('loaded');
     }
-
     return () => clearTimeout(contentLoadCheck);
   }, []);
 

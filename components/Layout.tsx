@@ -68,19 +68,19 @@ const Layout = ({ children }: LayoutProps) => {
             >
               <nav>
                 <MenuItem>
-                  <Link href="/">HOME</Link>
+                  <Link href="/">{translations[language].menu.home}</Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link href="/works">WORKS</Link>
+                  <Link href="/works">{translations[language].menu.works}</Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link href="/experience">EXPERIENCES</Link>
+                  <Link href="/experience">{translations[language].menu.experiences}</Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link href="/about">ABOUT</Link>
+                  <Link href="/about">{translations[language].menu.about}</Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link href="/search">SEARCH</Link>
+                  <Link href="/search">{translations[language].menu.search}</Link>
                 </MenuItem>
               </nav>
             </MenuContent>

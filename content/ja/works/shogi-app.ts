@@ -3,22 +3,23 @@ import { WorkContent } from "../../../types/content";
 export const shogiAppJa: WorkContent = {
   id: 'shogi-app',
   title: '将棋アプリ - CeConV2.31',
-  description: 'iPadに最適化された現代的な将棋アプリケーション。AI対戦とマルチプレイヤー機能を搭載。',
+  description: '一つでオンライン・研究ができる唯一無二の将棋アプリケーション。AI対戦を搭載し、Playgroundsでも遊べる。',
   techStack: [
     'Swift',
     'SpriteKit',
     'Firebase',
     'WebSocket',
-    'AI統合'
+    'AI'
   ],
   features: [
     {
       title: 'ゲーム機能',
       details: [
-        'リアルタイムマルチプレイヤー対戦',
-        '難易度調整可能なAI対戦',
+        'オンライン対戦',
+        'AI対戦',
         '駒の動きを検証する対話型将棋盤',
         '棋譜再生と対局履歴機能',
+        '棋譜保存・読み込み',
         '伝統的な日本の将棋駒デザイン'
       ]
     },
@@ -35,11 +36,11 @@ export const shogiAppJa: WorkContent = {
     {
       title: 'ユーザー体験',
       details: [
-        '直感的なドラッグ＆ドロップ操作',
-        '視覚的な手の提案',
+        '直感的かつスピーディーな操作が可能',
+        '移動できるマスの強調表示',
         'ゲーム内チャット機能',
-        'カスタマイズ可能なゲーム設定',
-        'iPadに最適化されたパフォーマンス'
+        '対戦中はプライベートチャットに自動移行',
+        'iPadのPlaygroundsで動かせる'
       ]
     }
   ],
