@@ -3,12 +3,21 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
+import LoadingScreen from './LoadingScreen';
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
+  const isSlugPage = router.pathname.includes('[');
+
   return (
     <LayoutWrapper>
+      {!isSlugPage && <LoadingScreen />}
       <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} $isOpen={isMenuOpen}>
         <span></span>
         <span></span>

@@ -9,4 +9,10 @@ services:
     routes:
       - type: rewrite
         source: /*
-        destination: /index.html
+        destination: /404.html
+      - type: rewrite
+        source: /works/*
+        destination: /works/[slug].html
+      - type: rewrite
+        source: /about
+        destination: /about.html
