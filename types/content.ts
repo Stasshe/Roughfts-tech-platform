@@ -21,4 +21,4 @@ export interface WorkContent extends Project {
   localizedContent?: {
     ja: LocalizedContent;
   };
-} 
+}
