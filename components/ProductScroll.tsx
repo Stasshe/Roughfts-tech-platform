@@ -31,7 +31,7 @@ const ProductScroll = () => {
             </ImageWrapper>
             <ProductInfo>
               <h3>{project.title}</h3>
-              <Description>{project.shortIntro}</Description>
+              <Description>{project.description}</Description>
               <TechTags>
                 {project.techStack.slice(0, 3).map((tech, i) => (
                   <TechTag key={i}>{tech}</TechTag>

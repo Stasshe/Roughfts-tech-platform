@@ -11,9 +11,12 @@ const WorkDetailPage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const { language } = useLanguage();
-  const work = getWorkContent(slug, language);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  
+  // Ensure slug is always a string
+  const slugString = Array.isArray(slug) ? slug[0] : slug;
+  const work = getWorkContent(slugString, language);
 
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   if (!work) {
     return (
       <Layout>
