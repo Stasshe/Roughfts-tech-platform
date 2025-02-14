@@ -8,7 +8,7 @@ import { ProfileSection } from '../components/ProfileSection';
 
 const HomePage = () => {
   const { scrollY } = useScroll();
-  const coverY = useTransform(scrollY, [0, 1000], [0, 300], { clamp: false });
+  const coverY = useTransform(scrollY, [0, 1200], [0, 300], { clamp: false });
   const scrollOpacity = useTransform(scrollY, [0, 700], [1, 0], { clamp: true });
 
   const scrollToProfile = () => {

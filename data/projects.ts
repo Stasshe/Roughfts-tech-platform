@@ -186,7 +186,10 @@ export const projects: { [key: string]: Project } = {
         ]
       }
     ],
-    images: ['/assets/python-filter-1.jpg', '/assets/python-filter-2.jpg']
+    images: [
+      '/assets/python-filter/a-1.jpg',
+      '/assets/python-filter/a-2.jpg'
+    ]
   },
   'edu-open-4step': {
     id: 'edu-open-4step',
@@ -250,7 +253,10 @@ export const projects: { [key: string]: Project } = {
         ]
       }
     ],
-    images: ['/assets/youtube-tool-1.jpg', '/assets/youtube-tool-2.jpg']
+    images: [
+      '/assets/youtube-tool-1.jpg',
+      '/assets/youtube-tool-2.jpg'
+    ]
   },
   'bookmarklet-scraping': {
     id: 'bookmarklet-scraping',
@@ -273,7 +279,10 @@ export const projects: { [key: string]: Project } = {
         ]
       }
     ],
-    images: ['/assets/scraping-1.jpg', '/assets/scraping-2.jpg']
+    images: [
+      '/assets/bookmarklet-scraping/d.jpg',
+      '/assets/bookmarklet-scraping/s.jpg'
+    ]
   },
   'bookmarklet-developer': {
     id: 'bookmarklet-developer',
@@ -305,6 +314,9 @@ export const projects: { [key: string]: Project } = {
         ]
       }
     ],
-    images: ['/assets/dev-tools-1.jpg', '/assets/dev-tools-2.jpg']
+    images: [
+      '/assets/bookmarklet-developer/a.jpg',
+      '/assets/bookmarklet-developer/s.jpg'
+    ]
   }
 }; 

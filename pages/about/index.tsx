@@ -54,7 +54,10 @@ const AboutPage = () => {
           >
             <h3>Fast Learning</h3>
             <p>
-              Harness the power of artificial intelligence to accelerate your coding journey. Our smart AI tools provide tailored assistance, offering instant feedback and guidance. From debugging to optimizing code, AI-driven support empowers you to achieve coding proficiency in record time. Dive into the future of coding and watch your skills soar with the most advanced AI support at your fingertips.
+              Harness the power of artificial intelligence to accelerate your coding journey. 
+              Our smart AI tools provide tailored assistance, offering instant feedback and guidance.
+               From debugging to optimizing code, AI-driven support empowers you to achieve coding proficiency in record time. 
+               Dive into the future of coding and watch your skills soar with the most advanced AI support at your fingertips.
             </p>
           </motion.div>
         </PolicySection>
