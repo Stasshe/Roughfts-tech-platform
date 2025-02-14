@@ -1,15 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
   reactStrictMode: true,
   exportPathMap: async function () {
     return {
       '/': { page: '/' },
-    }
+      '/404': { page: '/404' },
+      '/about': { page: '/about' },
+      '/experience': { page: '/experience' },
+      '/search': { page: '/search' },
+      '/works': { page: '/works' },
+    };
   },
   compiler: {
     styledComponents: true,

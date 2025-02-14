@@ -8,8 +8,14 @@ services:
         value: 18.17.0
     routes:
       - type: rewrite
+        source: /works
+        destination: /works/index.html
+      - type: rewrite
         source: /works/*
         destination: /works/:splat/index.html
+      - type: rewrite
+        source: /experience
+        destination: /experience/index.html
       - type: rewrite
         source: /experience/*
         destination: /experience/:splat/index.html
@@ -21,7 +27,7 @@ services:
         destination: /search/index.html
       - type: rewrite
         source: /404
-        destination: /404/index.html
+        destination: /404.html
       - type: rewrite
         source: /*
         destination: /index.html
