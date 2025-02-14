@@ -26,10 +26,9 @@ export const projects: { [key: string]: Project } = {
     title: 'Ventus-Talk',
     description: 'A high-performance, real-time chat application with advanced features and optimized user experience.',
     techStack: [
-      'Firebase Firestore',
-      'Express.js',
-      'React',
-      'Node.js',
+      'Firestore',
+      'JavaScript',
+      'PWA',
       'FCM (Firebase Cloud Messaging)',
       'Google Drive API',
       'WebRTC',
