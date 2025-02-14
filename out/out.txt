@@ -1,0 +1,36 @@
+.
+├── 404
+│   └── index.html
+├── 404.html
+├── _next
+│   ├── ZktEuaT7oBK-z9hFuxaOG
+│   └── static
+│       ├── ZktEuaT7oBK-z9hFuxaOG
+│       │   ├── _buildManifest.js
+│       │   └── _ssgManifest.js
+│       └── chunks
+│           ├── 282-d7acee195b410099.js
+│           ├── 537-c6abdf8d7eb16b58.js
+│           ├── 606-a8fff1ed518c6471.js
+│           ├── 649-c6de6169baf0d5e6.js
+│           ├── framework-64ad27b21261a9ce.js
+│           ├── main-ea681c905b070672.js
+│           ├── pages
+│           │   ├── _app-0ee8af0c0dfbad8a.js
+│           │   ├── _error-7a92967bea80186d.js
+│           │   ├── about-c2289a671ffad04c.js
+│           │   ├── experience
+│           │   │   └── [slug]-aad9003da53eecba.js
+│           │   ├── experience-3aaf3b0d9f8f8003.js
+│           │   ├── index-995aa7466dbfdeae.js
+│           │   ├── search-f1955970fd47968c.js
+│           │   ├── works
+│           │   │   └── [slug]-20f501d83e836081.js
+│           │   └── works-1cce4b7120e146a6.js
+│           ├── polyfills-42372ed130431b0a.js
+│           └── webpack-d38be8d96a62f950.js
+写真など
+├── index.html
+└── out.txt
+
+14 directories, 52 files
