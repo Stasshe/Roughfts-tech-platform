@@ -32,7 +32,7 @@ export const projects: { [key: string]: Project } = {
       'Node.js',
       'FCM (Firebase Cloud Messaging)',
       'Google Drive API',
-      'WebSocket',
+      'WebRTC',
       'Service Workers'
     ],
     features: [
@@ -57,7 +57,7 @@ export const projects: { [key: string]: Project } = {
           'Offline message caching',
           'Read status indicators',
           'Message search functionality',
-          'Emoji support and quick reactions'
+          'Any type of characters'
         ]
       },
       {
@@ -74,10 +74,11 @@ export const projects: { [key: string]: Project } = {
       }
     ],
     images: [
-      '/assets/ventus-talk/chat-interface.jpg',
-      '/assets/ventus-talk/file-sharing.jpg',
-      '/assets/ventus-talk/theme-customization.jpg',
-      '/assets/ventus-talk/youtube-embed.jpg'
+      '/assets/ventus-talk/IMG_0226.png',
+      '/assets/ventus-talk/IMG_0153.png',
+      '/assets/ventus-talk/IMG_0230.png',
+      '/assets/ventus-talk/IMG_0146.png',
+      '/assets/ventus-talk/IMG_0232.png'
     ],
     highlights: [
       {
