@@ -174,43 +174,48 @@ export const projects: { [key: string]: Project } = {
   'shogi-app': {
     id: 'shogi-app',
     title: 'Shogi App - CeConV2.31',
-    description: 'A modern Shogi (Japanese Chess) application built for iPad, featuring AI integration and multiplayer capabilities.',
+    description: 'A modern Shogi (Japanese Chess) application built for iPad, featuring AI integration, multiplayer capabilities, and extensive game analysis tools.',
     techStack: [
       'Swift',
       'SpriteKit',
       'Firebase',
       'WebSocket',
-      'AI Integration'
+      'GIKOU AI API',
+      'UIKit',
+      'CoreData'
     ],
     features: [
       {
-        title: 'Game Features',
+        title: 'Game Modes',
         details: [
-          'Real-time multiplayer matches',
-          'AI opponent with adjustable difficulty',
-          'Interactive game board with piece movement validation',
-          'Move history and game replay functionality',
-          'Traditional Japanese chess piece designs'
+          'Real-time online multiplayer with chat system',
+          'AI opponent mode using GIKOU engine',
+          'Solo study mode with move analysis',
+          'Game replay and analysis features',
+          'Spectator mode with board rotation',
+          'Move history and game state persistence'
         ]
       },
       {
         title: 'Technical Features',
         details: [
-          'Custom move parser for Shogi notation',
-          'Real-time game state synchronization',
+          'Real-time game synchronization (avg. 3s latency)',
+          'Custom Shogi notation parser',
           'Integrated chat system for players',
-          'Profile management system',
-          'Game state persistence'
+          'Move validation system',
+          'Game state persistence and restoration',
+          'Check (王手) detection system'
         ]
       },
       {
-        title: 'User Experience',
+        title: 'Version History',
         details: [
-          'Intuitive drag-and-drop interface',
-          'Visual move suggestions',
-          'In-game chat functionality',
-          'Customizable game settings',
-          'Performance optimized for iPad'
+          'v2.31: Fixed opponent move visibility in online matches',
+          'v2.30: Added in-game private chat',
+          'v2.28: Room ID copying and UI improvements',
+          'v2.0: Online multiplayer implementation',
+          'v1.8: Solo study mode completion',
+          'v1.0: GUI and core features implementation'
         ]
       }
     ],
@@ -220,6 +225,27 @@ export const projects: { [key: string]: Project } = {
       '/assets/cecon/IMG_0345.png',
       '/assets/cecon/IMG_0346.png'
     ],
+    highlights: [
+      {
+        title: 'Updates',
+        value: '30+',
+        description: 'Version iterations'
+      },
+      {
+        title: 'Modes',
+        value: '3',
+        description: 'Play styles available'
+      },
+      {
+        title: 'Latency',
+        value: '~3s',
+        description: 'Online play response'
+      }
+    ],
+    architecture: {
+      diagram: '/assets/cecon/architecture.svg',
+      description: 'Client-server architecture with AI integration and real-time multiplayer support using WebSocket connections.'
+    },
     demoVideo: '/assets/cecon/ScreenRecording_02-14-2025 09-49-30_1.mp4'
   },
   'python-filter': {
