@@ -225,7 +225,7 @@ export const projects: { [key: string]: Project } = {
     ],
     images: [
       '/assets/edu-open-4step/IMG_0066.jpeg',
-      '/assets/edu-open-4step/IMG_0362.png'
+      '/assets/edu-open-4step/IMG_0362.png',
       '/assets/edu-open-4step/IMG_0363.png'
     ]
   },
