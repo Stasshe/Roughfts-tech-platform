@@ -192,7 +192,7 @@ export const projects: { [key: string]: Project } = {
     id: 'edu-open-4step',
     title: 'Filtering Ignore web site',
     description: 'A web-based platform designed to enhance educational resource accessibility through a four-step verification process.',
-    techStack: 
+    techStack: [
       'JavaScript',
       'Scraping',
       'CSS',
