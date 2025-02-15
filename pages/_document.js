@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta httpEquiv="content-language" content="en,ja" />
+        <meta name="google-site-verification" content="2ZYx9Kjo9XcsVNzAz1iFFOgoIZZnn05nKjko7jRRMjw" />
         {/* Favicon */}
         <link rel="icon" href="/assets/ico.png" />
         <link rel="icon" type="image/svg+xml" href="/assets/ico_svg.svg" />
