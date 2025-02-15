@@ -75,7 +75,7 @@ export const projects: { [key: string]: Project } = {
     highlights: [
       {
         title: 'Modes',
-        value: '3',
+        value: '5',
         description: 'Difficulty levels'
       },
       {
@@ -108,8 +108,7 @@ export const projects: { [key: string]: Project } = {
         title: 'Core Features',
         details: [
           'Real-time messaging with 0.05-0.15 second update speed',
-          'Multi-server architecture with 3 Firestore servers',
-          'Efficient 4MB static site deployment',
+          'Multi-server architecture with 4 Firestore servers',
           'Automatic YouTube link conversion and embedding',
           'QR code friend addition system',
           'File sharing support',
@@ -411,8 +410,8 @@ export const projects: { [key: string]: Project } = {
       }
     ],
     images: [
-      '/assets/bookmarklet-developer/a.jpg',
-      '/assets/bookmarklet-developer/s.jpg'
+      '/assets/bookmarklet-developer/IMG_0378.png',
+      '/assets/bookmarklet-developer/IMG_0382.png'
     ]
   },
   'kanji-journey': {
