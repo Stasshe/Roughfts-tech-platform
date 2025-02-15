@@ -12,13 +12,13 @@ services:
         destination: /works/index.html
       - type: rewrite
         source: /works/*
-        destination: /works/:splat/index.html
+        destination: /works/index.html
       - type: rewrite
         source: /experience
         destination: /experience/index.html
       - type: rewrite
         source: /experience/*
-        destination: /experience/:splat/index.html
+        destination: /experience/index.html
       - type: rewrite
         source: /about
         destination: /about/index.html
@@ -31,3 +31,4 @@ services:
       - type: rewrite
         source: /*
         destination: /index.html
+        status: 404
