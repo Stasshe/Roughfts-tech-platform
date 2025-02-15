@@ -281,8 +281,8 @@ export const projects: { [key: string]: Project } = {
       }
     ],
     images: [
-      '/assets/python-filter/a-1.jpg',
-      '/assets/python-filter/a-2.jpg'
+      '/assets/python-filter/IMG_0385.png',
+      '/assets/python-filter/IMG_0384.png'
     ]
   },
   'edu-open-4step': {
