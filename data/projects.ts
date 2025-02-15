@@ -410,8 +410,8 @@ export const projects: { [key: string]: Project } = {
       }
     ],
     images: [
-      '/assets/bookmarklet-developer/IMG_0378.png',
-      '/assets/bookmarklet-developer/IMG_0382.png'
+      '/assets/bookmarklet/developer/IMG_0378.png',
+      '/assets/bookmarklet/developer/IMG_0382.png'
     ]
   },
   'kanji-journey': {
@@ -484,7 +484,6 @@ export const projects: { [key: string]: Project } = {
     architecture: {
       diagram: '/assets/kanji-journey/architecture.svg',
       description: 'Client-server architecture with real-time multiplayer support and Firebase Realtime Database integration.'
-    },
-    demoVideo: '/assets/kanji-journey/ScreenRecording_02-14-2025 09-49-30_1.mp4'
+    }
   }
 }; 
