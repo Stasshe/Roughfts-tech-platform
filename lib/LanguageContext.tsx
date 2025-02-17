@@ -13,7 +13,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('en');
   const contentManager = ContentManager.getInstance();
 
@@ -30,14 +30,23 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('language', lang);
   };
 
-  const t = (key: string, section?: string) => {
-    const keys = key.split('.');
-    let result = translations[language];
-    for (const k of keys) {
-      if (!result || typeof result[k] === 'undefined') return key;
-      result = result[k];
+  const t = (key: string, section?: string): string => {
+    try {
+      const keys = key.split('.');
+      let result = translations[language];
+      
+      for (const k of keys) {
+        if (result && typeof result === 'object' && k in result) {
+          result = result[k];
+        } else {
+          return key; // Return the key if translation not found
+        }
+      }
+      
+      return typeof result === 'string' ? result : key;
+    } catch (error) {
+      return key; // Return the key if any error occurs
     }
-    return result;
   };
 
   const getLocalizedContent = (type: 'project' | 'page', id: string) => {
@@ -51,13 +60,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     <LanguageContext.Provider value={{ 
       language, 
       setLanguage: handleSetLanguage, 
-      t, 
+      t: t as (key: string, section?: string) => string,
       getLocalizedContent 
     }}>
       {children}
     </LanguageContext.Provider>
   );
-}
+};
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);

@@ -69,21 +69,6 @@ const AboutPage = () => {
             </motion.div>
           </TextContent>
         </ContentSection>
-        <PolicySection>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <h3>Fast Learning</h3>
-            <p>
-              Harness the power of artificial intelligence to accelerate your coding journey. 
-              Our smart AI tools provide tailored assistance, offering instant feedback and guidance.
-              From debugging to optimizing code, AI-driven support empowers you to achieve coding proficiency in record time. 
-              Dive into the future of coding and watch your skills soar with the most advanced AI support at your fingertips.
-            </p>
-          </motion.div>
-        </PolicySection>
       </AboutContainer>
     </Layout>
   );
@@ -219,22 +204,6 @@ const SkillCategory = styled.div`
   color: #888;
   text-transform: uppercase;
   letter-spacing: 1px;
-`;
-
-const PolicySection = styled.div`
-  margin-top: 4rem;
-  text-align: center;
-
-  h3 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #fff;
-  }
-
-  p {
-    font-size: 1.2rem;
-    opacity: 0.8;
-  }
 `;
 
 export default AboutPage; 
