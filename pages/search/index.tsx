@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import Link from 'next/link';
-import { projects, Project } from '../../data/projects';
+import { Project, projects } from '../../data/projects';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
@@ -33,7 +33,7 @@ const SearchPage = () => {
     const searchMap = new Map<string, ConsolidatedResult>();
     const lowercaseQuery = query.toLowerCase();
 
-    Object.values(projects).forEach(project => {
+    Object.values(projects).forEach((project: Project) => {
       const matches: Match[] = [];
 
       // Search in title and description

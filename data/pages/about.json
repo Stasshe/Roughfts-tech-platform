@@ -1,6 +1,6 @@
 {
-  "title": "About Me",
-  "title_ja": "プロフィール",
+  "title": "About Roughfts",
+  "title_ja": "Roughftsについて",
   "description": "Full-stack developer passionate about creating innovative solutions.",
   "description_ja": "革新的なソリューションの創造に情熱を注ぐフルスタック開発者です。",
   "sections": {
@@ -10,17 +10,21 @@
       "content": "I am a passionate software developer with a focus on creating innovative solutions that make a difference.",
       "content_ja": "私は革新的なソリューションの創造に情熱を注ぐソフトウェア開発者です。"
     },
-    "skills": {
-      "title": "Technical Skills",
-      "title_ja": "技術スキル",
-      "content": "Proficient in multiple programming languages and frameworks",
-      "content_ja": "複数のプログラミング言語とフレームワークに精通"
-    },
-    "policy": {
+    "fastLearning": {
       "title": "Fast Learning",
       "title_ja": "高速学習",
       "content": "Harness the power of artificial intelligence to accelerate your coding journey. Our smart AI tools provide tailored assistance, offering instant feedback and guidance. From debugging to optimizing code, AI-driven support empowers you to achieve coding proficiency in record time. Dive into the future of coding and watch your skills soar with the most advanced AI support at your fingertips.",
-      "content_ja": "人工知能の力を活用してコーディングの旅を加速させましょう。スマートAIツールがカスタマイズされたアシスタンスを提供し、即座のフィードバックとガイダンスを提供します。デバッグからコードの最適化まで、AI駆動のサポートにより、記録的な速さでコーディングの習熟度を高めることができます。コーディングの未来に飛び込み、最先端のAIサポートであなたのスキルを飛躍的に向上させましょう。"
+      "content_ja": "人工知能の力を活用してコーディングの旅を加速させましょう。スマートAIツールがカスタマイズされたアシスタンスを提供し、即座のフィードバックとガイダンスを提供します。デバッグからコードの最適化まで、AI駆動のサポートにより、記録的な速さでコーディングの習熟度を高めることができます。"
     }
-  }
+  },
+  "skills": [
+    "JavaScript/TypeScript",
+    "React/Next.js",
+    "Node.js",
+    "Docker",
+    "AWS",
+    "Firebase",
+    "Web Security",
+    "UI/UX Design"
+  ]
 } 
