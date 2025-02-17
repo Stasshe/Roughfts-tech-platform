@@ -1,0 +1,36 @@
+{
+  "id": "bookmarklet-scraping",
+  "title": "Web Content Scraping Tool",
+  "title_ja": "Webコンテンツスクレイピングツール",
+  "description": "A bookmarklet for efficient web content extraction and analysis in educational contexts.",
+  "description_ja": "教育的な文脈でのWebコンテンツの効率的な抽出と分析のためのブックマークレット。",
+  "techStack": [
+    "JavaScript",
+    "DOM Scraping",
+    "Data Parsing",
+    "Bookmarklet"
+  ],
+  "features": [
+    {
+      "title": "Capabilities",
+      "title_ja": "機能",
+      "details": [
+        "Selective content extraction",
+        "Data formatting",
+        "Custom parsing rules",
+        "Export functionality"
+      ],
+      "details_ja": [
+        "選択的なコンテンツ抽出",
+        "データフォーマット",
+        "カスタムパースルール",
+        "エクスポート機能"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/bookmarklet/scraping/IMG_0365.png",
+    "/assets/bookmarklet/scraping/IMG_0364.png",
+    "/assets/bookmarklet/scraping/IMG_0366.png"
+  ]
+} 

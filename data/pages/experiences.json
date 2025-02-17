@@ -1,0 +1,20 @@
+{
+  "title": "Experiences",
+  "title_ja": "経験",
+  "description": "My professional journey and key achievements",
+  "description_ja": "私の職務経験と主な成果",
+  "sections": {
+    "education": {
+      "title": "Education",
+      "title_ja": "学歴",
+      "content": "Computer Science and Engineering with focus on software development and system architecture",
+      "content_ja": "ソフトウェア開発とシステムアーキテクチャに重点を置いたコンピュータサイエンスと工学の学習"
+    },
+    "projects": {
+      "title": "Key Projects",
+      "title_ja": "主要プロジェクト",
+      "content": "Led development of multiple successful applications, focusing on educational technology and communication tools",
+      "content_ja": "教育技術とコミュニケーションツールに焦点を当てた複数の成功したアプリケーションの開発をリード"
+    }
+  }
+} 

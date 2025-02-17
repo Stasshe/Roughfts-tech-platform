@@ -1,6 +1,7 @@
 import { LanguageProvider } from '../lib/LanguageContext';
+import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <LanguageProvider>
       <Component {...pageProps} />

@@ -2,22 +2,50 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
-
+import { GetStaticProps, GetStaticPaths } from 'next';
 import { useState } from 'react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { getWorkContent } from '../../lib/contentManager';
+import { WorkContent } from '../../types/content';
+import ProjectData from '../../lib/projectData';
 
-const WorkDetailPage = () => {
+interface WorkDetailPageProps {
+  workContent: WorkContent | null;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = ProjectData.getInstance().getAllProjects();
+  const paths = projects.map((project) => ({
+    params: { slug: project.id },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<WorkDetailPageProps> = async ({ params, locale }) => {
+  const slug = params?.slug as string;
+  const workContent = ProjectData.getInstance().getWorkContent(slug, locale || 'en');
+
+  return {
+    props: {
+      workContent,
+    },
+  };
+};
+
+const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps) => {
   const router = useRouter();
+  const { language, getLocalizedContent } = useLanguage();
   const { slug } = router.query;
-  const { language } = useLanguage();
-  
-  // Ensure slug is always a string
-  const slugString = Array.isArray(slug) ? slug[0] : slug;
-  const work = getWorkContent(slugString, language);
+
+  // Get localized content based on current language
+  const workContent = getLocalizedContent('project', slug as string) || initialWorkContent;
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  if (!work) {
+  if (!workContent) {
     return (
       <Layout>
         <WorkContainer>
@@ -40,13 +68,13 @@ const WorkDetailPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h1>{work.title}</motion.h1>
-          <motion.p>{work.description}</motion.p>
+          <motion.h1>{workContent.title}</motion.h1>
+          <motion.p>{workContent.description}</motion.p>
         </Header>
 
-        {work.highlights && (
+        {workContent.highlights && (
           <HighlightsSection>
-            {work.highlights.map((highlight, index) => (
+            {workContent.highlights.map((highlight, index) => (
               <HighlightCard
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -62,7 +90,7 @@ const WorkDetailPage = () => {
         )}
 
         <ImageGallery>
-          {work.images.map((image, index) => (
+          {workContent.images.map((image, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -70,12 +98,12 @@ const WorkDetailPage = () => {
               transition={{ delay: index * 0.2 }}
               onClick={() => setSelectedImage(image)}
             >
-              <GalleryImage src={image} alt={`${work.title} screenshot ${index + 1}`} />
+              <GalleryImage src={image} alt={`${workContent.title} screenshot ${index + 1}`} />
             </motion.div>
           ))}
         </ImageGallery>
 
-        {work.architecture && (
+        {workContent.architecture && (
           <ArchitectureSection>
             <motion.h2
               initial={{ opacity: 0 }}
@@ -84,20 +112,20 @@ const WorkDetailPage = () => {
               System Architecture
             </motion.h2>
             <motion.img
-              src={work.architecture.diagram}
+              src={workContent.architecture.diagram}
               alt="Architecture Diagram"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             />
-            <motion.p>{work.architecture.description}</motion.p>
+            <motion.p>{workContent.architecture.description}</motion.p>
           </ArchitectureSection>
         )}
 
         <TechStack>
           <h2>Technologies Used</h2>
           <TechList>
-            {work.techStack.map((tech, index) => (
+            {workContent.techStack.map((tech, index) => (
               <motion.li
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
@@ -111,7 +139,7 @@ const WorkDetailPage = () => {
         </TechStack>
 
         <FeaturesSection>
-          {work.features.map((feature, index) => (
+          {workContent.features.map((feature, index) => (
             <FeatureBlock
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -135,7 +163,7 @@ const WorkDetailPage = () => {
           ))}
         </FeaturesSection>
 
-        {work.demoVideo && (
+        {workContent.demoVideo && (
           <DemoSection>
             <motion.h2
               initial={{ opacity: 0 }}
@@ -149,7 +177,7 @@ const WorkDetailPage = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <source src={work.demoVideo} type="video/mp4" />
+              <source src={workContent.demoVideo} type="video/mp4" />
             </motion.video>
           </DemoSection>
         )}

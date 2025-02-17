@@ -1,66 +1,45 @@
-import { projects } from '../data/projects';
-import { Project } from '../data/projects';
-import { LocalizedContent, WorkContent } from '../types/content';
-// Import other content files...
+import { ProjectContent, PageContent, WorkContent } from '../types/content';
+import ProjectData from './projectData';
+import PageData from './pageData';
 
-type Language = 'en' | 'ja';
+export class ContentManager {
+  private static instance: ContentManager;
+  private projectData: ProjectData;
+  private pageData: PageData;
 
-// Import language-specific content
-import { ventusTalkJa } from '../content/ja/works/ventus-talk';
-import { shogiAppJa } from '../content/ja/works/shogi-app';
-import { pythonFilterJa } from '../content/ja/works/python-filter';
-// Import other Japanese content...
+  private constructor() {
+    this.projectData = ProjectData.getInstance();
+    this.pageData = PageData.getInstance();
+  }
 
-// Map of localized content
-const localizedContent: { [key: string]: { ja: LocalizedContent } } = {
-  'ventus-talk': {
-    ja: ventusTalkJa
-  },
-  'shogi-app': {
-    ja: shogiAppJa
-  },
-  'python-filter': {
-    ja: pythonFilterJa
-  },
-  // Add other projects' localized content
+  public static getInstance(): ContentManager {
+    if (!ContentManager.instance) {
+      ContentManager.instance = new ContentManager();
+    }
+    return ContentManager.instance;
+  }
+
+  public getProject(id: string, locale: string = 'en'): ProjectContent | null {
+    return this.projectData.getProject(id, locale);
+  }
+
+  public getPage(id: string, locale: string = 'en'): PageContent | null {
+    return this.pageData.getPage(id, locale);
+  }
+
+  public getAllProjects(locale: string = 'en'): ProjectContent[] {
+    return this.projectData.getAllProjects(locale);
+  }
+
+  public getWorkContent(slug: string, locale: string = 'en'): WorkContent | null {
+    return this.projectData.getWorkContent(slug, locale);
+  }
+
+  public getFeaturedWorks(): WorkContent[] {
+    return this.projectData.getFeaturedWorks();
+  }
+}
+
+export const getWorkContent = (slug: string, locale: string = 'en'): WorkContent | null => {
+  return ContentManager.getInstance().getWorkContent(slug, locale);
 };
-
-function mergeWithLocalizedContent(project: Project, language: Language): WorkContent {
-  if (language === 'en') {
-    return project as WorkContent;
-  }
-
-  const localized = localizedContent[project.id]?.[language];
-  if (!localized) {
-    return project as WorkContent;
-  }
-
-  return {
-    ...project,
-    title: localized.title ?? project.title,
-    description: localized.description ?? project.description,
-    features: localized.features ?? project.features,
-    architecture: localized.architecture 
-      ? { ...project.architecture, description: localized.architecture.description }
-      : project.architecture,
-    highlights: project.highlights?.map((highlight, index) => ({
-      ...highlight,
-      title: localized.highlights?.[index]?.title ?? highlight.title,
-      description: localized.highlights?.[index]?.description ?? highlight.description
-    }))
-  };
-}
-
-export function getWorkContent(workId: string, language: Language): WorkContent | undefined {
-  const project = projects[workId];
-  if (!project) return undefined;
-  return mergeWithLocalizedContent(project, language);
-}
-
-const selectedProjects = ['edu-open-4step', 'ventus-talk', 'shogi-app'];
-
-export function getFeaturedWorks(language: Language): WorkContent[] {
-  return Object.values(projects)
-    .filter(project => selectedProjects.includes(project.id))
-    .map(project => mergeWithLocalizedContent(project, language));
-}

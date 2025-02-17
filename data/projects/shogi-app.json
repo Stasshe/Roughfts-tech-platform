@@ -1,0 +1,66 @@
+{
+  "id": "shogi-app",
+  "title": "Shogi App - CeConV2.31",
+  "title_ja": "将棋アプリ - CeConV2.31",
+  "description": "A modern Shogi (Japanese Chess) application built for iPad, featuring AI integration, multiplayer capabilities, and extensive game analysis tools.",
+  "description_ja": "AI統合、マルチプレイヤー機能、および包括的なゲーム分析ツールを備えたiPad向けの現代的な将棋アプリケーション。",
+  "techStack": [
+    "Swift",
+    "SpriteKit",
+    "Firebase",
+    "WebSocket",
+    "GIKOU AI API",
+    "UIKit",
+    "CoreData"
+  ],
+  "features": [
+    {
+      "title": "Game Modes",
+      "title_ja": "ゲームモード",
+      "details": [
+        "Real-time online multiplayer with chat system",
+        "AI opponent mode using GIKOU engine",
+        "Solo study mode with move analysis",
+        "Game replay and analysis features",
+        "Spectator mode with board rotation",
+        "Move history and game state persistence"
+      ],
+      "details_ja": [
+        "チャットシステム付きリアルタイムオンラインマルチプレイヤー",
+        "技巧エンジンを使用したAI対戦モード",
+        "指し手分析付き独習モード",
+        "対局の再生と分析機能",
+        "盤面回転機能付き観戦モード",
+        "指し手履歴とゲーム状態の保存"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/cecon/IMG_0342.png",
+    "/assets/cecon/IMG_0339.png",
+    "/assets/cecon/IMG_0345.png",
+    "/assets/cecon/IMG_0346.png"
+  ],
+  "highlights": [
+    {
+      "title": "Updates",
+      "title_ja": "アップデート",
+      "value": "30+",
+      "description": "Version iterations",
+      "description_ja": "バージョン更新回数"
+    },
+    {
+      "title": "Modes",
+      "title_ja": "モード",
+      "value": "3",
+      "description": "Play styles available",
+      "description_ja": "利用可能なプレイスタイル"
+    }
+  ],
+  "architecture": {
+    "diagram": "/assets/cecon/architecture.svg",
+    "description": "Client-server architecture with AI integration and real-time multiplayer support using WebSocket connections.",
+    "description_ja": "WebSocket接続を使用したAI統合とリアルタイムマルチプレイヤーをサポートするクライアントサーバーアーキテクチャ。"
+  },
+  "demoVideo": "/assets/cecon/ScreenRecording_02-14-2025 09-49-30_1.mp4"
+} 

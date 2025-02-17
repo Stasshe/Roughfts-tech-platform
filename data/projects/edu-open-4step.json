@@ -1,0 +1,42 @@
+{
+  "id": "edu-open-4step",
+  "title": "Filtering Ignore web site",
+  "title_ja": "プロキシサイト-4ステップ",
+  "description": "A web-based platform designed to enhance educational resource accessibility through a four-step verification process.",
+  "description_ja": "4段階の認証プロセスを通じて教育リソースのアクセシビリティを向上させるために設計されたWebベースのプラットフォーム。",
+  "techStack": [
+    "JavaScript",
+    "Scraping",
+    "CSS",
+    "Filtering",
+    "Rest API",
+    "Network Protocols",
+    "Web Security",
+    "HTML"
+  ],
+  "features": [
+    {
+      "title": "Core Functionality",
+      "title_ja": "主要機能",
+      "details": [
+        "Four-step verification process",
+        "Secure resource access",
+        "User-friendly interface",
+        "Cross-browser compatibility",
+        "Minimal setup requirements"
+      ],
+      "details_ja": [
+        "4段階の認証プロセス",
+        "セキュアなリソースアクセス",
+        "ユーザーフレンドリーなインターフェース",
+        "クロスブラウザ互換性",
+        "最小限のセットアップ要件"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/edu-open-4step/IMG_0066.jpeg",
+    "/assets/edu-open-4step/IMG_0362.png",
+    "/assets/edu-open-4step/IMG_0363.png"
+  ]
+} 

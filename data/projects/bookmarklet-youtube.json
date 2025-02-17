@@ -1,0 +1,35 @@
+{
+  "id": "bookmarklet-youtube",
+  "title": "YouTube Educational Access",
+  "title_ja": "YouTube教育アクセス",
+  "description": "A bookmarklet tool for seamless access to educational YouTube content in restricted environments.",
+  "description_ja": "制限された環境で教育用YouTubeコンテンツにシームレスにアクセスするためのブックマークレットツール。",
+  "techStack": [
+    "JavaScript",
+    "Bookmarklet",
+    "YouTube API",
+    "DOM Manipulation"
+  ],
+  "features": [
+    {
+      "title": "Features",
+      "title_ja": "機能",
+      "details": [
+        "One-click activation",
+        "YouTube content access",
+        "Video quality optimization",
+        "Minimal browser impact"
+      ],
+      "details_ja": [
+        "ワンクリック起動",
+        "YouTubeコンテンツへのアクセス",
+        "動画品質の最適化",
+        "最小限のブラウザへの影響"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/youtube-tool-1.jpg",
+    "/assets/youtube-tool-2.jpg"
+  ]
+} 

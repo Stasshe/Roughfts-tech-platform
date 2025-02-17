@@ -1,0 +1,68 @@
+{
+  "id": "ventus-talk",
+  "title": "Ventus-Talk",
+  "title_ja": "ベンタストーク",
+  "description": "A high-performance, real-time chat application with advanced features and optimized user experience.",
+  "description_ja": "高性能なリアルタイムチャットアプリケーションで、高度な機能と最適化されたユーザー体験を提供します。",
+  "techStack": [
+    "Firestore",
+    "JavaScript",
+    "PWA",
+    "FCM (Firebase Cloud Messaging)",
+    "Google Drive API",
+    "WebRTC",
+    "Service Workers"
+  ],
+  "features": [
+    {
+      "title": "Core Features",
+      "title_ja": "主要機能",
+      "details": [
+        "Real-time messaging with 0.05-0.15 second update speed",
+        "Multi-server architecture with 4 Firestore servers",
+        "Automatic YouTube link conversion and embedding",
+        "QR code friend addition system",
+        "File sharing support",
+        "Push notifications via Service Workers"
+      ],
+      "details_ja": [
+        "0.05-0.15秒の更新速度でのリアルタイムメッセージング",
+        "4つのFirestoreサーバーによるマルチサーバーアーキテクチャ",
+        "YouTubeリンクの自動変換と埋め込み",
+        "QRコードによる友達追加システム",
+        "ファイル共有サポート",
+        "Service Workerによるプッシュ通知"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/ventus-talk/IMG_0226.png",
+    "/assets/ventus-talk/IMG_0153.png",
+    "/assets/ventus-talk/IMG_0230.png",
+    "/assets/ventus-talk/IMG_0146.png",
+    "/assets/ventus-talk/IMG_0232.png"
+  ],
+  "highlights": [
+    {
+      "title": "Performance",
+      "title_ja": "パフォーマンス",
+      "value": "0.05s",
+      "description": "Message update speed",
+      "description_ja": "メッセージ更新速度"
+    },
+    {
+      "title": "Scale",
+      "title_ja": "スケール",
+      "value": "10K+",
+      "description": "Messages per day",
+      "description_ja": "1日あたりのメッセージ数"
+    }
+  ],
+  "architecture": {
+    "diagram": "/assets/ventus-talk/architecture.svg",
+    "description": "Multi-server architecture utilizing Firebase Firestore for optimal performance and scalability.",
+    "description_ja": "最適なパフォーマンスとスケーラビリティのためのFirebase Firestoreを活用したマルチサーバーアーキテクチャ。"
+  },
+  "demoVideo": "/assets/ventus-talk/demo.mp4",
+  "featured": true
+} 

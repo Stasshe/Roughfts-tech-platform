@@ -2,9 +2,15 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import Link from 'next/link';
-import { projects } from '../../data/projects';
 import Head from 'next/head';
+import { useLanguage } from '../../lib/LanguageContext';
+import { Project } from '../../types/content';
+import { ContentManager } from '../../lib/contentManager';
+
 const WorksPage = () => {
+  const { language, getLocalizedContent } = useLanguage();
+  const projects = ContentManager.getInstance().getAllProjects(language);
+
   return (
     <Layout>
       <WorksContainer>
@@ -19,7 +25,7 @@ const WorksPage = () => {
           Works
         </motion.h1>
         <WorksGrid>
-          {Object.values(projects).map((work, index) => (
+          {projects.map((work: Project, index) => (
             <motion.div
               key={work.id}
               initial={{ opacity: 0, y: 20 }}

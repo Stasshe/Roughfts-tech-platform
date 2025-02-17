@@ -3,11 +3,18 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { useLanguage } from '../lib/LanguageContext';
 import { translations } from '../lib/translations';
-import { getFeaturedWorks } from '../lib/contentManager';
+import { ContentManager } from '../lib/contentManager';
 
 const ProductScroll = () => {
-  const { language } = useLanguage();
-  const featuredProjects = getFeaturedWorks(language);
+  const { language, t } = useLanguage();
+  const featuredProjects = ContentManager.getInstance().getFeaturedWorks();
+  const localizedProjects = featuredProjects.map(project => 
+    ContentManager.getInstance().getProject(project.id, language)
+  );
+
+  if (!localizedProjects || localizedProjects.length === 0) {
+    return null;
+  }
 
   return (
     <ScrollSection>
@@ -16,10 +23,10 @@ const ProductScroll = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        {translations[language].sections.selectedWorks}
+        {t('sections.selectedWorks')}
       </SectionTitle>
       <ProductContainer>
-        {featuredProjects.map((project, index) => (
+        {localizedProjects.map((project, index) => (
           <ProductCard
             key={project.id}
             initial={{ opacity: 0, x: -50 }}

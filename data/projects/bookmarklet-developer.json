@@ -1,0 +1,35 @@
+{
+  "id": "bookmarklet-developer",
+  "title": "Developer Tools Bookmarklet",
+  "title_ja": "開発者ツールブックマークレット",
+  "description": "A comprehensive suite of development tools packaged as a bookmarklet for educational environments.",
+  "description_ja": "教育環境向けにブックマークレットとしてパッケージ化された包括的な開発ツールスイート。",
+  "techStack": [
+    "JavaScript",
+    "Developer Tools",
+    "Debugging Utilities",
+    "Bookmarklet"
+  ],
+  "features": [
+    {
+      "title": "Development Tools",
+      "title_ja": "開発ツール",
+      "details": [
+        "DOM inspection",
+        "Network monitoring",
+        "Console utilities",
+        "Performance analysis"
+      ],
+      "details_ja": [
+        "DOM検査",
+        "ネットワーク監視",
+        "コンソールユーティリティ",
+        "パフォーマンス分析"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/bookmarklet/developer/IMG_0378.png",
+    "/assets/bookmarklet/developer/IMG_0382.png"
+  ]
+} 
