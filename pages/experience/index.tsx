@@ -2,30 +2,31 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-const experiences = [
-  {
-    id: 1,
-    year: '2023',
-    title: 'Experience 1',
-    description: 'Description of experience 1'
-  },
-  // Add more experiences as needed
-];
+// Import experiences data
+import developmentTips from '../../data/experiences/development-tips.json';
+
+const experiences = [developmentTips];
+// ... you can add more experience JSON imports here
 
 const ExperiencePage = () => {
+  const router = useRouter();
+  const locale = router.locale || 'en';
+
   return (
     <Layout>
       <ExperienceContainer>
         <Head>
-          <title>Roughfts Experience</title>
+          <title>{locale === 'en' ? 'Roughfts Experience' : 'Roughfts 経験'}</title>
         </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Experience
+          {locale === 'en' ? 'Experience' : '経験'}
         </motion.h1>
         <Timeline>
           {experiences.map((exp, index) => (
@@ -35,13 +36,15 @@ const ExperiencePage = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <TimelineItem>
-                <Year>{exp.year}</Year>
-                <Content>
-                  <h2>{exp.title}</h2>
-                  <p>{exp.description}</p>
-                </Content>
-              </TimelineItem>
+              <Link href={`/experience/${exp.slug}`} passHref>
+                <TimelineItem>
+                  <Year>{exp.year}</Year>
+                  <Content>
+                    <h2>{exp.title[locale]}</h2>
+                    <p>{exp.description[locale]}</p>
+                  </Content>
+                </TimelineItem>
+              </Link>
             </motion.div>
           ))}
         </Timeline>
@@ -74,10 +77,18 @@ const Timeline = styled.div`
   padding: 2rem 0;
 `;
 
-const TimelineItem = styled.div`
+const TimelineItem = styled.a`
   display: flex;
   margin-bottom: 3rem;
   position: relative;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  
+  &:hover {
+    opacity: 0.8;
+  }
   
   &:before {
     content: '';

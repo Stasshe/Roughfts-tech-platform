@@ -2,32 +2,37 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+
+// Import experiences data
+import developmentTips from '../../data/experiences/development-tips.json';
+
+const experiences = [developmentTips];
+// ... you can add more experience JSON imports here
 
 const ExperienceDetailPage = () => {
   const router = useRouter();
   const { slug } = router.query;
+  const locale = router.locale || 'en';
 
-  // In a real app, you would fetch the experience data based on the slug
-  const experience = {
-    title: 'Experience Title',
-    year: '2023',
-    description: 'Detailed description of the experience...',
-    achievements: [
-      'Achievement 1',
-      'Achievement 2',
-      'Achievement 3'
-    ]
-  };
+  const experience = experiences.find(exp => exp.slug === slug);
+
+  if (!experience) {
+    return <div>Experience not found</div>;
+  }
 
   return (
     <Layout>
       <DetailContainer>
+        <Head>
+          <title>{experience.title[locale]} | Roughfts</title>
+        </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {experience.title}
+          {experience.title[locale]}
         </motion.h1>
         
         <Year>{experience.year}</Year>
@@ -37,21 +42,31 @@ const ExperienceDetailPage = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          {experience.description}
+          {experience.description[locale]}
         </Description>
 
-        <AchievementsList>
-          {experience.achievements.map((achievement, index) => (
-            <motion.li
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 + index * 0.1 }}
-            >
-              {achievement}
-            </motion.li>
-          ))}
-        </AchievementsList>
+        <ContentSection>
+          {experience.details?.[locale]?.map((section, index) => (
+            <Section key={index}>
+              <SectionTitle>{section.title}</SectionTitle>
+              {section.content.map((content, i) => (
+                <SectionContent key={i}>{content}</SectionContent>
+              ))}
+              {section.subDetails && (
+                <SubDetailsList key="subDetailsList">
+                  {section.subDetails.map((subDetail, i) => (
+                    <SubDetail key={i}>
+                      <SubDetailTitle>{subDetail.title}</SubDetailTitle>
+                      {subDetail.content.map((content, j) => (
+                        <SectionContent key={j}>{content}</SectionContent>
+                      ))}
+                    </SubDetail>
+                  ))}
+                </SubDetailsList>
+              )}
+            </Section>
+          )) || <div>No content available for this language</div>}
+        </ContentSection>
       </DetailContainer>
     </Layout>
   );
@@ -87,22 +102,39 @@ const Description = styled(motion.p)`
   margin-bottom: 2rem;
 `;
 
-const AchievementsList = styled.ul`
-  list-style: none;
-  padding: 0;
-  
-  li {
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
-    position: relative;
-    
-    &:before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: #888;
-    }
-  }
+const ContentSection = styled.div`
+  margin-top: 2rem;
+`;
+
+const Section = styled.div`
+  margin-bottom: 2rem;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+`;
+
+const SectionContent = styled.p`
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: #ddd;
+`;
+
+const SubDetailsList = styled.div`
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+`;
+
+const SubDetail = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+const SubDetailTitle = styled.h3`
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
 `;
 
 export default ExperienceDetailPage; 

@@ -6,15 +6,17 @@ import Link from 'next/link';
 import { Project, projects } from '../../data/projects';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { Experience, experiences } from '../../data/experiences';
 
 interface Match {
-  type: 'project' | 'tech';
+  type: 'project' | 'experience' | 'tech';
   matchType: string;
   matchText: string;
 }
 
 interface ConsolidatedResult {
-  project: Project;
+  type: 'project' | 'experience';
+  item: Project | Experience;
   matches: Match[];
 }
 
@@ -32,11 +34,12 @@ const SearchPage = () => {
 
     const searchMap = new Map<string, ConsolidatedResult>();
     const lowercaseQuery = query.toLowerCase();
+    const locale = router.locale || 'en';
 
+    // Search in projects
     Object.values(projects).forEach((project: Project) => {
       const matches: Match[] = [];
 
-      // Search in title and description
       if (project.title.toLowerCase().includes(lowercaseQuery)) {
         matches.push({
           type: 'project',
@@ -77,11 +80,66 @@ const SearchPage = () => {
         });
       });
 
-      // If we found any matches, add to results
       if (matches.length > 0) {
-        searchMap.set(project.id, {
-          project,
-          matches: matches.slice(0, 3) // Limit to 3 matches per project
+        searchMap.set(`project-${project.id}`, {
+          type: 'project',
+          item: project,
+          matches: matches.slice(0, 3)
+        });
+      }
+    });
+
+    // Search in experiences
+    experiences.forEach((experience: Experience) => {
+      const matches: Match[] = [];
+      const title = locale === 'en' ? experience.title : experience.title_ja;
+      const description = locale === 'en' ? experience.description : experience.description_ja;
+
+      if (title.toLowerCase().includes(lowercaseQuery)) {
+        matches.push({
+          type: 'experience',
+          matchType: 'Title',
+          matchText: title
+        });
+      }
+
+      if (description.toLowerCase().includes(lowercaseQuery)) {
+        matches.push({
+          type: 'experience',
+          matchType: 'Description',
+          matchText: description
+        });
+      }
+
+      // Search in details
+      experience.details.forEach(detail => {
+        const detailTitle = locale === 'en' ? detail.title : detail.title_ja;
+        const content = locale === 'en' ? detail.content : detail.content_ja;
+
+        if (detailTitle.toLowerCase().includes(lowercaseQuery)) {
+          matches.push({
+            type: 'experience',
+            matchType: 'Section',
+            matchText: detailTitle
+          });
+        }
+
+        content.forEach(text => {
+          if (text.toLowerCase().includes(lowercaseQuery)) {
+            matches.push({
+              type: 'experience',
+              matchType: `Content: ${detailTitle}`,
+              matchText: text
+            });
+          }
+        });
+      });
+
+      if (matches.length > 0) {
+        searchMap.set(`experience-${experience.id}`, {
+          type: 'experience',
+          item: experience,
+          matches: matches.slice(0, 3)
         });
       }
     });
@@ -133,13 +191,13 @@ const SearchPage = () => {
           
           {results.map((result, index) => (
             <ResultCard
-              key={result.project.id}
+              key={`${result.type}-${result.item.id}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Link href={`/works/${result.project.id}`}>
-                <ResultTitle>{result.project.title}</ResultTitle>
+              <Link href={`/works/${result.item.id}`}>
+                <ResultTitle>{result.item.title}</ResultTitle>
                 <MatchesContainer>
                   {result.matches.map((match, idx) => (
                     <MatchItem key={idx}>

@@ -10,9 +10,13 @@ const allPages = {
 class PageData {
   private static instance: PageData;
   private pages: Map<string, PageContent>;
-
   private constructor() {
-    this.pages = new Map(Object.entries(allPages));
+    this.pages = new Map();
+    for (const [key, value] of Object.entries(allPages)) {
+      if ('title_ja' in value && 'description' in value && 'description_ja' in value) {
+        this.pages.set(key, value as PageContent);
+      }
+    }
   }
 
   public static getInstance(): PageData {

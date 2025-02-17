@@ -1,0 +1,66 @@
+{
+  "id": "development-tips",
+  "slug": "development-tips",
+  "title": "Development Tips & Solutions",
+  "title_ja": "開発のヒントとソリューション",
+  "year": "2023",
+  "category": "Development",
+  "description": "Common challenges and solutions in web development",
+  "description_ja": "Web開発における一般的な課題と解決策",
+  "details": [
+    {
+      "title": "Puppeteer",
+      "title_ja": "Puppeteer",
+      "content": [
+        "Puppeteer can be quite large, typically between 200-300MB, while free-hosting services usually offer around 500MB of storage and 200MB of memory.",
+        "When you install Puppeteer, it can exceed the memory limits, causing failures.",
+        "Therefore, you cannot use Puppeteer with most free-hosting services.",
+        "Additionally, if you manage to install Puppeteer, it might not be valuable for viewing the site as headless browsers are often blocked."
+      ],
+      "content_ja": [
+        "Puppeteerは通常200-300MBと大きく、無料ホスティングサービスは通常500MBのストレージと200MBのメモリしか提供していません。",
+        "Puppeteerをインストールすると、メモリ制限を超えて失敗することがあります。",
+        "そのため、ほとんどの無料ホスティングサービスではPuppeteerを使用できません。",
+        "また、Puppeteerのインストールに成功しても、ヘッドレスブラウザはしばしばブロックされるため、サイト閲覧には適していない場合があります。"
+      ]
+    },
+    {
+      "title": "Scraping Solutions",
+      "title_ja": "スクレイピングソリューション",
+      "content": ["There are mainly three methods for scraping:"],
+      "content_ja": ["スクレイピングには主に3つの方法があります："],
+      "subDetails": [
+        {
+          "title": "JavaScript: Build it Yourself",
+          "title_ja": "JavaScript: 自作する",
+          "content": [
+            "If you can use bookmarklets, visit my 'works' page to see examples of bookmarklet-based site viewing or developer tools.",
+            "This is valuable for gaining experience.",
+            "Divide the URL by protocol, domain, path, and query to bypass filtering apps."
+          ],
+          "content_ja": [
+            "ブックマークレットが使える場合は、私の「作品」ページでブックマークレットベースのサイト表示や開発者ツールの例を見てください。",
+            "経験を積むのに価値があります。",
+            "URLをプロトコル、ドメイン、パス、クエリに分割して、フィルタリングアプリをバイパスします。"
+          ]
+        },
+        {
+          "title": "Use UV (Ultraviolet)",
+          "content": [
+            "UV is a powerful tool for scraping.",
+            "Most static sites can be viewed using UV.",
+            "Some hosting services might block UV. Use alternatives like uv-edu or install UV as a file."
+          ]
+        },
+        {
+          "title": "Python: bs4, Requests, etc.",
+          "content": [
+            "Using Python for scraping is not always ideal.",
+            "It lacks the detailed expression and adjustability of JavaScript.",
+            "If only Python is available, it can be used, but JavaScript is preferred."
+          ]
+        }
+      ]
+    }
+  ]
+} 

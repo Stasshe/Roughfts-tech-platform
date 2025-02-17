@@ -42,6 +42,20 @@ const AboutPage = () => {
                   ? aboutData.sections.introduction.content_ja 
                   : aboutData.sections.introduction.content}
               </p>
+              
+              <h3>{isJapanese ? 'スキル' : 'Skills'}</h3>
+              <SkillsGrid>
+                {skills.map((skill, index) => (
+                  <SkillItem
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index }}
+                  >
+                    {skill}
+                  </SkillItem>
+                ))}
+              </SkillsGrid>
             </motion.div>
           </TextContent>
         </ContentSection>
@@ -103,7 +117,7 @@ const ContentSection = styled.div`
   margin: 0 auto;
   display: flex;
   gap: 4rem;
-  align-items: center;
+  align-items: flex-start;
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -130,6 +144,11 @@ const TextContent = styled.div`
   h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+  }
+  
+  h3 {
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
   }
   
   p {
