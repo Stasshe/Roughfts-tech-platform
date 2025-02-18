@@ -111,6 +111,17 @@ const SearchPage = () => {
         });
       }
 
+      // Search in tech stack
+      experience.techStack.forEach(tech => {
+        if (tech.toLowerCase().includes(lowercaseQuery)) {
+          matches.push({
+            type: 'tech',
+            matchType: 'Technology',
+            matchText: tech
+          });
+        }
+      });
+
       // Search in details
       experience.details.forEach(detail => {
         const detailTitle = locale === 'en' ? detail.caption : detail.caption_ja;
@@ -120,7 +131,7 @@ const SearchPage = () => {
           matches.push({
             type: 'experience',
             matchType: 'Section',
-            matchText: detailTitle
+            matchText: detailTitle            
           });
         }
 
@@ -159,7 +170,8 @@ const SearchPage = () => {
     router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
     searchProjects(searchQuery);
   };
-
+  
+  console.log(results);
   return (
     <Layout>
       <SearchContainer>
@@ -196,7 +208,7 @@ const SearchPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Link href={`/works/${result.item.id}`}>
+              <Link href={`/${result.type === 'experience' ? 'experience' : 'works'}/${result.item.id}`}>
                 <ResultTitle>{result.item.title}</ResultTitle>
                 <MatchesContainer>
                   {result.matches.map((match, idx) => (

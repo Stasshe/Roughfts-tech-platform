@@ -5,6 +5,7 @@ export interface Experience {
   title_ja: string;
   year: string;
   category: string;
+  techStack: string[];
   description: string;
   description_ja: string;
   details: ExperienceDetail[];
