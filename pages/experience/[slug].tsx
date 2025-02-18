@@ -7,6 +7,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { Gists } from '../../types/content';
 import fs from 'fs';
 import path from 'path';
+import { useLanguage } from '../../lib/LanguageContext'; // Import the language context
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
@@ -53,7 +54,7 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
 // Experience Detail Page
 const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
   const router = useRouter();
-  const locale = router.locale || 'en';
+  const { language } = useLanguage(); // Use the language context
 
   if (!experience) {
     return (
@@ -64,7 +65,7 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
   }
 
   const getLocalizedContent = (en: string, ja: string) => {
-    return locale === 'en' ? en : ja;
+    return language === 'en' ? en : ja;
   };
 
   return (
@@ -97,7 +98,7 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
               <SectionTitle>
                 {getLocalizedContent(section.title, section.title_ja)}
               </SectionTitle>
-              {section.content_ja && locale === 'ja' 
+              {section.content_ja && language === 'ja' 
                 ? section.content_ja.map((content, i) => (
                     <SectionContent key={i}>{content}</SectionContent>
                   ))
@@ -115,7 +116,7 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
                           subDetail.title_ja || subDetail.title
                         )}
                       </SubDetailTitle>
-                      {subDetail.content_ja && locale === 'ja'
+                      {subDetail.content_ja && language === 'ja'
                         ? subDetail.content_ja.map((content, i) => (
                             <SectionContent key={i}>{content}</SectionContent>
                           ))

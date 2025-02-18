@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Gists } from '../../types/content';
 // Import experiences data
 import developmentTips from '../../data/experiences/development-tips.json';
+import { useLanguage } from '../../lib/LanguageContext'; // Import the language context
 
 const experiences: Gists[] = [{
   ...developmentTips,
@@ -23,24 +23,23 @@ const experiences: Gists[] = [{
 // ... you can add more experience JSON imports here
 
 const ExperiencePage = () => {
-  const router = useRouter();
-  const locale = router.locale || 'en';
+  const { language } = useLanguage(); // Use the language context
 
   return (
     <Layout>
       <ExperienceContainer>
         <Head>
-          <title>{locale === 'en' ? 'Roughfts Experience' : 'Roughfts 経験'}</title>
+          <title>{language === 'en' ? 'Roughfts Experience' : 'Roughfts 経験'}</title>
         </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {locale === 'en' ? 'Experience' : '経験'}
+          {language === 'en' ? 'Experience' : '経験'}
         </motion.h1>
         <Timeline>
-          {experiences.map((exp:Gists, index) => (
+          {experiences.map((exp: Gists, index) => (
             <motion.div
               key={exp.id}
               initial={{ opacity: 0, x: -20 }}
@@ -51,8 +50,8 @@ const ExperiencePage = () => {
                 <TimelineItem>
                   <Year>{exp.year}</Year>
                   <Content>
-                    <h2>{locale === 'en' ? exp.title : exp.title_ja}</h2>
-                    <p>{locale === 'en' ? exp.description : exp.description_ja}</p>
+                    <h2>{language === 'en' ? exp.title : exp.title_ja}</h2>
+                    <p>{language === 'en' ? exp.description : exp.description_ja}</p>
                   </Content>
                 </TimelineItem>
               </Link>
