@@ -7,7 +7,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { Gists } from '../../types/content';
 import fs from 'fs';
 import path from 'path';
-import { useLanguage } from '../../lib/LanguageContext'; // Import the language context
+import { useLanguage } from '../../lib/LanguageContext';
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
 // Experience Detail Page
 const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
   const router = useRouter();
-  const { language } = useLanguage(); // Use the language context
+  const { language } = useLanguage();
 
   if (!experience) {
     return (
@@ -72,7 +72,7 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
     <Layout>
       <DetailContainer>
         <Head>
-          <title>{getLocalizedContent(experience.title, experience.title_ja)} - Roughfts</title>
+          <title>{getLocalizedContent([...experience.title].join(''), [experience.title_ja].join(''))} - Roughfts</title>
         </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -96,7 +96,7 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
           {experience.details.map((section, index) => (
             <Section key={index}>
               <SectionTitle>
-                {getLocalizedContent(section.title, section.title_ja)}
+                {getLocalizedContent(section.caption, section.caption_ja)}
               </SectionTitle>
               {section.content_ja && language === 'ja' 
                 ? section.content_ja.map((content, i) => (
@@ -112,8 +112,8 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
                     <SubDetail key={subIndex}>
                       <SubDetailTitle>
                         {getLocalizedContent(
-                          subDetail.title,
-                          subDetail.title_ja || subDetail.title
+                          subDetail.caption,
+                          subDetail.caption_ja || subDetail.caption
                         )}
                       </SubDetailTitle>
                       {subDetail.content_ja && language === 'ja'
