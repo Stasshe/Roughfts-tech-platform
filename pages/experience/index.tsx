@@ -23,10 +23,16 @@ const experiences: Gists[] = [{
     }))
   }))
 }];
-// ... you can add more experience JSON imports here
 
 const ExperiencePage = () => {
-  const { language } = useLanguage(); // Use the language context
+  const { language } = useLanguage();
+
+  const groupedExperiences = experiences.reduce((acc, exp) => {
+    const yearMonth = `${exp.year}-${('0' + exp.month).slice(-2)}`;
+    if (!acc[yearMonth]) acc[yearMonth] = [];
+    acc[yearMonth].push(exp);
+    return acc;
+  }, {});
 
   return (
     <Layout>
@@ -41,35 +47,58 @@ const ExperiencePage = () => {
         >
           {language === 'en' ? 'Experience' : '経験'}
         </motion.h1>
-        <Timeline>
-          {experiences.map((exp: Gists, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Link href={`/experience/${exp.id}`} passHref>
-                <TimelineItem>
-                  <Year>{exp.year}</Year>
-                  <Content>
-                    <h2>{language === 'en' ? exp.title : exp.title_ja}</h2>
-                    <p>{language === 'en' ? exp.description : exp.description_ja}</p>
-                    <TechStack>
-                      {exp.techStack.map((tech, i) => (
-                        <TechTag key={i}>{tech}</TechTag>
-                      ))}
-                    </TechStack>
-                  </Content>
-                </TimelineItem>
-              </Link>
-            </motion.div>
-          ))}
-        </Timeline>
+        {Object.keys(groupedExperiences).map((yearMonth, index) => (
+          <div key={index}>
+            
+            <Timeline>
+              {groupedExperiences[yearMonth].map((exp: Gists, idx) => (
+                <motion.div
+                  key={exp.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                >
+                  <TimelineItem>
+                    <Year>{exp.year}</Year>
+                    <Month>{exp.month}月</Month>
+                    <Content>
+                      <Link href={`/experience/${exp.id}`} passHref legacyBehavior>
+                        <StyledLink>
+                        <h2>{language === 'en' ? exp.title : exp.title_ja}</h2>
+                        <p>{language === 'en' ? exp.description : exp.description_ja}</p>
+                        </StyledLink>
+                      </Link>
+                      <TechStack>
+                        {exp.techStack.map((tech, i) => (
+                          <TechTag key={i}>{tech}</TechTag>
+                        ))}
+                      </TechStack>
+                    </Content>
+                  </TimelineItem>
+                </motion.div>
+              ))}
+            </Timeline>
+          </div>
+        ))}
       </ExperienceContainer>
     </Layout>
   );
 };
+
+
+
+const Month = styled.div`
+  width: 80px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-right: 1rem;
+  color: #bbb;
+  
+  @media (max-width: 768px) {
+    padding-bottom: 1rem;
+  }
+`;
+
 
 const TechStack = styled.div`
   margin-top: 1rem;
@@ -138,6 +167,14 @@ const TimelineItem = styled.a`
     &:before {
       left: 20px;
     }
+  }
+`;
+
+const StyledLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+  h2, p {
+    color: white;
   }
 `;
 

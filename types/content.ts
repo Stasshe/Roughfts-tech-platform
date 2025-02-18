@@ -33,6 +33,7 @@ export interface Gists {
   title: string;
   title_ja: string;
   year: string;
+  month: string;
   date: string;
   category: string;
   description: string;
