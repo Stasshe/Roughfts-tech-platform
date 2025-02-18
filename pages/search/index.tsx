@@ -113,7 +113,7 @@ const SearchPage = () => {
 
       // Search in details
       experience.details.forEach(detail => {
-        const detailTitle = locale === 'en' ? detail.title : detail.title_ja;
+        const detailTitle = locale === 'en' ? detail.caption : detail.caption_ja;
         const content = locale === 'en' ? detail.content : detail.content_ja;
 
         if (detailTitle.toLowerCase().includes(lowercaseQuery)) {

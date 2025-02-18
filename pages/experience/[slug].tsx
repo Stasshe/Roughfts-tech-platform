@@ -63,16 +63,19 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
       </Layout>
     );
   }
+  
 
   const getLocalizedContent = (en: string, ja: string) => {
     return language === 'en' ? en : ja;
   };
+  const title = language === 'en' ? experience.title : experience.title_ja;
+  
 
   return (
     <Layout>
       <DetailContainer>
         <Head>
-          <title>{getLocalizedContent([...experience.title].join(''), [experience.title_ja].join(''))} - Roughfts</title>
+          <title>{title}</title>
         </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

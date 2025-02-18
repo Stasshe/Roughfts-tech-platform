@@ -11,16 +11,16 @@ export interface Experience {
 }
 
 interface ExperienceDetail {
-  title: string;
-  title_ja: string;
+  caption: string;
+  caption_ja: string;
   content: string[];
   content_ja: string[];
   subDetails?: SubDetail[];
 }
 
 interface SubDetail {
-  title: string;
-  title_ja: string;
+  caption: string;
+  caption_ja: string;
   content: string[];
   content_ja: string[];
 }
