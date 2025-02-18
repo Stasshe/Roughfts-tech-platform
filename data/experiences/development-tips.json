@@ -7,15 +7,16 @@
   "date": "2023-01-01",
   "category": "Development",
   "techStack": [
-    "proxy",
-    "web"
+    "JavaScript",
+    "React",
+    "Node.js"
   ],
   "description": "Common challenges and solutions in web development",
   "description_ja": "Web開発における一般的な課題と解決策",
   "details": [
     {
-      "title": "Puppeteer",
-      "title_ja": "Puppeteer",
+      "caption": "Puppeteer",
+      "caption_ja": "Puppeteer",
       "content": [
         "Puppeteer can be quite large, typically between 200-300MB, while free-hosting services usually offer around 500MB of storage and 200MB of memory.",
         "When you install Puppeteer, it can exceed the memory limits, causing failures.",
@@ -30,14 +31,14 @@
       ]
     },
     {
-      "title": "Scraping Solutions",
-      "title_ja": "スクレイピングソリューション",
+      "caption": "Scraping Solutions",
+      "caption_ja": "スクレイピングソリューション",
       "content": ["There are mainly three methods for scraping:"],
       "content_ja": ["スクレイピングには主に3つの方法があります："],
       "subDetails": [
         {
-          "title": "JavaScript: Build it Yourself",
-          "title_ja": "JavaScript: 自作する",
+          "caption": "JavaScript: Build it Yourself",
+          "caption_ja": "JavaScript: 自作する",
           "content": [
             "If you can use bookmarklets, visit my 'works' page to see examples of bookmarklet-based site viewing or developer tools.",
             "This is valuable for gaining experience.",
@@ -50,19 +51,31 @@
           ]
         },
         {
-          "title": "Use UV (Ultraviolet)",
+          "caption": "Use UV (Ultraviolet)",
+          "caption_ja": "UV (Ultraviolet)を使用する",
           "content": [
             "UV is a powerful tool for scraping.",
             "Most static sites can be viewed using UV.",
             "Some hosting services might block UV. Use alternatives like uv-edu or install UV as a file."
+          ],
+          "content_ja": [
+            "UVはスクレイピングに強力なツールです。",
+            "ほとんどの静的サイトはUVで表示できます。",
+            "一部のホスティングサービスはUVをブロックするかもしれません。uv-eduを使用するか、UVをファイルとしてインストールしてください。"
           ]
         },
         {
-          "title": "Python: bs4, Requests, etc.",
+          "caption": "Python: bs4, Requests, etc.",
+          "caption_ja": "Python: bs4, Requests, etc.",
           "content": [
             "Using Python for scraping is not always ideal.",
             "It lacks the detailed expression and adjustability of JavaScript.",
             "If only Python is available, it can be used, but JavaScript is preferred."
+          ],
+          "content_ja": [
+            "Pythonでスクレイピングすることは常に理想的ではありません。",
+            "JavaScriptのような詳細な表現と調整性が不足しています。",
+            "Pythonのみが利用可能な場合は使用できますが、JavaScriptが推奨されます。"
           ]
         }
       ]

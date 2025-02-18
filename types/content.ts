@@ -39,13 +39,13 @@ export interface Gists {
   description_ja: string;
   techStack: string[];
   details: {
-    title: string;
-    title_ja: string;
+    caption: string;
+    caption_ja: string;
     content: string[];
     content_ja: string[];
     subDetails?: {
-      title: string;
-      title_ja: string;
+      caption: string;
+      caption_ja: string;
       content: string[];
       content_ja: string[];
     }[];

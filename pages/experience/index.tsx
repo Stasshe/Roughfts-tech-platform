@@ -13,9 +13,12 @@ const experiences: Gists[] = [{
   date: developmentTips.year,
   details: developmentTips.details.map(detail => ({
     ...detail,
+    caption: detail.caption || '',
+    caption_ja: detail.caption_ja || '',
     subDetails: detail.subDetails?.map(subDetail => ({
       ...subDetail,
-      title_ja: subDetail.title_ja || '',
+      caption: subDetail.caption || '',
+      caption_ja: subDetail.caption_ja || '',
       content_ja: subDetail.content_ja || []
     }))
   }))
@@ -52,6 +55,11 @@ const ExperiencePage = () => {
                   <Content>
                     <h2>{language === 'en' ? exp.title : exp.title_ja}</h2>
                     <p>{language === 'en' ? exp.description : exp.description_ja}</p>
+                    <TechStack>
+                      {exp.techStack.map((tech, i) => (
+                        <TechTag key={i}>{tech}</TechTag>
+                      ))}
+                    </TechStack>
                   </Content>
                 </TimelineItem>
               </Link>
@@ -63,6 +71,20 @@ const ExperiencePage = () => {
   );
 };
 
+const TechStack = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`;
+
+const TechTag = styled.span`
+  background: #333;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+`;
 
 const ExperienceContainer = styled.div`
   padding: 6rem 2rem 2rem;
