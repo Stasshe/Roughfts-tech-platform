@@ -1,3 +1,4 @@
+#なんか知らんがうまく行った
 services:
   - type: web
     name: react-static-site
