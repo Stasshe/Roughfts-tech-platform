@@ -5,6 +5,10 @@
   "title_ja": "開発のヒントとソリューション",
   "year": "2023",
   "category": "Development",
+  "techStack": [
+    "proxy",
+    "web"
+  ],
   "description": "Common challenges and solutions in web development",
   "description_ja": "Web開発における一般的な課題と解決策",
   "details": [

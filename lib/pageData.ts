@@ -1,15 +1,14 @@
 import { PageContent } from '../types/content';
 import aboutPage from '../data/pages/about.json';
-import experiencesPage from '../data/pages/experiences.json';
 
 const allPages = {
   'about': aboutPage,
-  'experiences': experiencesPage
 };
 
 class PageData {
   private static instance: PageData;
   private pages: Map<string, PageContent>;
+
   private constructor() {
     this.pages = new Map();
     for (const [key, value] of Object.entries(allPages)) {
@@ -52,4 +51,4 @@ class PageData {
   }
 }
 
-export default PageData; 
+export default PageData;

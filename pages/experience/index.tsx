@@ -4,11 +4,11 @@ import Layout from '../../components/Layout';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-
+import { Gists } from '../../types/content';
 // Import experiences data
 import developmentTips from '../../data/experiences/development-tips.json';
 
-const experiences = [developmentTips];
+const experiences: Gists[] = [developmentTips];
 // ... you can add more experience JSON imports here
 
 const ExperiencePage = () => {
@@ -29,19 +29,19 @@ const ExperiencePage = () => {
           {locale === 'en' ? 'Experience' : '経験'}
         </motion.h1>
         <Timeline>
-          {experiences.map((exp, index) => (
+          {experiences.map((exp:Gists, index) => (
             <motion.div
               key={exp.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Link href={`/experience/${exp.slug}`} passHref>
+              <Link href={`/experience/${exp.id}`} passHref>
                 <TimelineItem>
                   <Year>{exp.year}</Year>
                   <Content>
-                    <h2>{exp.title[locale]}</h2>
-                    <p>{exp.description[locale]}</p>
+                    <h2>{locale === 'en' ? exp.title : exp.title_ja}</h2>
+                    <p>{locale === 'en' ? exp.description : exp.description_ja}</p>
                   </Content>
                 </TimelineItem>
               </Link>
@@ -52,6 +52,7 @@ const ExperiencePage = () => {
     </Layout>
   );
 };
+
 
 const ExperienceContainer = styled.div`
   padding: 6rem 2rem 2rem;

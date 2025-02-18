@@ -28,6 +28,23 @@ export interface Project {
   featured?: boolean;
 }
 
+export interface Gists {
+  id: string;
+  title: string;
+  title_ja: string;
+  year: string;
+  category: string;
+  description: string;
+  description_ja: string;
+  techStack: string[];
+  details: {
+    title: string;
+    title_ja: string;
+    content: string[];
+    content_ja: string[];
+  }[];
+}
+
 // Alias Project as ProjectContent for backward compatibility
 export type ProjectContent = Project;
 
@@ -62,10 +79,13 @@ export interface PageContent {
   description_ja: string;
   sections?: {
     [key: string]: {
-      title: string;
-      title_ja: string;
-      content: string;
-      content_ja: string;
+      title?: string;
+      title_ja?: string;
+      content?: string;
+      content_ja?: string;
+      name?: string;
+      icon?: string;
+      category?: string;
     };
   };
 }
