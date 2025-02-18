@@ -33,6 +33,7 @@ export interface Gists {
   title: string;
   title_ja: string;
   year: string;
+  date: string;
   category: string;
   description: string;
   description_ja: string;
@@ -42,6 +43,12 @@ export interface Gists {
     title_ja: string;
     content: string[];
     content_ja: string[];
+    subDetails?: {
+      title: string;
+      title_ja: string;
+      content: string[];
+      content_ja: string[];
+    }[];
   }[];
 }
 

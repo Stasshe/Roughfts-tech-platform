@@ -63,18 +63,22 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
     );
   }
 
+  const getLocalizedContent = (en: string, ja: string) => {
+    return locale === 'en' ? en : ja;
+  };
+
   return (
     <Layout>
       <DetailContainer>
         <Head>
-          <title>{locale === 'en' ? experience.title : experience.title_ja} | Roughfts</title>
+          <title>{getLocalizedContent(experience.title, experience.title_ja)} - Roughfts</title>
         </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {locale === 'en' ? experience.title : experience.title_ja}
+          {getLocalizedContent(experience.title, experience.title_ja)}
         </motion.h1>
         
         <Year>{experience.year}</Year>
@@ -84,16 +88,45 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          {locale === 'en' ? experience.description : experience.description_ja}
+          {getLocalizedContent(experience.description, experience.description_ja)}
         </Description>
 
         <ContentSection>
           {experience.details.map((section, index) => (
             <Section key={index}>
-              <SectionTitle>{locale === 'en' ? section.title : section.title_ja}</SectionTitle>
-              {section.content.map((content, i) => (
-                <SectionContent key={i}>{content}</SectionContent>
-              ))}
+              <SectionTitle>
+                {getLocalizedContent(section.title, section.title_ja)}
+              </SectionTitle>
+              {section.content_ja && locale === 'ja' 
+                ? section.content_ja.map((content, i) => (
+                    <SectionContent key={i}>{content}</SectionContent>
+                  ))
+                : section.content.map((content, i) => (
+                    <SectionContent key={i}>{content}</SectionContent>
+                  ))
+              }
+              {section.subDetails && (
+                <SubDetailsList>
+                  {section.subDetails.map((subDetail, subIndex) => (
+                    <SubDetail key={subIndex}>
+                      <SubDetailTitle>
+                        {getLocalizedContent(
+                          subDetail.title,
+                          subDetail.title_ja || subDetail.title
+                        )}
+                      </SubDetailTitle>
+                      {subDetail.content_ja && locale === 'ja'
+                        ? subDetail.content_ja.map((content, i) => (
+                            <SectionContent key={i}>{content}</SectionContent>
+                          ))
+                        : subDetail.content.map((content, i) => (
+                            <SectionContent key={i}>{content}</SectionContent>
+                          ))
+                      }
+                    </SubDetail>
+                  ))}
+                </SubDetailsList>
+              )}
             </Section>
           ))}
         </ContentSection>

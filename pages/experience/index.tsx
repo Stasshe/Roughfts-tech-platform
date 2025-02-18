@@ -8,7 +8,18 @@ import { Gists } from '../../types/content';
 // Import experiences data
 import developmentTips from '../../data/experiences/development-tips.json';
 
-const experiences: Gists[] = [developmentTips];
+const experiences: Gists[] = [{
+  ...developmentTips,
+  date: developmentTips.year,
+  details: developmentTips.details.map(detail => ({
+    ...detail,
+    subDetails: detail.subDetails?.map(subDetail => ({
+      ...subDetail,
+      title_ja: subDetail.title_ja || '',
+      content_ja: subDetail.content_ja || []
+    }))
+  }))
+}];
 // ... you can add more experience JSON imports here
 
 const ExperiencePage = () => {
