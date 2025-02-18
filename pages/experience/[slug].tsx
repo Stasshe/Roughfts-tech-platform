@@ -3,36 +3,78 @@ import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { Gists } from '../../types/content';
+import fs from 'fs';
+import path from 'path';
 
-// Import experiences data
-import developmentTips from '../../data/experiences/development-tips.json';
+interface ExperienceDetailPageProps {
+  experience: Gists | null;
+}
 
-const experiences = [developmentTips];
-// ... you can add more experience JSON imports here
+// Static Paths
+export const getStaticPaths: GetStaticPaths = async () => {
+  const worksDirectory = path.join(process.cwd(), 'data', 'experiences');
+  const filenames = fs.readdirSync(worksDirectory);
 
-const ExperienceDetailPage = () => {
+  const paths = filenames
+    .filter((filename) => filename.endsWith('.json'))
+    .map((filename) => ({
+      params: { slug: filename.replace('.json', '') },
+    }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+// Static Props
+export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async ({ params }) => {
+  const slug = params?.slug as string;
+  const filePath = path.join(process.cwd(), 'data', 'experiences', `${slug}.json`);
+  
+  let experience: Gists | null = null;
+  
+  try {
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    experience = JSON.parse(fileContent) as Gists;
+  } catch (error) {
+    console.error(`Error loading experience content: ${error}`);
+  }
+
+  return {
+    props: {
+      experience,
+    },
+  };
+};
+
+// Experience Detail Page
+const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
   const router = useRouter();
-  const { slug } = router.query;
   const locale = router.locale || 'en';
 
-  const experience = experiences.find(exp => exp.slug === slug);
-
   if (!experience) {
-    return <div>Experience not found</div>;
+    return (
+      <Layout>
+        <div>Experience not found</div>
+      </Layout>
+    );
   }
 
   return (
     <Layout>
       <DetailContainer>
         <Head>
-          <title>{experience.title[locale]} | Roughfts</title>
+          <title>{locale === 'en' ? experience.title : experience.title_ja} | Roughfts</title>
         </Head>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {experience.title[locale]}
+          {locale === 'en' ? experience.title : experience.title_ja}
         </motion.h1>
         
         <Year>{experience.year}</Year>
@@ -42,36 +84,25 @@ const ExperienceDetailPage = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          {experience.description[locale]}
+          {locale === 'en' ? experience.description : experience.description_ja}
         </Description>
 
         <ContentSection>
-          {experience.details?.[locale]?.map((section, index) => (
+          {experience.details.map((section, index) => (
             <Section key={index}>
-              <SectionTitle>{section.title}</SectionTitle>
+              <SectionTitle>{locale === 'en' ? section.title : section.title_ja}</SectionTitle>
               {section.content.map((content, i) => (
                 <SectionContent key={i}>{content}</SectionContent>
               ))}
-              {section.subDetails && (
-                <SubDetailsList key="subDetailsList">
-                  {section.subDetails.map((subDetail, i) => (
-                    <SubDetail key={i}>
-                      <SubDetailTitle>{subDetail.title}</SubDetailTitle>
-                      {subDetail.content.map((content, j) => (
-                        <SectionContent key={j}>{content}</SectionContent>
-                      ))}
-                    </SubDetail>
-                  ))}
-                </SubDetailsList>
-              )}
             </Section>
-          )) || <div>No content available for this language</div>}
+          ))}
         </ContentSection>
       </DetailContainer>
     </Layout>
   );
 };
 
+// Styled-components
 const DetailContainer = styled.div`
   padding: 6rem 2rem 2rem;
   min-height: 100vh;
@@ -137,4 +168,4 @@ const SubDetailTitle = styled.h3`
   color: #fff;
 `;
 
-export default ExperienceDetailPage; 
+export default ExperienceDetailPage;
