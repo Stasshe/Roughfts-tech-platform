@@ -32,7 +32,7 @@ import kanjiJourney from './projects/kanji-journey.json';
 import primeCube from './projects/prime-cube.json';
 import ventusTalk from './projects/ventus-talk.json';
 import pythonFilter from './projects/python-filter.json';
-
+import virtualBrowser from './projects/novnc-virtual-browser.json';
 
 // Import other project JSON files as needed
 
@@ -46,4 +46,5 @@ export const projects: { [key: string]: Project } = {
   'prime-cube': primeCube as Project,
   'ventus-talk': ventusTalk as Project,
   'python-filter': pythonFilter as Project,
+  'virtual-browser' : virtualBrowser as Project
 };

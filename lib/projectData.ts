@@ -7,6 +7,7 @@ import kanjiJourney from '../data/projects/kanji-journey.json';
 import bookmarkletYoutube from '../data/projects/bookmarklet-youtube.json';
 import bookmarkletScraping from '../data/projects/bookmarklet-scraping.json';
 import bookmarkletDeveloper from '../data/projects/bookmarklet-developer.json';
+import virtualBrowser from '../data/projects/novnc-virtual-browser.json';
 
 const allProjects = {
   'ventus-talk': ventusTalk,
@@ -17,6 +18,7 @@ const allProjects = {
   'bookmarklet-youtube': bookmarkletYoutube,
   'bookmarklet-scraping': bookmarkletScraping,
   'bookmarklet-developer': bookmarkletDeveloper,
+  'virtual-browser' : virtualBrowser,
 };
 
 class ProjectData {
