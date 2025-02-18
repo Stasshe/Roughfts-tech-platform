@@ -42,57 +42,50 @@ const AboutPage = () => {
                   ? aboutData.sections.introduction.content_ja 
                   : aboutData.sections.introduction.content}
               </p>
-              
-              <h3>{isJapanese ? 'スキル' : 'Skills'}</h3>
-              <SkillsGrid>
-                {skills.map((skill, index) => (
-                  <SkillItem
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                  >
-                    {skill}
-                  </SkillItem>
-                ))}
-              </SkillsGrid>
+
+              <h3>
+                {isJapanese 
+                  ? aboutData.sections.fastLearning.title_ja 
+                  : aboutData.sections.fastLearning.title}
+              </h3>
+              <p>
+                {isJapanese 
+                  ? aboutData.sections.fastLearning.content_ja 
+                  : aboutData.sections.fastLearning.content}
+              </p>
             </motion.div>
           </TextContent>
         </ContentSection>
-        
-        <PolicySection>
+        <TextContent>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <h3>
-              {isJapanese 
-                ? aboutData.sections.fastLearning.title_ja 
-                : aboutData.sections.fastLearning.title}
-            </h3>
-            <p>
-              {isJapanese 
-                ? aboutData.sections.fastLearning.content_ja 
-                : aboutData.sections.fastLearning.content}
-            </p>
+            <SkillsContainer>
+            <h3>{isJapanese ? 'スキル' : 'Skills'}</h3>
+              <SkillsGrid>
+                {aboutData.sections.skills.map((skill, index) => (
+                  <SkillItem
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index }}
+                    whileHover={{ scale: 1.05, backgroundColor: '#444' }}
+                  >
+                    <SkillIcon>{skill.icon}</SkillIcon>
+                    <SkillName>{skill.name}</SkillName>
+                    <SkillCategory>{skill.category}</SkillCategory>
+                  </SkillItem>
+                ))}
+              </SkillsGrid>
+            </SkillsContainer>
           </motion.div>
-        </PolicySection>
+        </TextContent>
       </AboutContainer>
     </Layout>
   );
 };
-
-const skills = [
-  'JavaScript/TypeScript',
-  'React/Next.js',
-  'Node.js',
-  'Docker',
-  'AWS',
-  'Firebase',
-  'Web Security',
-  'UI/UX Design'
-];
 
 const AboutContainer = styled.div`
   padding: 6rem 2rem 2rem;
@@ -140,7 +133,7 @@ const ProfileImage = styled(motion.img)`
 
 const TextContent = styled.div`
   flex: 1;
-  
+  margint-top:auto;
   h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -156,21 +149,6 @@ const TextContent = styled.div`
     line-height: 1.6;
     opacity: 0.9;
   }
-`;
-
-const SkillsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-`;
-
-const SkillItem = styled(motion.div)`
-  background: #111;
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.9rem;
 `;
 
 const PolicySection = styled.div`
@@ -205,5 +183,54 @@ const PolicySection = styled.div`
   }
 `;
 
+
+const SkillsContainer = styled.div`
+  
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+`;
+
+const SkillsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+`;
+
+const SkillItem = styled(motion.div)`
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+`;
+
+const SkillIcon = styled.div`
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+`;
+
+const SkillName = styled.div`
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0.5rem 0;
+`;
+
+const SkillCategory = styled.div`
+  font-size: 0.9rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+`;
 
 export default AboutPage;

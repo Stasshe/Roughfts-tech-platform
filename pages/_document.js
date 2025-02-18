@@ -4,6 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+        <script>
+          eruda.init();
+        </script>
         <meta httpEquiv="content-language" content="en,ja" />
         <meta name="google-site-verification" content="DEgw9x5qg54-nkcoE9493eaEFFU0kxke_ff9_faoRhY" />
         {/* Favicon */}

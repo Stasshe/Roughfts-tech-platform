@@ -1,6 +1,6 @@
 {
-  "title": "About Roughfts",
-  "title_ja": "Roughftsについて",
+  "title": "About Me",
+  "title_ja": "About Me",
   "description": "Full-stack developer passionate about creating innovative solutions.",
   "description_ja": "革新的なソリューションの創造に情熱を注ぐフルスタック開発者です。",
   "sections": {
@@ -15,16 +15,16 @@
       "title_ja": "高速学習",
       "content": "Harness the power of artificial intelligence to accelerate your coding journey. Our smart AI tools provide tailored assistance, offering instant feedback and guidance. From debugging to optimizing code, AI-driven support empowers you to achieve coding proficiency in record time. Dive into the future of coding and watch your skills soar with the most advanced AI support at your fingertips.",
       "content_ja": "人工知能の力を活用してコーディングの旅を加速させましょう。スマートAIツールがカスタマイズされたアシスタンスを提供し、即座のフィードバックとガイダンスを提供します。デバッグからコードの最適化まで、AI駆動のサポートにより、記録的な速さでコーディングの習熟度を高めることができます。"
-    }
-  },
-  "skills": [
-    "JavaScript/TypeScript",
-    "React/Next.js",
-    "Node.js",
-    "Docker",
-    "AWS",
-    "Firebase",
-    "Web Security",
-    "UI/UX Design"
+    },
+    "skills": [
+    { "name": "JavaScript/TypeScript", "icon": "⚡", "category": "Languages" },
+    { "name": "React/Next.js", "icon": "⚛️", "category": "Frontend" },
+    { "name": "Node.js", "icon": "🚀", "category": "Backend" },
+    { "name": "Docker", "icon": "🐳", "category": "DevOps" },
+    { "name": "AWS", "icon": "☁️", "category": "Cloud" },
+    { "name": "Firebase", "icon": "🔥", "category": "Backend" },
+    { "name": "Web Security", "icon": "🔒", "category": "Security" },
+    { "name": "UI/UX Design", "icon": "🎨", "category": "Design" }
   ]
+  }  
 } 

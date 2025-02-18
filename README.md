@@ -34,3 +34,15 @@ To deploy:
    - Publish Directory: `out`
 
 The site will be automatically built and deployed whenever you push changes to your repository.
+
+
+const skills = [
+  'JavaScript/TypeScript',
+  'React/Next.js',
+  'Node.js',
+  'Docker',
+  'AWS',
+  'Firebase',
+  'Web Security',
+  'UI/UX Design'
+];
