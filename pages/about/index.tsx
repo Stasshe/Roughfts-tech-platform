@@ -48,6 +48,7 @@ const AboutPage = () => {
                 wrapper="p"
                 cursor={true}
                 speed={50}
+                style={{ height: '100px', overflow: 'hidden' }}
               />
 
               <h3>
@@ -65,7 +66,7 @@ const AboutPage = () => {
                 wrapper="p"
                 cursor={true}
                 speed={80} 
-                style={{ height: '150px', overflow: 'hidden' }}
+                style={{ height: '180px', overflow: 'hidden' }}
               />
             </motion.div>
           </TextContent>
@@ -125,7 +126,7 @@ const AboutContainer = styled.div`
 `;
 
 const ContentSection = styled.div`
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
   gap: 4rem;
