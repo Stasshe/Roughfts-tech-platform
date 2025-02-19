@@ -17,9 +17,10 @@ const ErrorCode = styled(motion.h1)`
   font-size: 8rem;
   font-family: 'Playfair Display', serif;
   margin: 0;
-  background: linear-gradient(to right, #fff, #666);
+  background: linear-gradient(to right, #ffffff, #a0a0a0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 `;
 
 const Message = styled(motion.p)`
@@ -28,11 +29,12 @@ const Message = styled(motion.p)`
   text-align: center;
   font-family: 'Cormorant Garamond', serif;
   letter-spacing: 2px;
+  color: #ffffff;
 `;
 
-const HomeLink = styled(motion.div)`
-  color: #fff;
-  border: 1px solid #fff;
+const HomeLink = styled(motion.div)<{ $initial: any; $animate: any; $transition: any; $whileHover: any }>`
+  color: #ffffff;
+  border: 1px solid #ffffff;
   padding: 1rem 2rem;
   font-family: 'Cormorant Garamond', serif;
   letter-spacing: 2px;
@@ -48,13 +50,13 @@ const HomeLink = styled(motion.div)`
     left: -100%;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #ffffff;
     transition: transform 0.3s ease;
     z-index: -1;
   }
 
   &:hover {
-    color: #111;
+    color: #000000;
     &:before {
       transform: translateX(100%);
     }
@@ -81,10 +83,10 @@ const NotFoundPage = () => {
       <Link href="/" passHref legacyBehavior>
         <HomeLink
           as="a"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          whileHover={{ scale: 1.05 }}
+          $initial={{ opacity: 0 }}
+          $animate={{ opacity: 1 }}
+          $transition={{ duration: 0.8, delay: 0.6 }}
+          $whileHover={{ scale: 1.05 }}
         >
           Return Home
         </HomeLink>
