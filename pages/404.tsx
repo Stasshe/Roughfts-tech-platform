@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Layout from '../components/Layout';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -12,12 +13,16 @@ const Container = styled.div`
   background-color: #111 !important;
   color: #fff !important;
   padding: 2rem;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const ErrorCode = styled(motion.h1)`
@@ -28,6 +33,10 @@ const ErrorCode = styled(motion.h1)`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+
+  @media (max-width: 768px) {
+    font-size: 4rem;
+  }
 `;
 
 const Message = styled(motion.p)`
@@ -37,6 +46,10 @@ const Message = styled(motion.p)`
   font-family: 'Cormorant Garamond', serif;
   letter-spacing: 2px;
   color: #ffffff;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const HomeLink = styled(motion.div)<{ $initial: any; $animate: any; $transition: any; $whileHover: any }>`
@@ -72,6 +85,7 @@ const HomeLink = styled(motion.div)<{ $initial: any; $animate: any; $transition:
 
 const NotFoundPage = () => {
   return (
+    <Layout>
     <Container>
       <ErrorCode
         initial={{ opacity: 0, y: -50 }}
@@ -99,6 +113,7 @@ const NotFoundPage = () => {
         </HomeLink>
       </Link>
     </Container>
+    </Layout>
   );
 };
 

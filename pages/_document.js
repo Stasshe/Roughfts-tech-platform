@@ -62,13 +62,6 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <script>
-          {`
-            window.addEventListener('load', function() {
-              document.getElementById('__next').classList.add('loaded');
-            });
-          `}
-        </script>
       </body>
     </Html>
   )
