@@ -8,6 +8,7 @@ import { useLanguage } from '../../lib/LanguageContext';
 import { getWorkContent } from '../../lib/contentManager';
 import { WorkContent } from '../../types/content';
 import ProjectData from '../../lib/projectData';
+import Link from 'next/link';
 
 interface WorkDetailPageProps {
   workContent: WorkContent | null;
@@ -63,6 +64,9 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
   return (
     <Layout>
       <WorkContainer>
+        <Link href="/works" style={{ position: 'absolute', top: '3rem', left: '3rem', color: '#ccc', textDecoration: 'none' }}>
+          ←Return to Works
+        </Link>
         <Header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

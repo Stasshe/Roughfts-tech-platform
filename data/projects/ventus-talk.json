@@ -59,7 +59,7 @@
     }
   ],
   "architecture": {
-    "diagram": "/assets/ventus-talk/architecture.svg",
+    "diagram": "/assets/ventus-talk/ventus-architecture.svg",
     "description": "Multi-server architecture utilizing Firebase Firestore for optimal performance and scalability.",
     "description_ja": "最適なパフォーマンスとスケーラビリティのためのFirebase Firestoreを活用したマルチサーバーアーキテクチャ。"
   },

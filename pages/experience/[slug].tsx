@@ -8,6 +8,7 @@ import { Gists } from '../../types/content';
 import fs from 'fs';
 import path from 'path';
 import { useLanguage } from '../../lib/LanguageContext';
+import Link from 'next/link';
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
@@ -74,6 +75,9 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
   return (
     <Layout>
       <DetailContainer>
+        <Link href="/experience" style={{ position: 'absolute', top: '3rem', left: '3rem', color: '#ccc', textDecoration: 'none' }}>
+          ←Return to Experiences
+        </Link>
         <Head>
           <title>{title}</title>
         </Head>
