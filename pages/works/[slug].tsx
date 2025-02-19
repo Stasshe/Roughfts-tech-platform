@@ -64,9 +64,14 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
   return (
     <Layout>
       <WorkContainer>
-        <Link href="/works" style={{ position: 'absolute', top: '3rem', left: '3rem', color: '#ccc', textDecoration: 'none' }}>
-          ←Return to Works
-        </Link>
+        <motion.div
+          style={{ position: 'absolute', top: '3rem', left: '3rem' }}
+          whileHover={{ scale: 1.1, color: '#fff' }}
+        >
+          <Link href="/works" style={{ color: '#ccc', textDecoration: 'none' }}>
+            ←Return to Works
+          </Link>
+        </motion.div>
         <Header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,7 +83,7 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
 
         {workContent.highlights && (
           <HighlightsSection>
-            {workContent.highlights.map((highlight, index) => (
+            {workContent.highlights.map((highlight: any, index: number) => (
               <HighlightCard
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -115,7 +120,7 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
             >
               System Architecture
             </motion.h2>
-            <div style={{ background: 'white', padding: '1rem', borderRadius: '8px' }}>
+            <div style={{ background: 'white', padding: '2rem', borderRadius: '8px' }}>
               <a href={workContent.architecture.diagram} target="_blank" rel="noopener noreferrer">
                 <motion.img
                   src={workContent.architecture.diagram}
@@ -123,6 +128,7 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
+                  whileHover={{ scale: 1.05, rotate: 0, transition: { duration: 0.3 } }} // Increased scale on hover, no rotation
                 />
               </a>
             </div>

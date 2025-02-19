@@ -75,9 +75,14 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
   return (
     <Layout>
       <DetailContainer>
-        <Link href="/experience" style={{ position: 'absolute', top: '3rem', left: '3rem', color: '#ccc', textDecoration: 'none' }}>
-          ←Return to Experiences
-        </Link>
+        <motion.div
+          style={{ position: 'absolute', top: '3rem', left: '3rem' }}
+          whileHover={{ scale: 1.1, color: '#fff' }}
+        >
+          <Link href="/experience" style={{ color: '#ccc', textDecoration: 'none' }}>
+            ←Return to Experiences
+          </Link>
+        </motion.div>
         <Head>
           <title>{title}</title>
         </Head>

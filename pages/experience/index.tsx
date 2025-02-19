@@ -54,9 +54,9 @@ const ExperiencePage = () => {
               {groupedExperiences[yearMonth].map((exp: Gists, idx) => (
                 <motion.div
                   key={exp.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  initial={{ opacity: 0, scale: 0.8 }} // Changed x to scale for a more pronounced effect
+                  animate={{ opacity: 1, scale: 1 }} // Adjusted to scale for a smoother transition
+                  transition={{ duration: 0.5, delay: idx * 0.1, type: "spring", stiffness: 100 }} // Added spring type for a more dynamic motion
                 >
                   <TimelineItem>
                     <Year>{exp.year}</Year>
@@ -64,8 +64,13 @@ const ExperiencePage = () => {
                     <Content>
                       <Link href={`/experience/${exp.id}`} passHref legacyBehavior>
                         <StyledLink>
-                        <h2>{language === 'en' ? exp.title : exp.title_ja}</h2>
-                        <p>{language === 'en' ? exp.description : exp.description_ja}</p>
+                          <motion.div
+                            whileHover={{ scale: 1.05, color: '#fff' }} // Added hover animation
+                            transition={{ duration: 0.3 }} // Transition duration for the hover effect
+                          >
+                            <h2>{language === 'en' ? exp.title : exp.title_ja}</h2>
+                            <p>{language === 'en' ? exp.description : exp.description_ja}</p>
+                          </motion.div>
                         </StyledLink>
                       </Link>
                       <TechStack>
