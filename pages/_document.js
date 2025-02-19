@@ -11,6 +11,9 @@ export default function Document() {
         <meta httpEquiv="content-language" content="en,ja" />
         <meta name="google-site-verification" content="DEgw9x5qg54-nkcoE9493eaEFFU0kxke_ff9_faoRhY" />
         <meta name="msvalidate.01" content="C3267624A0885DF4ACF4A680014D4512" />
+        <meta name='description' content="Hi! I'm Roughfts, and this is a PLATFORM about my introduction to Shogi(Cecon) and other game apps, as well as technology and other technical guidance on circumventing school filtering regulations." lang="en" />
+        <meta name='description' content="Roughftsです！このサイトでは、私の将棋（Cecon）やその他のゲームアプリの紹介、IT技術について、そして学校のフィルタリング規制を回避するための技術的なガイドを提供します。" lang="ja" />
+
         {/* Favicon */}
         <link rel="icon" href="/assets/ico.png" />
         <link rel="icon" type="image/svg+xml" href="/assets/ico_svg.svg" />
