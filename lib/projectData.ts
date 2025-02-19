@@ -1,25 +1,25 @@
 import { ProjectContent, WorkContent } from '../types/content';
-import ventusTalk from '../data/projects/ventus-talk.json';
-import primeCube from '../data/projects/prime-cube.json';
-import shogiApp from '../data/projects/shogi-app.json';
-import pythonFilter from '../data/projects/python-filter.json';
-import kanjiJourney from '../data/projects/kanji-journey.json';
-import bookmarkletYoutube from '../data/projects/bookmarklet-youtube.json';
-import bookmarkletScraping from '../data/projects/bookmarklet-scraping.json';
-import bookmarkletDeveloper from '../data/projects/bookmarklet-developer.json';
-import virtualBrowser from '../data/projects/novnc-virtual-browser.json';
 
-const allProjects = {
-  'ventus-talk': ventusTalk,
-  'prime-cube': primeCube,
-  'shogi-app': shogiApp,
-  'python-filter': pythonFilter,
-  'kanji-journey': kanjiJourney,
-  'bookmarklet-youtube': bookmarkletYoutube,
-  'bookmarklet-scraping': bookmarkletScraping,
-  'bookmarklet-developer': bookmarkletDeveloper,
-  'virtual-browser' : virtualBrowser,
-};
+// プロジェクト名（.jsonを除く）をリストにする
+const projectNames = [
+  'ventus-talk',
+  'prime-cube',
+  'shogi-app',
+  'python-filter',
+  'kanji-journey',
+  'bookmarklet-youtube',
+  'bookmarklet-scraping',
+  'bookmarklet-developer',
+  'novnc-virtual-browser'
+];
+
+// 各プロジェクトをインポート
+const allProjects = {};
+for (const projectName of projectNames) {
+  allProjects[projectName] = require(`../data/projects/${projectName}.json`);
+}
+
+
 
 class ProjectData {
   private static instance: ProjectData;

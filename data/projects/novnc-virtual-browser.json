@@ -1,5 +1,5 @@
 {
-    "id": "selenium-browser",
+    "id": "novnc-virtual-browser",
     "title": "Selenium Virtual Browser",
     "title_ja": "Selenium仮想ブラウザ",
     "description": "Launch Selenium virtual browser with Docker in Codespaces.",
