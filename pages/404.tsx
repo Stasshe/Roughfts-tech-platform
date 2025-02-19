@@ -4,13 +4,20 @@ import { motion } from 'framer-motion';
 
 const Container = styled.div`
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #111;
-  color: #fff;
+  background-color: #111 !important;
+  color: #fff !important;
   padding: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
 `;
 
 const ErrorCode = styled(motion.h1)`
