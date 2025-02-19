@@ -43,11 +43,11 @@ const AboutPage = () => {
                   isJapanese 
                     ? aboutData.sections.introduction.content_ja 
                     : aboutData.sections.introduction.content,
-                  500,  // Delay after the text
+                  500,
                 ]}
                 wrapper="p"
                 cursor={true}
-                speed={50}  // Speed of the typing animation
+                speed={50}
               />
 
               <h3>
@@ -60,12 +60,12 @@ const AboutPage = () => {
                   isJapanese 
                     ? aboutData.sections.fastLearning.content_ja 
                     : aboutData.sections.fastLearning.content,
-                  500,  // Further reduced delay for even faster typing
+                  500, 
                 ]}
                 wrapper="p"
                 cursor={true}
-                speed={80}  // Added speed prop for faster animation
-                style={{ height: '150px', overflow: 'hidden' }} // Fixed height
+                speed={80} 
+                style={{ height: '150px', overflow: 'hidden' }}
               />
             </motion.div>
           </TextContent>

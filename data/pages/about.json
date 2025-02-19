@@ -17,7 +17,8 @@
       "content_ja": "人工知能の力を活用してコーディングの旅を加速させましょう。スマートAIツールがカスタマイズされたアシスタンスを提供し、即座のフィードバックとガイダンスを提供します。デバッグからコードの最適化まで、AI駆動のサポートにより、記録的な速さでコーディングの習熟度を高めることができます。"
     },
     "skills": [
-    { "name": "JavaScript/TypeScript", "icon": "⚡", "category": "Languages" },
+    { "name": "JavaScript", "icon": "🛠️", "category": "Languages" },
+    { "name": "TypeScript", "icon": "⚡", "category": "Languages" },
     { "name": "React/Next.js", "icon": "⚛️", "category": "Frontend" },
     { "name": "Node.js", "icon": "🚀", "category": "Backend" },
     { "name": "Docker", "icon": "🐳", "category": "DevOps" },
