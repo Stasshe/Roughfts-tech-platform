@@ -27,13 +27,6 @@ const ProfileContainer = styled.section`
     padding: 1rem;
     flex-direction: column;
     margin-top: 0;
-    img {
-      width: 60vw;
-      height: 60vw;
-      max-width: 300px;
-      max-height:300px;
-      margin-bottom: 2rem;
-    }
   }
 `;
 
@@ -42,13 +35,18 @@ const ProfileImage = styled.img`
   height: 250px;
   border-radius: 50%;
   margin-right: 30px;
+
   @media (max-width: 768px) {
-    margin-right:0px;
+    margin-right: 0px;
+    width: 60vw;
+    height: 60vw;
+    max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 2rem;
   }
 `;
 
 const ProfileInfo = styled.div`
-
   h1 {
     margin: 0;
     width: 500px;
@@ -62,7 +60,7 @@ const ProfileInfo = styled.div`
   @media (max-width: 768px) {
     width: 120%;
     padding: 0;
-    margin-left:0px;
+    margin-left: 0px;
     text-align: center; /* Center the text */
 
     h1 {

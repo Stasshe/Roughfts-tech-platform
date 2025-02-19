@@ -38,11 +38,17 @@ const AboutPage = () => {
               transition={{ delay: 0.3 }}
             >
               <h2>Roughfts</h2>
-              <p>
-                {isJapanese 
-                  ? aboutData.sections.introduction.content_ja 
-                  : aboutData.sections.introduction.content}
-              </p>
+              <TypeAnimation
+                sequence={[
+                  isJapanese 
+                    ? aboutData.sections.introduction.content_ja 
+                    : aboutData.sections.introduction.content,
+                  500,  // Delay after the text
+                ]}
+                wrapper="p"
+                cursor={true}
+                speed={50}  // Speed of the typing animation
+              />
 
               <h3>
                 {isJapanese 
@@ -54,24 +60,29 @@ const AboutPage = () => {
                   isJapanese 
                     ? aboutData.sections.fastLearning.content_ja 
                     : aboutData.sections.fastLearning.content,
-                  1000, 
+                  500,  // Further reduced delay for even faster typing
                 ]}
                 wrapper="p"
-                
                 cursor={true}
+                speed={80}  // Added speed prop for faster animation
+                style={{ height: '150px', overflow: 'hidden' }} // Fixed height
               />
             </motion.div>
           </TextContent>
         </ContentSection>
-        <TextContent>
+        <TextContent
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', textAlign: 'center', width: '80%', margin: '0 auto' }}
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <SkillsContainer>
+            <SkillsContainer
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '80%', margin: '0 auto' }}
+            >
               <h3>{isJapanese ? 'スキル' : 'Skills'}</h3>
-              <SkillsGrid>
+              <SkillsGrid style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
                 {aboutData.sections.skills.map((skill, index) => (
                   <SkillItem
                     key={index}
@@ -79,6 +90,7 @@ const AboutPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * index }}
                     whileHover={{ scale: 1.05, backgroundColor: '#444' }}
+                    style={{ width: '150px' }}
                   >
                     <SkillIcon>{skill.icon}</SkillIcon>
                     <SkillName>{skill.name}</SkillName>
@@ -140,7 +152,9 @@ const ProfileImage = styled(motion.img)`
 
 const TextContent = styled.div`
   flex: 1;
-  margint-top:auto;
+  margin-top:auto;
+  margin-right:auto;
+  margin-left:auto;
   h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -192,7 +206,9 @@ const PolicySection = styled.div`
 
 
 const SkillsContainer = styled.div`
-  
+  margin-top:auto;
+  margin-right:auto;
+  margin-left:auto;
   padding: 1rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
