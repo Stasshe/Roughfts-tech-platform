@@ -115,14 +115,18 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
             >
               System Architecture
             </motion.h2>
-            <motion.img
-              src={workContent.architecture.diagram}
-              alt="Architecture Diagram"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            />
-            <motion.p>{workContent.architecture.description}</motion.p>
+            <div style={{ background: 'white', padding: '1rem', borderRadius: '8px' }}>
+              <a href={workContent.architecture.diagram} target="_blank" rel="noopener noreferrer">
+                <motion.img
+                  src={workContent.architecture.diagram}
+                  alt="Architecture Diagram"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                />
+              </a>
+            </div>
+            <motion.p style={{ marginTop: '1rem' }}>{workContent.architecture.description}</motion.p>
           </ArchitectureSection>
         )}
 
