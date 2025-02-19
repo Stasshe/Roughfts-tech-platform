@@ -30,9 +30,8 @@ const Message = styled(motion.p)`
   letter-spacing: 2px;
 `;
 
-const HomeLink = styled(motion.a)`
+const HomeLink = styled(motion.div)`
   color: #fff;
-  text-decoration: none;
   border: 1px solid #fff;
   padding: 1rem 2rem;
   font-family: 'Cormorant Garamond', serif;
@@ -40,6 +39,7 @@ const HomeLink = styled(motion.a)`
   position: relative;
   overflow: hidden;
   transition: color 0.3s ease;
+  cursor: pointer;
 
   &:before {
     content: '';
@@ -78,9 +78,9 @@ const NotFoundPage = () => {
       >
         The page you are looking for does not exist.
       </Message>
-      <Link href="/" passHref>
+      <Link href="/" passHref legacyBehavior>
         <HomeLink
-          as={motion.a}
+          as="a"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
