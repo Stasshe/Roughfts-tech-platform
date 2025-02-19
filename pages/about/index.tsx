@@ -4,6 +4,7 @@ import Layout from '../../components/Layout';
 import Head from 'next/head';
 import aboutData from '../../data/pages/about.json';
 import { useLanguage } from '../../lib/LanguageContext';
+import { TypeAnimation } from 'react-type-animation';
 
 const AboutPage = () => {
   const { language } = useLanguage();
@@ -48,11 +49,17 @@ const AboutPage = () => {
                   ? aboutData.sections.fastLearning.title_ja 
                   : aboutData.sections.fastLearning.title}
               </h3>
-              <p>
-                {isJapanese 
-                  ? aboutData.sections.fastLearning.content_ja 
-                  : aboutData.sections.fastLearning.content}
-              </p>
+              <TypeAnimation
+                sequence={[
+                  isJapanese 
+                    ? aboutData.sections.fastLearning.content_ja 
+                    : aboutData.sections.fastLearning.content,
+                  1000, 
+                ]}
+                wrapper="p"
+                
+                cursor={true}
+              />
             </motion.div>
           </TextContent>
         </ContentSection>
@@ -63,7 +70,7 @@ const AboutPage = () => {
             transition={{ delay: 0.3 }}
           >
             <SkillsContainer>
-            <h3>{isJapanese ? 'スキル' : 'Skills'}</h3>
+              <h3>{isJapanese ? 'スキル' : 'Skills'}</h3>
               <SkillsGrid>
                 {aboutData.sections.skills.map((skill, index) => (
                   <SkillItem
