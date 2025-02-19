@@ -10,6 +10,7 @@ export default function Document() {
         </script>
         <meta httpEquiv="content-language" content="en,ja" />
         <meta name="google-site-verification" content="DEgw9x5qg54-nkcoE9493eaEFFU0kxke_ff9_faoRhY" />
+        <meta name="msvalidate.01" content="C3267624A0885DF4ACF4A680014D4512" />
         {/* Favicon */}
         <link rel="icon" href="/assets/ico.png" />
         <link rel="icon" type="image/svg+xml" href="/assets/ico_svg.svg" />
