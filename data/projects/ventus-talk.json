@@ -1,7 +1,7 @@
 {
   "id": "ventus-talk",
   "title": "Ventus-Talk",
-  "title_ja": "ベンタストーク",
+  "title_ja": "Ventus-Talk",
   "description": "A high-performance, real-time chat application with advanced features and optimized user experience.",
   "description_ja": "高性能なリアルタイムチャットアプリケーションで、高度な機能と最適化されたユーザー体験を提供します。",
   "techStack": [
