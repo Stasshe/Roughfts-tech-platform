@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://roughfts-tech-platform.onrender.com/sitemap.xml
