@@ -38,6 +38,7 @@ const AboutPage = () => {
               transition={{ delay: 0.3 }}
             >
               <h2>Roughfts</h2>
+              <Introduce>
               <TypeAnimation
                 sequence={[
                   isJapanese 
@@ -48,14 +49,14 @@ const AboutPage = () => {
                 wrapper="p"
                 cursor={true}
                 speed={50}
-                style={{ height: '100px', overflow: 'hidden' }}
-              />
+              /></Introduce>
 
               <h3>
                 {isJapanese 
                   ? aboutData.sections.fastLearning.title_ja 
                   : aboutData.sections.fastLearning.title}
               </h3>
+              <FastLearning>
               <TypeAnimation
                 sequence={[
                   isJapanese 
@@ -65,9 +66,8 @@ const AboutPage = () => {
                 ]}
                 wrapper="p"
                 cursor={true}
-                speed={80} 
-                style={{ height: '180px', overflow: 'hidden' }}
-              />
+                speed={85}
+              /></FastLearning>
             </motion.div>
           </TextContent>
         </ContentSection>
@@ -80,7 +80,7 @@ const AboutPage = () => {
             transition={{ delay: 0.3 }}
           >
             <SkillsContainer
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '80%', margin: '0 auto' }}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '85vw', margin: '0 auto' }}
             >
               <h3>{isJapanese ? 'スキル' : 'Skills'}</h3>
               <SkillsGrid style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -106,6 +106,20 @@ const AboutPage = () => {
     </Layout>
   );
 };
+
+const Introduce = styled.div`
+  height: 100px
+  overflow: hidden;
+`;
+const FastLearning = styled.div`
+  height: 180px;
+  overflow: hidden;
+
+  @media (max-width: 767px) {
+    height: 350px;
+    overflow: hidden;
+  }
+`;
 
 const AboutContainer = styled.div`
   padding: 6rem 2rem 2rem;

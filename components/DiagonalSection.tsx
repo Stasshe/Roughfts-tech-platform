@@ -1,86 +1,91 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { useLanguage } from '../lib/LanguageContext';
+import { Experience } from '../data/experiences';
+import { experiences } from '../data/experiences';
+import { useRouter } from 'next/router';
+
+const Container = styled.section`
+  padding: 4rem 2rem;
+  background: linear-gradient(45deg, #f3f4f6, #ffffff);
+`;
+
+const ArticleGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const ArticleCard = styled(motion.article)`
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const Title = styled.h3`
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+`;
+
+const Description = styled.p`
+  color: #666;
+  margin-bottom: 1rem;
+`;
+
+const Content = styled.div`
+  color: #444;
+  font-size: 0.9rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
 
 const DiagonalSection = () => {
+  const { language } = useLanguage();
+  const router = useRouter();
+  const recentExperiences = experiences.slice(0, 5);
+
+  const handleCardClick = (slug: string) => {
+    router.push(`/experience/${slug}`);
+  };
+
   return (
-    <Section>
-      <DiagonalDiv />
-      <Content
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2>My Expertise</h2>
-        <SkillsList>
-          <li>Node.js</li>
-          <li>Docker</li>
-          <li>Web Security</li>
-          <li>Firebase</li>
-          <li>SNS Web Apps</li>
-        </SkillsList>
-      </Content>
-    </Section>
+    <Container>
+      <ArticleGrid>
+        {recentExperiences.map((experience: Experience) => (
+          <ArticleCard
+            key={experience.id}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.05 }}
+            onClick={() => handleCardClick(experience.slug)}
+          >
+            <Title>
+              {language === 'en' ? experience.title : experience.title_ja}
+            </Title>
+            <Description>
+              {language === 'en' ? experience.description : experience.description_ja}
+            </Description>
+            <Content>
+              {language === 'en' 
+                ? experience.details[0]?.content[0] 
+                : experience.details[0]?.content_ja[0]}
+            </Content>
+          </ArticleCard>
+        ))}
+      </ArticleGrid>
+    </Container>
   );
 };
 
-const Section = styled.section`
-  position: relative;
-  min-height: 100vh;
-  background: #000;
-  overflow: hidden;
-`;
-
-const DiagonalDiv = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #111;
-  transform: skewY(-10deg);
-  transform-origin: top left;
-`;
-
-const Content = styled(motion.div)`
-  position: relative;
-  z-index: 2;
-  color: white;
-  padding: 4rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  
-  h2 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
-  }
-  @media (max-width: 768px) {
-    h2 {
-      text-align:center;
-    }
-  }
-`;
-
-const SkillsList = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  
-  li {
-    font-size: 1.5rem;
-    padding: 1rem;
-    background: #000;
-    border-radius: 4px;
-    text-align: center;
-  }
-  @media (max-width: 768px) {
-    gap: 1rem;
-    li {
-      font-size: 1.0rem;
-      padding: 0rem;
-    }
-  } 
-`;
-
-export default DiagonalSection; 
+export default DiagonalSection;
