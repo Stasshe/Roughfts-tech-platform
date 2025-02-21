@@ -10,80 +10,54 @@ interface Skill {
 
 const skillsData = {
   frontend: [
-    { name: 'React/Next.js', description: 'Building modern, responsive web applications with React and Next.js framework' },
-    { name: 'TypeScript', description: 'Writing type-safe code to prevent runtime errors and improve maintainability' },
-    { name: 'HTML5/CSS', description: 'Creating structured, semantic markup and stylish designs' },
-    { name: 'Responsive Design', description: 'Ensuring applications work beautifully across all device sizes' }
+    { name: 'React/Next.js', description: 'Modern web application development with React and Next.js', icon: 'https://profilinator.rishav.dev/skills-assets/react-original-wordmark.svg' },
+    { name: 'JavaScript', description: 'Core web development and application logic', icon: 'https://profilinator.rishav.dev/skills-assets/javascript-original.svg' },
+    { name: 'TypeScript', description: 'Type-safe JavaScript development', icon: 'https://profilinator.rishav.dev/skills-assets/typescript-original.svg' },
+    { name: 'HTML5/CSS3', description: 'Semantic markup and modern styling', icon: 'https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg' },
+    { name: 'Styled Components', description: 'Component-level styling in React', icon: 'https://profilinator.rishav.dev/skills-assets/styled-components.png' },
+    { name: 'Swift', description: 'iOS and macOS application development', icon: 'https://profilinator.rishav.dev/skills-assets/swift-original-wordmark.svg' }
   ],
   backend: [
-    { name: 'Node.js', description: 'Developing scalable server-side applications and APIs' },
-    { name: 'Python', description: 'Building robust backend services and data processing systems' },
-    { name: 'Firebase', description: 'Implementing real-time databases and authentication systems' },
-    { name: 'RESTful APIs', description: 'Designing and implementing REST APIs for client-server communication' }
+    { name: 'Node.js', description: 'Server-side JavaScript runtime', icon: 'https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg' },
+    { name: 'Express.js', description: 'Web application framework for Node.js', icon: 'https://profilinator.rishav.dev/skills-assets/express-original-wordmark.svg' },
+    { name: 'Firebase', description: 'Backend as a service platform', icon: 'https://profilinator.rishav.dev/skills-assets/firebase.png' },
+    { name: 'Python', description: 'Backend development and data processing', icon: 'https://profilinator.rishav.dev/skills-assets/python-original.svg' },
+    { name: 'AWS', description: 'Cloud infrastructure and services', icon: 'https://profilinator.rishav.dev/skills-assets/amazonwebservices-original-wordmark.svg' },
+    { name: 'Google Cloud', description: 'Cloud platform services', icon: 'https://profilinator.rishav.dev/skills-assets/google_cloud-icon.svg' }
   ],
-  tools: [
-    { name: 'Git/GitHub', description: 'Version control and collaborative development workflows' },
-    { name: 'Docker', description: 'Containerizing applications for consistent deployment' },
-    { name: 'AWS', description: 'Cloud infrastructure and serverless computing' },
-    { name: 'Network Security', description: 'Implementing secure communication protocols and best practices' }
+  devops: [
+    { name: 'Git', description: 'Version control and collaboration', icon: 'https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg' },
+    { name: 'Docker', description: 'Container platform', icon: 'https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg' },
+    { name: 'Bash', description: 'Shell scripting and automation', icon: 'https://profilinator.rishav.dev/skills-assets/gnu_bash-icon.svg' }
+  ],
+  other: [
+    { name: 'Unity', description: '3D and 2D game development', icon: 'https://profilinator.rishav.dev/skills-assets/unity.png' },
+    { name: 'Blender', description: '3D modeling and animation', icon: 'https://profilinator.rishav.dev/skills-assets/blender_community_badge_white.svg' },
+    { name: 'OpenCV', description: 'Computer vision and image processing', icon: 'https://profilinator.rishav.dev/skills-assets/opencv-icon.svg' },
+    { name: 'LaTeX', description: 'Document preparation system', icon: 'https://profilinator.rishav.dev/skills-assets/latex.png' },
+    { name: 'WordPress', description: 'Content management system', icon: 'https://profilinator.rishav.dev/skills-assets/wordpress.png' },
+    { name: 'RESTful APIs', description: 'API design and implementation', icon: null },
+    { name: 'Network Security', description: 'Security best practices and implementation', icon: null }
   ]
 };
 
-const getSkillIcon = (skillName: string): { type: 'svg' | 'emoji'; content: string } => {
-  const iconMap: { [key: string]: { type: 'svg' | 'emoji'; content: string } } = {
-    // Frontend icons
-    'React/Next.js': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/react.svg'
-    },
-    'TypeScript': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/typescript.svg'
-    },
-    'HTML5/CSS': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/html5.svg'
-    },
-    'Responsive Design': {
+const getSkillIcon = (skill: { name: string; icon: string | null }): { type: 'svg' | 'emoji'; content: string } => {
+  if (!skill.icon) {
+    // Fallback emojis for conceptual skills
+    const fallbackEmojis: { [key: string]: string } = {
+      'RESTful APIs': '🔌',
+      'Network Security': '🔒'
+    };
+    return {
       type: 'emoji',
-      content: '📱'
-    },
-    // Backend icons
-    'Node.js': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nodedotjs.svg'
-    },
-    'Python': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/python.svg'
-    },
-    'Firebase': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/firebase.svg'
-    },
-    'RESTful APIs': {
-      type: 'emoji',
-      content: '🔌'
-    },
-    // Tools icons
-    'Git/GitHub': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg'
-    },
-    'Docker': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/docker.svg'
-    },
-    'AWS': {
-      type: 'svg',
-      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/amazonaws.svg'
-    },
-    'Network Security': {
-      type: 'emoji',
-      content: '🔒'
-    }
+      content: fallbackEmojis[skill.name] || '⚡'
+    };
+  }
+  
+  return {
+    type: 'svg',
+    content: skill.icon
   };
-  return iconMap[skillName] || { type: 'emoji', content: '⚡' };
 };
 
 const SkillsCarousel: React.FC = () => {
@@ -95,7 +69,8 @@ const SkillsCarousel: React.FC = () => {
   const sections = [
     { title: 'Frontend', skills: skillsData.frontend },
     { title: 'Backend', skills: skillsData.backend },
-    { title: 'Tools & Other', skills: skillsData.tools }
+    { title: 'DevOps', skills: skillsData.devops },
+    { title: 'Other Skills', skills: skillsData.other }
   ];
 
   useEffect(() => {
@@ -236,16 +211,16 @@ const SkillsCarousel: React.FC = () => {
                     >
                       <SkillItem>
                         <SkillIcon>
-                          {getSkillIcon(skill.name).type === 'svg' ? (
+                          {getSkillIcon(skill).type === 'svg' ? (
                             <Image
-                              src={getSkillIcon(skill.name).content}
+                              src={getSkillIcon(skill).content}
                               alt={skill.name}
                               width={24}
                               height={24}
                               style={{ filter: 'invert(1)' }}
                             />
                           ) : (
-                            getSkillIcon(skill.name).content
+                            getSkillIcon(skill).content
                           )}
                         </SkillIcon>
                         <SkillContent>
@@ -348,10 +323,15 @@ const CarouselSlide = styled(motion.div)`
 `;
 
 const SlideContent = styled.div`
-  width: 70%;
+  width: 90%;
   max-width: 1200px;
-  padding: 2rem;
+  padding: 1rem;
   position: relative;
+
+  @media (min-width: 768px) {
+    width: 70%;
+    padding: 2rem;
+  }
 `;
 
 const SectionTitle = styled(motion.h3)`
@@ -412,6 +392,13 @@ const SkillItem = styled.div`
   &:hover::before {
     transform: translateX(100%);
   }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
 `;
 
 const SkillName = styled.h4`
@@ -422,6 +409,12 @@ const SkillName = styled.h4`
   -webkit-text-fill-color: transparent;
   font-weight: 600;
   white-space: nowrap;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    white-space: normal;
+    text-align: center;
+  }
 `;
 
 const SkillDescription = styled.p`
@@ -429,6 +422,11 @@ const SkillDescription = styled.p`
   margin: 0;
   font-size: 1.1rem;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    text-align: center;
+  }
 `;
 
 const Navigation = styled.div`
@@ -474,6 +472,16 @@ const SkillIcon = styled.div`
     width: 24px;
     height: 24px;
     object-fit: contain;
+
+    @media (max-width: 768px) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
   }
 `;
 
