@@ -6,8 +6,39 @@ import { experiences } from '../data/experiences';
 import { useRouter } from 'next/router';
 
 const Container = styled.section`
-  padding: 4rem 2rem;
-  background: linear-gradient(45deg, #f3f4f6, #ffffff);
+  position: relative;
+  padding: 8rem 2rem;
+  background: linear-gradient(
+    to bottom,
+    #000000 0%,
+    rgba(0, 0, 0, 0.8) 10%,
+    rgba(255, 255, 255, 0.95) 20%,
+    #ffffff 30%,
+    #ffffff 70%,
+    rgba(255, 255, 255, 0.95) 80%,
+    rgba(0, 0, 0, 0.8) 90%,
+    #000000 100%
+  );
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+  }
+
+  &::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  }
+
+  &::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  }
 `;
 
 const ArticleGrid = styled.div`
@@ -16,6 +47,8 @@ const ArticleGrid = styled.div`
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 `;
 
 const ArticleCard = styled(motion.article)`

@@ -1,4 +1,3 @@
-//import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styled from 'styled-components';
@@ -6,6 +5,7 @@ import Layout from '../components/Layout';
 import ProductScroll from '../components/ProductScroll';
 import DiagonalSection from '../components/DiagonalSection';
 import { ProfileSection } from '../components/ProfileSection';
+import SkillsCarousel from '../components/SkillsCarousel';
 
 const HomePage = () => {
   const { scrollY } = useScroll();
@@ -40,42 +40,7 @@ const HomePage = () => {
       <ProfileSection id="profile-section" />
       <ProductScroll />
       <DiagonalSection />
-
-      <SkillsSection>
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8 }}>
-          <h2>Technical Skills</h2>
-          <SkillsGrid>
-            <SkillCategory>
-              <h3>Frontend</h3>
-              <ul>
-                <li>React/Next.js</li>
-                <li>TypeScript</li>
-                <li>HTML5/CSS</li>
-                <li>Responsive Design</li>
-              </ul>
-            </SkillCategory>
-            <SkillCategory>
-              <h3>Backend</h3>
-              <ul>
-                <li>Node.js</li>
-                <li>Python</li>
-                <li>Firebase</li>
-                <li>RESTful APIs</li>
-              </ul>
-            </SkillCategory>
-            <SkillCategory>
-              <h3>Tools & Others</h3>
-              <ul>
-                <li>Git/GitHub</li>
-                <li>Docker</li>
-                <li>AWS</li>
-                <li>Network Security</li>
-              </ul>
-            </SkillCategory>
-          </SkillsGrid>
-        </motion.div>
-      </SkillsSection>
-
+      <SkillsCarousel />
       <ContactSection>
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8 }}>
           <h2>Let's Connect</h2>
@@ -162,62 +127,6 @@ const ContactSection = styled.section`
   margin-left: -50vw;
   margin-right: -50vw;
   text-align:center;
-`;
-
-const SkillsSection = styled.section`
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-  padding: 4rem 2rem;
-  color: white;
-  text-align: center;
-
-  h2 {
-    font-size: 3rem;
-    font-weight: 200;
-    width: 80vw;
-    margin-right:auto;
-    margin-left:auto;
-    letter-spacing: 0.2em;
-    margin-bottom: 4rem;
-  }
-  @media (max-width: 768px) {
-    h2{
-      text-align:center;
-    }
-  }
-`;
-
-const SkillsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const SkillCategory = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 12px;
-  
-  h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    
-    li {
-      margin: 1rem 0;
-      opacity: 0.8;
-    }
-  }
 `;
 
 const ContactInfo = styled.div`
