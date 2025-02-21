@@ -157,7 +157,6 @@ const SkillsCarousel: React.FC = () => {
               exit="exit"
             >
               <SlideContent>
-                <GlowEffect />
                 <SectionTitle
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -178,6 +177,7 @@ const SkillsCarousel: React.FC = () => {
                       transition={{ duration: 0.5 }}
                     >
                       <SkillItem>
+                        <GlowEffect />
                         <SkillIcon>⚡</SkillIcon>
                         <SkillContent>
                           <SkillName>{skill.name}</SkillName>
@@ -235,10 +235,11 @@ const SkillsSection = styled.section`
   min-height: 80vh;
   background: #000;
   color: white;
-  padding: 4rem 2rem;
-  overflow: hidden;
+  padding: 4rem 2rem 6rem; // Increased bottom padding
   position: relative;
-
+  
+  // Remove overflow: hidden to prevent cutoff
+  
   h2 {
     font-size: 3rem;
     font-weight: 200;
@@ -254,7 +255,7 @@ const SkillsSection = styled.section`
 const CarouselWrapper = styled.div`
   position: relative;
   width: 100%;
-  overflow: hidden;
+  margin-bottom: 2rem; // Add space at bottom
   min-height: 600px; // Add explicit height
 `;
 
@@ -262,6 +263,7 @@ const CarouselTrack = styled.div`
   position: relative;
   width: 100%;
   min-height: 600px; // Match wrapper height
+  padding-bottom: 3rem; // Add padding to prevent cutoff
 `;
 
 const CarouselSlide = styled(motion.div)`
@@ -301,6 +303,37 @@ const SkillsList = styled.div`
   margin-bottom: 2rem; // Add space for navigation dots
 `;
 
+const GlowEffect = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  animation: pulse 4s infinite;
+
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+  }
+`;
+
 const SkillItem = styled.div`
   display: flex;
   align-items: center;
@@ -318,6 +351,11 @@ const SkillItem = styled.div`
     transform: translateX(10px) scale(1.02);
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover ${GlowEffect} {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.2);
   }
 
   &::before {
@@ -364,6 +402,9 @@ const Navigation = styled.div`
   justify-content: center;
   gap: 1rem;
   margin-top: 2rem;
+  padding-bottom: 2rem; // Add padding to prevent cutoff
+  position: relative; // Ensure dots are always visible
+  z-index: 2;
 `;
 
 const NavigationDot = styled.button<{ $active: boolean }>`
@@ -378,21 +419,6 @@ const NavigationDot = styled.button<{ $active: boolean }>`
   &:hover {
     background: rgba(255, 255, 255, 0.8);
   }
-`;
-
-const GlowEffect = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  pointer-events: none;
 `;
 
 const SkillIcon = styled.div`
