@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 interface Skill {
   name: string;
@@ -28,25 +29,61 @@ const skillsData = {
   ]
 };
 
-const getSkillIcon = (skillName: string): string => {
-  const iconMap: { [key: string]: string } = {
+const getSkillIcon = (skillName: string): { type: 'svg' | 'emoji'; content: string } => {
+  const iconMap: { [key: string]: { type: 'svg' | 'emoji'; content: string } } = {
     // Frontend icons
-    'React/Next.js': '⚛️',
-    'TypeScript': '📝',
-    'HTML5/CSS': '🎨',
-    'Responsive Design': '📱',
+    'React/Next.js': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/react.svg'
+    },
+    'TypeScript': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/typescript.svg'
+    },
+    'HTML5/CSS': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/html5.svg'
+    },
+    'Responsive Design': {
+      type: 'emoji',
+      content: '📱'
+    },
     // Backend icons
-    'Node.js': '🟢',
-    'Python': '🐍',
-    'Firebase': '🔥',
-    'RESTful APIs': '🔌',
+    'Node.js': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nodedotjs.svg'
+    },
+    'Python': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/python.svg'
+    },
+    'Firebase': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/firebase.svg'
+    },
+    'RESTful APIs': {
+      type: 'emoji',
+      content: '🔌'
+    },
     // Tools icons
-    'Git/GitHub': '📂',
-    'Docker': '🐳',
-    'AWS': '☁️',
-    'Network Security': '🔒'
+    'Git/GitHub': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg'
+    },
+    'Docker': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/docker.svg'
+    },
+    'AWS': {
+      type: 'svg',
+      content: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/amazonaws.svg'
+    },
+    'Network Security': {
+      type: 'emoji',
+      content: '🔒'
+    }
   };
-  return iconMap[skillName] || '⚡';
+  return iconMap[skillName] || { type: 'emoji', content: '⚡' };
 };
 
 const SkillsCarousel: React.FC = () => {
@@ -198,7 +235,19 @@ const SkillsCarousel: React.FC = () => {
                       transition={{ duration: 0.5 }}
                     >
                       <SkillItem>
-                        <SkillIcon>{getSkillIcon(skill.name)}</SkillIcon>
+                        <SkillIcon>
+                          {getSkillIcon(skill.name).type === 'svg' ? (
+                            <Image
+                              src={getSkillIcon(skill.name).content}
+                              alt={skill.name}
+                              width={24}
+                              height={24}
+                              style={{ filter: 'invert(1)' }}
+                            />
+                          ) : (
+                            getSkillIcon(skill.name).content
+                          )}
+                        </SkillIcon>
                         <SkillContent>
                           <SkillName>{skill.name}</SkillName>
                           <SkillDescription>{skill.description}</SkillDescription>
@@ -415,14 +464,19 @@ const SkillIcon = styled.div`
   background: linear-gradient(45deg, #333, #111); // グラデーション背景を追加
   border-radius: 12px;
   margin-right: 1rem;
-  font-size: 1.5rem;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   position: relative;
   z-index: 2;
+
+  img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
 `;
+
 const SkillContent = styled.div`
   flex: 1;
 `;
