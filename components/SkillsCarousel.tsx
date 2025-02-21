@@ -176,9 +176,11 @@ const SkillsCarousel: React.FC = () => {
     >
       <h2>Technical Skills</h2>
       <CarouselWrapper>
-        <AnimatePresence>
+        {/* Add mode="wait" to parent AnimatePresence */}
+        <AnimatePresence mode="wait">
           {showArrows && activeSection > 0 && (
             <StyledArrowButton
+              key="left-arrow" // Add unique key
               as={motion.button}
               left
               onClick={() => handleScroll('left')}
@@ -191,6 +193,7 @@ const SkillsCarousel: React.FC = () => {
           )}
           {showArrows && activeSection < sections.length - 1 && (
             <StyledArrowButton
+              key="right-arrow" // Add unique key
               as={motion.button}
               right
               onClick={() => handleScroll('right')}
@@ -206,7 +209,7 @@ const SkillsCarousel: React.FC = () => {
         <CarouselTrack>
           <AnimatePresence mode="wait" initial={false}>
             <CarouselSlide
-              key={`slide-${activeSection}`}
+              key={`slide-${activeSection}-${direction}`} // Add direction to make key unique
               custom={direction}
               variants={slideVariants}
               initial="enter"
