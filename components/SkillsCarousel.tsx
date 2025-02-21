@@ -30,6 +30,7 @@ const skillsData = {
 
 const SkillsCarousel: React.FC = () => {
   const [activeSection, setActiveSection] = useState(0);
+  const [direction, setDirection] = useState<'left' | 'right'>('right');
   const [showArrows, setShowArrows] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>();
 
@@ -41,8 +42,9 @@ const SkillsCarousel: React.FC = () => {
 
   useEffect(() => {
     timeoutRef.current = setInterval(() => {
+      setDirection('right');
       setActiveSection((prev) => (prev + 1) % 3);
-    }, 3000); // Changed to 3 seconds
+    }, 5000); // Increased time for better readability
 
     return () => {
       if (timeoutRef.current) {
@@ -51,12 +53,13 @@ const SkillsCarousel: React.FC = () => {
     };
   }, []);
 
-  const handleScroll = (direction: 'left' | 'right') => {
+  const handleScroll = (dir: 'left' | 'right') => {
     if (timeoutRef.current) {
       clearInterval(timeoutRef.current);
     }
+    setDirection(dir);
     setActiveSection((prev) => {
-      if (direction === 'right') {
+      if (dir === 'right') {
         return (prev + 1) % 3;
       }
       return (prev - 1 + 3) % 3;
@@ -68,6 +71,45 @@ const SkillsCarousel: React.FC = () => {
     const { width } = e.currentTarget.getBoundingClientRect();
     const threshold = 100;
     setShowArrows(clientX < threshold || clientX > width - threshold);
+  };
+
+  const slideVariants = {
+    enter: (direction: 'left' | 'right') => ({
+      x: direction === 'right' ? '100%' : '-100%',
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    exit: (direction: 'left' | 'right') => ({
+      x: direction === 'right' ? '-100%' : '100%',
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeIn"
+      }
+    })
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
   };
 
   return (
@@ -105,42 +147,49 @@ const SkillsCarousel: React.FC = () => {
         </AnimatePresence>
 
         <CarouselTrack>
-          {sections.map((section, sectionIndex) => (
+          <AnimatePresence mode="wait" initial={false}>
             <CarouselSlide
-              key={section.title}
-              initial={false}
-              animate={{
-                x: `${(sectionIndex - activeSection) * 100}%`,
-                opacity: sectionIndex === activeSection ? 1 : 0.3
-              }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+              key={`slide-${activeSection}`}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
             >
               <SlideContent>
+                <GlowEffect />
                 <SectionTitle
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  {section.title}
+                  {sections[activeSection].title}
                 </SectionTitle>
-                <SkillsList>
-                  {section.skills.map((skill, index) => (
+                <SkillsList
+                  as={motion.div}
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {sections[activeSection].skills.map((skill, index) => (
                     <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      key={`${sections[activeSection].title}-${skill.name}-${index}`}
+                      variants={itemVariants}
+                      transition={{ duration: 0.5 }}
                     >
                       <SkillItem>
-                        <SkillName>{skill.name}</SkillName>
-                        <SkillDescription>{skill.description}</SkillDescription>
+                        <SkillIcon>⚡</SkillIcon>
+                        <SkillContent>
+                          <SkillName>{skill.name}</SkillName>
+                          <SkillDescription>{skill.description}</SkillDescription>
+                        </SkillContent>
                       </SkillItem>
                     </motion.div>
                   ))}
                 </SkillsList>
               </SlideContent>
             </CarouselSlide>
-          ))}
+          </AnimatePresence>
         </CarouselTrack>
       </CarouselWrapper>
 
@@ -227,12 +276,10 @@ const CarouselSlide = styled(motion.div)`
 `;
 
 const SlideContent = styled.div`
-  width: 100%;
+  width: 70%;
   max-width: 1200px;
   padding: 2rem;
-  min-height: 100%; // Fill parent height
-  display: flex;
-  flex-direction: column;
+  position: relative;
 `;
 
 const SectionTitle = styled(motion.h3)`
@@ -255,25 +302,43 @@ const SkillsList = styled.div`
 `;
 
 const SkillItem = styled.div`
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 2rem;
+  display: flex;
   align-items: center;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
   backdrop-filter: blur(10px);
-  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(10px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    text-align: center;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+
+  &:hover::before {
+    transform: translateX(100%);
   }
 `;
 
@@ -313,6 +378,39 @@ const NavigationDot = styled.button<{ $active: boolean }>`
   &:hover {
     background: rgba(255, 255, 255, 0.8);
   }
+`;
+
+const GlowEffect = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  pointer-events: none;
+`;
+
+const SkillIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+`;
+
+const SkillContent = styled.div`
+  flex: 1;
 `;
 
 export default SkillsCarousel;
