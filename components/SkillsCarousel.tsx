@@ -28,6 +28,27 @@ const skillsData = {
   ]
 };
 
+const getSkillIcon = (skillName: string): string => {
+  const iconMap: { [key: string]: string } = {
+    // Frontend icons
+    'React/Next.js': '⚛️',
+    'TypeScript': '📝',
+    'HTML5/CSS': '🎨',
+    'Responsive Design': '📱',
+    // Backend icons
+    'Node.js': '🟢',
+    'Python': '🐍',
+    'Firebase': '🔥',
+    'RESTful APIs': '🔌',
+    // Tools icons
+    'Git/GitHub': '📂',
+    'Docker': '🐳',
+    'AWS': '☁️',
+    'Network Security': '🔒'
+  };
+  return iconMap[skillName] || '⚡';
+};
+
 const SkillsCarousel: React.FC = () => {
   const [activeSection, setActiveSection] = useState(0);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
@@ -177,8 +198,7 @@ const SkillsCarousel: React.FC = () => {
                       transition={{ duration: 0.5 }}
                     >
                       <SkillItem>
-                        <GlowEffect />
-                        <SkillIcon>⚡</SkillIcon>
+                        <SkillIcon>{getSkillIcon(skill.name)}</SkillIcon>
                         <SkillContent>
                           <SkillName>{skill.name}</SkillName>
                           <SkillDescription>{skill.description}</SkillDescription>
@@ -275,6 +295,7 @@ const CarouselSlide = styled(motion.div)`
   display: flex;
   justify-content: center;
   will-change: transform;
+  background: #111;
 `;
 
 const SlideContent = styled.div`
@@ -303,37 +324,6 @@ const SkillsList = styled.div`
   margin-bottom: 2rem; // Add space for navigation dots
 `;
 
-const GlowEffect = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.1) 20%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
-  animation: pulse 4s infinite;
-
-  @keyframes pulse {
-    0% {
-      transform: translate(-50%, -50%) scale(0.8);
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(0.8);
-    }
-  }
-`;
-
 const SkillItem = styled.div`
   display: flex;
   align-items: center;
@@ -351,11 +341,6 @@ const SkillItem = styled.div`
     transform: translateX(10px) scale(1.02);
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  &:hover ${GlowEffect} {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) scale(1.2);
   }
 
   &::before {
@@ -427,14 +412,17 @@ const SkillIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(45deg, #333, #111); // グラデーション背景を追加
   border-radius: 12px;
   margin-right: 1rem;
   font-size: 1.5rem;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  position: relative;
+  z-index: 2;
 `;
-
 const SkillContent = styled.div`
   flex: 1;
 `;
