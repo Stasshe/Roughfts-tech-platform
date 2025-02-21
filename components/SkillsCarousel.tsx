@@ -320,6 +320,11 @@ const SkillsSection = styled.section`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  @media (max-width: 768px) {
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem; // Adjusted padding for mobile
+  }
 `;
 
 const CarouselWrapper = styled.div`
@@ -328,6 +333,10 @@ const CarouselWrapper = styled.div`
   height: 720px; // Fixed height to accommodate 5 items + title + navigation
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    height: 800px; // Taller on mobile
+  }
 `;
 
 const CarouselTrack = styled.div`
@@ -424,10 +433,11 @@ const SkillItem = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 1.25rem 1rem;
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: 0.35rem; // Reduced gap between elements
+    height: 140px; // Taller cards on mobile
   }
 `;
 
@@ -515,7 +525,9 @@ const SkillIcon = styled.div`
 
   @media (max-width: 768px) {
     margin-right: 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem; // Reduced bottom margin
+    width: 48px; // Slightly larger icon container
+    height: 48px;
   }
 `;
 
