@@ -1,0 +1,25 @@
+{
+    "React/Next.js": "Modern web application development with React and Next.js",
+    "JavaScript": "Core web development and application logic",
+    "TypeScript": "Type-safe JavaScript development",
+    "HTML5/CSS3": "Semantic markup and modern styling",
+    "Styled Components": "Component-level styling in React",
+    "Swift": "iOS and macOS application development",
+    "Node.js": "Server-side JavaScript runtime",
+    "Express.js": "Web application framework for Node.js",
+    "Firebase": "Backend as a service platform",
+    "Python": "Backend development and data processing",
+    "AWS": "Cloud infrastructure and services",
+    "Google Cloud": "Cloud platform services",
+    "Git": "Version control and collaboration",
+    "Docker": "Container platform",
+    "Bash": "Shell scripting and automation",
+    "Unity": "3D and 2D game development",
+    "Blender": "3D modeling and animation",
+    "OpenCV": "Computer vision and image processing",
+    "LaTeX": "Document preparation system",
+    "WordPress": "Content management system",
+    "RESTful APIs": "API design and implementation",
+    "Network Security": "Security best practices and implementation"
+  }
+  

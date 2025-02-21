@@ -2,43 +2,72 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import skillDescriptions from '../data/skills/descriptions.json';
+import skillIcons from '../data/skills/icons.json';
 
 interface Skill {
   name: string;
   description: string;
 }
 
-const skillsData = {
-  frontend: [
-    { name: 'React/Next.js', description: 'Modern web application development with React and Next.js', icon: 'https://profilinator.rishav.dev/skills-assets/react-original-wordmark.svg' },
-    { name: 'JavaScript', description: 'Core web development and application logic', icon: 'https://profilinator.rishav.dev/skills-assets/javascript-original.svg' },
-    { name: 'TypeScript', description: 'Type-safe JavaScript development', icon: 'https://profilinator.rishav.dev/skills-assets/typescript-original.svg' },
-    { name: 'HTML5/CSS3', description: 'Semantic markup and modern styling', icon: 'https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg' },
-    { name: 'Styled Components', description: 'Component-level styling in React', icon: 'https://profilinator.rishav.dev/skills-assets/styled-components.png' },
-    { name: 'Swift', description: 'iOS and macOS application development', icon: 'https://profilinator.rishav.dev/skills-assets/swift-original-wordmark.svg' }
-  ],
-  backend: [
-    { name: 'Node.js', description: 'Server-side JavaScript runtime', icon: 'https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg' },
-    { name: 'Express.js', description: 'Web application framework for Node.js', icon: 'https://profilinator.rishav.dev/skills-assets/express-original-wordmark.svg' },
-    { name: 'Firebase', description: 'Backend as a service platform', icon: 'https://profilinator.rishav.dev/skills-assets/firebase.png' },
-    { name: 'Python', description: 'Backend development and data processing', icon: 'https://profilinator.rishav.dev/skills-assets/python-original.svg' },
-    { name: 'AWS', description: 'Cloud infrastructure and services', icon: 'https://profilinator.rishav.dev/skills-assets/amazonwebservices-original-wordmark.svg' },
-    { name: 'Google Cloud', description: 'Cloud platform services', icon: 'https://profilinator.rishav.dev/skills-assets/google_cloud-icon.svg' }
-  ],
-  devops: [
-    { name: 'Git', description: 'Version control and collaboration', icon: 'https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg' },
-    { name: 'Docker', description: 'Container platform', icon: 'https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg' },
-    { name: 'Bash', description: 'Shell scripting and automation', icon: 'https://profilinator.rishav.dev/skills-assets/gnu_bash-icon.svg' }
-  ],
-  other: [
-    { name: 'Unity', description: '3D and 2D game development', icon: 'https://profilinator.rishav.dev/skills-assets/unity.png' },
-    { name: 'Blender', description: '3D modeling and animation', icon: 'https://profilinator.rishav.dev/skills-assets/blender_community_badge_white.svg' },
-    { name: 'OpenCV', description: 'Computer vision and image processing', icon: 'https://profilinator.rishav.dev/skills-assets/opencv-icon.svg' },
-    { name: 'LaTeX', description: 'Document preparation system', icon: 'https://profilinator.rishav.dev/skills-assets/latex.png' },
-    { name: 'WordPress', description: 'Content management system', icon: 'https://profilinator.rishav.dev/skills-assets/wordpress.png' },
-    { name: 'RESTful APIs', description: 'API design and implementation', icon: null },
-    { name: 'Network Security', description: 'Security best practices and implementation', icon: null }
-  ]
+// Helper function to chunk array into groups of 4
+const chunkArray = <T,>(arr: T[], size: number = 4): T[][] => {
+  return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+    arr.slice(i * size, i * size + size)
+  );
+};
+
+const createSkillsData = () => {
+  const rawData = {
+    frontend: [
+      { name: 'React/Next.js' },
+      { name: 'JavaScript' },
+      { name: 'TypeScript' },
+      { name: 'HTML5/CSS3' },
+      { name: 'Styled Components' },
+      { name: 'Swift' }
+    ],
+    backend: [
+      { name: 'Node.js' },
+      { name: 'Express.js' },
+      { name: 'Firebase' },
+      { name: 'Python' },
+      { name: 'AWS' },
+      { name: 'Google Cloud' }
+    ],
+    devops: [
+      { name: 'Git' },
+      { name: 'Docker' },
+      { name: 'Bash' }
+    ],
+    other: [
+      { name: 'Unity' },
+      { name: 'Blender' },
+      { name: 'OpenCV' },
+      { name: 'LaTeX' },
+      { name: 'WordPress' },
+      { name: 'RESTful APIs' },
+      { name: 'Network Security' }
+    ]
+  };
+
+  // Process each category and add description and icon
+  const processed = Object.entries(rawData).map(([category, skills]) => {
+    const enrichedSkills = skills.map(skill => ({
+      ...skill,
+      description: skillDescriptions[skill.name],
+      icon: skillIcons[skill.name] || null
+    }));
+    
+    // Split into chunks of 4
+    const chunks = chunkArray(enrichedSkills, 4);
+    return chunks.map((chunk, i) => ({
+      title: chunks.length > 1 ? `${category} ${i + 1}` : category,
+      skills: chunk
+    }));
+  }).flat();
+
+  return processed;
 };
 
 const getSkillIcon = (skill: { name: string; icon: string | null }): { type: 'svg' | 'emoji'; content: string } => {
@@ -66,17 +95,12 @@ const SkillsCarousel: React.FC = () => {
   const [showArrows, setShowArrows] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>();
 
-  const sections = [
-    { title: 'Frontend', skills: skillsData.frontend },
-    { title: 'Backend', skills: skillsData.backend },
-    { title: 'DevOps', skills: skillsData.devops },
-    { title: 'Other Skills', skills: skillsData.other }
-  ];
+  const sections = createSkillsData();
 
   useEffect(() => {
     timeoutRef.current = setInterval(() => {
       setDirection('right');
-      setActiveSection((prev) => (prev + 1) % 3);
+      setActiveSection((prev) => (prev + 1) % sections.length);
     }, 5000); // Increased time for better readability
 
     return () => {
@@ -93,9 +117,9 @@ const SkillsCarousel: React.FC = () => {
     setDirection(dir);
     setActiveSection((prev) => {
       if (dir === 'right') {
-        return (prev + 1) % 3;
+        return (prev + 1) % sections.length;
       }
-      return (prev - 1 + 3) % 3;
+      return (prev - 1 + sections.length) % sections.length;
     });
   };
 
@@ -165,7 +189,7 @@ const SkillsCarousel: React.FC = () => {
               ←
             </StyledArrowButton>
           )}
-          {showArrows && activeSection < 2 && (
+          {showArrows && activeSection < sections.length - 1 && (
             <StyledArrowButton
               as={motion.button}
               right
@@ -217,7 +241,6 @@ const SkillsCarousel: React.FC = () => {
                               alt={skill.name}
                               width={24}
                               height={24}
-                              style={{ filter: 'invert(1)' }}
                             />
                           ) : (
                             getSkillIcon(skill).content
@@ -289,7 +312,7 @@ const SkillsSection = styled.section`
     font-weight: 200;
     text-align: center;
     letter-spacing: 0.2em;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     background: linear-gradient(to right, #fff, #888);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -299,44 +322,46 @@ const SkillsSection = styled.section`
 const CarouselWrapper = styled.div`
   position: relative;
   width: 100%;
-  margin-bottom: 2rem; // Add space at bottom
-  min-height: 600px; // Add explicit height
+  height: 720px; // Fixed height to accommodate 5 items + title + navigation
+  display: flex;
+  flex-direction: column;
 `;
 
 const CarouselTrack = styled.div`
   position: relative;
   width: 100%;
-  min-height: 600px; // Match wrapper height
-  padding-bottom: 3rem; // Add padding to prevent cutoff
+  flex: 1;
+  overflow: hidden;
 `;
 
 const CarouselSlide = styled(motion.div)`
   position: absolute;
   width: 100%;
-  min-height: 600px; // Match wrapper height
+  height: 100%;
   left: 0;
   top: 0;
   display: flex;
   justify-content: center;
-  will-change: transform;
   background: #111;
 `;
 
 const SlideContent = styled.div`
   width: 90%;
   max-width: 1200px;
-  padding: 1rem;
+  padding: 2.5rem 2rem; // Increased padding
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   @media (min-width: 768px) {
     width: 70%;
-    padding: 2rem;
   }
 `;
 
 const SectionTitle = styled(motion.h3)`
   font-size: 2.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem; // Increased margin
   text-align: center;
   background: linear-gradient(45deg, #fff, #888);
   -webkit-background-clip: text;
@@ -347,16 +372,18 @@ const SectionTitle = styled(motion.h3)`
 const SkillsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem; // Increased gap
   width: 100%;
-  flex: 1; // Take remaining space
-  margin-bottom: 2rem; // Add space for navigation dots
+  flex: 1;
+  overflow: visible;
+  padding: 0rem 0; // Add vertical padding
 `;
 
 const SkillItem = styled.div`
   display: flex;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1.25rem; // Slightly reduced padding
+  height: 80px; // Increased height for better spacing
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   backdrop-filter: blur(10px);
@@ -433,10 +460,13 @@ const Navigation = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 2rem;
-  padding-bottom: 2rem; // Add padding to prevent cutoff
-  position: relative; // Ensure dots are always visible
+  padding: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
 `;
 
 const NavigationDot = styled.button<{ $active: boolean }>`
@@ -472,6 +502,7 @@ const SkillIcon = styled.div`
     width: 24px;
     height: 24px;
     object-fit: contain;
+    filter: brightness(0) invert(1); // Make icons pure white
 
     @media (max-width: 768px) {
       width: 32px;
