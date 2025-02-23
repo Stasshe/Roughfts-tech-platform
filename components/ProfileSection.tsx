@@ -6,7 +6,7 @@ const Background = styled.div`
   min-height: 450px;
   background: black;
   z-index: 2;
-  margin-top: 150px;
+  margin-top: 50px;
 
   @media (max-width: 768px) {
     min-height: 80vh;
@@ -26,7 +26,7 @@ const ProfileContainer = styled.section`
   @media (max-width: 768px) {
     padding: 1rem;
     flex-direction: column;
-    margin-top: 3rem;
+    margin-top: 0;
   }
 `;
 
@@ -58,7 +58,7 @@ const ProfileInfo = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 120%;
+    width: 90vw;
     padding: 0;
     margin-left: 0px;
     text-align: center; /* Center the text */

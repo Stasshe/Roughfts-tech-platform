@@ -130,6 +130,13 @@ const ProductInfo = styled.div`
     margin-bottom: 1rem;
     letter-spacing: 0.1em;
   }
+  @media (max-width: 768px) {
+    padding: 0;
+    h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      }
+  }
 `;
 
 const ViewButton = styled.button`

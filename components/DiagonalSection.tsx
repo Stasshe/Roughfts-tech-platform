@@ -60,17 +60,27 @@ const ArticleCard = styled(motion.article)`
   &:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   }
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+  }
 `;
 
 const Title = styled.h3`
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: #1a1a1a;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-top: 0;
+  }
 `;
 
 const Description = styled.p`
   color: #666;
   margin-bottom: 1rem;
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Content = styled.div`
@@ -80,6 +90,10 @@ const Content = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  @media (max-width: 768px) {
+    -webkit-line-clamp: 2;
+    font-size: 0.8rem;
+  }
 `;
 
 const DiagonalSection = () => {

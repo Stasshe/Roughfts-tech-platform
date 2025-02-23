@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
@@ -9,8 +10,9 @@ import SkillsCarousel from '../components/SkillsCarousel';
 
 const HomePage = () => {
   const { scrollY } = useScroll();
-  const coverY = useTransform(scrollY, [0, 800], [0, 300], { clamp: false });
-  const scrollOpacity = useTransform(scrollY, [0, 700], [1, 0], { clamp: true });
+  // パララックス効果を強調
+  const coverY = useTransform(scrollY, [0, 800], [0, 400], { clamp: false });
+  const scrollOpacity = useTransform(scrollY, [0, 500], [1, 0], { clamp: true });
 
   const scrollToProfile = () => {
     const profileSection = document.getElementById('profile-section');
@@ -20,18 +22,47 @@ const HomePage = () => {
   return (
     <Layout>
       <HeroSection>
-      <Head>
-        <title>Roughfts Tech Platform</title>
-      </Head>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          Welcome to Roughfts
-        </motion.h1>
-        <motion.div style={{ y: coverY, position: 'absolute', width: '100%', height: '100%' }}>
-          <CoverImage src="/assets/cover.jpeg" alt="Cover" />
+        <Head>
+          <title>Roughfts Tech Platform</title>
+        </Head>
+        <HeroContent>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8 }}
+          >
+            <TitleLine>Welcome</TitleLine>
+            <TitleLine>to</TitleLine>
+            <TitleLine>Roughfts</TitleLine>
+          </motion.h1>
+        </HeroContent>
+        <motion.div 
+          style={{ 
+            y: coverY, 
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden'
+          }}
+        >
+          <CoverImageWrapper>
+            <Image 
+              src="/assets/cover.jpeg" 
+              alt="Cover"
+              priority
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </CoverImageWrapper>
         </motion.div>
         <ScrollButton style={{ opacity: scrollOpacity }} onClick={scrollToProfile}>
           <span>Scroll Down</span>
-          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+          <motion.div 
+            animate={{ y: [0, 10, 0] }} 
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
             ↓
           </motion.div>
         </ScrollButton>
@@ -62,36 +93,56 @@ const HomePage = () => {
 
 const HeroSection = styled.section`
   height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
+`;
+
+const HeroContent = styled.div`
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 2rem;
+  width: 100%;
 
   h1 {
-    font-size: 4rem;
     color: white;
-    z-index: 2;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.1em;
+    line-height: 1.1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  @media (max-width: 768px) {
+    text-align: left;
+    padding-left: 2rem;
   }
 `;
 
-const CoverImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
+const TitleLine = styled.div`
+  font-size: clamp(3rem, 12vw, 6rem);
+  margin: -0.2em 0;
+
+  @media (max-width: 768px) {
+    font-size: clamp(2.5rem, 16vw, 7rem);  
+    line-height: 1.2;
+  }
+`;
+
+const CoverImageWrapper = styled.div`
+  position: relative;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  will-change: transform;
+  height: 100vh;
 `;
 
 const ScrollButton = styled(motion.button)`
   position: absolute;
-  bottom: 2rem;
+  bottom: max(2rem, 5vh);
   left: 50%;
   transform: translateX(-50%);
   background: transparent;
@@ -102,13 +153,31 @@ const ScrollButton = styled(motion.button)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1rem;
+  padding: 1rem;
+  gap: 0.8rem;
+  width: auto;
+  min-width: 120px;
   
   span {
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    bottom: 1.5rem;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    
+    div {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-height: 600px) {
+    display: none;
   }
 `;
 
