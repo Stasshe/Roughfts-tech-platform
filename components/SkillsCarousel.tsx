@@ -283,8 +283,8 @@ const StyledArrowButton = styled.button<{ left?: boolean; right?: boolean }>`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  ${props => props.left ? 'left: 20px; text-align: left; padding-left: 10px;' : 'right: 20px; text-align: right; padding-right: 10px;'};
-  background: rgba(0, 0, 0, 0.5); // Adjusted background color
+  ${props => props.left ? 'left: 20px;' : 'right: 20px;'};
+  background: rgba(0, 0, 0, 0.5);
   border: none;
   color: white;
   font-size: 2rem;
@@ -295,9 +295,12 @@ const StyledArrowButton = styled.button<{ left?: boolean; right?: boolean }>`
   z-index: 10;
   backdrop-filter: blur(5px);
   transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.7); // Adjusted hover background color
+    background: rgba(0, 0, 0, 0.5);
   }
 `;
 
