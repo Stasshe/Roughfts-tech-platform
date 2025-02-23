@@ -108,10 +108,11 @@ const HeroContent = styled.div`
   text-align: center;
   padding: 0 2rem;
   width: 100%;
+  margin-top: -5rem;
 
   h1 {
     color: white;
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     line-height: 1.1;
@@ -125,7 +126,7 @@ const HeroContent = styled.div`
 `;
 
 const TitleLine = styled.div`
-  font-size: clamp(3rem, 12vw, 6rem);
+  font-size: 5rem;
   margin: -0.2em 0;
 
   @media (max-width: 768px) {
@@ -142,7 +143,7 @@ const CoverImageWrapper = styled.div`
 
 const ScrollButton = styled(motion.button)`
   position: absolute;
-  bottom: max(2rem, 5vh);
+  bottom: max(4rem, 5vh);
   left: 50%;
   transform: translateX(-50%);
   background: transparent;

@@ -113,8 +113,8 @@
             "If you want to use the Chrome browser in any browser, visit this: [selenium-Docker-noVNC](https://github.com/Stasshe/selenium-Docker-noVNC)"
           ],
           "content_ja": [
-            "イメージ（Linux、Ubuntu）を作成して設定します。推奨ツール：noVNC、KasmVNC",
-            "任意のブラウザでChromeブラウザを使用したい場合は、こちらを訪問してください：[selenium-Docker-noVNC](https://github.com/Stasshe/selenium-Docker-noVNC)"
+            "イメージ（Linux、Ubuntu）を作成して設定します。推奨ツール:noVNC、KasmVNC",
+            "任意のブラウザでChromeブラウザを使用したい場合は、こちらを訪問してください:[selenium-Docker-noVNC](https://github.com/Stasshe/selenium-Docker-noVNC)"
           ]
         }
       ]
