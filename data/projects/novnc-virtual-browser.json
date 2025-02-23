@@ -45,6 +45,12 @@
       "diagram": "/assets/selenium/architecture.svg",
       "description": "Client-server architecture with real-time logging and flexible configurations supported by Docker and GitHub Codespaces.",
       "description_ja": "DockerとGitHub Codespacesによってサポートされるリアルタイムロギングと柔軟な構成を備えたクライアントサーバーアーキテクチャ。"
-    }
+    },
+    "links": [
+      {
+        "type": "github",
+        "url": "https://github.com/Stasshe/selenium-Docker-noVNC"
+      }
+    ]
   }
   

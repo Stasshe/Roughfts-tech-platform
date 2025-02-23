@@ -37,5 +37,11 @@
   "images": [
     "/assets/python-filter/IMG_0385.png",
     "/assets/python-filter/IMG_0384.png"
+  ],
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/Stasshe/-school-filtering-ignore/blob/main/Python/%E3%82%B9%E3%82%AF%E3%83%AC%E3%82%A4%E3%83%94%E3%83%B3%E3%82%B0save%20web:local.py"
+    }
   ]
 } 

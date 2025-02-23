@@ -48,5 +48,16 @@
     "/assets/edu-open-4step/IMG_0066.jpeg",
     "/assets/edu-open-4step/IMG_0362.png",
     "/assets/edu-open-4step/IMG_0363.png"
+  ],
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/Stasshe/-school-filtering-ignore/tree/52e67c116feebfe8e95e8fb1a5edc54070274789/Web%E3%82%B5%E3%82%A4%E3%83%88"
+    },
+    {
+      "type": "glitch",
+      "url": "https://edu-open-4step.glitch.me",
+      "title": "Live Demo (Glitch)"
+    }
   ]
 } 

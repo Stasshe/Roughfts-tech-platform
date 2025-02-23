@@ -123,13 +123,8 @@
   "links": [
     {
       "type": "github",
-      "url": "https://github.com/yourusername/project",
+      "url": "https://gist.github.com/Stasshe/bbfd0ca6d1a8f7041deb64f30e2fa7a3",
       "title": "View Source"
-    },
-    {
-      "type": "website",
-      "url": "https://example.com",
-      "title": "Live Demo"
     }
   ]
 }

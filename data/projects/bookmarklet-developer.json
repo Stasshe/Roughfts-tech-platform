@@ -38,5 +38,12 @@
   "images": [
     "/assets/bookmarklet/developer/IMG_0378.png",
     "/assets/bookmarklet/developer/IMG_0382.png"
+  ],
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/Stasshe/-school-filtering-ignore/tree/main/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88/%E9%96%8B%E7%99%BA%E8%80%85%E5%90%91%E3%81%91%E3%83%84%E3%83%BC%E3%83%ABDeveloper%20tool",
+      "title": "View Source"
+    }
   ]
 } 

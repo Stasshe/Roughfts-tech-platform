@@ -36,5 +36,11 @@
   "images": [
     "/assets/youtube-tool-1.jpg",
     "/assets/youtube-tool-2.jpg"
+  ],
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/Stasshe/-school-filtering-ignore/tree/52e67c116feebfe8e95e8fb1a5edc54070274789/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88/Youtube"
+    }
   ]
 } 
