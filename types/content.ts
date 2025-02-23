@@ -26,7 +26,11 @@ export interface Project {
     description_ja: string;
   }[];
   architecture?: {
-    diagram: string;
+    diagrams: {
+      image: string;
+      description?: string;
+      description_ja?: string;
+    }[];
     description: string;
     description_ja: string;
   };

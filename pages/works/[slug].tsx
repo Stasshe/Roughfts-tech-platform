@@ -159,18 +159,32 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
               System Architecture
             </motion.h2>
             <div style={{ background: 'white', padding: '2rem', borderRadius: '8px' }}>
-              <a href={workContent.architecture.diagram} target="_blank" rel="noopener noreferrer">
-                <motion.img
-                  src={workContent.architecture.diagram}
-                  alt="Architecture Diagram"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  whileHover={{ scale: 1.05, rotate: 0, transition: { duration: 0.3 } }} // Increased scale on hover, no rotation
-                />
-              </a>
+              {workContent.architecture.diagrams.map((diagram, index) => (
+                <div key={index} style={{ marginBottom: '2rem' }}>
+                  <a href={diagram.image} target="_blank" rel="noopener noreferrer">
+                    <motion.img
+                      src={diagram.image}
+                      alt={`Architecture Diagram ${index + 1}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 * index }}
+                      whileHover={{ scale: 1.05 }}
+                    />
+                  </a>
+                  {diagram.description && (
+                    <motion.p
+                      style={{ marginTop: '1rem', textAlign: 'center', fontSize: '0.9rem' }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.8 }}
+                      transition={{ delay: 0.2 * index + 0.1 }}
+                    >
+                      {diagram.description}
+                    </motion.p>
+                  )}
+                </div>
+              ))}
             </div>
-            <motion.p style={{ marginTop: '1rem' }}>{workContent.architecture.description}</motion.p>
+            <motion.p style={{ marginTop: '2rem' }}>{workContent.architecture.description}</motion.p>
           </ArchitectureSection>
         )}
 

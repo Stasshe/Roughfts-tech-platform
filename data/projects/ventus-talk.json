@@ -66,11 +66,21 @@
     }
   ],
   "architecture": {
-    "diagram": "/assets/ventus-talk/ventus-talk-system-architecture.svg",
+    "diagrams": [
+      {
+        "image": "/assets/ventus-talk/ventus-talk-system-architecture.svg",
+        "description": "Overall system architecture diagram showing the multi-server setup",
+        "description_ja": "マルチサーバーセットアップを示す全体的なシステムアーキテクチャ図"
+      },
+      {
+        "image": "/assets/ventus-talk/sequence.svg",
+        "description": "Sequence diagram",
+        "description_ja": "シーケンス図"
+      }
+    ],
     "description": "Multi-server architecture utilizing Firebase Firestore for optimal performance and scalability, and free.",
     "description_ja": "最適なパフォーマンスとスケーラビリティ、そしてこれらを無料で実現するためのFirebase Firestoreを活用したマルチサーバーアーキテクチャ。"
   },
-  "demoVideo": "/assets/ventus-talk/demo.mp4",
   "featured": true,
   "links": [
     {
