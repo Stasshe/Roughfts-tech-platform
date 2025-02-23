@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { useLanguage } from '../lib/LanguageContext';
 const Background = styled.div`
   position: relative;
   min-height: 450px;
@@ -9,7 +9,7 @@ const Background = styled.div`
   margin-top: 150px;
 
   @media (max-width: 768px) {
-    min-height: 80vh; /* スマホ時に高さを高くする */
+    min-height: 80vh;
   }
 `;
 
@@ -82,23 +82,30 @@ interface ProfileSectionProps {
 }
 
 export const ProfileSection: React.FC<ProfileSectionProps> = ({ id }) => {
+  const { language } = useLanguage();
+
   const paragraphs = [
     "Hi! I'm Roughfts, and this blog is my digital playground where I showcase my coding prowess and share my journey in the tech world.",
     "Here, you'll find in-depth tutorials, tips, and insights on a range of topics including Node.js, Docker, web security, Firebase, and SNS web app development.",
     "Whether you're a fellow developer, a tech enthusiast, or someone just getting started, this blog is your go-to resource for mastering these technologies and staying ahead in the ever-evolving world of coding."
   ];
+  const paragraphs_ja = [
+    "こんにちは!Roughftsです。このブログは、私のコーディングの腕前を披露し、テックワールドでの旅を共有するデジタルプレイグラウンドです。",
+    "ここでは、Node.js、Docker、Webセキュリティ、Firebase、SNS Webアプリ開発など、さまざまなトピックについての詳細なチュートリアル、ヒント、洞察を紹介しています。",
+    "あなたが開発者仲間、テック愛好家、または初心者であるかどうかに関係なく、このブログはこれらのテクノロジーをマスターし、常に進化し続けるコーディングの世界で先を行くための必読リソースです。"
+  ]
 
   return (
     <section id={id}>
       <Background>
         <ProfileContainer>
           <ProfileImage src="/assets/ico.png" alt="Profile Icon" />
-          <ProfileInfo>
+            <ProfileInfo>
             <h1>Hi! I'm Roughfts.</h1>
-            {paragraphs.map((text, index) => (
+            {(language === 'ja' ? paragraphs_ja : paragraphs).map((text, index) => (
               <p key={index}>{text}</p>
             ))}
-          </ProfileInfo>
+            </ProfileInfo>
         </ProfileContainer>
       </Background>
     </section>

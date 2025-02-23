@@ -368,6 +368,7 @@ const SlideContent = styled.div`
 
   @media (min-width: 768px) {
     width: 70%;
+    height: 90vh;
   }
 `;
 
@@ -433,11 +434,11 @@ const SkillItem = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 1.25rem 1rem;
+    padding: 1.1rem 0.9rem;
     flex-direction: column;
     text-align: center;
     gap: 0.35rem; // Reduced gap between elements
-    height: 140px; // Taller cards on mobile
+    height: 110px; // Taller cards on mobile
   }
 `;
 
@@ -451,7 +452,7 @@ const SkillName = styled.h4`
   white-space: nowrap;
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     white-space: normal;
     text-align: center;
   }
@@ -464,7 +465,7 @@ const SkillDescription = styled.p`
   line-height: 1.6;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: smaller;
     text-align: center;
   }
 `;
