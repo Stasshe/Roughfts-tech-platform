@@ -2,29 +2,34 @@
   "id": "bookmarklet-youtube",
   "title": "YouTube Educational Access",
   "title_ja": "YouTube教育アクセス",
-  "description": "A bookmarklet tool for seamless access to educational YouTube content in restricted environments.",
-  "description_ja": "制限された環境で教育用YouTubeコンテンツにシームレスにアクセスするためのブックマークレットツール。",
+  "description": "A YouTube viewing tool for no-cookie environments. Allows access to comments and more.",
+  "description_ja": "no-cookie環境用のYoutube視聴ツール。コメントなども閲覧可能",
   "techStack": [
     "JavaScript",
     "Bookmarklet",
     "YouTube API",
-    "DOM Manipulation"
+    "DOM Manipulation",
+    "no-cookie",
+    "js",
+    "JavaScript",
+    "ブックマークレット"
   ],
   "features": [
     {
       "title": "Features",
       "title_ja": "機能",
       "details": [
-        "One-click activation",
-        "YouTube content access",
-        "Video quality optimization",
-        "Minimal browser impact"
+        "One-click launch",
+        "Only works when no-cookie.youtube.com is allowed (ISGC filter is likely allowed by default)",
+        "Note that youtube-api-v3 quota consumption is important. Search-related is up to 100 times a day",
+        "Support by creating a lot of api keys (annoying)"
       ],
       "details_ja": [
         "ワンクリック起動",
-        "YouTubeコンテンツへのアクセス",
-        "動画品質の最適化",
-        "最小限のブラウザへの影響"
+        "no-cookie.youtube.comが許可されている(ISGCフィルターはおそらくデフォルトで許可されている)時のみ有効",
+        "尚、コメント閲覧はno-cookieが許可されていなくても可能",
+        "youtube-api-v3のクォーター消費に注意。検索系は1日100回まで",
+        "たくさんapiキーを作ることで対応(迷惑)"
       ]
     }
   ],

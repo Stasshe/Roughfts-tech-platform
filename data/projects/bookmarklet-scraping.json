@@ -2,29 +2,37 @@
   "id": "bookmarklet-scraping",
   "title": "Web Content Scraping Tool",
   "title_ja": "Webコンテンツスクレイピングツール",
-  "description": "A bookmarklet for efficient web content extraction and analysis in educational contexts.",
-  "description_ja": "教育的な文脈でのWebコンテンツの効率的な抽出と分析のためのブックマークレット。",
+  "description": "Even if the site is restricted, it's okay. Break through restrictions with a bookmarklet and fight!",
+  "description_ja": "サイトが規制されても大丈夫。ブックマークレットから規制を突破して、学校に対抗しよう!",
   "techStack": [
     "JavaScript",
     "DOM Scraping",
     "Data Parsing",
-    "Bookmarklet"
+    "Bookmarklet",
+    "Regulation Evasion",
+    "Site",
+    "js",
+    "JavaScript",
+    "DOMスクレイピング",
+    "データ解析",
+    "ブックマークレット",
+    "規制回避"
   ],
   "features": [
     {
       "title": "Capabilities",
       "title_ja": "機能",
       "details": [
-        "Selective content extraction",
-        "Data formatting",
-        "Custom parsing rules",
-        "Export functionality"
+        "Use api.allorigins.win to fetch site content",
+        "Since this isn't a site itself, the block probability is quite low",
+        "Unless the bookmarklet is blocked by MDM, it's usable",
+        "Analyze site data through DOM scraping"
       ],
       "details_ja": [
-        "選択的なコンテンツ抽出",
-        "データフォーマット",
-        "カスタムパースルール",
-        "エクスポート機能"
+        "api.allorigins.winを使ってサイトのコンテンツを取得",
+        "これ自体はサイトじゃないからブロックの確率はかなり低い",
+        "ブックマークレットがMDMでブロックされていない限り、使える",
+        "DOMスクレイピングで、サイトのデータを解析して閲覧"
       ]
     }
   ],

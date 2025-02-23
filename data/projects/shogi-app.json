@@ -3,7 +3,7 @@
   "title": "Shogi App - CeConV2.31",
   "title_ja": "将棋アプリ - CeConV2.31",
   "description": "A modern Shogi (Japanese Chess) application built for iPad, featuring AI integration, multiplayer capabilities, and extensive game analysis tools.",
-  "description_ja": "AI統合、マルチプレイヤー機能、および包括的なゲーム分析ツールを備えたiPad向けの現代的な将棋アプリケーション。",
+  "description_ja": "一人で研究、AI、オンラインプレイヤー機能を全て一つに。他にはない集約力。",
   "techStack": [
     "Swift",
     "SpriteKit",
@@ -15,23 +15,29 @@
   ],
   "features": [
     {
-      "title": "Game Modes",
-      "title_ja": "ゲームモード",
+      "title": "Game Details",
+      "title_ja": "ゲーム詳細",
       "details": [
-        "Real-time online multiplayer with chat system",
-        "AI opponent mode using GIKOU engine",
-        "Solo study mode with move analysis",
-        "Game replay and analysis features",
-        "Spectator mode with board rotation",
-        "Move history and game state persistence"
+        "Unique research mode with options to save game records and toggle free piece placement",
+        "In online mode, creating a room automatically notifies the chat system for participation",
+        "The last board state is saved even if the app is closed",
+        "Real-time online player with chat system (private, public)",
+        "AI battle mode using the GIKOU engine (some bugs due to REST API issues)",
+        "Game record saving feature",
+        "Board flipping feature and spectator mode (theoretically supports up to 1000 simultaneous viewers)",
+        "Covers basic Shogi rules such as check and double pawn (does not support perpetual check due to varying rules)",
+        "Added the ability to save game records and toggle free piece placement in research mode, and achieved online mode, research mode, and AI simultaneously, resulting in a large number of bugs. Praise me for fixing them all."
       ],
       "details_ja": [
-        "チャットシステム付きリアルタイムオンラインマルチプレイヤー",
-        "技巧エンジンを使用したAI対戦モード",
-        "指し手分析付き独習モード",
-        "対局の再生と分析機能",
-        "盤面回転機能付き観戦モード",
-        "指し手履歴とゲーム状態の保存"
+        "他のどんなアプリにもない、研究モード中の、棋譜保存や駒の自由配置のON/OFF機能",
+        "オンラインでは、ルームを作成すると自動でチャットシステムに通知が出て参加可能",
+        "アプリを閉じてしまっても、最後の盤面は保存される",
+        "チャット（private,public）システム付きリアルタイムオンラインプレイヤー",
+        "技巧エンジンを使用したAI対戦モード(rest api の関係で、ややバグあり)",
+        "棋譜保存機能",
+        "盤面反転機能や、観戦モード（理論上は1000人同時視聴可能）",
+        "王手や2歩、など、将棋の基本ルールは網羅（千日手はルールが様々なので非対応）",
+        "研究モード中の、棋譜保存や駒の自由配置のON/OFF機能を追加したのと、オンライン・研究モード、AIを同時に実現したからバグが大量に発生した。全部直した私を誰か褒めてくれ。"
       ]
     }
   ],
@@ -52,7 +58,7 @@
     {
       "title": "Modes",
       "title_ja": "モード",
-      "value": "3",
+      "value": "4",
       "description": "Play styles available",
       "description_ja": "利用可能なプレイスタイル"
     }

@@ -22,47 +22,57 @@
         "Puppeteer can be quite large, typically between 200-300MB, while free-hosting services usually offer around 500MB of storage and 200MB of memory.",
         "When you install Puppeteer, it can exceed the memory limits, causing failures.",
         "Therefore, you cannot use Puppeteer with most free-hosting services.",
-        "Additionally, if you manage to install Puppeteer, it might not be valuable for viewing the site as headless browsers are often blocked."
+        "Free-hosting service example: Glitch",
+        "Additionally, if you manage to install Puppeteer, it might not be valuable for viewing the site as headless browsers are often blocked. When you encounter such a situation, it's better to use scraping."
       ],
       "content_ja": [
         "Puppeteerは通常200-300MBと大きく、無料ホスティングサービスは通常500MBのストレージと200MBのメモリしか提供していません。",
         "Puppeteerをインストールすると、メモリ制限を超えて失敗することがあります。",
         "そのため、ほとんどの無料ホスティングサービスではPuppeteerを使用できません。",
-        "また、Puppeteerのインストールに成功しても、ヘッドレスブラウザはしばしばブロックされるため、サイト閲覧には適していない場合があります。"
+        "無料ホスティングサービスの例:Glitch",
+        "また、Puppeteerのインストールに成功しても、ヘッドレスブラウザはしばしばブロックされるため、サイト閲覧には適していない場合があります。このような状況に遭遇した場合は、スクレイピングを使用する方が良いです。"
       ]
     },
     {
       "caption": "Scraping Solutions",
       "caption_ja": "スクレイピングソリューション",
       "content": ["There are mainly three methods for scraping:"],
-      "content_ja": ["スクレイピングには主に3つの方法があります："],
+      "content_ja": ["スクレイピングには主に3つの方法があります:"],
       "subDetails": [
         {
           "caption": "JavaScript: Build it Yourself",
           "caption_ja": "JavaScript: 自作する",
           "content": [
             "If you can use bookmarklets, visit my 'works' page to see examples of bookmarklet-based site viewing or developer tools.",
-            "This is valuable for gaining experience.",
-            "Divide the URL by protocol, domain, path, and query to bypass filtering apps."
+            "This is valuable for gaining experience. For instance, User-Agent may not work as expected, or school filtering apps might block certain content based on:",
+            "URL domain (e.g., domains including 'games' are pre-set to block)",
+            "API or fetch queries observed by the app",
+            "How to solve this?",
+            "Divide the URL by protocol, domain, path, and query.",
+            "This method helps in bypassing the app's reaction to the URL."
           ],
           "content_ja": [
             "ブックマークレットが使える場合は、私の「作品」ページでブックマークレットベースのサイト表示や開発者ツールの例を見てください。",
-            "経験を積むのに価値があります。",
-            "URLをプロトコル、ドメイン、パス、クエリに分割して、フィルタリングアプリをバイパスします。"
+            "経験を積むのに価値があります。例えば、User-Agentが期待通りに動作しない場合や、学校のフィルタリングアプリが特定のコンテンツをブロックする場合があります：",
+            "URLドメイン（例: 'games' を含むドメインは事前にブロックされる）",
+            "アプリによって観察されるAPIまたはフェッチクエリ",
+            "これを解決する方法は？",
+            "URLをプロトコル、ドメイン、パス、クエリに分割します。",
+            "この方法は、アプリのURLに対する反応を回避するのに役立ちます。"
           ]
         },
         {
-          "caption": "Use UV (Ultraviolet)",
-          "caption_ja": "UV (Ultraviolet)を使用する",
+          "caption": "Use UV (Ultraviolet) (Recommended)",
+          "caption_ja": "UV (Ultraviolet)を使用する（推奨）",
           "content": [
             "UV is a powerful tool for scraping.",
             "Most static sites can be viewed using UV.",
-            "Some hosting services might block UV. Use alternatives like uv-edu or install UV as a file."
+            "Some hosting services like Glitch might block UV. To avoid this, use alternatives like uv-edu or install UV as a file, not as a node module."
           ],
           "content_ja": [
             "UVはスクレイピングに強力なツールです。",
             "ほとんどの静的サイトはUVで表示できます。",
-            "一部のホスティングサービスはUVをブロックするかもしれません。uv-eduを使用するか、UVをファイルとしてインストールしてください。"
+            "Glitchのような一部のホスティングサービスはUVをブロックするかもしれません。これを避けるために、uv-eduのような代替手段を使用するか、UVをノードモジュールとしてではなくファイルとしてインストールしてください。"
           ]
         },
         {
@@ -71,15 +81,43 @@
           "content": [
             "Using Python for scraping is not always ideal.",
             "It lacks the detailed expression and adjustability of JavaScript.",
-            "If only Python is available, it can be used, but JavaScript is preferred."
+            "If only Python is available, it can be used, but JavaScript is preferred for better adaptability to web browsers."
           ],
           "content_ja": [
             "Pythonでスクレイピングすることは常に理想的ではありません。",
             "JavaScriptのような詳細な表現と調整性が不足しています。",
-            "Pythonのみが利用可能な場合は使用できますが、JavaScriptが推奨されます。"
+            "Pythonのみが利用可能な場合は使用できますが、Webブラウザへの適応性を考えるとJavaScriptが推奨されます。"
+          ]
+        }
+      ]
+    },
+    {
+      "caption": "Remote Desktop",
+      "caption_ja": "リモートデスクトップ",
+      "subDetails": [
+        {
+          "caption": "Chrome Remote Desktop",
+          "caption_ja": "Chromeリモートデスクトップ",
+          "content": [
+            "If you have your own PC (not a school PC), definitely use this."
+          ],
+          "content_ja": [
+            "自分のPC（学校のPCではない）を持っている場合は、ぜひこれを使用してください。"
+          ]
+        },
+        {
+          "caption": "VNC",
+          "caption_ja": "VNC",
+          "content": [
+            "Build an image (Linux, Ubuntu) and set it up. Recommended tools: noVNC, KasmVNC",
+            "If you want to use the Chrome browser in any browser, visit this: [selenium-Docker-noVNC](https://github.com/Stasshe/selenium-Docker-noVNC)"
+          ],
+          "content_ja": [
+            "イメージ（Linux、Ubuntu）を作成して設定します。推奨ツール：noVNC、KasmVNC",
+            "任意のブラウザでChromeブラウザを使用したい場合は、こちらを訪問してください：[selenium-Docker-noVNC](https://github.com/Stasshe/selenium-Docker-noVNC)"
           ]
         }
       ]
     }
   ]
-} 
+}

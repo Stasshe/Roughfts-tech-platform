@@ -10,25 +10,28 @@
       "Docker",
       "noVNC",
       "Codespaces",
-      "Virtual"
+      "Virtual",
+      "Browser",
+      "規制回避",
+      "Filtering"
     ],
     "features": [
       {
-        "title": "Automated Testing",
-        "title_ja": "自動テスト",
+        "title": "100% Regulation Evasion",
+        "title_ja": "100%規制回避",
         "details": [
-          "Run tests in various environments seamlessly",
-          "Real-time Monitoring with noVNC",
-          "Detailed logs and reports for every test run",
-          "Customize screen resolution and session timeouts",
-          "Smooth setup with Docker and GitHub Codespaces"
+          "Launch Selenium virtual browser with Docker in Codespaces",
+          "Achieve 100% regulation evasion unlike scraping",
+          "Concerns about screen resolution, session timeout, and lag",
+          "Detailed explanation with polite method",
+          "Even GitHub beginners can do it!"
         ],
         "details_ja": [
-          "さまざまな環境でシームレスにテストを実行",
-          "noVNCによるリアルタイム監視",
-          "すべてのテスト実行の詳細なログとレポート",
-          "画面解像度とセッションタイムアウトのカスタマイズ",
-          "DockerとGitHub Codespacesを使用したスムーズなセットアップ"
+          "Selenium仮想ブラウザをCodespacesのDockerで立ち上げて、それをnoVNCで操作",
+          "スクレイピングとは違い、100%の規制回避を実現",
+          "画面解像度とセッションタイムアウト、ラグが懸念点",
+          "めっちゃ丁寧なやり方解説付き",
+          "Github初心者でもできる!"
         ]
       }
     ],
@@ -37,22 +40,6 @@
       "/assets/selenium/IMG_0002.png",
       "/assets/selenium/IMG_0003.png",
       "/assets/selenium/IMG_0004.png"
-    ],
-    "highlights": [
-      {
-        "title": "Updates",
-        "title_ja": "アップデート",
-        "value": "Continuous",
-        "description": "Continuous iterations and improvements",
-        "description_ja": "継続的なイテレーションと改善"
-      },
-      {
-        "title": "Modes",
-        "title_ja": "モード",
-        "value": "Various",
-        "description": "Various testing modes available",
-        "description_ja": "利用可能なさまざまなテストモード"
-      }
     ],
     "architecture": {
       "diagram": "/assets/selenium/architecture.svg",

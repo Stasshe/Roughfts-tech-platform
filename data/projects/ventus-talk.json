@@ -11,27 +11,34 @@
     "FCM (Firebase Cloud Messaging)",
     "Google Drive API",
     "WebRTC",
-    "Service Workers"
+    "Service Workers",
+    "Firestore",
+    "JavaScript",
+    "js"
   ],
   "features": [
     {
       "title": "Core Features",
       "title_ja": "主要機能",
       "details": [
-        "Real-time messaging with 0.05-0.15 second update speed",
+        "Real-time messaging with 0.05-0.15s update speed",
         "Multi-server architecture with 4 Firestore servers",
-        "Automatic YouTube link conversion and embedding",
-        "QR code friend addition system",
-        "File sharing support",
-        "Push notifications via Service Workers"
+        "No-cookie auto-conversion and embedding of YouTube links",
+        "Video calls using Sky-way",
+        "Friend addition system via QR code",
+        "Google Drive file sharing support",
+        "Push notifications via PWA/Service Worker",
+        "Due to prioritizing development speed and usability, security measures that would put a load on free servers were not implemented. Well, you wouldn't send anything too important, and the likelihood of this web app being attacked is low, so it's okay."
       ],
       "details_ja": [
         "0.05-0.15秒の更新速度でのリアルタイムメッセージング",
         "4つのFirestoreサーバーによるマルチサーバーアーキテクチャ",
-        "YouTubeリンクの自動変換と埋め込み",
+        "YouTubeリンクのno-cookie自動変換と埋め込み",
+        "Sky-wayを使用したビデオ通話",
         "QRコードによる友達追加システム",
-        "ファイル共有サポート",
-        "Service Workerによるプッシュ通知"
+        "Google-Driveファイル共有サポート",
+        "PWA/Service Workerによるプッシュ通知",
+        "開発スピードと、ユーザビリティを重視したから、無料サーバーに負荷をかけるようなセキュリティは搭載できなかった。ま、そんな大事すぎるもんは送らんだろうし、このwebアプリが攻撃される可能性も低いし大丈夫や。"
       ]
     }
   ],

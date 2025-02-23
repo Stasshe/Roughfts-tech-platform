@@ -3,31 +3,34 @@
   "title": "School Filter Bypass - Python",
   "title_ja": "Pythonフィルターバイパス",
   "description": "A Python-based solution for educational network access, enabling students to access legitimate learning resources.",
-  "description_ja": "生徒が正当な学習リソースにアクセスできるようにするための、Pythonベースの教育ネットワークアクセスソリューション。",
+  "description_ja": "Pythonを使ったサイト規制回避",
   "techStack": [
     "Python",
     "Socket Programming",
     "Network Protocols",
     "Proxy Server",
-    "HTTP/HTTPS"
+    "HTTP/HTTPS",
+    "サイト規制回避",
+    "HTML",
+    "replit"
   ],
   "features": [
     {
       "title": "Core Features",
       "title_ja": "主要機能",
       "details": [
-        "Custom proxy server implementation",
-        "Protocol-level network handling",
-        "Efficient data routing",
-        "Low-latency connection management",
-        "Educational resource access"
+        "Bypasses school network filters",
+        "Accesses blocked websites",
+        "Supports HTTP and HTTPS",
+        "Runs on local server",
+        "Simple and easy to use"
       ],
       "details_ja": [
-        "カスタムプロキシサーバーの実装",
-        "プロトコルレベルのネットワーク処理",
-        "効率的なデータルーティング",
-        "低遅延接続管理",
-        "教育リソースへのアクセス"
+        "静的サイトはほとんど見れる",
+        "画像処理系も得意",
+        "推奨環境はreplit",
+        "普通にjsの方が良い。",
+        "Google-collaboratで使うには少し難しい。"
       ]
     }
   ],

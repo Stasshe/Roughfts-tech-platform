@@ -2,8 +2,8 @@
   "id": "edu-open-4step",
   "title": "Filtering Ignore web site",
   "title_ja": "プロキシサイト-4ステップ",
-  "description": "A web-based platform designed to enhance educational resource accessibility through a four-step verification process.",
-  "description_ja": "4段階の認証プロセスを通じて教育リソースのアクセシビリティを向上させるために設計されたWebベースのプラットフォーム。",
+  "description": "A dynamically regulated bypass site with a very simple structure. Only two things to copy and paste. Easy even if you don't know git!",
+  "description_ja": "非常にシンプルな構造の、動的規制回避用サイト。コピペするのは2つだけ。gitがわからんくても簡単！",
   "techStack": [
     "JavaScript",
     "Scraping",
@@ -12,25 +12,35 @@
     "Rest API",
     "Network Protocols",
     "Web Security",
-    "HTML"
+    "HTML",
+    "DOM",
+    "js",
+    "Simple",
+    "Dynamic Site",
+    "Regulation Evasion",
+    "規制回避",
+    "シンプル",
+    "動的サイト",
+    "REST API",
+    "ネットワークプロトコル"
   ],
   "features": [
     {
       "title": "Core Functionality",
       "title_ja": "主要機能",
       "details": [
-        "Four-step verification process",
-        "Secure resource access",
-        "User-friendly interface",
-        "Cross-browser compatibility",
-        "Minimal setup requirements"
+        "Easily deploy with glitch or render (glitch recommended)",
+        "Copy and paste server.js and index.html",
+        "Enter the URL and bypass the regulation",
+        "Get the site using REST API",
+        "Divide the URL to bypass the regulation and get the site"
       ],
       "details_ja": [
-        "4段階の認証プロセス",
-        "セキュアなリソースアクセス",
-        "ユーザーフレンドリーなインターフェース",
-        "クロスブラウザ互換性",
-        "最小限のセットアップ要件"
+        "glitchやrenderで簡単にデプロイ（glitchおすすめ）",
+        "server.jsと、index.htmlをコピーしてペースト",
+        "URLを入力して、規制回避",
+        "REST APIを使って、サイトを取得",
+        "URLを分割して確実に規制を回避し、サイトを取得"
       ]
     }
   ],

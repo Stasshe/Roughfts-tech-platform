@@ -7,27 +7,32 @@
   "techStack": [
     "Swift",
     "SpriteKit",
-    "Firebase",
     "UIKit",
-    "CoreData"
+    "Game",
+    "iOS",
+    "App",
+    "Firebase Realtime Database",
+    "Online",
+    "Ranking",
+    "Playgrounds"
   ],
   "features": [
     {
       "title": "Game Modes",
       "title_ja": "ゲームモード",
       "details": [
-        "Tiered mode with progressive difficulty levels",
-        "Unlimited mode for continuous play",
-        "Online leaderboard for each difficulty level",
-        "Real-time multiplayer capabilities",
-        "Comprehensive kanji study tools"
+        "A remake of Kanji de GO!",
+        "Japanese style for the direction and cooler graphics.",
+        "Unlimited mode, which was not in KANJI de GO!",
+        "In unlimited mode, the hierarchy you reach is reflected in your online ranking",
+        "Most of the included kanji are all ChatGPT, so be careful about authenticity."
       ],
       "details_ja": [
-        "段階的な難易度レベルを持つティアモード",
-        "連続プレイ可能なアンリミテッドモード",
-        "難易度レベルごとのオンラインリーダーボード",
-        "リアルタイムマルチプレイヤー機能",
-        "総合的な漢字学習ツール"
+        "漢字でGO!のリメイク版",
+        "演出を和風にし、よりかっこいいグラフィックを。",
+        "漢字でGO!にはなかった、アンリミテッドモード",
+        "無制限モードでは、到達階層をオンラインランキングに反映できる",
+        "収録漢字はほとんどが全てChatGPTなので、真偽には注意。"
       ]
     }
   ],
@@ -49,14 +54,14 @@
     {
       "title": "Game Modes",
       "title_ja": "ゲームモード",
-      "value": "2",
+      "value": "4*2=8",
       "description": "Play styles available",
       "description_ja": "利用可能なプレイスタイル"
     }
   ],
   "architecture": {
     "diagram": "/assets/kanji-journey/architecture.svg",
-    "description": "Client-server architecture with real-time multiplayer support and Firebase Realtime Database integration.",
-    "description_ja": "リアルタイムマルチプレイヤーサポートとFirebase Realtime Databaseを統合したクライアントサーバーアーキテクチャ。"
+    "description": "A client-server architecture built with Swift, supporting real-time online rankings with integration to Firebase Realtime Database.",
+    "description_ja": "swiftで作られたクライアントサーバーアーキテクチャで、Firebase Realtime Databaseとの統合を備えたリアルタイムオンラインランキングをサポートします。"
   }
 } 
