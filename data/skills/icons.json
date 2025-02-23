@@ -18,6 +18,12 @@
     "Blender": "https://profilinator.rishav.dev/skills-assets/blender_community_badge_white.svg",
     "OpenCV": "https://profilinator.rishav.dev/skills-assets/opencv-icon.svg",
     "LaTeX": "https://profilinator.rishav.dev/skills-assets/latex.png",
-    "WordPress": "https://profilinator.rishav.dev/skills-assets/wordpress.png"
-  }
-  
+    "WordPress": "https://profilinator.rishav.dev/skills-assets/wordpress.png",
+    "github": "https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg",
+    "github-gist": "https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg",
+    "replit": "https://replit.com/public/icons/favicon-196.png",
+    "glitch": "https://glitch.com/favicon.ico",
+    "render": "https://render.com/favicon.ico",
+    "website": "https://profilinator.rishav.dev/skills-assets/internet_explorer-icon.svg",
+    "github-pages": "https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg"
+}

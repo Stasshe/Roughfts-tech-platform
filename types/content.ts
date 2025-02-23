@@ -1,3 +1,9 @@
+export interface LinkItem {
+  type: 'github' | 'github-gist' | 'glitch' | 'replit' | 'github-pages' | 'website' | 'render';
+  url: string;
+  title?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -26,11 +32,7 @@ export interface Project {
   };
   demoVideo?: string;
   featured?: boolean;
-  links?: {
-    type: 'github' | 'replit' | 'website' | 'other';
-    url: string;
-    title?: string;
-  }[];
+  links?: LinkItem[];
 }
 
 export interface SubDetail {
@@ -61,11 +63,7 @@ export interface Gists {
   description: string;
   description_ja: string;
   details: Detail[];
-  links?: {
-    type: 'github' | 'replit' | 'website' | 'other';
-    url: string;
-    title?: string;
-  }[];
+  links?: LinkItem[];
 }
 
 // Alias Project as ProjectContent for backward compatibility

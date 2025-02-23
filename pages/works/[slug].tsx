@@ -9,8 +9,7 @@ import { getWorkContent } from '../../lib/contentManager';
 import { WorkContent } from '../../types/content';
 import ProjectData from '../../lib/projectData';
 import Link from 'next/link';
-import { FaGithub, FaGlobe } from 'react-icons/fa';
-import { SiReplit } from 'react-icons/si';
+import icons from '../../data/skills/icons.json';
 
 interface WorkDetailPageProps {
   workContent: WorkContent | null;
@@ -64,14 +63,12 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
   }
 
   const getIconByType = (type: string) => {
-    switch (type) {
-      case 'github':
-        return <FaGithub size={24} />;
-      case 'replit':
-        return <SiReplit size={24} />;
-      default:
-        return <FaGlobe size={24} />;
-    }
+    const iconUrl = icons[type as keyof typeof icons] || icons.website;
+    return (
+      <IconWrapper>
+        <img src={iconUrl} alt={type} width="24" height="24" />
+      </IconWrapper>
+    );
   };
 
   return (
@@ -451,13 +448,14 @@ const LinksSection = styled.div`
   gap: 1rem;
   margin-top: 3rem;
   flex-wrap: wrap;
+  justify-content: center; // 追加：中央揃え
 `;
 
 const LinkButton = styled.a`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.75rem;
+  padding: 0.5rem 1.5rem;
   background: #222;
   border-radius: 8px;
   color: white;
@@ -472,6 +470,17 @@ const LinkButton = styled.a`
 
 const LinkText = styled.span`
   font-size: 1rem;
+`;
+
+const IconWrapper = styled.div`
+  background: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
 `;
 
 export default WorkDetailPage;

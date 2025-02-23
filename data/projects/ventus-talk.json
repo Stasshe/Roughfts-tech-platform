@@ -78,14 +78,14 @@
       "url": "https://github.com/stasshe/ventus-talk"
     },
     {
-      "type": "website",
+      "type": "glitch",
       "url": "https://ventus-talk.glitch.me",
-      "title": "Live Demo"
+      "title": "Live Demo (Glitch)"
     },
     {
-      "type": "website",
+      "type": "render",
       "url": "https://ventus-talk.onrender.com",
-      "title": "Live Demo"
+      "title": "Live Demo (Render)"
     }
   ]
 }
