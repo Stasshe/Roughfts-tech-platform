@@ -52,6 +52,37 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
   };
 };
 
+// リンク変換用のヘルパー関数を追加
+const convertMarkdownLinks = (text: string) => {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    // リンク前のテキストを追加
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    
+    // リンクを追加
+    parts.push(
+      <ExternalLink href={match[2]} target="_blank" rel="noopener noreferrer" key={match.index}>
+        {match[1]}
+      </ExternalLink>
+    );
+    
+    lastIndex = match.index + match[0].length;
+  }
+  
+  // 残りのテキストを追加
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+};
+
 // Experience Detail Page
 const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
   const router = useRouter();
@@ -112,10 +143,10 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
               </SectionTitle>
               {section.content_ja && language === 'ja' 
                 ? section.content_ja?.map((content, i) => (
-                    <SectionContent key={i}>{content}</SectionContent>
+                    <SectionContent key={i}>{convertMarkdownLinks(content)}</SectionContent>
                   ))
                 : section.content?.map((content, i) => (
-                    <SectionContent key={i}>{content}</SectionContent>
+                    <SectionContent key={i}>{convertMarkdownLinks(content)}</SectionContent>
                   ))
               }
               {section.subDetails && (
@@ -130,10 +161,10 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
                       </SubDetailTitle>
                       {subDetail.content_ja && language === 'ja'
                         ? subDetail.content_ja?.map((content, i) => (
-                            <SectionContent key={i}>{content}</SectionContent>
+                            <SectionContent key={i}>{convertMarkdownLinks(content)}</SectionContent>
                           ))
                         : subDetail.content?.map((content, i) => (
-                            <SectionContent key={i}>{content}</SectionContent>
+                            <SectionContent key={i}>{convertMarkdownLinks(content)}</SectionContent>
                           ))
                       }
                     </SubDetail>
@@ -212,6 +243,24 @@ const SubDetailTitle = styled.h3`
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   color: #fff;
+`;
+
+// 外部リンク用のスタイル
+const ExternalLink = styled.a`
+  color: #00a8ff;
+  text-decoration: none;
+  position: relative;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  &::before {
+    content: '🔗';
+    font-size: 0.8em;
+    margin-left: 4px;
+    display: inline-block;
+  }
 `;
 
 export default ExperienceDetailPage;
