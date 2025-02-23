@@ -105,16 +105,16 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
         </Description>
 
         <ContentSection>
-          {experience.details.map((section, index) => (
+          {experience.details?.map((section, index) => (
             <Section key={index}>
               <SectionTitle>
-                {getLocalizedContent(section.caption, section.caption_ja || '')}
+                {getLocalizedContent(section.caption, section.caption_ja ?? section.caption)}
               </SectionTitle>
               {section.content_ja && language === 'ja' 
-                ? section.content_ja.map((content, i) => (
+                ? section.content_ja?.map((content, i) => (
                     <SectionContent key={i}>{content}</SectionContent>
                   ))
-                : section.content.map((content, i) => (
+                : section.content?.map((content, i) => (
                     <SectionContent key={i}>{content}</SectionContent>
                   ))
               }
@@ -125,14 +125,14 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
                       <SubDetailTitle>
                         {getLocalizedContent(
                           subDetail.caption,
-                          subDetail.caption_ja || ''
+                          subDetail.caption_ja ?? subDetail.caption
                         )}
                       </SubDetailTitle>
                       {subDetail.content_ja && language === 'ja'
-                        ? subDetail.content_ja.map((content, i) => (
+                        ? subDetail.content_ja?.map((content, i) => (
                             <SectionContent key={i}>{content}</SectionContent>
                           ))
-                        : subDetail.content.map((content, i) => (
+                        : subDetail.content?.map((content, i) => (
                             <SectionContent key={i}>{content}</SectionContent>
                           ))
                       }
