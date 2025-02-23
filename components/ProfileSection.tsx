@@ -26,7 +26,7 @@ const ProfileContainer = styled.section`
   @media (max-width: 768px) {
     padding: 1rem;
     flex-direction: column;
-    margin-top: 0;
+    margin-top: 3rem;
   }
 `;
 
