@@ -112,7 +112,7 @@ const HeroContent = styled.div`
 
   h1 {
     color: white;
-    font-weight: 500;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     line-height: 1.1;
@@ -130,6 +130,7 @@ const TitleLine = styled.div`
   margin: -0.2em 0;
 
   @media (max-width: 768px) {
+    margin: 0;
     font-size: clamp(2.5rem, 16vw, 7rem);  
     line-height: 1.2;
   }
