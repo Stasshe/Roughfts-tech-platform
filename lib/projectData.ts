@@ -5,6 +5,7 @@ const projectNames = [
   'ventus-talk',
   'prime-cube',
   'shogi-app',
+  'edu-open-4step',
   'python-filter',
   'kanji-journey',
   'bookmarklet-youtube',

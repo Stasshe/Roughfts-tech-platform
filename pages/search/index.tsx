@@ -130,7 +130,7 @@ const SearchPage = () => {
       // Search in details
       experience.details.forEach(detail => {
         const detailTitle = locale === 'en' ? detail.caption : detail.caption_ja;
-        const content = locale === 'en' ? detail.content : detail.content_ja;
+        const content = locale === 'en' ? detail.content : detail.content_ja || [];  // デフォルト値を追加
 
         if (detailTitle.toLowerCase().includes(lowercaseQuery)) {
           matches.push({
@@ -140,7 +140,8 @@ const SearchPage = () => {
           });
         }
 
-        content.forEach(text => {
+        // contentが存在する場合のみforEachを実行
+        content?.forEach(text => {
           if (text.toLowerCase().includes(lowercaseQuery)) {
             matches.push({
               type: 'experience',
@@ -148,32 +149,32 @@ const SearchPage = () => {
               matchText: text
             });
           }
-        }      
-      );
+        });
 
-      detail.subDetails?.forEach(subdetail => {
-        const subdetailTitle = locale === 'en' ? subdetail.caption : subdetail.caption_ja;
-        const subcontent = locale === 'en' ? subdetail.content : subdetail.content_ja;
-        if (subdetailTitle.toLowerCase().includes(lowercaseQuery)) {
-          matches.push({
-            type: 'experience',
-            matchType: 'Caption',
-            matchText: subdetailTitle           
-          });
-        }
+        // サブ詳細の処理
+        detail.subDetails?.forEach(subdetail => {
+          const subdetailTitle = locale === 'en' ? subdetail.caption : subdetail.caption_ja;
+          const subcontent = locale === 'en' ? subdetail.content : subdetail.content_ja || [];  // デフォルト値を追加
 
-        subcontent.forEach(text => {
-          if (text.toLowerCase().includes(lowercaseQuery)) {
+          if (subdetailTitle.toLowerCase().includes(lowercaseQuery)) {
             matches.push({
               type: 'experience',
-              matchType: `Content: ${subdetailTitle}`,
-              matchText: text
+              matchType: 'Caption',
+              matchText: subdetailTitle           
             });
           }
-        }      
-      );
-      })
 
+          // subcontentが存在する場合のみforEachを実行
+          subcontent?.forEach(text => {
+            if (text.toLowerCase().includes(lowercaseQuery)) {
+              matches.push({
+                type: 'experience',
+                matchType: `Content: ${subdetailTitle}`,
+                matchText: text
+              });
+            }
+          });
+        });
       });
 
       if (matches.length > 0) {
@@ -386,4 +387,4 @@ const NoResults = styled.div`
   color: #888;
 `;
 
-export default SearchPage; 
+export default SearchPage;

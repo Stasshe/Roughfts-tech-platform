@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 
 const Container = styled.div`
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100%;
   display: flex;
   flex-direction: column;

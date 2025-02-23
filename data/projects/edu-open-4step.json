@@ -1,7 +1,7 @@
 {
   "id": "edu-open-4step",
   "title": "Filtering Ignore web site",
-  "title_ja": "プロキシサイト-4ステップ",
+  "title_ja": "プロキシサイト-4step",
   "description": "A dynamically regulated bypass site with a very simple structure. Only two things to copy and paste. Easy even if you don't know git!",
   "description_ja": "非常にシンプルな構造の、動的規制回避用サイト。コピペするのは2つだけ。gitがわからんくても簡単！",
   "techStack": [
