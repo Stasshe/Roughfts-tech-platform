@@ -26,6 +26,11 @@ export interface Project {
   };
   demoVideo?: string;
   featured?: boolean;
+  links?: {
+    type: 'github' | 'replit' | 'website' | 'other';
+    url: string;
+    title?: string;
+  }[];
 }
 
 export interface SubDetail {
@@ -56,6 +61,11 @@ export interface Gists {
   description: string;
   description_ja: string;
   details: Detail[];
+  links?: {
+    type: 'github' | 'replit' | 'website' | 'other';
+    url: string;
+    title?: string;
+  }[];
 }
 
 // Alias Project as ProjectContent for backward compatibility

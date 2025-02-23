@@ -9,6 +9,8 @@ import fs from 'fs';
 import path from 'path';
 import { useLanguage } from '../../lib/LanguageContext';
 import Link from 'next/link';
+import { FaGithub, FaGlobe } from 'react-icons/fa';
+import { SiReplit } from 'react-icons/si';
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
@@ -102,6 +104,16 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
   };
   const title = language === 'en' ? experience.title : experience.title_ja;
   
+  const getIconByType = (type: string) => {
+    switch (type) {
+      case 'github':
+        return <FaGithub size={24} />;
+      case 'replit':
+        return <SiReplit size={24} />;
+      default:
+        return <FaGlobe size={24} />;
+    }
+  };
 
   return (
     <Layout>
@@ -174,6 +186,22 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
             </Section>
           ))}
         </ContentSection>
+
+        {experience.links && experience.links.length > 0 && (
+          <LinksSection>
+            {experience.links.map((link, index) => (
+              <LinkButton
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {getIconByType(link.type)}
+                <LinkText>{link.title || link.type}</LinkText>
+              </LinkButton>
+            ))}
+          </LinksSection>
+        )}
       </DetailContainer>
     </Layout>
   );
@@ -261,6 +289,34 @@ const ExternalLink = styled.a`
     margin-left: 4px;
     display: inline-block;
   }
+`;
+
+const LinksSection = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+`;
+
+const LinkButton = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #222;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+`;
+
+const LinkText = styled.span`
+  font-size: 1rem;
 `;
 
 export default ExperienceDetailPage;

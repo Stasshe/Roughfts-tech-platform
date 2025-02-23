@@ -9,6 +9,8 @@ import { getWorkContent } from '../../lib/contentManager';
 import { WorkContent } from '../../types/content';
 import ProjectData from '../../lib/projectData';
 import Link from 'next/link';
+import { FaGithub, FaGlobe } from 'react-icons/fa';
+import { SiReplit } from 'react-icons/si';
 
 interface WorkDetailPageProps {
   workContent: WorkContent | null;
@@ -60,6 +62,17 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
       </Layout>
     );
   }
+
+  const getIconByType = (type: string) => {
+    switch (type) {
+      case 'github':
+        return <FaGithub size={24} />;
+      case 'replit':
+        return <SiReplit size={24} />;
+      default:
+        return <FaGlobe size={24} />;
+    }
+  };
 
   return (
     <Layout>
@@ -194,6 +207,22 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
               <source src={workContent.demoVideo} type="video/mp4" />
             </motion.video>
           </DemoSection>
+        )}
+
+        {workContent.links && workContent.links.length > 0 && (
+          <LinksSection>
+            {workContent.links.map((link, index) => (
+              <LinkButton
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {getIconByType(link.type)}
+                <LinkText>{link.title || link.type}</LinkText>
+              </LinkButton>
+            ))}
+          </LinksSection>
         )}
 
         <AnimatePresence>
@@ -417,4 +446,32 @@ const GalleryImage = styled.img`
   }
 `;
 
-export default WorkDetailPage; 
+const LinksSection = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+`;
+
+const LinkButton = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #222;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+`;
+
+const LinkText = styled.span`
+  font-size: 1rem;
+`;
+
+export default WorkDetailPage;

@@ -119,5 +119,17 @@
         }
       ]
     }
+  ],
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/yourusername/project",
+      "title": "View Source"
+    },
+    {
+      "type": "website",
+      "url": "https://example.com",
+      "title": "Live Demo"
+    }
   ]
 }

@@ -71,5 +71,21 @@
     "description_ja": "最適なパフォーマンスとスケーラビリティ、そしてこれらを無料で実現するためのFirebase Firestoreを活用したマルチサーバーアーキテクチャ。"
   },
   "demoVideo": "/assets/ventus-talk/demo.mp4",
-  "featured": true
-} 
+  "featured": true,
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/stasshe/ventus-talk"
+    },
+    {
+      "type": "website",
+      "url": "https://ventus-talk.glitch.me",
+      "title": "Live Demo"
+    },
+    {
+      "type": "website",
+      "url": "https://ventus-talk.onrender.com",
+      "title": "Live Demo"
+    }
+  ]
+}
