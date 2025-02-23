@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 import LoadingScreen from './LoadingScreen';
 import { useLanguage } from '../lib/LanguageContext';
 import { translations } from '../lib/translations';
+import LanguagePrompt from './LanguagePrompt';
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,9 +15,24 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showLanguagePrompt, setShowLanguagePrompt] = useState(false);
   const router = useRouter();
   const isSlugPage = router.pathname.includes('[');
   const { language, setLanguage } = useLanguage();
+
+  useEffect(() => {
+    // Check if user has visited before
+    const isUserVisited = localStorage.getItem('isUserVisited');
+    if (!isUserVisited) {
+      setShowLanguagePrompt(true);
+    }
+  }, []);
+
+  const handleLanguageSelect = (selectedLanguage: 'en' | 'ja') => {
+    setLanguage(selectedLanguage);
+    setShowLanguagePrompt(false);
+    localStorage.setItem('isUserVisited', 'true');
+  };
 
   useEffect(() => {
     // Ensure content is hidden initially
@@ -32,6 +48,11 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <LayoutWrapper>
+      <AnimatePresence>
+        {showLanguagePrompt && (
+          <LanguagePrompt onSelectLanguage={handleLanguageSelect} />
+        )}
+      </AnimatePresence>
       {!isSlugPage && <LoadingScreen />}
       <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} $isOpen={isMenuOpen}>
         <span></span>
