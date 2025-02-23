@@ -71,6 +71,34 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
     );
   };
 
+  // リンク変換用のヘルパー関数を追加（上部に追加）
+  const convertMarkdownLinks = (text: string) => {
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index));
+      }
+      
+      parts.push(
+        <ExternalLink href={match[2]} target="_blank" rel="noopener noreferrer" key={match.index}>
+          {match[1]}
+        </ExternalLink>
+      );
+      
+      lastIndex = match.index + match[0].length;
+    }
+    
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+
+    return parts;
+  };
+
   return (
     <Layout>
       <WorkContainer>
@@ -163,28 +191,33 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
         </TechStack>
 
         <FeaturesSection>
-          {workContent.features.map((feature, index) => (
-            <FeatureBlock
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-            >
-              <h3>{feature.title}</h3>
-              <ul>
-                {feature.details.map((detail, idx) => (
-                  <motion.li
-                    key={idx}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 + idx * 0.1 }}
-                  >
-                    {detail}
-                  </motion.li>
-                ))}
-              </ul>
-            </FeatureBlock>
-          ))}
+          <FeaturesTitle>Features</FeaturesTitle>
+          <FeaturesList>
+            {workContent.features.map((feature, index) => (
+              <FeatureBlock
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <FeatureCapsule>{feature.title}</FeatureCapsule>
+                <FeatureContent>
+                  <ul>
+                    {feature.details.map((detail, idx) => (
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.2 + idx * 0.1 }}
+                      >
+                        {convertMarkdownLinks(detail)}
+                      </motion.li>
+                    ))}
+                  </ul>
+                </FeatureContent>
+              </FeatureBlock>
+            ))}
+          </FeaturesList>
         </FeaturesSection>
 
         {workContent.demoVideo && (
@@ -299,22 +332,42 @@ const TechList = styled.ul`
 `;
 
 const FeaturesSection = styled.div`
+  margin: 4rem 0;
+`;
+
+const FeaturesTitle = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #fff;
+`;
+
+const FeaturesList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  margin-bottom: 4rem;
 `;
 
 const FeatureBlock = styled(motion.div)`
-  background: #111;
-  padding: 2rem;
-  border-radius: 12px;
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 16px;
+  overflow: hidden;
+`;
 
-  h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: #fff;
-  }
+const FeatureCapsule = styled.div`
+  background: #222;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  border-bottom: 1px solid #333;
+`;
+
+const FeatureContent = styled.div`
+  padding: 2rem;
+  background: #111;
 
   ul {
     list-style: none;
@@ -481,6 +534,23 @@ const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 4px;
+`;
+
+const ExternalLink = styled.a`
+  color: #00a8ff;
+  text-decoration: none;
+  position: relative;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  &::before {
+    content: '🔗';
+    font-size: 0.8em;
+    margin-left: 4px;
+    display: inline-block;
+  }
 `;
 
 export default WorkDetailPage;

@@ -1,0 +1,103 @@
+{
+  "id": "lists",
+  "title": "🌐 Web Tools Collection",
+  "title_ja": "🌐 Web ツールコレクション",
+  "description": "A comprehensive collection of web tools, including proxy sites, social media apps, bookmarklets, and more",
+  "description_ja": "プロキシサイト、SNSアプリ、ブックマークレット等を含む総合的なWebツールコレクション",
+  "techStack": [
+    "Node.js",
+    "Express",
+    "Python",
+    "Docker",
+    "Selenium",
+    "noVNC",
+    "JavaScript",
+    "Glitch",
+    "Render"
+  ],
+  "features": [
+    {
+      "title": "Proxy Solutions",
+      "title_ja": "プロキシソリューション",
+      "details": [
+        "[edu-open-5step](https://edu-open-5step.glitch.me) - Advanced proxy implementation",
+        "[Hypertab on Render](https://proxy-render-hypertab-1.onrender.com/) - Alternative proxy solution",
+        "[edu-open-4step](https://edu-open-4step.glitch.me) - Streamlined proxy version",
+        "[YouTube Specific Proxy](https://angry-magical-carp.glitch.me/) - Dedicated YouTube proxy service"
+      ],
+      "details_ja": [
+        "[edu-open-5step](https://edu-open-5step.glitch.me) - 高度なプロキシ実装",
+        "[Render上のHypertab](https://proxy-render-hypertab-1.onrender.com/) - 代替プロキシソリューション",
+        "[edu-open-4step](https://edu-open-4step.glitch.me) - 簡略化されたプロキシバージョン",
+        "[YouTube専用プロキシ](https://angry-magical-carp.glitch.me/) - YouTube特化型プロキシ"
+      ]
+    },
+    {
+      "title": "Social Media Applications",
+      "title_ja": "SNSアプリケーション",
+      "details": [
+        "[Ventus Talk](https://github.com/Stasshe/Ventus-Talk) - LINE-like chat application",
+        "[Ventus Talk on Render](https://render-ventus-talk.onrender.com) - Hosted version"
+      ],
+      "details_ja": [
+        "[Ventus Talk](https://github.com/Stasshe/Ventus-Talk) - LINE風チャットアプリ",
+        "[Render上のVentus Talk](https://render-ventus-talk.onrender.com) - ホスティング版"
+      ]
+    },
+    {
+      "title": "Browser Tools",
+      "title_ja": "ブラウザツール",
+      "details": [
+        "[Bookmarklet Collection](https://github.com/Stasshe/-school-filtering-ignore/tree/main/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88) - Including:",
+        "Static site restriction bypass",
+        "No-cookie YouTube with full features",
+        "Developer tools"
+      ],
+      "details_ja": [
+        "[ブックマークレットコレクション](https://github.com/Stasshe/-school-filtering-ignore/tree/main/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88) - 含まれる機能:",
+        "静的サイト規制回避",
+        "フル機能対応のno-cookie YouTube",
+        "開発者向けツール"
+      ]
+    },
+    {
+      "title": "Advanced Solutions",
+      "title_ja": "高度なソリューション",
+      "details": [
+        "[Browser-in-Browser](https://github.com/Stasshe/selenium-Docker-noVNC) - Virtual browser using Docker and noVNC",
+        "[Python Scraping Tools](https://github.com/Stasshe/-school-filtering-ignore/tree/main/Python) - Various scraping utilities"
+      ],
+      "details_ja": [
+        "[ブラウザ内ブラウザ](https://github.com/Stasshe/selenium-Docker-noVNC) - DockerとnoVNCを使用した仮想ブラウザ",
+        "[Pythonスクレイピングツール](https://github.com/Stasshe/-school-filtering-ignore/tree/main/Python) - 各種スクレイピングユーティリティ"
+      ]
+    },
+    {
+      "title": "Miscellaneous",
+      "title_ja": "その他",
+      "details": [
+        "[Overseas Bypass Site](https://sdfsdf.cbass92.org/asdjklhfskjafhakfhueoyraehfjkcnjkdscnsjakdreuoiwefh/embed.html)- A site list for bypassing overseas restrictions"
+      ],
+      "details_ja": [
+        "[海外のバケモンサイト](https://sdfsdf.cbass92.org/asdjklhfskjafhakfhueoyraehfjkcnjkdscnsjakdreuoiwefh/embed.html)- 海外の規制を回避するためのサイトList"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/lists/lists.jpeg"
+  ],
+  "highlights": [
+    {
+      "title": "Deployment",
+      "value": "Multi-platform",
+      "description": "Deployed across Glitch, Render, and GitHub for maximum accessibility",
+      "description_ja":"Glitch、Render、GitHubにまたがる展開で、最大限のアクセシビリティを実現"
+    },
+    {
+      "title": "Scope",
+      "value": "Comprehensive",
+      "description": "Tools ranging from simple bookmarklets to complex Docker solutions",
+      "description_ja":"プロキシサイト、SNSアプリ、ブックマークレット等を含む総合的なWebツールコレクション"
+    }
+  ]
+}
