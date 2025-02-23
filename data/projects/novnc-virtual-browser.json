@@ -41,11 +41,6 @@
       "/assets/selenium/IMG_0003.png",
       "/assets/selenium/IMG_0004.png"
     ],
-    "architecture": {
-      "diagram": "/assets/selenium/architecture.svg",
-      "description": "Client-server architecture with real-time logging and flexible configurations supported by Docker and GitHub Codespaces.",
-      "description_ja": "DockerとGitHub Codespacesによってサポートされるリアルタイムロギングと柔軟な構成を備えたクライアントサーバーアーキテクチャ。"
-    },
     "links": [
       {
         "type": "github",

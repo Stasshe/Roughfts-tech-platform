@@ -171,20 +171,22 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
                       whileHover={{ scale: 1.05 }}
                     />
                   </a>
-                  {diagram.description && (
+                  {diagram[language === 'ja' ? 'description_ja' : 'description'] && (
                     <motion.p
-                      style={{ marginTop: '1rem', textAlign: 'center', fontSize: '0.9rem' }}
+                      style={{ marginTop: '1rem', textAlign: 'center', fontSize: '0.9rem', color: '#333' }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 0.8 }}
                       transition={{ delay: 0.2 * index + 0.1 }}
                     >
-                      {diagram.description}
+                      {diagram[language === 'ja' ? 'description_ja' : 'description']}
                     </motion.p>
                   )}
                 </div>
               ))}
             </div>
-            <motion.p style={{ marginTop: '2rem' }}>{workContent.architecture.description}</motion.p>
+            <motion.p style={{ marginTop: '2rem' }}>
+              {workContent.architecture[language === 'ja' ? 'description_ja' : 'description']}
+            </motion.p>
           </ArchitectureSection>
         )}
 

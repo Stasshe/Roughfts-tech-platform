@@ -63,11 +63,6 @@
       "description_ja": "利用可能なプレイスタイル"
     }
   ],
-  "architecture": {
-    "diagram": "/assets/cecon/architecture.svg",
-    "description": "Client-server architecture with AI integration and real-time multiplayer support using WebSocket connections.",
-    "description_ja": "WebSocket接続を使用したAI統合とリアルタイムマルチプレイヤーをサポートするクライアントサーバーアーキテクチャ。"
-  },
   "demoVideo": "/assets/cecon/ScreenRecording_02-14-2025 09-49-30_1.mp4",
   "featured": true,
   "links": [
