@@ -108,7 +108,7 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
           {experience.details.map((section, index) => (
             <Section key={index}>
               <SectionTitle>
-                {getLocalizedContent(section.caption, section.caption_ja)}
+                {getLocalizedContent(section.caption, section.caption_ja || '')}
               </SectionTitle>
               {section.content_ja && language === 'ja' 
                 ? section.content_ja.map((content, i) => (
@@ -125,7 +125,7 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
                       <SubDetailTitle>
                         {getLocalizedContent(
                           subDetail.caption,
-                          subDetail.caption_ja || subDetail.caption
+                          subDetail.caption_ja || ''
                         )}
                       </SubDetailTitle>
                       {subDetail.content_ja && language === 'ja'

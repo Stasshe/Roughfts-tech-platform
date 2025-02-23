@@ -28,29 +28,34 @@ export interface Project {
   featured?: boolean;
 }
 
+export interface SubDetail {
+  caption: string;
+  caption_ja?: string;
+  content: string[];
+  content_ja?: string[];
+}
+
+export interface Detail {
+  caption: string;
+  caption_ja?: string;
+  content: string[];
+  content_ja?: string[];
+  subDetails?: SubDetail[];
+}
+
 export interface Gists {
   id: string;
+  slug: string;
   title: string;
   title_ja: string;
   year: string;
   month: string;
   date: string;
   category: string;
+  techStack: string[];
   description: string;
   description_ja: string;
-  techStack: string[];
-  details: {
-    caption: string;
-    caption_ja: string;
-    content: string[];
-    content_ja: string[];
-    subDetails?: {
-      caption: string;
-      caption_ja: string;
-      content: string[];
-      content_ja: string[];
-    }[];
-  }[];
+  details: Detail[];
 }
 
 // Alias Project as ProjectContent for backward compatibility

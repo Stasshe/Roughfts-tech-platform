@@ -4,27 +4,41 @@ import Layout from '../../components/Layout';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Gists } from '../../types/content';
-// Import experiences data
-import developmentTips from '../../data/experiences/development-tips.json';
-import { useLanguage } from '../../lib/LanguageContext'; // Import the language context
+import fs from 'fs';
+import path from 'path';
+import { useLanguage } from '../../lib/LanguageContext';
 
-const experiences: Gists[] = [{
-  ...developmentTips,
-  date: developmentTips.year,
-  details: developmentTips.details.map(detail => ({
-    ...detail,
-    caption: detail.caption || '',
-    caption_ja: detail.caption_ja || '',
-    subDetails: detail.subDetails?.map(subDetail => ({
-      ...subDetail,
-      caption: subDetail.caption || '',
-      caption_ja: subDetail.caption_ja || '',
-      content_ja: subDetail.content_ja || []
-    }))
-  }))
-}];
+// Static Props to load all experiences
+export async function getStaticProps() {
+  const experiencesDirectory = path.join(process.cwd(), 'data', 'experiences');
+  const filenames = fs.readdirSync(experiencesDirectory);
+  
+  const experiences = filenames
+    .filter(filename => filename.endsWith('.json'))
+    .map(filename => {
+      const filePath = path.join(experiencesDirectory, filename);
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      return JSON.parse(fileContent) as Gists;
+    })
+    .sort((a, b) => {
+      // Sort by date in descending order
+      const dateA = `${a.year}-${a.month}`;
+      const dateB = `${b.year}-${b.month}`;
+      return dateB.localeCompare(dateA);
+    });
 
-const ExperiencePage = () => {
+  return {
+    props: {
+      experiences
+    }
+  };
+}
+
+interface ExperiencePageProps {
+  experiences: Gists[];
+}
+
+const ExperiencePage = ({ experiences }: ExperiencePageProps) => {
   const { language } = useLanguage();
 
   const groupedExperiences = experiences.reduce((acc, exp) => {
@@ -32,7 +46,7 @@ const ExperiencePage = () => {
     if (!acc[yearMonth]) acc[yearMonth] = [];
     acc[yearMonth].push(exp);
     return acc;
-  }, {});
+  }, {} as Record<string, Gists[]>);
 
   return (
     <Layout>
@@ -213,4 +227,4 @@ const Content = styled.div`
   }
 `;
 
-export default ExperiencePage; 
+export default ExperiencePage;
