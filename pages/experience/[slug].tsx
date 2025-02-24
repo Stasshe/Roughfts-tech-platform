@@ -94,6 +94,7 @@ const ThreeImagesContainer = styled.div`
     position: relative;
     scroll-snap-type: x mandatory;
     justify-content: flex-start; // 左寄せに変更
+    scroll-behavior: smooth; // スムーズスクロールを追加
     
     // 右端のグラデーション
     &::after {
@@ -157,6 +158,7 @@ const ThreeImagesContainer = styled.div`
       flex: 0 0 85%;
       max-width: none;
       scroll-snap-align: start; // 左寄せのスナップに変更
+      scroll-snap-stop: always; // 確実にスナップさせる
     }
   }
 
@@ -227,10 +229,31 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
   const { language } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [imageLoadError, setImageLoadError] = useState<{[key: string]: boolean}>({});
+  const [threeImagesRefs, setThreeImagesRefs] = useState<HTMLDivElement[]>([]);
+
+  const addToRefs = (el: HTMLDivElement | null) => {
+    if (el) {
+      setThreeImagesRefs(prev => {
+        if (!prev.includes(el)) {
+          return [...prev, el];
+        }
+        return prev;
+      });
+      // 要素が追加されたら即座にスクロール位置を設定
+      el.scrollLeft = 0;
+    }
+  };
 
   // ハイドレーションエラー対策
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // コンポーネントのクリーンアップ時にrefsをリセット
+  useEffect(() => {
+    return () => {
+      setThreeImagesRefs([]);
+    };
   }, []);
 
   if (!mounted) {
@@ -272,7 +295,10 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
                 {images}
               </SingleImageContainer>
             ) : images.length === 3 ? (
-              <ThreeImagesContainer key={`img-group-${i}`}>
+              <ThreeImagesContainer
+                key={`img-group-${i}`}
+                ref={addToRefs}
+              >
                 {images}
               </ThreeImagesContainer>
             ) : (
@@ -297,7 +323,10 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
             {images}
           </SingleImageContainer>
         ) : images.length === 3 ? (
-          <ThreeImagesContainer key="img-group-final">
+          <ThreeImagesContainer
+            key="img-group-final"
+            ref={addToRefs}
+          >
             {images}
           </ThreeImagesContainer>
         ) : (
