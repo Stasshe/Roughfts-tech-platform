@@ -68,6 +68,36 @@ const SingleImageContainer = styled.div`
   }
 `;
 
+// 3枚横並び用のコンテナを追加
+const ThreeImagesContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  justify-content: center;
+  width: 100%;
+
+  img {
+    flex: 1;
+    max-width: calc(33.333% - 0.67rem);
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+  }
+
+  // タブレット以下でスクロール可能な横並びに
+  @media (max-width: 768px) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+    
+    img {
+      flex: 0 0 80%;
+      max-width: none;
+    }
+  }
+`;
+
 // 複数画像用のコンテナを更新
 const ImageContainer = styled.div`
   display: flex;
@@ -83,6 +113,12 @@ const ImageContainer = styled.div`
     height: auto;
     max-height: 600px; // 最大高さを増加
     width: auto;
+  }
+
+  &.three-images {
+    img {
+      max-width: calc(33.333% - 1rem);
+    }
   }
 `;
 
@@ -158,6 +194,10 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
               <SingleImageContainer key={`img-group-${i}`}>
                 {images}
               </SingleImageContainer>
+            ) : images.length === 3 ? (
+              <ThreeImagesContainer key={`img-group-${i}`}>
+                {images}
+              </ThreeImagesContainer>
             ) : (
               <ImageContainer key={`img-group-${i}`}>
                 {images}
@@ -179,6 +219,10 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
           <SingleImageContainer key="img-group-final">
             {images}
           </SingleImageContainer>
+        ) : images.length === 3 ? (
+          <ThreeImagesContainer key="img-group-final">
+            {images}
+          </ThreeImagesContainer>
         ) : (
           <ImageContainer key="img-group-final">
             {images}
