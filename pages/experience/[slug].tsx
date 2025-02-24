@@ -171,7 +171,7 @@ const ThreeImagesContainer = styled.div`
       opacity: 0.5;
     }
     100% {
-      transform: translateX(833%);
+      transform: translateX(750%);
       opacity: 1;
     }
   }
