@@ -10,6 +10,7 @@ import path from 'path';
 import { useLanguage } from '../../lib/LanguageContext';
 import Link from 'next/link';
 import icons from '../../data/skills/icons.json';
+import { useState } from 'react';
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
@@ -53,41 +54,51 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
   };
 };
 
-// リンク変換用のヘルパー関数を追加
-const convertMarkdownLinks = (text: string) => {
-  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-  const parts = [];
-  let lastIndex = 0;
-  let match;
+// 画像表示用のコンポーネントを追加
+const ContentImage = styled.img`
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+`;
 
-  while ((match = linkRegex.exec(text)) !== null) {
-    // リンク前のテキストを追加
-    if (match.index > lastIndex) {
-      parts.push(text.slice(lastIndex, match.index));
-    }
-    
-    // リンクを追加
-    parts.push(
-      <ExternalLink href={match[2]} target="_blank" rel="noopener noreferrer" key={match.index}>
-        {match[1]}
-      </ExternalLink>
-    );
-    
-    lastIndex = match.index + match[0].length;
-  }
-  
-  // 残りのテキストを追加
-  if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex));
-  }
-
-  return parts;
-};
-
-// Experience Detail Page
-const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
+const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience }) => {
   const router = useRouter();
   const { language } = useLanguage();
+  const [imageLoadError, setImageLoadError] = useState<{[key: string]: boolean}>({});
+
+  // 画像とリンクの変換関数
+  const convertContent = (text: string) => {
+    // 画像の正規表現
+    const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
+    
+    // テキストを分割して処理
+    const parts = text.split(imageRegex);
+    const result = [];
+    
+    for (let i = 0; i < parts.length; i++) {
+      if (i % 3 === 0) {
+        // 通常のテキスト
+        if (parts[i]) result.push(<span key={`text-${i}`}>{parts[i]}</span>);
+      } else if (i % 3 === 2) {
+        // 画像URL
+        const alt = parts[i - 1];
+        const src = parts[i];
+        if (!imageLoadError[src]) {
+          result.push(
+            <ContentImage
+              key={`img-${i}`}
+              src={src}
+              alt={alt}
+              onError={() => setImageLoadError(prev => ({ ...prev, [src]: true }))}
+            />
+          );
+        }
+      }
+    }
+    
+    return result;
+  };
 
   if (!experience) {
     return (
@@ -152,10 +163,10 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
               </SectionTitle>
               {section.content_ja && language === 'ja' 
                 ? section.content_ja?.map((content, i) => (
-                    <SectionContent key={i}>{convertMarkdownLinks(content)}</SectionContent>
+                    <SectionContent key={i}>{convertContent(content)}</SectionContent>
                   ))
                 : section.content?.map((content, i) => (
-                    <SectionContent key={i}>{convertMarkdownLinks(content)}</SectionContent>
+                    <SectionContent key={i}>{convertContent(content)}</SectionContent>
                   ))
               }
               {section.subDetails && (
@@ -170,10 +181,10 @@ const ExperienceDetailPage = ({ experience }: ExperienceDetailPageProps) => {
                       </SubDetailTitle>
                       {subDetail.content_ja && language === 'ja'
                         ? subDetail.content_ja?.map((content, i) => (
-                            <SectionContent key={i}>{convertMarkdownLinks(content)}</SectionContent>
+                            <SectionContent key={i}>{convertContent(content)}</SectionContent>
                           ))
                         : subDetail.content?.map((content, i) => (
-                            <SectionContent key={i}>{convertMarkdownLinks(content)}</SectionContent>
+                            <SectionContent key={i}>{convertContent(content)}</SectionContent>
                           ))
                       }
                     </SubDetail>

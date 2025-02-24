@@ -27,5 +27,6 @@ interface SubDetail {
 }
 
 export const experiences = [
-  require('./experiences/development-tips.json')
+  require('./experiences/development-tips.json'),
+  require('./experiences/ipad-restriction-guide.json'),
 ]; 

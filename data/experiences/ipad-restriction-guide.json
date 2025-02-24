@@ -1,0 +1,118 @@
+{
+  "id": "ipad-restriction-guide",
+  "slug": "ipad",
+  "title": "School iPad Setup Guide",
+  "title_ja": "学校iPad設定ガイド",
+  "year": "2023",
+  "month": "4",
+  "date": "1",
+  "category": "Technical Guide",
+  "techStack": [
+    "iOS",
+    "iTunes",
+    "iCloud",
+    "Apple ID"
+  ],
+  "description": "A comprehensive guide for setting up school iPads with proper configuration steps",
+  "description_ja": "学校のiPadの設定方法を紹介します。この記事では実際の手順を詳しく解説していきます。",
+  "details": [
+    {
+      "caption": "Important Notice",
+      "caption_ja": "注意事項",
+      "content": [
+        "Warning: All data will be erased, so make sure to backup your data to Google Drive or similar service.",
+        "Also, be careful with password apps as screenshots may automatically hide password sections, making them unreadable later.",
+        "It's recommended to write down passwords on paper to ensure successful migration.",
+        "Please note that I take no responsibility if you get in trouble with teachers for using this method. Proceed at your own risk."
+      ],
+      "content_ja": [
+        "注意：全てのデータが吹き飛ぶので、必ずバックアップを取っておいてください。google driveなどで。",
+        "また、パスワードアプリでは、スクショしてもパスワードの部分が自動で隠されてしまい、後で見たところでさっぱりわからなくなるので、十分気をつけてください。",
+        "確実に移行できるよう、パスワードだけ紙にも、残すというのは良い方法でしょう。",
+        "また、この方法で先生に怒られたとしても私は知りません。自己責任で。それでは、どうぞ。"
+      ]
+    },
+    {
+      "caption": "Preparation",
+      "caption_ja": "準備",
+      "content": [
+        "First, note down your WiFi password as the connection will be reset during this process.",
+        "Since I don't know your exact environment, please read through this entire guide before taking any action.",
+        "Download iTunes for Windows on your school computer. You can also use your personal Mac if you have one."
+      ],
+      "content_ja": [
+        "最初に、この方法では、wifiを切断するので、wifiのパスワードを見ておきます。",
+        "また、この記事を読んでいるあなたの環境は分かりませんので、この記事を全て読んでから、行動に移してください。",
+        "itunes for windows を学校のパソコンでダウンロードします。自分のMacがある場合はそれでも良いです。"
+      ]
+    },
+    {
+      "caption": "iTunes Setup",
+      "caption_ja": "iTunes設定",
+      "content": [
+        "Connect your iPad to the computer via cable and select 'Trust This Device'",
+        "![iTunes Restore Screen](/assets/ipad-restriction-guide/itunesForWindowsRestore.jpeg)",
+        "Click the red circle shown in the image above. In Japanese, it's labeled as 'iPad の復元' (Restore iPad).",
+        "Don't waste time creating backups as they won't be usable anyway.",
+        "The iPad will begin resetting, completely ignoring Jamf Pro. Just wait.",
+        "(During this process, try not to disconnect the cable. However, it's surprisingly resilient and won't enter a boot loop. If disconnected, the progress bar will stop, but you can resume by clicking restore again.)",
+        "While waiting, verify your Apple account password on your smartphone."
+      ],
+      "content_ja": [
+        "パソコンとipadをケーブルで接続し、「デバイスを信頼する」とします",
+        "![iTunes復元画面](/assets/ipad-restriction-guide/itunesForWindowsRestore.jpeg)",
+        "上の画像の赤丸を押します。日本語だと、「ipadの復元」です。",
+        "バックアップは取ったところで使えませんので、取るだけ時間の無駄です。無視しましょう。",
+        "そして、ipadがjamf proをガン無視でリセットを始めるので、待ちましょう。",
+        "(この間、接続は抜かないようにしてください。でも、意外と大丈夫で、リンゴループになることはありませんでした。抜けるとプログレスバーが停止しますが、もう一度ipadの復元を押すと、再開できます。)",
+        "この間に、自分のスマホのappleアカウントのパスワードなどを確認しておきましょう。"
+      ]
+    },
+    {
+      "caption": "Initial Setup",
+      "caption_ja": "初期設定",
+      "content": [
+        "Once completed, you'll see the 'Hello' screen. From here, it's a race against time.",
+        "I recommend setting up using your iPhone (scanning the blue wavy pattern).",
+        "It's better to set up the keyboard at this stage.",
+        "Connect to WiFi, but make sure to enable 'Low Data Mode'. This typically works better."
+      ],
+      "content_ja": [
+        "全部終わったら、「こんにちは」が出てきます。ここから時間との勝負です。",
+        "自分のスマホから、セットアップする方法がおすすめです。（水色のふわふわしたやつを読み取る）。",
+        "キーボードセットアップはした方が良いです。",
+        "wifiは接続してください。この時、「省データモード」をオンにしてください。この方がうまくいきます。"
+      ]
+    },
+    {
+      "caption": "Final Configuration",
+      "caption_ja": "最終設定",
+      "content": [
+        "As you proceed, you'll see the 'Register this iPad to School' screen. This is where the real time challenge begins.",
+        "First, open the App Store and sign in with your Apple ID.",
+        "![App Store Screen 1](/assets/ipad-restriction-guide/appstore1.jpeg)",
+        "![App Store Screen 2](/assets/ipad-restriction-guide/appstore2.jpeg)",
+        "If you've previously installed apps on your iPhone, they'll appear with a cloud icon ☁️ as shown above, making the process much smoother. While not mandatory, this is highly recommended.",
+        "Once app downloads begin, you're safe. If an app shows 'Installing', it's essentially guaranteed to complete.",
+        "After confirming all desired apps are in the installation queue, move to Settings.",
+        "(You can remove filtering apps like ISGC Assist, but this might completely block internet access. When I tried removing it, I lost all connectivity and had to start over.)",
+        "In Settings, sign in to your Apple account. If you spend too much time in the App Store, MDM installation might complete before this step.",
+        "![iCloud Settings Screen](/assets/ipad-restriction-guide/icloudLinkConfig1.jpeg)",
+        "Sign in and open this screen. Once here, you're safe. Stay calm and don't close this screen until iCloud sync settings are complete. If you close it after MDM installation completes, you'll never be able to access it again."
+      ],
+      "content_ja": [
+        "操作をすすめていくと、「このipadを学校に登録」というのが出てきます。ここからが本当に時間との勝負です。",
+        "まず最初にapp storeを開き、自分のapple idでサインインします。",
+        "![App Store画面1](/assets/ipad-restriction-guide/appstore1.jpeg)",
+        "![App Store画面2](/assets/ipad-restriction-guide/appstore2.jpeg)",
+        "入れたいアプリを事前にスマホで入れておくと、上のように過去に入れたアプリが☁️マークになっているので、いちいち検索する手間が省けて、非常にスムーズにできます。必須ではありませんが、必ずと言っていいほどやった方が良いです。",
+        "アプリのダウンロードは、始まりさえすれば、問題ありません。インストール中になれば、実質そのアプリは入ったも同然です。",
+        "入れたいアプリが全てインストール中になったことを確認し、設定に移ります。",
+        "（この時、フィルタリングアプリ(ISGC Assistなど)を消せますが、そうするとおそらくブラウジングが一切できなくなります。少なくとも私は、消したらネットから遮断されたので、もう一度初期化をやり直しました。）",
+        "設定に移ったら、appleアカウントにサインインします。app storeのところで手間取ると、このあたりでMDMインストールが完了してしまいます。",
+        "![iCloud設定画面](/assets/ipad-restriction-guide/icloudLinkConfig1.jpeg)",
+        "サインインを確実に行い、この画面を開きます。ここまでできたら、OKです。落ち着きましょう。appleアカウントの同期設定し終わるまで、この画面は閉じないようにしましょう。一度でも閉じると、MDMがインストール完了していた場合、二度と開けなくなります。"
+      ]
+    }
+  ]
+}
