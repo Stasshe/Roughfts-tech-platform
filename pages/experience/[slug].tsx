@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
   };
 };
 
-// 単一画像用のコンテナ
+// 単一画像用のコンテナを更新
 const SingleImageContainer = styled.div`
   margin: 1.5rem 0;
   width: 100%;
@@ -62,9 +62,9 @@ const SingleImageContainer = styled.div`
   justify-content: center;
 
   img {
-    max-width: calc(50% - 0.75rem);
+    max-width: 100%; // 横長画像用に100%に変更
     height: auto;
-    max-height: 500px; // 最大高さを設定
+    max-height: 600px; // 最大高さを増加
   }
 `;
 
@@ -77,15 +77,12 @@ const ImageContainer = styled.div`
   justify-content: center;
   width: 100%;
 
-  // フレックスアイテムのアライメントを調整
-  
-
   img {
     flex: 0 1 auto;
-    max-width: calc(50% - 0.75rem);
-    height: auto; // 高さを自動調整に変更
-    max-height: 500px; // 最大高さを設定
-    width: auto; // 幅を自動調整
+    max-width: calc(75% - 0.75rem); // 横長画像用に75%に拡大
+    height: auto;
+    max-height: 600px; // 最大高さを増加
+    width: auto;
   }
 `;
 
@@ -98,17 +95,17 @@ const ContentImage = styled.img`
   
   // 複数画像の場合のスタイル（クラスなしの場合）
   height: auto;
-  max-height: 500px;
+  max-height: 600px;
   
   // 単一画像の場合のスタイル
   &.single-image {
-    max-width: calc(50% - 0.75rem);
+    width: 100%;
     height: auto;
-    max-height: 500px;
+    max-height: 600px;
   }
 
   @media (max-width: 768px) {
-    max-height: 400px;
+    max-height: 400px; // モバイルでの高さは適度に制限
   }
 `;
 

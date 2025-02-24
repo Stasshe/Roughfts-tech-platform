@@ -108,7 +108,8 @@
         "入れたいアプリが全てインストール中になったことを確認し、設定に移ります。",
         "（この時、フィルタリングアプリ(ISGC Assistなど)を消せますが、そうするとおそらくブラウジングが一切できなくなります。少なくとも私は、消したらネットから遮断されたので、もう一度初期化をやり直しました。）",
         "設定に移ったら、appleアカウントにサインインします。app storeのところで手間取ると、このあたりでMDMインストールが完了してしまいます。",
-        "![iCloud設定画面1](/assets/ipad-restriction-guide/IMG_0496.jpeg)![iCloud設定画面2](/assets/ipad-restriction-guide/IMG_7235.png),![iCloud設定画面3](/assets/ipad-restriction-guide/IMG_7234.jpeg)![iCloud設定画面4](/assets/ipad-restriction-guide/IMG_7232.png)",
+        "![iCloud設定画面1](/assets/ipad-restriction-guide/IMG_0496.jpeg)",
+        "![iCloud設定画面2](/assets/ipad-restriction-guide/IMG_7235.png)![iCloud設定画面3](/assets/ipad-restriction-guide/IMG_7234.jpeg)![iCloud設定画面4](/assets/ipad-restriction-guide/IMG_7232.png)",
         "サインインを確実に行い、この画面を開きます。ここまでできたら、OKです。落ち着きましょう。appleアカウントの同期設定し終わるまで、この画面は閉じないようにしましょう。一度でも閉じると、MDMがインストール完了していた場合、二度と開けなくなります。"
       ]
     }
