@@ -110,7 +110,7 @@ const ThreeImagesContainer = styled.div`
 
     // 左端のグラデーション（2枚目以降がある事を示す）
     &::before {
-      content: '→右にスクロール';
+      content: '';
       position: absolute;
       left: 0;
       top: 0;
