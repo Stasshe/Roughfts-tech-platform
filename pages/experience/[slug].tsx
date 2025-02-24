@@ -68,7 +68,7 @@ const SingleImageContainer = styled.div`
   }
 `;
 
-// 3枚横並び用のコンテナを追加
+// 3枚横並び用のコンテナを更新
 const ThreeImagesContainer = styled.div`
   display: flex;
   gap: 1rem;
@@ -88,12 +88,65 @@ const ThreeImagesContainer = styled.div`
   @media (max-width: 768px) {
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding-bottom: 1rem;
+    overflow-y: hidden; // 縦スクロール防止
+    padding-bottom: 1.5rem;
     -webkit-overflow-scrolling: touch;
+    position: relative;
+    scroll-snap-type: x mandatory; // スクロールスナップを追加
+    
+    // 右端のグラデーション
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 1.5rem;
+      width: 60px;
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8));
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    
+    // スクロール案内
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.8) 20%,
+        rgba(255, 255, 255, 0.8) 80%,
+        transparent
+      );
+      animation: scrollGuide 2s ease-in-out infinite;
+    }
     
     img {
       flex: 0 0 80%;
       max-width: none;
+      scroll-snap-align: center; // スクロールスナップ位置
+    }
+  }
+
+  @keyframes scrollGuide {
+    0% {
+      transform: translateX(-80px);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(80px);
+      opacity: 0;
     }
   }
 `;
