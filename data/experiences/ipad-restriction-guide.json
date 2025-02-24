@@ -51,7 +51,7 @@
       "caption_ja": "iTunes設定",
       "content": [
         "Connect your iPad to the computer via cable and select 'Trust This Device'",
-        "![iTunes Restore Screen](/assets/ipad-restriction-guide/itunesForWindowsRestore.jpeg)",
+        "![iTunes Restore Screen](/assets/ipad-restriction-guide/IMG_7231.jpeg)",
         "Click the red circle shown in the image above. In Japanese, it's labeled as 'iPad の復元' (Restore iPad).",
         "Don't waste time creating backups as they won't be usable anyway.",
         "The iPad will begin resetting, completely ignoring Jamf Pro. Just wait.",
@@ -60,7 +60,7 @@
       ],
       "content_ja": [
         "パソコンとipadをケーブルで接続し、「デバイスを信頼する」とします",
-        "![iTunes復元画面](/assets/ipad-restriction-guide/itunesForWindowsRestore.jpeg)",
+        "![iTunes復元画面](/assets/ipad-restriction-guide/IMG_7231.jpeg)",
         "上の画像の赤丸を押します。日本語だと、「ipadの復元」です。",
         "バックアップは取ったところで使えませんので、取るだけ時間の無駄です。無視しましょう。",
         "そして、ipadがjamf proをガン無視でリセットを始めるので、待ちましょう。",
@@ -90,27 +90,28 @@
       "content": [
         "As you proceed, you'll see the 'Register this iPad to School' screen. This is where the real time challenge begins.",
         "First, open the App Store and sign in with your Apple ID.",
-        "![App Store Screen 1](/assets/ipad-restriction-guide/appstore1.jpeg)",
-        "![App Store Screen 2](/assets/ipad-restriction-guide/appstore2.jpeg)",
+        "![App Store Screen](/assets/ipad-restriction-guide/IMG_7230.png)",
         "If you've previously installed apps on your iPhone, they'll appear with a cloud icon ☁️ as shown above, making the process much smoother. While not mandatory, this is highly recommended.",
         "Once app downloads begin, you're safe. If an app shows 'Installing', it's essentially guaranteed to complete.",
         "After confirming all desired apps are in the installation queue, move to Settings.",
         "(You can remove filtering apps like ISGC Assist, but this might completely block internet access. When I tried removing it, I lost all connectivity and had to start over.)",
         "In Settings, sign in to your Apple account. If you spend too much time in the App Store, MDM installation might complete before this step.",
-        "![iCloud Settings Screen](/assets/ipad-restriction-guide/icloudLinkConfig1.jpeg)",
+        "![iCloud Setup Screen 1](/assets/ipad-restriction-guide/IMG_0496.jpeg)",
+        "![iCloud Setup Screen 2](/assets/ipad-restriction-guide/IMG_7235.jpeg)",
+        "![iCloud Setup Screen 3](/assets/ipad-restriction-guide/IMG_7234.jpeg)",
+        "![iCloud Setup Screen 4](/assets/ipad-restriction-guide/IMG_7233.jpeg)",
         "Sign in and open this screen. Once here, you're safe. Stay calm and don't close this screen until iCloud sync settings are complete. If you close it after MDM installation completes, you'll never be able to access it again."
       ],
       "content_ja": [
         "操作をすすめていくと、「このipadを学校に登録」というのが出てきます。ここからが本当に時間との勝負です。",
         "まず最初にapp storeを開き、自分のapple idでサインインします。",
-        "![App Store画面1](/assets/ipad-restriction-guide/appstore1.jpeg)",
-        "![App Store画面2](/assets/ipad-restriction-guide/appstore2.jpeg)",
+        "![App Store画面](/assets/ipad-restriction-guide/IMG_7230.png)",
         "入れたいアプリを事前にスマホで入れておくと、上のように過去に入れたアプリが☁️マークになっているので、いちいち検索する手間が省けて、非常にスムーズにできます。必須ではありませんが、必ずと言っていいほどやった方が良いです。",
         "アプリのダウンロードは、始まりさえすれば、問題ありません。インストール中になれば、実質そのアプリは入ったも同然です。",
         "入れたいアプリが全てインストール中になったことを確認し、設定に移ります。",
         "（この時、フィルタリングアプリ(ISGC Assistなど)を消せますが、そうするとおそらくブラウジングが一切できなくなります。少なくとも私は、消したらネットから遮断されたので、もう一度初期化をやり直しました。）",
         "設定に移ったら、appleアカウントにサインインします。app storeのところで手間取ると、このあたりでMDMインストールが完了してしまいます。",
-        "![iCloud設定画面](/assets/ipad-restriction-guide/icloudLinkConfig1.jpeg)",
+        "![iCloud設定画面1](/assets/ipad-restriction-guide/IMG_0496.jpeg)![iCloud設定画面2](/assets/ipad-restriction-guide/IMG_7235.png),![iCloud設定画面3](/assets/ipad-restriction-guide/IMG_7234.jpeg)![iCloud設定画面4](/assets/ipad-restriction-guide/IMG_7232.png)",
         "サインインを確実に行い、この画面を開きます。ここまでできたら、OKです。落ち着きましょう。appleアカウントの同期設定し終わるまで、この画面は閉じないようにしましょう。一度でも閉じると、MDMがインストール完了していた場合、二度と開けなくなります。"
       ]
     }

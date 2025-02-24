@@ -10,7 +10,7 @@ import path from 'path';
 import { useLanguage } from '../../lib/LanguageContext';
 import Link from 'next/link';
 import icons from '../../data/skills/icons.json';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
@@ -54,49 +54,105 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
   };
 };
 
-// 画像表示用のコンポーネントを追加
+// 画像コンテナのスタイリングを更新
+const ImageContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  justify-content: center;
+  width: 100%;
+
+  img {
+    flex: 0 1 auto;
+    max-width: calc(50% - 0.75rem); // 2列の場合
+    
+    @media (min-width: 768px) {
+      max-width: calc(50% - 0.75rem); // PCでも2列まで
+    }
+  }
+`;
+
+// 画像スタイルを更新
 const ContentImage = styled.img`
-  max-width: 100%;
-  height: auto;
+  height: 400px; // 高さを増加
+  width: auto;
   border-radius: 8px;
-  margin: 1rem 0;
+  object-fit: contain;
+  margin: 0 auto; // 中央揃え
+  display: block; // ブロック要素化して中央揃えを有効に
+  
+  @media (max-width: 768px) {
+    height: 250px; // モバイルでの高さも調整
+  }
 `;
 
 const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience }) => {
   const router = useRouter();
   const { language } = useLanguage();
+  const [mounted, setMounted] = useState(false);
   const [imageLoadError, setImageLoadError] = useState<{[key: string]: boolean}>({});
 
-  // 画像とリンクの変換関数
+  // ハイドレーションエラー対策
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  // 画像変換関数を改善
   const convertContent = (text: string) => {
-    // 画像の正規表現
+    // 連続する画像を検出するための正規表現
     const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
-    
-    // テキストを分割して処理
-    const parts = text.split(imageRegex);
+    const parts = text.split(/(!?\[[^\]]*\]\([^)]+\))/);
     const result = [];
-    
+    let images = [];
+
     for (let i = 0; i < parts.length; i++) {
-      if (i % 3 === 0) {
-        // 通常のテキスト
-        if (parts[i]) result.push(<span key={`text-${i}`}>{parts[i]}</span>);
-      } else if (i % 3 === 2) {
-        // 画像URL
-        const alt = parts[i - 1];
-        const src = parts[i];
-        if (!imageLoadError[src]) {
-          result.push(
+      const part = parts[i];
+      
+      if (!part) continue;
+
+      if (part.startsWith('![')) {
+        // 画像の場合
+        const match = part.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+        if (match && !imageLoadError[match[2]]) {
+          images.push(
             <ContentImage
               key={`img-${i}`}
-              src={src}
-              alt={alt}
-              onError={() => setImageLoadError(prev => ({ ...prev, [src]: true }))}
+              src={match[2]}
+              alt={match[1]}
+              onError={() => setImageLoadError(prev => ({ ...prev, [match[2]]: true }))}
             />
           );
         }
+      } else {
+        // テキストの場合、直前の画像グループがあれば追加
+        if (images.length > 0) {
+          result.push(
+            <ImageContainer key={`img-group-${i}`}>
+              {images}
+            </ImageContainer>
+          );
+          images = [];
+        }
+        if (part.trim()) {
+          result.push(<span key={`text-${i}`}>{part}</span>);
+        }
       }
     }
-    
+
+    // 残りの画像グループを追加
+    if (images.length > 0) {
+      result.push(
+        <ImageContainer key="img-group-final">
+          {images}
+        </ImageContainer>
+      );
+    }
+
     return result;
   };
 
