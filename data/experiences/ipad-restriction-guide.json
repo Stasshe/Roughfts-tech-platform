@@ -96,10 +96,7 @@
         "After confirming all desired apps are in the installation queue, move to Settings.",
         "(You can remove filtering apps like ISGC Assist, but this might completely block internet access. When I tried removing it, I lost all connectivity and had to start over.)",
         "In Settings, sign in to your Apple account. If you spend too much time in the App Store, MDM installation might complete before this step.",
-        "![iCloud Setup Screen 1](/assets/ipad-restriction-guide/IMG_0496.jpeg)",
-        "![iCloud Setup Screen 2](/assets/ipad-restriction-guide/IMG_7235.jpeg)",
-        "![iCloud Setup Screen 3](/assets/ipad-restriction-guide/IMG_7234.jpeg)",
-        "![iCloud Setup Screen 4](/assets/ipad-restriction-guide/IMG_7233.jpeg)",
+        "![iCloud Setup Screen 1](/assets/ipad-restriction-guide/IMG_0496.jpeg)![iCloud Setup Screen 2](/assets/ipad-restriction-guide/IMG_7235.png),![iCloud Setup Screen 3](/assets/ipad-restriction-guide/IMG_7234.jpeg)![iCloud Setup Screen 4](/assets/ipad-restriction-guide/IMG_7232.png)",
         "Sign in and open this screen. Once here, you're safe. Stay calm and don't close this screen until iCloud sync settings are complete. If you close it after MDM installation completes, you'll never be able to access it again."
       ],
       "content_ja": [
