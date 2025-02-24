@@ -54,7 +54,21 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
   };
 };
 
-// 画像コンテナのスタイリングを更新
+// 単一画像用のコンテナ
+const SingleImageContainer = styled.div`
+  margin: 1.5rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  img {
+    max-width: calc(50% - 0.75rem);
+    height: auto;
+    max-height: 500px; // 最大高さを設定
+  }
+`;
+
+// 複数画像用のコンテナを更新
 const ImageContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -63,27 +77,38 @@ const ImageContainer = styled.div`
   justify-content: center;
   width: 100%;
 
+  // フレックスアイテムのアライメントを調整
+  
+
   img {
     flex: 0 1 auto;
-    max-width: calc(50% - 0.75rem); // 2列の場合
-    
-    @media (min-width: 768px) {
-      max-width: calc(50% - 0.75rem); // PCでも2列まで
-    }
+    max-width: calc(50% - 0.75rem);
+    height: auto; // 高さを自動調整に変更
+    max-height: 500px; // 最大高さを設定
+    width: auto; // 幅を自動調整
   }
 `;
 
 // 画像スタイルを更新
 const ContentImage = styled.img`
-  height: 400px; // 高さを増加
-  width: auto;
   border-radius: 8px;
   object-fit: contain;
-  margin: 0 auto; // 中央揃え
-  display: block; // ブロック要素化して中央揃えを有効に
+  margin: 0 auto;
+  display: block;
   
+  // 複数画像の場合のスタイル（クラスなしの場合）
+  height: auto;
+  max-height: 500px;
+  
+  // 単一画像の場合のスタイル
+  &.single-image {
+    max-width: calc(50% - 0.75rem);
+    height: auto;
+    max-height: 500px;
+  }
+
   @media (max-width: 768px) {
-    height: 250px; // モバイルでの高さも調整
+    max-height: 400px;
   }
 `;
 
@@ -104,7 +129,6 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
 
   // 画像変換関数を改善
   const convertContent = (text: string) => {
-    // 連続する画像を検出するための正規表現
     const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
     const parts = text.split(/(!?\[[^\]]*\]\([^)]+\))/);
     const result = [];
@@ -124,6 +148,7 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
               key={`img-${i}`}
               src={match[2]}
               alt={match[1]}
+              className={images.length === 0 && !parts[i + 1]?.startsWith('![') ? 'single-image' : ''}
               onError={() => setImageLoadError(prev => ({ ...prev, [match[2]]: true }))}
             />
           );
@@ -132,9 +157,15 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
         // テキストの場合、直前の画像グループがあれば追加
         if (images.length > 0) {
           result.push(
-            <ImageContainer key={`img-group-${i}`}>
-              {images}
-            </ImageContainer>
+            images.length === 1 ? (
+              <SingleImageContainer key={`img-group-${i}`}>
+                {images}
+              </SingleImageContainer>
+            ) : (
+              <ImageContainer key={`img-group-${i}`}>
+                {images}
+              </ImageContainer>
+            )
           );
           images = [];
         }
@@ -147,9 +178,15 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
     // 残りの画像グループを追加
     if (images.length > 0) {
       result.push(
-        <ImageContainer key="img-group-final">
-          {images}
-        </ImageContainer>
+        images.length === 1 ? (
+          <SingleImageContainer key="img-group-final">
+            {images}
+          </SingleImageContainer>
+        ) : (
+          <ImageContainer key="img-group-final">
+            {images}
+          </ImageContainer>
+        )
       );
     }
 
