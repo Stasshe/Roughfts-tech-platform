@@ -56,7 +56,6 @@ export interface Detail {
 
 export interface Gists {
   id: string;
-  slug: string;
   title: string;
   title_ja: string;
   year: string;

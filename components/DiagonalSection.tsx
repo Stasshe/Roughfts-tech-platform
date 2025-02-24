@@ -26,7 +26,7 @@ const Container = styled.section`
     position: absolute;
     left: 0;
     right: 0;
-    height: 100px;
+    height: auto;
     pointer-events: none;
   }
 
@@ -44,7 +44,7 @@ const Container = styled.section`
 const ArticleGrid = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -53,7 +53,7 @@ const ArticleGrid = styled.div`
 
 const ArticleCard = styled(motion.article)`
   background: white;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -66,33 +66,34 @@ const ArticleCard = styled(motion.article)`
 `;
 
 const Title = styled.h3`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 1rem;
   color: #1a1a1a;
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-top: 0;
   }
 `;
 
 const Description = styled.p`
   color: #666;
+  font-size: 1rem;
   margin-bottom: 1rem;
   @media (max-width: 768px) {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 `;
 
 const Content = styled.div`
   color: #444;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   @media (max-width: 768px) {
     -webkit-line-clamp: 2;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 `;
 
@@ -101,8 +102,8 @@ const DiagonalSection = () => {
   const router = useRouter();
   const recentExperiences = experiences.slice(0, 5);
 
-  const handleCardClick = (slug: string) => {
-    router.push(`/experience/${slug}`);
+  const handleCardClick = (id: string) => {
+    router.push(`/experience/${id}`);
   };
 
   return (
@@ -115,7 +116,7 @@ const DiagonalSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
-            onClick={() => handleCardClick(experience.slug)}
+            onClick={() => handleCardClick(experience.id)}
           >
             <Title>
               {language === 'en' ? experience.title : experience.title_ja}
