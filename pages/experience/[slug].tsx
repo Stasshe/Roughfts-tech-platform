@@ -88,11 +88,12 @@ const ThreeImagesContainer = styled.div`
   @media (max-width: 768px) {
     flex-wrap: nowrap;
     overflow-x: auto;
-    overflow-y: hidden; // 縦スクロール防止
-    padding-bottom: 1.5rem;
+    overflow-y: hidden;
+    padding-bottom: 2rem;
     -webkit-overflow-scrolling: touch;
     position: relative;
-    scroll-snap-type: x mandatory; // スクロールスナップを追加
+    scroll-snap-type: x mandatory;
+    justify-content: flex-start; // 左寄せに変更
     
     // 右端のグラデーション
     &::after {
@@ -100,53 +101,76 @@ const ThreeImagesContainer = styled.div`
       position: absolute;
       right: 0;
       top: 0;
-      bottom: 1.5rem;
-      width: 60px;
-      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8));
+      bottom: 2rem;
+      width: 80px;
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.9));
       pointer-events: none;
-      opacity: 0.8;
+      opacity: 1;
+    }
+
+    // 左端のグラデーション（2枚目以降がある事を示す）
+    &::before {
+      content: '→右にスクロール';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 2rem;
+      width: 80px;
+      background: linear-gradient(to left, transparent 50%, rgba(0, 0, 0, 0.9));
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:has(:first-child:not(:hover)) {
+      &::before {
+        opacity: 1;
+      }
     }
     
-    // スクロール案内
+    // スクロール案内インジケーター
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+    }
+
     &::before {
       content: '';
       position: absolute;
       bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(255, 255, 255, 0.8) 20%,
-        rgba(255, 255, 255, 0.8) 80%,
-        transparent
-      );
-      animation: scrollGuide 2s ease-in-out infinite;
+      left: 0;
+      width: 30%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      animation: scrollIndicator 2s ease-in-out infinite;
+      z-index: 1;
     }
     
     img {
-      flex: 0 0 80%;
+      flex: 0 0 85%;
       max-width: none;
-      scroll-snap-align: center; // スクロールスナップ位置
+      scroll-snap-align: start; // 左寄せのスナップに変更
     }
   }
 
-  @keyframes scrollGuide {
+  @keyframes scrollIndicator {
     0% {
-      transform: translateX(-80px);
-      opacity: 0;
-    }
-    20% {
+      transform: translateX(0%);
       opacity: 1;
     }
-    80% {
-      opacity: 1;
+    50% {
+      opacity: 0.5;
     }
     100% {
-      transform: translateX(80px);
-      opacity: 0;
+      transform: translateX(233%);
+      opacity: 1;
     }
   }
 `;
