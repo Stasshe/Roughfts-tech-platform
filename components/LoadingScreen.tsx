@@ -8,6 +8,7 @@ const LoadingScreen = () => {
   const [progress, setProgress] = useState(0);
   const [hasVisited, setHasVisited] = useState(false);
   const [gridLines, setGridLines] = useState([]);
+  const [isExiting, setIsExiting] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -37,9 +38,14 @@ const LoadingScreen = () => {
       if (newProgress < 1) {
         requestAnimationFrame(animate);
       } else {
+        // フェードアウトの開始
         setTimeout(() => {
-          setIsLoading(false);
-          document.getElementById('__next')?.classList.add('loaded');
+          setIsExiting(true);
+          // フェードアウト完了後に実際にコンポーネントを非表示にする
+          setTimeout(() => {
+            setIsLoading(false);
+            document.getElementById('__next')?.classList.add('loaded');
+          }, 800); // フェードアウトアニメーションの時間
         }, 300);
       }
     };
@@ -83,6 +89,7 @@ const LoadingScreen = () => {
     <AnimatePresence>
       <LoadingWrapper
         initial={{ opacity: 1 }}
+        animate={{ opacity: isExiting ? 0 : 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
