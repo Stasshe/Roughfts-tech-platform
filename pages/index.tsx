@@ -94,7 +94,7 @@ const HomePage = () => {
                   animate={{ opacity: 0.8, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.2 }}
                 >
-                  <Tagline>Elevating digital experiences through modern design</Tagline>
+                  <Tagline>Practice is the best shortcut of learning.</Tagline>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
