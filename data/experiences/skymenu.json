@@ -56,16 +56,12 @@
             "caption_ja": "仕組み",
             "content": [
                 "The mechanism is simple. It takes a screenshot of the page with pyautogui, moves the mouse to a place that matches the image of the button taken in advance to some extent, and clicks it.",
-                "![Image1](/assets/skymenu/add.png)",
-                "![Image2](/assets/skymenu/close.png)",
-                "![Image3](/assets/skymenu/popup_image.png)",
+                "![Image1](/assets/skymenu/add.png)![Image2](/assets/skymenu/close.png)![Image3](/assets/skymenu/popup_image.png)",
                 "These three button images are recognized. The rest is done with the tab key, etc."
             ],
             "content_ja": [
                 "pyautoguiで、ページのスクリーンショットを撮り、事前に撮っておいたボタンの画像とある程度適合するところにマウスを持っていき、クリックします。",
-                "![画像1](/assets/skymenu/add.png)",
-                "![画像2](/assets/skymenu/close.png)",
-                "![画像3](/assets/skymenu/popup_image.png)",
+                "![画像1](/assets/skymenu/add.png)![画像2](/assets/skymenu/close.png)![画像3](/assets/skymenu/popup_image.png)",
                 "これら三つのボタンの画像を、認識しています。それ以外はタブキーなどです。"
             ]
         }
