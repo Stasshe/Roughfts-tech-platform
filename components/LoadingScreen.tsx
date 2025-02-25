@@ -105,48 +105,111 @@ const LoadingScreen = () => {
         </GridBackground>
         
         <LoadingContent>
-          <LogoContainer>
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-            >
-              <OuterCircle 
-                initial={{ rotate: 0 }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <CircleHighlight />
-              </OuterCircle>
-            </motion.div>
-
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-            >
-              <InnerCircle 
-                initial={{ rotate: 360 }}
-                animate={{ rotate: 0 }}
-                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-              >
-                <InnerCircleHighlight />
-              </InnerCircle>
-            </motion.div>
-
-            <motion.div
+          <AnimationContainer>
+            {/* 大きな円のアニメーション */}
+            <CircleGroup
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 1 }}
+              transition={{ duration: 1.2 }}
             >
-              <CenterDot 
+              {/* 背景の輪 */}
+              <BackgroundRing 
+                initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.7, 1, 0.7]
+                  scale: [0.8, 1.2, 0.8], 
+                  opacity: [0.1, 0.4, 0.1]
                 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 4,
+                  ease: "easeInOut"
+                }}
               />
-            </motion.div>
+              
+              {/* 複数の円がぶつかり合う効果 */}
+              <OrbitingCircles>
+                <OrbitCircle 
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                >
+                  <GlowingCircle 
+                    size={60} 
+                    color="rgba(65, 184, 255, 0.8)" 
+                    distance={140}
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.7, 1, 0.7]
+                    }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                </OrbitCircle>
+                
+                <OrbitCircle 
+                  initial={{ rotate: 120 }}
+                  animate={{ rotate: -240 }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                >
+                  <GlowingCircle 
+                    size={40} 
+                    color="rgba(255, 100, 255, 0.8)" 
+                    distance={120}
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [0.6, 0.9, 0.6]
+                    }}
+                    transition={{ 
+                      duration: 3.5, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                </OrbitCircle>
+                
+                <OrbitCircle 
+                  initial={{ rotate: 240 }}
+                  animate={{ rotate: 600 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                >
+                  <GlowingCircle 
+                    size={35} 
+                    color="rgba(120, 255, 180, 0.8)" 
+                    distance={100}
+                    animate={{
+                      scale: [1, 1.4, 1],
+                      opacity: [0.7, 1, 0.7]
+                    }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                </OrbitCircle>
+              </OrbitingCircles>
+              
+              {/* 中心の円 */}
+              <CenterCircle
+                animate={{ 
+                  scale: [1, 1.15, 1],
+                  opacity: [0.8, 1, 0.8],
+                  boxShadow: [
+                    '0 0 20px 2px rgba(255, 255, 255, 0.3)',
+                    '0 0 40px 5px rgba(255, 255, 255, 0.6)',
+                    '0 0 20px 2px rgba(255, 255, 255, 0.3)'
+                  ]
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+              />
+            </CircleGroup>
 
             <TextContainer>
               <WelcomeText
@@ -157,7 +220,7 @@ const LoadingScreen = () => {
                 Welcome
               </WelcomeText>
             </TextContainer>
-          </LogoContainer>
+          </AnimationContainer>
 
           <LoadingBarContainer>
             <LoadingBarTrack>
@@ -218,65 +281,71 @@ const LoadingContent = styled.div`
   z-index: 2;
 `;
 
-const LogoContainer = styled.div`
+const AnimationContainer = styled.div`
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 300px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const OuterCircle = styled(motion.div)`
-  width: 150px;
-  height: 150px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  position: absolute;
+const CircleGroup = styled(motion.div)`
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const CircleHighlight = styled.div`
+const BackgroundRing = styled(motion.div)`
   position: absolute;
-  width: 10px;
-  height: 10px;
-  background: white;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  top: -5px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+  filter: blur(2px);
+`;
+
+const OrbitingCircles = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const OrbitCircle = styled(motion.div)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const GlowingCircle = styled(motion.div)<{ size: number; color: string; distance: number }>`
+  position: absolute;
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
+  border-radius: 50%;
+  background: ${props => props.color};
+  box-shadow: 0 0 20px ${props => props.color};
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, calc(-50% - ${props => props.distance}px));
+  filter: blur(5px);
 `;
 
-const InnerCircle = styled(motion.div)`
-  width: 100px;
-  height: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+const CenterCircle = styled(motion.div)`
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const InnerCircleHighlight = styled.div`
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  top: -3px;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
-const CenterDot = styled(motion.div)`
-  width: 12px;
-  height: 12px;
-  background: white;
-  border-radius: 50%;
-  position: absolute;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.4) 100%);
+  box-shadow: 0 0 30px 3px rgba(255, 255, 255, 0.5);
 `;
 
 const TextContainer = styled.div`
