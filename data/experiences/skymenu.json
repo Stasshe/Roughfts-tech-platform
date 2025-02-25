@@ -1,0 +1,45 @@
+{
+    "id": "skymenu",
+    "title": "SkyMenu",
+    "title_ja": "SkyMenu",
+    "year": "2025",
+    "month": "2",
+    "date": "25",
+    "category": "Web Development",
+    "techStack": [
+        "python",
+        "gui",
+        "pyautogui",
+        "opencv-python"
+    ],
+    "description": "SkyMenu is a service that allows users to create and manage their own menus. This service provides each student with an account, allowing them to log in and save their work during class. However, many users tend to keep the default password (which is the same as their user ID), so this data can be aggregated and enjoyed. Please proceed with caution. (Note: This is almost cracking, do not imitate.)",
+    "description_ja": "情報室のSkyMenuというサービスがあります。これは、情報室のメニューを管理するためのサービスです。このサービスでは、生徒それぞれにアカウントが存在し、それにログインすることで、授業内での作品を保存することができます。しかし、このアカウントのパスワードを初期値のままにしておく（ユーザーIDと同じ）人が多いので、それを集計し、楽しむというものです。それではどうぞ。（※ほぼクラッキング、マネしないでね）",
+    "details":[
+        {
+            "caption": "SkyMenu",
+            "caption_ja": "SkyMenu",
+            "content": ["SkyMenu is a web development project that allows users to create and manage their own menus."],
+            "content_ja": ["SkyMenuは、ユーザーが自分のメニューを作成して管理できるウェブ開発プロジェクトです。"]
+        },
+        {
+            "caption": "How to Crack",
+            "caption_ja": "クラッキングのやり方",
+            "content": ["SkyMenu is a web development project that allows users to create and manage their own menus."],
+            "content_ja": [
+                "batで実行する方法もありますが、止めれなくなってしまったので、やや実行の遅く、まだ手に負える範囲で暴走するpythonでのやり方を紹介します。",
+                "まずは、このコードをコピーしてください。",
+                "```python",
+                
+                "```",
+                "そして、このコードを実行してください。",
+                "これで、SkyMenuのメニューをクラッキングすることができます。"
+            ]
+        },
+        {
+            "caption": "How to Crack",
+            "caption_ja": "クラッキングのやり方",
+            "content": ["SkyMenu is a web development project that allows users to create and manage their own menus."],
+            "content_ja": ["SkyMenuは、ユーザーが自分のメニューを作成して管理できるウェブ開発プロジェクトです。"]
+        }
+    ]
+}
