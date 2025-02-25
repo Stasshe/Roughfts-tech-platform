@@ -12,8 +12,8 @@
         "pyautogui",
         "opencv-python"
     ],
-    "description": "SkyMenu is a service that allows users to create and manage their own menus. This service provides each student with an account, allowing them to log in and save their work during class. However, many users tend to keep the default password (which is the same as their user ID), so this data can be aggregated and enjoyed. Please proceed with caution. (Note: This is almost cracking, do not imitate.)",
-    "description_ja": "情報室のSkyMenuというサービスがあります。これは、情報室のメニューを管理するためのサービスです。このサービスでは、生徒それぞれにアカウントが存在し、それにログインすることで、授業内での作品を保存することができます。しかし、このアカウントのパスワードを初期値のままにしておく（ユーザーIDと同じ）人が多いので、それを集計し、楽しむというものです。それではどうぞ。（※ほぼクラッキング、マネしないでね）",
+    "description": "There is a service called SkyMenu in the information room. In this service, each student has an account, and by logging in to it, they can save the works in the class. However, many people leave the password of this account as the initial value (the same as the user ID), so this is a project to collect and enjoy it. Here you go. (※ Almost cracking, don't imitate)",
+    "description_ja": "情報室のSkyMenuというサービスがあります。このサービスでは、生徒それぞれにアカウントが存在し、それにログインすることで、授業内での作品を保存することができます。しかし、このアカウントのパスワードを初期値のままにしておく（ユーザーIDと同じ）人が多いので、それを集計し、楽しむというものです。それではどうぞ。（※ほぼクラッキング、マネしないでね）",
     "details":[
         {
             "caption": "SkyMenu",
@@ -24,12 +24,19 @@
         {
             "caption": "How to Crack",
             "caption_ja": "クラッキングのやり方",
-            "content": ["SkyMenu is a web development project that allows users to create and manage their own menus."],
+            "content": [
+                "There is a way to run this code with bat, but it got out of control, so I will introduce a way to run it with python, which is slower and still manageable.",
+                "First, copy this code.",
+                "$[IDturtle.py](python)",
+                "Then, run this code.",
+                "Now you can crack the SkyMenu menu."
+            ],
             "content_ja": [
                 "batで実行する方法もありますが、止めれなくなってしまったので、やや実行の遅く、まだ手に負える範囲で暴走するpythonでのやり方を紹介します。",
-                "まずは、このコードをコピーしてください。",
+                "`py -m pip install pyautogui`",
+                "を実行して、必要なモジュールをインストールします。",
+                "そして、このコードをコピーして実行。",
                 "$[IDturtle.py](python)",
-                "そして、このコードを実行してください。",
                 "これで、SkyMenuのメニューをクラッキングすることができます。"
             ]
         },

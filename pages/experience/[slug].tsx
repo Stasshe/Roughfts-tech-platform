@@ -16,7 +16,7 @@ import 'highlight.js/styles/atom-one-dark.css'; // ダークテーマのスタ�
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
-  codeContent: string | null;
+  codeContent: { [key: string]: string };
 }
 
 // Static Paths
@@ -36,23 +36,56 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-// Static Props
+// Static Props を更新
 export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async ({ params }) => {
   const slug = params?.slug as string;
   const filePath = path.join(process.cwd(), 'data', 'experiences', `${slug}.json`);
   
   let experience: Gists | null = null;
-  let codeContent: string | null = null;
+  let codeContent: { [key: string]: string } = {};
   
   try {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     experience = JSON.parse(fileContent) as Gists;
 
-    if (slug === 'skymenu') {
-      codeContent = fs.readFileSync(path.join(process.cwd(), 'public', 'scripts', 'IDturtle.py'), 'utf8');
+    // experience.details から $[filename] パターンを抽出
+    const codePattern = /\$\[([^\]]+)\]/g;
+    const codeFiles = new Set<string>();
+
+    // すべての details と subDetails のコンテンツをチェック
+    experience.details?.forEach(detail => {
+      const contents = [...(detail.content || []), ...(detail.content_ja || [])];
+      contents.forEach(content => {
+        let match;
+        while ((match = codePattern.exec(content)) !== null) {
+          codeFiles.add(match[1]);
+        }
+      });
+
+      // subDetails もチェック
+      detail.subDetails?.forEach(subDetail => {
+        const subContents = [...(subDetail.content || []), ...(subDetail.content_ja || [])];
+        subContents.forEach(content => {
+          let match;
+          while ((match = codePattern.exec(content)) !== null) {
+            codeFiles.add(match[1]);
+          }
+        });
+      });
+    });
+
+    // 見つかったすべてのコードファイルを読み込む
+    for (const filename of codeFiles) {
+      try {
+        const codePath = path.join(process.cwd(),'public', 'scripts', filename);
+        codeContent[filename] = fs.readFileSync(codePath, 'utf8');
+      } catch (error) {
+        console.error(`Error loading code file ${filename}:`, error);
+        codeContent[filename] = `// Error: Could not load ${filename}`;
+      }
     }
   } catch (error) {
-    console.error(`Error loading experience content: ${error}`);
+    console.error(`Error loading experience content:`, error);
   }
 
   return {
@@ -369,7 +402,7 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
                         <CodeFilename>{filename}</CodeFilename>
                         <ButtonGroup>
                             <DownloadButton 
-                                onClick={() => downloadFile(filename, codeContent || '')}
+                                onClick={() => downloadFile(filename, codeContent[filename] || '')}
                                 title="ファイルをダウンロード"
                             >
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -377,7 +410,7 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
                                 </svg>
                             </DownloadButton>
                             <CopyButton 
-                                onClick={() => copyToClipboard(codeContent || '', codeId)}
+                                onClick={() => copyToClipboard(codeContent[filename] || '', codeId)}
                                 title={isCopied ? "コピーしました" : "クリップボードにコピー"}
                                 copied={isCopied}
                             >
@@ -398,7 +431,7 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
                     </CodeHeader>
                     <pre>
                         <code className={language}>
-                            {codeContent}
+                            {codeContent[filename]}
                         </code>
                     </pre>
                 </CodeBlock>
