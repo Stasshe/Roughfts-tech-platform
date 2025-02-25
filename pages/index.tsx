@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import ProductScroll from '../components/ProductScroll';
@@ -10,10 +10,12 @@ import SkillsCarousel from '../components/SkillsCarousel';
 
 const HomePage = () => {
   const { scrollY } = useScroll();
-  // パララックス効果を強調
-  const coverY = useTransform(scrollY, [0, 800], [0, 400], { clamp: false });
-  const scrollOpacity = useTransform(scrollY, [0, 500], [1, 0], { clamp: true });
-
+  // より洗練されたパララックス効果
+  const coverScale = useTransform(scrollY, [0, 500], [1.1, 1.4]);
+  const coverOpacity = useTransform(scrollY, [0, 300], [0.6, 0]);
+  const titleY = useTransform(scrollY, [0, 300], [0, -50]);
+  const scrollOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  
   const scrollToProfile = () => {
     const profileSection = document.getElementById('profile-section');
     profileSection?.scrollIntoView({ behavior: 'smooth' });
@@ -25,26 +27,20 @@ const HomePage = () => {
         <Head>
           <title>Roughfts Tech Platform</title>
         </Head>
-        <HeroContent>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8 }}
-          >
-            <TitleLine>Welcome</TitleLine>
-            <TitleLine>to</TitleLine>
-            <TitleLine>Roughfts</TitleLine>
-          </motion.h1>
-        </HeroContent>
+        
+        {/* グラデーションオーバーレイ */}
+        <GradientOverlay />
+        
+        {/* カバー画像 */}
         <motion.div 
           style={{ 
-            y: coverY, 
+            scale: coverScale,
+            opacity: coverOpacity,
             position: 'absolute',
             top: 0,
             left: 0,
             width: '100%',
             height: '100%',
-            overflow: 'hidden'
           }}
         >
           <CoverImageWrapper>
@@ -53,18 +49,85 @@ const HomePage = () => {
               alt="Cover"
               priority
               fill
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'cover', filter: 'grayscale(80%)' }}
             />
           </CoverImageWrapper>
         </motion.div>
-        <ScrollButton style={{ opacity: scrollOpacity }} onClick={scrollToProfile}>
-          <span>Scroll Down</span>
-          <motion.div 
-            animate={{ y: [0, 10, 0] }} 
-            transition={{ duration: 1.5, repeat: Infinity }}
+
+        {/* メインコンテンツ */}
+        <motion.div 
+          className="hero-content-wrapper"
+          style={{ y: titleY, zIndex: 5 }}
+        >
+          <HeroContent>
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <motion.h1>
+                  <TitleLine 
+                    initial={{ x: -100, opacity: 0 }} 
+                    animate={{ x: 0, opacity: 1 }} 
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                  >
+                    Welcome
+                  </TitleLine>
+                  <TitleLine 
+                    initial={{ x: -100, opacity: 0 }} 
+                    animate={{ x: 0, opacity: 1 }} 
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                  >
+                    to
+                  </TitleLine>
+                  <TitleLine 
+                    initial={{ x: -100, opacity: 0 }} 
+                    animate={{ x: 0, opacity: 1 }} 
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                  >
+                    <GradientText>Roughfts</GradientText>
+                  </TitleLine>
+                </motion.h1>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 0.8, y: 0 }}
+                  transition={{ duration: 0.8, delay: 1.2 }}
+                >
+                  <Tagline>Elevating digital experiences through modern design</Tagline>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </HeroContent>
+        </motion.div>
+
+        {/* スクロールボタン */}
+        <ScrollButton 
+          style={{ opacity: scrollOpacity }} 
+          onClick={scrollToProfile}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.8, duration: 0.8 }}
+        >
+          <ScrollCircle
+            animate={{ 
+              scale: [1, 1.05, 1],
+              opacity: [0.6, 1, 0.6]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity,
+              ease: "easeInOut" 
+            }}
           >
-            ↓
-          </motion.div>
+            <motion.div 
+              animate={{ y: [0, 5, 0] }} 
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <ArrowDown />
+            </motion.div>
+          </ScrollCircle>
+          <ScrollText>Explore</ScrollText>
         </ScrollButton>
       </HeroSection>
 
@@ -72,20 +135,29 @@ const HomePage = () => {
       <ProductScroll />
       <DiagonalSection />
       <SkillsCarousel />
+      
       <ContactSection>
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8 }}>
-          <h2>Let's Connect</h2>
+        <ContactContainer
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <ContactHeader>Let's Connect</ContactHeader>
+          <ContactDivider />
           <ContactInfo>
             <p>Interested in collaboration or have a project in mind?</p>
             <ContactLinks>
-              <a href="https://github.com/Stasshe" target="_blank" rel="noopener noreferrer">
+              <SocialLink href="https://github.com/Stasshe" target="_blank" rel="noopener noreferrer">
                 GitHub
-              </a>
-              <span>•</span>
-              <a href="mailto:egnm9stasshe@gmail.com">Email</a>
+              </SocialLink>
+              <Dot>•</Dot>
+              <SocialLink href="mailto:egnm9stasshe@gmail.com">
+                Email
+              </SocialLink>
             </ContactLinks>
           </ContactInfo>
-        </motion.div>
+        </ContactContainer>
       </ContactSection>
     </Layout>
   );
@@ -100,23 +172,34 @@ const HeroSection = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
+  background-color: #000;
+`;
+
+const GradientOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 70%, #000 100%);
+  z-index: 2;
 `;
 
 const HeroContent = styled.div`
   position: relative;
-  z-index: 2;
+  z-index: 10;
   text-align: center;
   padding: 0 2rem;
   width: 100%;
-  margin-top: -5rem;
+  max-width: 1200px;
 
   h1 {
     color: white;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    line-height: 1.1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 1.5rem;
   }
 
   @media (max-width: 768px) {
@@ -125,14 +208,37 @@ const HeroContent = styled.div`
   }
 `;
 
-const TitleLine = styled.div`
-  font-size: 5rem;
-  margin: -0.2em 0;
+const TitleLine = styled(motion.div)`
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  margin: -0.1em 0;
+  display: block;
 
   @media (max-width: 768px) {
-    margin: 0;
-    font-size: clamp(2.5rem, 16vw, 7rem);  
-    line-height: 1.2;
+    font-size: clamp(2.5rem, 12vw, 5rem);
+    line-height: 1.1;
+  }
+`;
+
+const GradientText = styled.span`
+  background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+`;
+
+const Tagline = styled.p`
+  color: rgba(255,255,255,0.8);
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    margin-left: 0;
+    text-align: left;
   }
 `;
 
@@ -142,40 +248,49 @@ const CoverImageWrapper = styled.div`
   height: 100vh;
 `;
 
+const ArrowDown = styled.div`
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+`;
+
+const ScrollCircle = styled(motion.div)`
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ScrollText = styled.span`
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 0.5rem;
+  font-weight: 300;
+`;
+
 const ScrollButton = styled(motion.button)`
   position: absolute;
-  bottom: max(4rem, 5vh);
+  bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);
   background: transparent;
   border: none;
   color: white;
   cursor: pointer;
-  z-index: 2;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  gap: 0.8rem;
-  width: auto;
-  min-width: 120px;
+  padding: 0;
   
-  span {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: clamp(0.7rem, 2vw, 0.8rem);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    white-space: nowrap;
-  }
-
-  @media (max-width: 768px) {
-    bottom: 1.5rem;
-    gap: 0.5rem;
-    padding: 0.8rem;
-    
-    div {
-      font-size: 1.2rem;
-    }
+  &:hover ${ScrollCircle} {
+    border-color: rgba(255,255,255,0.8);
   }
 
   @media (max-height: 600px) {
@@ -190,26 +305,46 @@ const ContactSection = styled.section`
   justify-content: center;
   background: #000;
   color: white;
-  margin: 0;
   width: 100vw;
   position: relative;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  text-align:center;
+`;
+
+const ContactContainer = styled(motion.div)`
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
+  padding: 4rem 2rem;
+`;
+
+const ContactHeader = styled.h2`
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+`;
+
+const ContactDivider = styled.div`
+  width: 60px;
+  height: 3px;
+  background: white;
+  margin: 2rem auto;
 `;
 
 const ContactInfo = styled.div`
   margin-top: 2rem;
-  margin-right:auto;
-  margin-left:auto;
-  text-align:center;
   
   p {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     opacity: 0.8;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
 
@@ -218,25 +353,41 @@ const ContactLinks = styled.div`
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  text-align:center;
-  margin-left:auto;
-  margin-right:auto;
-  width:60vw;
+`;
+
+const SocialLink = styled.a`
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  position: relative;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
   
-  a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: opacity 0.3s;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  &:hover {
+    opacity: 0.9;
     
-    &:hover {
-      opacity: 0.7;
+    &:after {
+      width: 80%;
     }
   }
+`;
 
-  span {
-    opacity: 0.5;
-  }
+const Dot = styled.span`
+  opacity: 0.5;
+  font-size: 1rem;
 `;
 
 export default HomePage;
