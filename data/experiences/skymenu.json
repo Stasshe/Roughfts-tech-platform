@@ -25,12 +25,17 @@
             "caption": "How to Crack",
             "caption_ja": "クラッキングのやり方",
             "content": [
-                "There is a way to execute it with bat, but it couldn't be stopped, so here is a method using python which runs a bit slower but is still manageable.",
+                "There is a way to run it with bat, but it became uncontrollable, so I will introduce a way to run it with python, which is slower to execute and still within the range of being manageable.",
                 "`py -m pip install pyautogui`",
                 "Run this to install the necessary modules.",
-                "Then, copy and execute this code.",
+                "Then, copy and run this code.",
                 "$[IDturtle.py](python)",
-                "With this, you can crack the SkyMenu menu."
+                "Now you can crack the SkyMenu menu.",
+                "![Image1](/assets/skymenu/IMG_0514.jpeg)",
+                "![Image2](/assets/skymenu/IMG_0515.jpeg)",
+                "Our school has about 300 students in each grade. After trying all of them,",
+                "[people whose userId and psw matched](/assets/skymenu/successID.txt)",
+                "125 people were found not to have changed them. It's vulnerable, isn't it?"
             ],
             "content_ja": [
                 "batで実行する方法もありますが、止めれなくなってしまったので、やや実行の遅く、まだ手に負える範囲で暴走するpythonでのやり方を紹介します。",
@@ -40,17 +45,28 @@
                 "$[IDturtle.py](python)",
                 "これで、SkyMenuのメニューをクラッキングすることができます。",
                 "![画像1](/assets/skymenu/IMG_0514.jpeg)",
-                "![画像2](/assets/skymenu/IMG_0515.jpeg)"
+                "![画像2](/assets/skymenu/IMG_0515.jpeg)",
+                "うちの学校は一学年全員で300人程度です。それを全て試したところ、",
+                "[userIdとpswが一致した人たち](/assets/skymenu/successID.txt)",
+                "このように125人が変えていないことがわかりました。脆弱ですね〜"
             ]
         },
         {
             "caption": "Mechanism",
             "caption_ja": "仕組み",
             "content": [
-                "pyautogui takes a screenshot of the page, moves the mouse to a place where the image of the button taken in advance matches to some extent, and clicks it."
+                "The mechanism is simple. It takes a screenshot of the page with pyautogui, moves the mouse to a place that matches the image of the button taken in advance to some extent, and clicks it.",
+                "![Image1](/assets/skymenu/add.png)",
+                "![Image2](/assets/skymenu/close.png)",
+                "![Image3](/assets/skymenu/popup_image.png)",
+                "These three button images are recognized. The rest is done with the tab key, etc."
             ],
             "content_ja": [
-                "pyautoguiで、ページのスクリーンショットを撮り、事前に撮っておいたボタンの画像とある程度適合するところにマウスを持っていき、クリックします。"
+                "pyautoguiで、ページのスクリーンショットを撮り、事前に撮っておいたボタンの画像とある程度適合するところにマウスを持っていき、クリックします。",
+                "![画像1](/assets/skymenu/add.png)",
+                "![画像2](/assets/skymenu/close.png)",
+                "![画像3](/assets/skymenu/popup_image.png)",
+                "これら三つのボタンの画像を、認識しています。それ以外はタブキーなどです。"
             ]
         }
     ]
