@@ -294,6 +294,36 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
     );
   };
 
+  // ファイルをダウンロードする関数
+  const downloadFile = (filename: string, content: string) => {
+    // ファイルの拡張子から適切なMIMEタイプを判断
+    let mimeType = 'text/plain';
+    const extension = filename.split('.').pop()?.toLowerCase();
+    
+    if (extension === 'py') mimeType = 'text/x-python';
+    else if (extension === 'js') mimeType = 'text/javascript';
+    else if (extension === 'html') mimeType = 'text/html';
+    else if (extension === 'css') mimeType = 'text/css';
+    else if (extension === 'json') mimeType = 'application/json';
+    
+    // Blobを作成
+    const blob = new Blob([content], { type: mimeType });
+    
+    // ダウンロード用のリンクを作成
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename);
+    
+    // リンクをシミュレートしてダウンロード開始
+    document.body.appendChild(link);
+    link.click();
+    
+    // クリーンアップ
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   if (!mounted) {
     return null;
   }
@@ -337,24 +367,34 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
                 <CodeBlock key={`code-${i}`}>
                     <CodeHeader>
                         <CodeFilename>{filename}</CodeFilename>
-                        <CopyButton 
-                            onClick={() => copyToClipboard(codeContent || '', codeId)}
-                            title={isCopied ? "コピーしました" : "クリップボードにコピー"}
-                            copied={isCopied}
-                        >
-                            {isCopied ? (
-                                <>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-                                    </svg>
-                                    <CopiedText>コピーしました</CopiedText>
-                                </>
-                            ) : (
+                        <ButtonGroup>
+                            <DownloadButton 
+                                onClick={() => downloadFile(filename, codeContent || '')}
+                                title="ファイルをダウンロード"
+                            >
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" />
+                                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
                                 </svg>
-                            )}
-                        </CopyButton>
+                            </DownloadButton>
+                            <CopyButton 
+                                onClick={() => copyToClipboard(codeContent || '', codeId)}
+                                title={isCopied ? "コピーしました" : "クリップボードにコピー"}
+                                copied={isCopied}
+                            >
+                                {isCopied ? (
+                                    <>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                                        </svg>
+                                        <CopiedText>コピーしました</CopiedText>
+                                    </>
+                                ) : (
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" />
+                                    </svg>
+                                )}
+                            </CopyButton>
+                        </ButtonGroup>
                     </CodeHeader>
                     <pre>
                         <code className={language}>
@@ -703,10 +743,14 @@ const CodeHeader = styled.div`
   border-bottom: 1px solid #3e4451;
   font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', Consolas, monospace;
 `;
-
 const CodeFilename = styled.div`
   color: #9da5b4;
   font-size: 0.85rem;
+`;
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
 `;
 
 // コピーボタンのprops型定義
@@ -730,6 +774,30 @@ const CopyButton = styled.button<CopyButtonProps>`
   &:hover {
     background-color: ${props => props.copied ? 'rgba(66, 153, 225, 0.2)' : '#3e4451'};
     color: ${props => props.copied ? '#63b3ed' : '#fff'};
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+`;
+
+// ダウンロードボタンのスタイル
+const DownloadButton = styled.button`
+  background: transparent;
+  border: none;
+  color: #9da5b4;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: #3e4451;
+    color: #fff;
   }
   
   svg {
