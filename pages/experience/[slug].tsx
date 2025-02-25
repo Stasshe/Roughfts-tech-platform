@@ -239,6 +239,8 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
   const [mounted, setMounted] = useState(false);
   const [imageLoadError, setImageLoadError] = useState<{[key: string]: boolean}>({});
   const [threeImagesRefs, setThreeImagesRefs] = useState<HTMLDivElement[]>([]);
+  // コピー状態を管理するstate
+  const [codeCopied, setCodeCopied] = useState<{[key: string]: boolean}>({});
 
   const addToRefs = (el: HTMLDivElement | null) => {
     if (el) {
@@ -274,12 +276,17 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
     }
   }, [mounted, codeContent, language]);
 
-  // コードをクリップボードにコピーする関数
-  const copyToClipboard = (text: string) => {
+  // コードをクリップボードにコピーする関数を更新
+  const copyToClipboard = (text: string, codeId: string) => {
     navigator.clipboard.writeText(text).then(
       () => {
-        // 成功時の処理（オプション）
-        console.log('コードをクリップボードにコピーしました');
+        // コピー成功時、対応するコードIDのコピー状態をtrueに
+        setCodeCopied(prev => ({ ...prev, [codeId]: true }));
+        
+        // 2秒後にコピー状態をリセット
+        setTimeout(() => {
+          setCodeCopied(prev => ({ ...prev, [codeId]: false }));
+        }, 2000);
       },
       (err) => {
         console.error('コピーに失敗しました:', err);
@@ -323,18 +330,30 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
             const match = part.match(/\$\[([^\]]+)\]\(([^)]*)\)/);
             const filename = match ? match[1] : 'code';
             const language = match && match[2] ? match[2] : 'python';
+            const codeId = `code-${i}-${filename}`;
+            const isCopied = codeCopied[codeId] || false;
             
             result.push(
                 <CodeBlock key={`code-${i}`}>
                     <CodeHeader>
                         <CodeFilename>{filename}</CodeFilename>
                         <CopyButton 
-                            onClick={() => copyToClipboard(codeContent || '')}
-                            title="クリップボードにコピー"
+                            onClick={() => copyToClipboard(codeContent || '', codeId)}
+                            title={isCopied ? "コピーしました" : "クリップボードにコピー"}
+                            copied={isCopied}
                         >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" />
-                            </svg>
+                            {isCopied ? (
+                                <>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                                    </svg>
+                                    <CopiedText>コピーしました</CopiedText>
+                                </>
+                            ) : (
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" />
+                                </svg>
+                            )}
                         </CopyButton>
                     </CodeHeader>
                     <pre>
@@ -690,27 +709,38 @@ const CodeFilename = styled.div`
   font-size: 0.85rem;
 `;
 
-const CopyButton = styled.button`
-  background: transparent;
+// コピーボタンのprops型定義
+interface CopyButtonProps {
+  copied: boolean;
+}
+
+const CopyButton = styled.button<CopyButtonProps>`
+  background: ${props => props.copied ? 'rgba(66, 153, 225, 0.1)' : 'transparent'};
   border: none;
-  color: #9da5b4;
+  color: ${props => props.copied ? '#4299e1' : '#9da5b4'};
   cursor: pointer;
-  padding: 4px;
+  padding: 4px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
   transition: all 0.2s ease;
+  gap: 4px;
   
   &:hover {
-    background-color: #3e4451;
-    color: #fff;
+    background-color: ${props => props.copied ? 'rgba(66, 153, 225, 0.2)' : '#3e4451'};
+    color: ${props => props.copied ? '#63b3ed' : '#fff'};
   }
   
   svg {
     width: 16px;
     height: 16px;
   }
+`;
+
+const CopiedText = styled.span`
+  font-size: 0.75rem;
+  font-weight: 500;
 `;
 
 // コードブロックのスタイルを追加
