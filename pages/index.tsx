@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
@@ -9,6 +10,7 @@ import { ProfileSection } from '../components/ProfileSection';
 import SkillsCarousel from '../components/SkillsCarousel';
 
 const HomePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const { scrollY } = useScroll();
   // より洗練されたパララックス効果
   const coverScale = useTransform(scrollY, [0, 500], [1.1, 1.4]);
@@ -21,144 +23,157 @@ const HomePage = () => {
     profileSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // ローディングアニメーションの時間を設定
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Layout>
-      <HeroSection>
-        <Head>
-          <title>Roughfts Tech Platform</title>
-        </Head>
-        
-        {/* グラデーションオーバーレイ */}
-        <GradientOverlay />
-        
-        {/* カバー画像 */}
-        <motion.div 
-          style={{ 
-            scale: coverScale,
-            opacity: coverOpacity,
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-          }}
-        >
-          <CoverImageWrapper>
-            <Image 
-              src="/assets/cover.jpeg" 
-              alt="Cover"
-              priority
-              fill
-              style={{ objectFit: 'cover', filter: 'grayscale(80%)' }}
-            />
-          </CoverImageWrapper>
-        </motion.div>
-
-        {/* メインコンテンツ */}
-        <motion.div 
-          className="hero-content-wrapper"
-          style={{ y: titleY, zIndex: 5 }}
-        >
-          <HeroContent>
-            <AnimatePresence>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-              >
-                <motion.h1>
-                  <TitleLine 
-                    initial={{ x: -100, opacity: 0 }} 
-                    animate={{ x: 0, opacity: 1 }} 
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                  >
-                    Welcome
-                  </TitleLine>
-                  <TitleLine 
-                    initial={{ x: -100, opacity: 0 }} 
-                    animate={{ x: 0, opacity: 1 }} 
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                  >
-                    to
-                  </TitleLine>
-                  <TitleLine 
-                    initial={{ x: -100, opacity: 0 }} 
-                    animate={{ x: 0, opacity: 1 }} 
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                  >
-                    <GradientText>Roughfts</GradientText>
-                  </TitleLine>
-                </motion.h1>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 0.8, y: 0 }}
-                  transition={{ duration: 0.8, delay: 1.2 }}
-                >
-                  <Tagline>Practice is the best shortcut of learning.</Tagline>
-                </motion.div>
-              </motion.div>
-            </AnimatePresence>
-          </HeroContent>
-        </motion.div>
-
-        {/* スクロールボタン */}
-        <ScrollButton 
-          style={{ opacity: scrollOpacity }} 
-          onClick={scrollToProfile}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 0.8 }}
-        >
-          <ScrollCircle
-            animate={{ 
-              scale: [1, 1.05, 1],
-              opacity: [0.6, 1, 0.6]
-            }}
-            transition={{ 
-              duration: 2, 
-              repeat: Infinity,
-              ease: "easeInOut" 
-            }}
-          >
+      {isLoading ? (
+        <></>
+      ) : (
+        <>
+          <HeroSection>
+            <Head>
+              <title>Roughfts Tech Platform</title>
+            </Head>
+            
+            {/* グラデーションオーバーレイ */}
+            <GradientOverlay />
+            
+            {/* カバー画像 */}
             <motion.div 
-              animate={{ y: [0, 5, 0] }} 
-              transition={{ duration: 2, repeat: Infinity }}
+              style={{ 
+                scale: coverScale,
+                opacity: coverOpacity,
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+              }}
             >
-              <ArrowDown />
+              <CoverImageWrapper>
+                <Image 
+                  src="/assets/cover.jpeg" 
+                  alt="Cover"
+                  priority
+                  fill
+                  style={{ objectFit: 'cover', filter: 'grayscale(80%)' }}
+                />
+              </CoverImageWrapper>
             </motion.div>
-          </ScrollCircle>
-          <ScrollText>Explore</ScrollText>
-        </ScrollButton>
-      </HeroSection>
 
-      <ProfileSection id="profile-section" />
-      <ProductScroll />
-      <DiagonalSection />
-      <SkillsCarousel />
-      
-      <ContactSection>
-        <ContactContainer
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <ContactHeader>Let's Connect</ContactHeader>
-          <ContactDivider />
-          <ContactInfo>
-            <p>Interested in collaboration or have a project in mind?</p>
-            <ContactLinks>
-              <SocialLink href="https://github.com/Stasshe" target="_blank" rel="noopener noreferrer">
-                GitHub
-              </SocialLink>
-              <Dot>•</Dot>
-              <SocialLink href="mailto:egnm9stasshe@gmail.com">
-                Email
-              </SocialLink>
-            </ContactLinks>
-          </ContactInfo>
-        </ContactContainer>
-      </ContactSection>
+            {/* メインコンテンツ */}
+            <motion.div 
+              className="hero-content-wrapper"
+              style={{ y: titleY, zIndex: 5 }}
+            >
+              <HeroContent>
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                  >
+                    <motion.h1>
+                      <TitleLine 
+                        initial={{ x: -100, opacity: 0 }} 
+                        animate={{ x: 0, opacity: 1 }} 
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                      >
+                        Welcome
+                      </TitleLine>
+                      <TitleLine 
+                        initial={{ x: -100, opacity: 0 }} 
+                        animate={{ x: 0, opacity: 1 }} 
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                      >
+                        to
+                      </TitleLine>
+                      <TitleLine 
+                        initial={{ x: -100, opacity: 0 }} 
+                        animate={{ x: 0, opacity: 1 }} 
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                      >
+                        <GradientText>Roughfts</GradientText>
+                      </TitleLine>
+                    </motion.h1>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 0.8, y: 0 }}
+                      transition={{ duration: 0.8, delay: 1.2 }}
+                    >
+                      <Tagline>Practice is the best shortcut of learning.</Tagline>
+                    </motion.div>
+                  </motion.div>
+                </AnimatePresence>
+              </HeroContent>
+            </motion.div>
+
+            {/* スクロールボタン */}
+            <ScrollButton 
+              style={{ opacity: scrollOpacity }} 
+              onClick={scrollToProfile}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.8, duration: 0.8 }}
+            >
+              <ScrollCircle
+                animate={{ 
+                  scale: [1, 1.05, 1],
+                  opacity: [0.6, 1, 0.6]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity,
+                  ease: "easeInOut" 
+                }}
+              >
+                <motion.div 
+                  animate={{ y: [0, 5, 0] }} 
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <ArrowDown />
+                </motion.div>
+              </ScrollCircle>
+              <ScrollText>Explore</ScrollText>
+            </ScrollButton>
+          </HeroSection>
+
+          <ProfileSection id="profile-section" />
+          <ProductScroll />
+          <DiagonalSection />
+          <SkillsCarousel />
+          
+          <ContactSection>
+            <ContactContainer
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <ContactHeader>Let's Connect</ContactHeader>
+              <ContactDivider />
+              <ContactInfo>
+                <p>Interested in collaboration or have a project in mind?</p>
+                <ContactLinks>
+                  <SocialLink href="https://github.com/Stasshe" target="_blank" rel="noopener noreferrer">
+                    GitHub
+                  </SocialLink>
+                  <Dot>•</Dot>
+                  <SocialLink href="mailto:egnm9stasshe@gmail.com">
+                    Email
+                  </SocialLink>
+                </ContactLinks>
+              </ContactInfo>
+            </ContactContainer>
+          </ContactSection>
+        </>
+      )}
     </Layout>
   );
 };
