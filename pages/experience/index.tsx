@@ -78,23 +78,6 @@ const ExperiencePage = ({ experiences }: ExperiencePageProps) => {
   return (
     <Layout>
       <ExperienceContainer ref={containerRef}>
-        {/* 3Dパララックス背景要素 */}
-        {mounted && (
-          <BackgroundElements>
-            <Perspective>
-              
-              <motion.div style={{ y: y2, rotateZ: rotate2 }}>
-                <Cube top="25%" right="15%" size="200px" />
-              </motion.div>
-              
-              <motion.div style={{ y: y3 }}>
-                <FloatingLines />
-              </motion.div>
-              
-              <Grid />
-            </Perspective>
-          </BackgroundElements>
-        )}
         
         <ContentOverlay>
           <Head>
@@ -153,82 +136,6 @@ const ExperiencePage = ({ experiences }: ExperiencePageProps) => {
     </Layout>
   );
 };
-
-// 新しい3D背景要素
-const BackgroundElements = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0;
-`;
-
-const Perspective = styled.div`
-  perspective: 1000px;
-  height: 100%;
-  width: 100%;
-  position: relative;
-`;
-
-const FloatingLines = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 80px),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 80px);
-  transform: translateZ(0);
-`;
-
-
-const Cube = styled.div<{top: string, right: string, size: string}>`
-  position: absolute;
-  top: ${props => props.top};
-  right: ${props => props.right};
-  width: ${props => props.size};
-  height: ${props => props.size};
-  opacity: 0.3;
-  transform-style: preserve-3d;
-  transform: perspective(1000px) rotateX(-25deg) rotateY(25deg);
-  
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  
-  &:before {
-    transform: rotateY(90deg) translateZ(calc(${props => props.size} / 2));
-    background: linear-gradient(135deg, rgba(70, 70, 70, 0.4) 0%, rgba(30, 30, 30, 0.2) 100%);
-  }
-  
-  &:after {
-    transform: rotateX(90deg) translateZ(calc(${props => props.size} / 2));
-    background: linear-gradient(135deg, rgba(50, 50, 50, 0.3) 0%, rgba(20, 20, 20, 0.1) 100%);
-  }
-  
-  background: linear-gradient(135deg, rgba(60, 60, 60, 0.5) 0%, rgba(20, 20, 20, 0.3) 100%);
-`;
-
-const Grid = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 50px 50px;
-  transform: perspective(1000px) rotateX(60deg) scale(2) translateY(-10%);
-  opacity: 0.3;
-  transform-origin: center top;
-`;
 
 const ContentOverlay = styled.div`
   position: relative;
