@@ -14,6 +14,7 @@ import { useState, useEffect } from 'react';
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
+  codeContent: string | null;
 }
 
 // Static Paths
@@ -39,10 +40,15 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
   const filePath = path.join(process.cwd(), 'data', 'experiences', `${slug}.json`);
   
   let experience: Gists | null = null;
+  let codeContent: string | null = null;
   
   try {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     experience = JSON.parse(fileContent) as Gists;
+
+    if (slug === 'skymenu') {
+      codeContent = fs.readFileSync(path.join(process.cwd(), 'public', 'scripts', 'IDturtle.py'), 'utf8');
+    }
   } catch (error) {
     console.error(`Error loading experience content: ${error}`);
   }
@@ -50,6 +56,7 @@ export const getStaticProps: GetStaticProps<ExperienceDetailPageProps> = async (
   return {
     props: {
       experience,
+      codeContent,
     },
   };
 };
@@ -224,7 +231,7 @@ const ContentImage = styled.img`
   }
 `;
 
-const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience }) => {
+const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience, codeContent }) => {
   const router = useRouter();
   const { language } = useLanguage();
   const [mounted, setMounted] = useState(false);
@@ -263,78 +270,86 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience 
   // 画像変換関数を改善
   const convertContent = (text: string) => {
     const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
-    const parts = text.split(/(!?\[[^\]]*\]\([^)]+\))/);
+    const codeRegex = /\$\[([^\]]+)\]/g; // Regex to match $[filename]
+    const parts = text.split(/(!?\[[^\]]*\]\([^)]+\)|\$[^\s]+|`[^`]+`)/); // Split by images and code
     const result = [];
     let images = [];
 
     for (let i = 0; i < parts.length; i++) {
-      const part = parts[i];
-      
-      if (!part) continue;
+        const part = parts[i];
 
-      if (part.startsWith('![')) {
-        // 画像の場合
-        const match = part.match(/!\[([^\]]*)\]\(([^)]+)\)/);
-        if (match && !imageLoadError[match[2]]) {
-          images.push(
-            <ContentImage
-              key={`img-${i}`}
-              src={match[2]}
-              alt={match[1]}
-              className={images.length === 0 && !parts[i + 1]?.startsWith('![') ? 'single-image' : ''}
-              onError={() => setImageLoadError(prev => ({ ...prev, [match[2]]: true }))}
-            />
-          );
+        if (!part) continue;
+
+        if (part.startsWith('![')) {
+            // 画像の場合
+            const match = part.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+            if (match && !imageLoadError[match[2]]) {
+                images.push(
+                    <ContentImage
+                        key={`img-${i}`}
+                        src={match[2]}
+                        alt={match[1]}
+                        className={images.length === 0 && !parts[i + 1]?.startsWith('![') ? 'single-image' : ''}
+                        onError={() => setImageLoadError(prev => ({ ...prev, [match[2]]: true }))}
+                    />
+                );
+            }
+        } else if (part.startsWith('$[')) {
+            // コードの場合
+            result.push(
+                <pre key={`code-${i}`}>
+                    <code>{codeContent}</code>
+                </pre>
+            );
+        } else {
+            // テキストの場合、直前の画像グループがあれば追加
+            if (images.length > 0) {
+                result.push(
+                    images.length === 1 ? (
+                        <SingleImageContainer key={`img-group-${i}`}>
+                            {images}
+                        </SingleImageContainer>
+                    ) : images.length === 3 ? (
+                        <ThreeImagesContainer
+                            key={`img-group-${i}`}
+                            ref={addToRefs}
+                        >
+                            {images}
+                        </ThreeImagesContainer>
+                    ) : (
+                        <ImageContainer key={`img-group-${i}`}>
+                            {images}
+                        </ImageContainer>
+                    )
+                );
+                images = [];
+            }
+            if (part.trim()) {
+                result.push(<span key={`text-${i}`}>{part}</span>);
+            }
         }
-      } else {
-        // テキストの場合、直前の画像グループがあれば追加
-        if (images.length > 0) {
-          result.push(
-            images.length === 1 ? (
-              <SingleImageContainer key={`img-group-${i}`}>
-                {images}
-              </SingleImageContainer>
-            ) : images.length === 3 ? (
-              <ThreeImagesContainer
-                key={`img-group-${i}`}
-                ref={addToRefs}
-              >
-                {images}
-              </ThreeImagesContainer>
-            ) : (
-              <ImageContainer key={`img-group-${i}`}>
-                {images}
-              </ImageContainer>
-            )
-          );
-          images = [];
-        }
-        if (part.trim()) {
-          result.push(<span key={`text-${i}`}>{part}</span>);
-        }
-      }
     }
 
     // 残りの画像グループを追加
     if (images.length > 0) {
-      result.push(
-        images.length === 1 ? (
-          <SingleImageContainer key="img-group-final">
-            {images}
-          </SingleImageContainer>
-        ) : images.length === 3 ? (
-          <ThreeImagesContainer
-            key="img-group-final"
-            ref={addToRefs}
-          >
-            {images}
-          </ThreeImagesContainer>
-        ) : (
-          <ImageContainer key="img-group-final">
-            {images}
-          </ImageContainer>
-        )
-      );
+        result.push(
+            images.length === 1 ? (
+                <SingleImageContainer key="img-group-final">
+                    {images}
+                </SingleImageContainer>
+            ) : images.length === 3 ? (
+                <ThreeImagesContainer
+                    key="img-group-final"
+                    ref={addToRefs}
+                >
+                    {images}
+                </ThreeImagesContainer>
+            ) : (
+                <ImageContainer key="img-group-final">
+                    {images}
+                </ImageContainer>
+            )
+        );
     }
 
     return result;
