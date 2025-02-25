@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import Head from 'next/head';
@@ -7,6 +7,7 @@ import { Gists } from '../../types/content';
 import fs from 'fs';
 import path from 'path';
 import { useLanguage } from '../../lib/LanguageContext';
+import { useRef, useEffect, useState } from 'react';
 
 // Static Props to load all experiences
 export async function getStaticProps() {
@@ -40,7 +41,25 @@ interface ExperiencePageProps {
 
 const ExperiencePage = ({ experiences }: ExperiencePageProps) => {
   const { language } = useLanguage();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+  
+  // パララックス効果用の変換値を設定
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 10]);
+  const rotate2 = useTransform(scrollYProgress, [0, 1], [0, -15]);
+  
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
   // Group experiences by year first, then by year-month
   const groupedByYear = experiences.reduce((acc, exp) => {
     if (!acc[exp.year]) acc[exp.year] = [];
@@ -58,12 +77,25 @@ const ExperiencePage = ({ experiences }: ExperiencePageProps) => {
 
   return (
     <Layout>
-      <ExperienceContainer>
-        <BackgroundElements>
-          <Circle top="10%" left="5%" size="150px" delay={0.2} />
-          <Circle top="60%" right="8%" size="200px" delay={0.5} />
-          <Grid />
-        </BackgroundElements>
+      <ExperienceContainer ref={containerRef}>
+        {/* 3Dパララックス背景要素 */}
+        {mounted && (
+          <BackgroundElements>
+            <Perspective>
+              
+              <motion.div style={{ y: y2, rotateZ: rotate2 }}>
+                <Cube top="25%" right="15%" size="200px" />
+              </motion.div>
+              
+              <motion.div style={{ y: y3 }}>
+                <FloatingLines />
+              </motion.div>
+              
+              <Grid />
+            </Perspective>
+          </BackgroundElements>
+        )}
+        
         <ContentOverlay>
           <Head>
             <title>{language === 'en' ? 'Roughfts Experience' : 'Roughfts 経験'}</title>
@@ -91,6 +123,7 @@ const ExperiencePage = ({ experiences }: ExperiencePageProps) => {
                       <TimelineItem>
                         <MonthBadge>{exp.month}月</MonthBadge>
                         <ContentCard>
+                          <CardGlow />
                           <Link href={`/experience/${exp.id}`} passHref legacyBehavior>
                             <StyledLink>
                               <motion.div
@@ -121,7 +154,7 @@ const ExperiencePage = ({ experiences }: ExperiencePageProps) => {
   );
 };
 
-// Background elements
+// 新しい3D背景要素
 const BackgroundElements = styled.div`
   position: absolute;
   top: 0;
@@ -132,35 +165,55 @@ const BackgroundElements = styled.div`
   z-index: 0;
 `;
 
-const Circle = styled(motion.div)<{ top: string; left?: string; right?: string; size: string; delay: number }>`
-  position: absolute;
-  width: ${props => props.size};
-  height: ${props => props.size};
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(40, 40, 40, 0.8) 0%, rgba(20, 20, 20, 0.4) 100%);
-  top: ${props => props.top};
-  ${props => props.left && `left: ${props.left};`}
-  ${props => props.right && `right: ${props.right};`}
-  opacity: 0.4;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
-    z-index: -1;
-  }
+const Perspective = styled.div`
+  perspective: 1000px;
+  height: 100%;
+  width: 100%;
+  position: relative;
 `;
 
-Circle.defaultProps = {
-  initial: { scale: 0, opacity: 0 },
-  animate: { scale: 1, opacity: 0.4 },
-  transition: { duration: 1.5, type: "spring" },
-};
+const FloatingLines = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 80px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 80px);
+  transform: translateZ(0);
+`;
+
+
+const Cube = styled.div<{top: string, right: string, size: string}>`
+  position: absolute;
+  top: ${props => props.top};
+  right: ${props => props.right};
+  width: ${props => props.size};
+  height: ${props => props.size};
+  opacity: 0.3;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(-25deg) rotateY(25deg);
+  
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  &:before {
+    transform: rotateY(90deg) translateZ(calc(${props => props.size} / 2));
+    background: linear-gradient(135deg, rgba(70, 70, 70, 0.4) 0%, rgba(30, 30, 30, 0.2) 100%);
+  }
+  
+  &:after {
+    transform: rotateX(90deg) translateZ(calc(${props => props.size} / 2));
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.3) 0%, rgba(20, 20, 20, 0.1) 100%);
+  }
+  
+  background: linear-gradient(135deg, rgba(60, 60, 60, 0.5) 0%, rgba(20, 20, 20, 0.3) 100%);
+`;
 
 const Grid = styled.div`
   position: absolute;
@@ -169,10 +222,12 @@ const Grid = styled.div`
   width: 100%;
   height: 100%;
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.4;
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(1000px) rotateX(60deg) scale(2) translateY(-10%);
+  opacity: 0.3;
+  transform-origin: center top;
 `;
 
 const ContentOverlay = styled.div`
@@ -183,7 +238,7 @@ const ContentOverlay = styled.div`
 const ExperienceContainer = styled.div`
   padding: 6rem 2rem 2rem;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #000000, #121212);
+  background: linear-gradient(to bottom, #000000, #000000);
   color: white;
   position: relative;
   overflow: hidden;
@@ -192,10 +247,12 @@ const ExperienceContainer = styled.div`
     text-align: center;
     font-size: 3.5rem;
     margin-bottom: 4rem;
-    background: linear-gradient(to right, #ffffff, #cccccc);
+    background: linear-gradient(to right, #ffffff, #a0a0a0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+    position: relative;
+    z-index: 2;
     
     @media (max-width: 768px) {
       font-size: 2.5rem;
@@ -204,10 +261,30 @@ const ExperienceContainer = styled.div`
   }
 `;
 
+const CardGlow = styled.div`
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  box-shadow: 
+    0 0 20px 2px rgba(255, 255, 255, 0.05),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0) 70%
+  );
+`;
+
 const Timeline = styled.div`
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  position: relative;
+  z-index: 2;
 `;
 
 const YearSection = styled.section`
@@ -222,6 +299,17 @@ const YearLabel = styled.h2`
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.5rem;
   display: inline-block;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent);
+  }
 `;
 
 const TimelineEntries = styled.div`
@@ -235,7 +323,8 @@ const TimelineEntries = styled.div`
     top: 0;
     height: 100%;
     width: 2px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05));
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
   }
 `;
 
@@ -244,18 +333,27 @@ const TimelineItem = styled.div`
   margin-bottom: 3rem;
   display: flex;
   align-items: flex-start;
+  
+  &:hover ${CardGlow} {
+    opacity: 1;
+  }
 `;
 
 const MonthBadge = styled.div`
-  background: rgba(40, 40, 40, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(20, 20, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 4px;
   padding: 0.4rem 0.8rem;
   font-weight: bold;
   min-width: 70px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
   margin-right: 1.5rem;
+  backdrop-filter: blur(4px);
+  position: relative;
+  z-index: 3;
   
   &:before {
     content: '';
@@ -266,24 +364,34 @@ const MonthBadge = styled.div`
     height: 0.7rem;
     border-radius: 50%;
     background: white;
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 0 0 3px rgba(255, 255, 255, 0.1),
+      0 0 10px rgba(255, 255, 255, 0.5);
   }
 `;
 
 const ContentCard = styled.div`
-  background: rgba(30, 30, 30, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(20, 20, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   padding: 1.5rem;
   flex: 1;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) translateZ(0);
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    background: rgba(35, 35, 35, 0.7);
+    transform: perspective(1000px) translateZ(10px) translateY(-5px);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(25, 25, 35, 0.8);
   }
 `;
 
@@ -296,6 +404,22 @@ const StyledLink = styled.a`
     color: white;
     margin: 0 0 0.8rem;
     font-size: 1.4rem;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.5);
+      transition: width 0.3s ease;
+    }
+  }
+  
+  &:hover h2:after {
+    width: 100%;
   }
   
   p {
@@ -319,11 +443,13 @@ const TechTag = styled.span`
   border-radius: 20px;
   font-size: 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  transform: translateZ(5px);
   
   &:hover {
-    background: rgba(60, 60, 60, 0.6);
-    transform: translateY(-2px);
+    background: rgba(60, 60, 80, 0.6);
+    transform: translateY(-2px) translateZ(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
 `;
 
