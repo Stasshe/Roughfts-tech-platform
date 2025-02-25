@@ -11,6 +11,8 @@ import { useLanguage } from '../../lib/LanguageContext';
 import Link from 'next/link';
 import icons from '../../data/skills/icons.json';
 import { useState, useEffect } from 'react';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css'; // ダークテーマのスタイルをインポート
 
 interface ExperienceDetailPageProps {
   experience: Gists | null;
@@ -263,6 +265,28 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
     };
   }, []);
 
+  // シンタックスハイライトを適用するために useEffect を追加
+  useEffect(() => {
+    if (mounted) {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightElement(block as HTMLElement);
+      });
+    }
+  }, [mounted, codeContent, language]);
+
+  // コードをクリップボードにコピーする関数
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        // 成功時の処理（オプション）
+        console.log('コードをクリップボードにコピーしました');
+      },
+      (err) => {
+        console.error('コピーに失敗しました:', err);
+      }
+    );
+  };
+
   if (!mounted) {
     return null;
   }
@@ -270,8 +294,8 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
   // 画像変換関数を改善
   const convertContent = (text: string) => {
     const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
-    const codeRegex = /\$\[([^\]]+)\]/g; // Regex to match $[filename]
-    const parts = text.split(/(!?\[[^\]]*\]\([^)]+\)|\$[^\s]+|`[^`]+`)/); // Split by images and code
+    const codeRegex = /\$\[([^\]]+)\]\(([^)]*)\)/g; // 言語指定のパターンを更新
+    const parts = text.split(/(!?\[[^\]]*\]\([^)]+\)|\$\[[^\]]+\]\([^)]*\)|`[^`]+`)/); // Split by images and code
     const result = [];
     let images = [];
 
@@ -295,11 +319,38 @@ const ExperienceDetailPage: React.FC<ExperienceDetailPageProps> = ({ experience,
                 );
             }
         } else if (part.startsWith('$[')) {
-            // コードの場合
+            // コードの場合 - 新しいパターン $[filename](language)
+            const match = part.match(/\$\[([^\]]+)\]\(([^)]*)\)/);
+            const filename = match ? match[1] : 'code';
+            const language = match && match[2] ? match[2] : 'python';
+            
             result.push(
-                <pre key={`code-${i}`}>
-                    <code>{codeContent}</code>
-                </pre>
+                <CodeBlock key={`code-${i}`}>
+                    <CodeHeader>
+                        <CodeFilename>{filename}</CodeFilename>
+                        <CopyButton 
+                            onClick={() => copyToClipboard(codeContent || '')}
+                            title="クリップボードにコピー"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" />
+                            </svg>
+                        </CopyButton>
+                    </CodeHeader>
+                    <pre>
+                        <code className={language}>
+                            {codeContent}
+                        </code>
+                    </pre>
+                </CodeBlock>
+            );
+        } else if (part.startsWith('`') && part.endsWith('`')) {
+            // インラインコードの場合
+            const code = part.substring(1, part.length - 1);
+            result.push(
+                <InlineCode key={`inline-code-${i}`}>
+                    {code}
+                </InlineCode>
             );
         } else {
             // テキストの場合、直前の画像グループがあれば追加
@@ -592,6 +643,84 @@ const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 4px;
+`;
+
+// コードブロックのスタイルを更新
+const CodeBlock = styled.div`
+  margin: 1.5rem 0;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden; // 子要素をはみ出さない
+  border: 1px solid #3e4451;
+  
+  pre {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    background: #282c34; // ダークなバックグラウンド
+  }
+  
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', Consolas, monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0;
+    background: transparent;
+  }
+`;
+
+// コードヘッダー部分のスタイル
+const CodeHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e2127;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #3e4451;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', Consolas, monospace;
+`;
+
+const CodeFilename = styled.div`
+  color: #9da5b4;
+  font-size: 0.85rem;
+`;
+
+const CopyButton = styled.button`
+  background: transparent;
+  border: none;
+  color: #9da5b4;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: #3e4451;
+    color: #fff;
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+`;
+
+// コードブロックのスタイルを追加
+const InlineCode = styled.code`
+  background-color: #282c34;
+  color: #e06c75;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', Consolas, monospace;
+  font-size: 0.9em;
 `;
 
 export default ExperienceDetailPage;
