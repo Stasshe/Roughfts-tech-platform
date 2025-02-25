@@ -45,18 +45,7 @@ export default function Document() {
           #__next.loaded {
             opacity: 1;
           }
-          .initial-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: black;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+          
         `}</style>
       </Head>
       <body>

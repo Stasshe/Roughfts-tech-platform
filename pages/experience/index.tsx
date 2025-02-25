@@ -47,19 +47,6 @@ const ExperiencePage = ({ experiences }: ExperiencePageProps) => {
     offset: ["start start", "end end"]
   });
   
-  // パララックス効果用の変換値を設定
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 10]);
-  const rotate2 = useTransform(scrollYProgress, [0, 1], [0, -15]);
-  
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  
   // Group experiences by year first, then by year-month
   const groupedByYear = experiences.reduce((acc, exp) => {
     if (!acc[exp.year]) acc[exp.year] = [];
@@ -145,7 +132,7 @@ const ContentOverlay = styled.div`
 const ExperienceContainer = styled.div`
   padding: 6rem 2rem 2rem;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #000000, #000000);
+  background: #000000;
   color: white;
   position: relative;
   overflow: hidden;
@@ -154,10 +141,7 @@ const ExperienceContainer = styled.div`
     text-align: center;
     font-size: 3.5rem;
     margin-bottom: 4rem;
-    background: linear-gradient(to right, #ffffff, #a0a0a0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+    color: #ffffff;
     position: relative;
     z-index: 2;
     
@@ -169,21 +153,7 @@ const ExperienceContainer = styled.div`
 `;
 
 const CardGlow = styled.div`
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.3s ease;
-  box-shadow: 
-    0 0 20px 2px rgba(255, 255, 255, 0.05),
-    inset 0 0 20px rgba(255, 255, 255, 0.05);
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 25%,
-    rgba(255, 255, 255, 0) 70%
-  );
+  display: none;
 `;
 
 const Timeline = styled.div`
@@ -206,17 +176,6 @@ const YearLabel = styled.h2`
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.5rem;
   display: inline-block;
-  position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent);
-  }
 `;
 
 const TimelineEntries = styled.div`
@@ -283,22 +242,13 @@ const ContentCard = styled.div`
   border-radius: 8px;
   padding: 1.5rem;
   flex: 1;
-  box-shadow: 
-    0 15px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: perspective(1000px) translateZ(0);
+  transition: all 0.3s ease;
   
   &:hover {
-    transform: perspective(1000px) translateZ(10px) translateY(-5px);
-    box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.6),
-      0 0 20px rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
-    background: rgba(25, 25, 35, 0.8);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   }
 `;
 

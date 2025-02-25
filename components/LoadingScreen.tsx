@@ -93,23 +93,6 @@ const LoadingScreen = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
-        <GridBackground>
-          {gridLines.map((line, index) => (
-            <GridLine
-              key={index}
-              horizontal={line.horizontal}
-              style={{
-                top: line.horizontal ? `${line.position}px` : 0,
-                left: line.horizontal ? 0 : `${line.position}px`,
-                width: line.horizontal ? '100%' : '1px',
-                height: line.horizontal ? '1px' : '100%'
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              transition={{ delay: line.delay, duration: 0.5 }}
-            />
-          ))}
-        </GridBackground>
         
         <LoadingContent>
           <AnimationContainer>
@@ -257,26 +240,6 @@ const LoadingWrapper = styled(motion.div)`
   align-items: center;
   z-index: 9999;
   overflow: hidden;
-`;
-
-const GridBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.15;
-`;
-
-const GridLine = styled(motion.div)<{ horizontal?: boolean }>`
-  position: absolute;
-  background: linear-gradient(
-    ${props => props.horizontal ? 'to right' : 'to bottom'},
-    rgba(255,255,255,0), 
-    rgba(255,255,255,0.4), 
-    rgba(255,255,255,0)
-  );
-  ${props => props.horizontal ? 'height: 1px;' : 'width: 1px;'}
 `;
 
 const LoadingContent = styled.div`

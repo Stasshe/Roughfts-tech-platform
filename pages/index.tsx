@@ -69,7 +69,11 @@ const HomePage = () => {
           style={{ 
             y: titleY, 
             zIndex: 5,
-            position: 'relative' // 追加：非静的なポジション
+            position: 'relative',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
           }}
         >
           <HeroContent>
@@ -185,9 +189,8 @@ const HeroSection = styled.section`
   height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center; /* 中央揃え */
+  align-items: center;
   position: relative;
   overflow: hidden;
   background-color: #000;
@@ -207,27 +210,29 @@ const HeroContent = styled.div`
   position: relative;
   z-index: 10;
   text-align: center;
-  padding: 0 2rem;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform-style: preserve-3d; // 追加：3D変換のサポート
+  justify-content: center;
 
   h1 {
+    width: 100%;
     color: white;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     line-height: 1;
     margin-bottom: 1.5rem;
+    text-align: center;
   }
 
   @media (max-width: 768px) {
-    text-align: center; /* 左揃えから中央揃えに変更 */
-    padding-left: 2rem;
+    text-align: center;
+    padding: 0 1rem;
   }
 `;
 
