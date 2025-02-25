@@ -25,11 +25,12 @@
             "caption": "How to Crack",
             "caption_ja": "クラッキングのやり方",
             "content": [
-                "There is a way to run this code with bat, but it got out of control, so I will introduce a way to run it with python, which is slower and still manageable.",
-                "First, copy this code.",
+                "There is a way to execute it with bat, but it couldn't be stopped, so here is a method using python which runs a bit slower but is still manageable.",
+                "`py -m pip install pyautogui`",
+                "Run this to install the necessary modules.",
+                "Then, copy and execute this code.",
                 "$[IDturtle.py](python)",
-                "Then, run this code.",
-                "Now you can crack the SkyMenu menu."
+                "With this, you can crack the SkyMenu menu."
             ],
             "content_ja": [
                 "batで実行する方法もありますが、止めれなくなってしまったので、やや実行の遅く、まだ手に負える範囲で暴走するpythonでのやり方を紹介します。",
@@ -37,14 +38,20 @@
                 "を実行して、必要なモジュールをインストールします。",
                 "そして、このコードをコピーして実行。",
                 "$[IDturtle.py](python)",
-                "これで、SkyMenuのメニューをクラッキングすることができます。"
+                "これで、SkyMenuのメニューをクラッキングすることができます。",
+                "![画像1](/assets/skymenu/IMG_0514.jpeg)",
+                "![画像2](/assets/skymenu/IMG_0515.jpeg)"
             ]
         },
         {
-            "caption": "How to Crack",
-            "caption_ja": "クラッキングのやり方",
-            "content": ["SkyMenu is a web development project that allows users to create and manage their own menus."],
-            "content_ja": ["SkyMenuは、ユーザーが自分のメニューを作成して管理できるウェブ開発プロジェクトです。"]
+            "caption": "Mechanism",
+            "caption_ja": "仕組み",
+            "content": [
+                "pyautogui takes a screenshot of the page, moves the mouse to a place where the image of the button taken in advance matches to some extent, and clicks it."
+            ],
+            "content_ja": [
+                "pyautoguiで、ページのスクリーンショットを撮り、事前に撮っておいたボタンの画像とある程度適合するところにマウスを持っていき、クリックします。"
+            ]
         }
     ]
 }
