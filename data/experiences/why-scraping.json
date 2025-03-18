@@ -46,14 +46,28 @@
                 "It is incredibly challenging to proxy all diverse API URL representations (e.g., https://api.~ or //api.~).",
                 "An example code snippet is as follows:",
                 "$[why-scraping.js](javascripit)",
-                "Additionally, security measures like CSP and CSRF might block proxy execution."
+                "Additionally, security measures like CSP and CSRF might block proxy execution.",
+                "To rewrite all URLs, one would need to detect and replace each URL.",
+                "In the case of .env, using service workers might provide a minimal solution, but it is technically impractical.",
+                "The variety of modern libraries and frameworks, each with their own methods for detecting and replacing URLs, makes it extremely challenging and time-consuming.",
+                "Additionally, excessive scraping can be perceived as an attack, so it is necessary to proxy only the blocked URLs.",
+                "Initially, you must retrieve .html, .css, .js, and then rewrite URLs only as necessary.",
+                "Even if URL rewriting is possible, security protocols such as CSP and CSRF will stand in your way.",
+                "Moreover, many servers will reject improper data retrieval from suspicious domains (e.g., All Origins or proxy domains) as a defense against attacks."
             ],
             "content_ja": [
                 "フィルタリングソフトや拡張機能は、内部URLも検知します。iframeの使用でも同様の問題が発生します。",
                 "多様なAPI URLの記述方法（e.g., https://api.~ や //api.~）を全てプロキシ対応するのは非常に困難です。",
                 "例として以下のコードがあります：",
                 "$[why-scraping.js](javascripit)",
-                "また、CSP, CSRFなどのセキュリティ対策がプロキシの実行を阻む可能性があります。"
+                "また、CSP, CSRFなどのセキュリティ対策がプロキシの実行を阻む可能性があります。",
+                "全てのURLを書き換えるためには、URLを検知し、全て置き換える必要があります。",
+                ".envの場合、service workerなどでギリギリ対応できるかもしれませんが、技術的には不可能です。",
+                "現代の多種多様なライブラリやフレームワークがそれぞれ独自のURL検知・書き換え方法を持っており、それに対応するのは非常に骨が折れる作業です。",
+                "さらに、過剰なスクレイピングは攻撃と見なされる可能性があるため、ブロックされているURLのみをプロキシ化する必要があります。",
+                "まず、.html、.css、.jsなどを取得し、その中のURLを必要な分だけ書き換えます。",
+                "URLの書き換えができたとしても、CSPやCSRFなどのセキュリティ対策が立ちはだかります。",
+                "また、多くのサーバーでは、攻撃に備え、不審なドメイン（All Originsなどのプロキシドメインを含む）からの不適切なデータ取得を拒否します。"
             ]
         }
     ]
