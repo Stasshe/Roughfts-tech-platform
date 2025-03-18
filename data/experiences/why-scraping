@@ -1,0 +1,60 @@
+{
+    "id": "why-scraping",
+    "title": "All Origins API Limitations",
+    "title_ja": "なぜ動的サイトはスクレイピングで見れないのか",
+    "year": "2025",
+    "month": "3",
+    "date": "2025-03-18",
+    "category": "API Usage",
+    "techStack": ["API","scraping","why","],
+    "description": "An explanation of the limitations of All Origins API and related challenges with executing JS post-HTML retrieval.",
+    "description_ja": "All Origins APIの制約、およびHTML取得後にJSを実行する際の課題についての解説。",
+    "details": [
+        {
+            "caption": "Overview",
+            "caption_ja": "概要",
+            "content": [
+                "The All Origins API allows you to retrieve HTML, but does not allow you to execute JavaScript after retrieval.",
+                "This is the conclusion."
+            ],
+            "content_ja": [
+                "All Origins APIではHTMLの取得は可能ですが、取得後にJavaScriptを実行することはできません。",
+                "これが結論です。"
+            ]
+        },
+        {
+            "caption": "Dynamic Websites and Challenges",
+            "caption_ja": "動的サイトとその課題",
+            "content": [
+                "Dynamic websites utilize APIs (REST, GraphQL) or server-side scripts (e.g., Node.js's Express server, PHP, etc.) to continue updating content even after rendering pages in the browser.",
+                "Scripts executed on the browser side ultimately boil down to JavaScript.",
+                "Rendering methods like SSR and ISR dynamically generate all content using JavaScript.",
+                "Without executing `JavaScript`, only plain-colored pages are displayed."
+            ],
+            "content_ja": [
+                "動的サイトとは、API (REST, GraphQL) やサーバーサイドスクリプト（Node.jsのExpressサーバー、PHPなど）を利用して、ブラウザでページレンダリング後もコンテンツを更新し続ける仕組みです。",
+                "ブラウザ側でのスクリプト実行は、最終的にJavaScriptに集約されます。",
+                "SSRやISRなどのレンダリング方式では、全ての内容がJavaScriptによって動的に生成されます。",
+                "`JavaScript` の実行がないと、単色のページしか表示されません。"
+            ]
+        },
+        {
+            "caption": "Technical Limitations and Proxy Challenges",
+            "caption_ja": "技術的制約とプロキシの課題",
+            "content": [
+                "Filtering software or extensions detect internal URLs; similar issues occur with iframe usage.",
+                "It is incredibly challenging to proxy all diverse API URL representations (e.g., https://api.~ or //api.~).",
+                "An example code snippet is as follows:",
+                "$[why-scraping.js](javascripit)",
+                "Additionally, security measures like CSP and CSRF might block proxy execution."
+            ],
+            "content_ja": [
+                "フィルタリングソフトや拡張機能は、内部URLも検知します。iframeの使用でも同様の問題が発生します。",
+                "多様なAPI URLの記述方法（e.g., https://api.~ や //api.~）を全てプロキシ対応するのは非常に困難です。",
+                "例として以下のコードがあります：",
+                "$[why-scraping.js](javascripit)",
+                "また、CSP, CSRFなどのセキュリティ対策がプロキシの実行を阻む可能性があります。"
+            ]
+        }
+    ]
+}
