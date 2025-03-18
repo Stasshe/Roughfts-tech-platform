@@ -6,7 +6,7 @@
     "month": "3",
     "date": "2025-03-18",
     "category": "API Usage",
-    "techStack": ["API","scraping","why","],
+    "techStack": ["API","scraping","why","tech","school","restrictions"],
     "description": "An explanation of the limitations of All Origins API and related challenges with executing JS post-HTML retrieval.",
     "description_ja": "All Origins APIの制約、およびHTML取得後にJSを実行する際の課題についての解説。",
     "details": [
