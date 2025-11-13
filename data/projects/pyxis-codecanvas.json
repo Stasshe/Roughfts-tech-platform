@@ -1,0 +1,230 @@
+{
+  "id": "pyxis-codecanvas",
+  "title": "Pyxis - Client Side Code Editor",
+  "title_ja": "Pyxis - クライアントサイドコードエディタ",
+  "description": "A lightweight, browser-based IDE designed for iPad with 1-second startup, supporting 18 languages. Features Git integration, Node.js/TypeScript runtime, Markdown/Mermaid/LaTeX support, and live reload for web development.",
+  "description_ja": "iPad向けに設計された1秒起動の軽量ブラウザIDEで、18ヶ国語対応。Git統合、Node.js/TypeScriptランタイム、Markdown/Mermaid/LaTeXサポート、ライブリロード機能を搭載。",
+  "techStack": [
+    "Next.js 15",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS",
+    "Monaco Editor",
+    "xterm.js",
+    "Tauri",
+    "IndexedDB",
+    "Lightning FS",
+    "isomorphic-git",
+    "node-stdlib-browser",
+    "Babel Standalone"
+  ],
+  "features": [
+    {
+      "title": "Multi-language Support",
+      "title_ja": "多言語対応",
+      "details": [
+        "18 languages supported globally",
+        "日本語 • English • 中文 • 繁體中文 • 한국어 • Español • Français • Deutsch • Italiano • Português • Русский • Nederlands • Türkçe • العربية • हिन्दी • ไทย • Tiếng Việt • Bahasa Indonesia • Svenska • Polski"
+      ],
+      "details_ja": [
+        "世界18ヶ国語に対応",
+        "日本語 • English • 中文 • 繁體中文 • 한국어 • Español • Français • Deutsch • Italiano • Português • Русский • Nederlands • Türkçe • العربية • हिन्दी • ไทย • Tiếng Việt • Bahasa Indonesia • Svenska • Polski"
+      ]
+    },
+    {
+      "title": "Rich Document Creation",
+      "title_ja": "リッチドキュメント作成",
+      "details": [
+        "Markdown editor with real-time preview",
+        "Mermaid diagram support for flowcharts",
+        "LaTeX mathematical expression rendering",
+        "Perfect for technical documentation and blog writing"
+      ],
+      "details_ja": [
+        "リアルタイムプレビュー付きMarkdownエディタ",
+        "Mermaidによるフローチャート・図表作成",
+        "LaTeX数式の完璧なレンダリング",
+        "技術文書やブログ執筆に最適"
+      ]
+    },
+    {
+      "title": "Live Reload",
+      "title_ja": "ライブリロード",
+      "details": [
+        "HTML/CSS/JS instant browser reflection",
+        "No setup required for quick web development",
+        "Custom implementation without WebContainer for speed"
+      ],
+      "details_ja": [
+        "HTML/CSS/JSの即座にブラウザ反映",
+        "セットアップ不要で素早いWeb開発",
+        "WebContainer不要の独自実装による高速リロード"
+      ]
+    },
+    {
+      "title": "Git Version Control & GitHub Integration",
+      "title_ja": "Gitバージョン管理・GitHub連携",
+      "details": [
+        "Visual diff, branch operations, merge, reset",
+        "Export with .git directory included",
+        "GitHub push/pull with PAT authentication",
+        "Safe learning environment for Git beginners"
+      ],
+      "details_ja": [
+        "ビジュアル差分、ブランチ操作、マージ、リセット",
+        ".git込みでのエクスポート機能",
+        "PAT認証によるGitHubへのpush/pull",
+        "初心者のGit学習に最適な安全環境"
+      ]
+    },
+    {
+      "title": "AI Assistant",
+      "title_ja": "AIアシスタント",
+      "details": [
+        "Code diff suggestions and adoption support",
+        "Ask & Edit functionality for efficient development",
+        "Context preservation while working with files"
+      ],
+      "details_ja": [
+        "コード差分の提案・採用サポート",
+        "Ask & Edit機能で効率的な開発",
+        "ファイルを開いたままコンテキスト保持"
+      ]
+    },
+    {
+      "title": "Node.js & TypeScript Runtime",
+      "title_ja": "Node.js & TypeScriptランタイム",
+      "details": [
+        "Custom implementation without WASM",
+        "TypeScript execution via Babel Standalone",
+        "File operations (fs, readline, userinterface)",
+        "Instant execution with zero compile time"
+      ],
+      "details_ja": [
+        "WASMを使わない独自実装",
+        "Babel StandaloneによるTypeScript実行",
+        "ファイル操作対応（fs, readline, userinterface）",
+        "コンパイル不要の瞬時実行"
+      ]
+    },
+    {
+      "title": "Advanced Shell System",
+      "title_ja": "高度なシェルシステム",
+      "details": [
+        "Full POSIX shell script support in browser",
+        "Pipeline processing (cmd1 | cmd2 | cmd3)",
+        "Complete redirection support (>, >>, <, 2>&1)",
+        "Control structures (if/then/else, for/while loops)",
+        "Variable expansion ($VAR, $(command), $((arithmetic)))",
+        "StreamShell architecture for memory-efficient data flow"
+      ],
+      "details_ja": [
+        "ブラウザ上で本格的なPOSIX準拠シェル実行",
+        "パイプライン処理（cmd1 | cmd2 | cmd3）",
+        "完全なリダイレクション対応（>, >>, <, 2>&1）",
+        "制御構文（if/then/else、for/whileループ）",
+        "変数展開（$VAR、$(command)、$((算術))）",
+        "メモリ効率の高いStreamShellアーキテクチャ"
+      ]
+    },
+    {
+      "title": "Extension System",
+      "title_ja": "拡張機能システム",
+      "details": [
+        "CLI template generation with pnpm run create-extension",
+        "Full npm library support",
+        "Terminal command extensions via API",
+        "VSCode-like UI extensions with custom tabs/sidebar panels",
+        "Language packs and service extensions",
+        "Safe sandboxed design with IndexedDB persistence"
+      ],
+      "details_ja": [
+        "pnpm run create-extensionでCLIテンプレート生成",
+        "npmライブラリ完全対応",
+        "APIによるTerminalコマンド拡張",
+        "カスタムタブ・サイドバーパネルのVSCodeライクUI拡張",
+        "多言語パック・サービス拡張",
+        "IndexedDB永続化による安全なサンドボックス設計"
+      ]
+    },
+    {
+      "title": "Tauri Desktop Support",
+      "title_ja": "Tauriデスクトップ対応",
+      "details": [
+        "Native app for Windows/Mac/Linux",
+        "Same experience as web version on desktop",
+        "Works offline"
+      ],
+      "details_ja": [
+        "Windows/Mac/Linuxでネイティブアプリとして動作",
+        "Web版と同じ体験をデスクトップで",
+        "オフラインでも動作"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/pyxis/IMG_0033.png",
+    "/assets/pyxis/IMG_1470.png",
+    "/assets/pyxis/IMG_0034.png",
+    "/assets/pyxis/IMG_0035.png",
+    "/assets/pyxis/IMG_1469.png",
+    "/assets/pyxis/IMG_0126.png",
+    "/assets/pyxis/IMG_0113.png",
+    "/assets/pyxis/IMG_0117.png",
+    "/assets/pyxis/IMG_1467.png",
+    "/assets/pyxis/IMG_0048.png"
+  ],
+  "highlights": [
+    {
+      "title": "Startup Speed",
+      "title_ja": "起動速度",
+      "value": "1 sec",
+      "description": "Instant startup with serverless static hosting",
+      "description_ja": "サーバーレス静的ホスティングによる瞬間起動"
+    },
+    {
+      "title": "Languages",
+      "title_ja": "対応言語",
+      "value": "18",
+      "description": "Global language support",
+      "description_ja": "世界18ヶ国語対応"
+    },
+    {
+      "title": "Bundle Size",
+      "title_ja": "バンドルサイズ",
+      "value": "1.04MB",
+      "description": "Lightweight and fast",
+      "description_ja": "軽量・高速"
+    },
+    {
+      "title": "Platform",
+      "title_ja": "プラットフォーム",
+      "value": "Web/iPad/Desktop",
+      "description": "Works everywhere with Tauri support",
+      "description_ja": "Tauriサポートでどこでも動作"
+    }
+  ],
+  "architecture": {
+    "diagrams": [
+      {
+        "image": "/assets/pyxis/architecture-flow.svg",
+        "description": "Complete processing flow showing data management, file system operations, runtime execution, and extension system integration.",
+        "description_ja": "データ管理、ファイルシステム操作、ランタイム実行、拡張機能システム統合を示す完全な処理フロー。"
+      }
+    ]
+  },
+  "links": [
+    {
+      "type": "demo",
+      "url": "https://Stasshe.github.io/Pyxis-CodeCanvas"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/Stasshe/Pyxis-Client-Side-Code-Editor"
+    },
+    {
+      "type": "website",
+      "url": "https://pyxis-code.onrender.com"
+    }
+  ]
+}

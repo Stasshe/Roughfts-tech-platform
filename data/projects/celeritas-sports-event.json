@@ -1,0 +1,217 @@
+{
+  "id": "celeritas-sports-event",
+  "title": "Celeritas - Sports Event Web Manager",
+  "title_ja": "Celeritas - スポーツ祭運営Webシステム",
+  "description": "A comprehensive web management system for school sports events, solving operational challenges for both student organizers and participants. Features real-time score updates, schedule management, and tournament brackets with Firebase Realtime Database integration.",
+  "description_ja": "学校のスポーツ祭運営の課題を解決する総合Webシステム。リアルタイムスコア更新、スケジュール管理、トーナメント表示をFirebase Realtime Databaseで実現。生徒会と一般生徒の双方にメリットを提供。",
+  "techStack": [
+    "React v18",
+    "TypeScript",
+    "MUI Material",
+    "Firebase Realtime Database",
+    "Firebase Authentication",
+    "g-loot/react-tournament-brackets",
+    "i18n (国際化対応)",
+    "ExcelJS",
+    "SSG (Static Site Generation)"
+  ],
+  "features": [
+    {
+      "title": "Real-time Score Management",
+      "title_ja": "リアルタイムスコア管理",
+      "details": [
+        "Live score updates across all devices",
+        "Tournament bracket visualization",
+        "Automatic playoff progression tracking",
+        "Conflict resolution with version control system",
+        "Instant synchronization via Firebase Realtime Database"
+      ],
+      "details_ja": [
+        "全デバイスでのライブスコア更新",
+        "トーナメント表の可視化",
+        "プレーオフ進出状況の自動追跡",
+        "バージョン管理によるコンフリクト解決",
+        "Firebase Realtime Databaseによる即座の同期"
+      ]
+    },
+    {
+      "title": "Event & Schedule Management",
+      "title_ja": "行事・スケジュール管理",
+      "details": [
+        "Create and manage multiple sports events",
+        "Automated schedule generation",
+        "Competition creation and team assignment",
+        "Real-time schedule updates for all participants",
+        "Delay notifications and status updates"
+      ],
+      "details_ja": [
+        "複数のスポーツ行事の作成・管理",
+        "自動スケジュール生成",
+        "競技作成とチーム割り当て",
+        "全参加者へのリアルタイムスケジュール更新",
+        "遅延通知とステータス更新"
+      ]
+    },
+    {
+      "title": "Admin Operations",
+      "title_ja": "運営スタッフ機能",
+      "details": [
+        "Centralized admin dashboard",
+        "Complete event lifecycle management",
+        "Score entry and correction",
+        "Excel export for official records",
+        "Built-in operation help guide",
+        "Firebase Authentication for secure access"
+      ],
+      "details_ja": [
+        "集中管理ダッシュボード",
+        "行事全体のライフサイクル管理",
+        "スコア入力・修正",
+        "公式記録用のExcelエクスポート",
+        "操作ヘルプガイド内蔵",
+        "Firebase Authenticationによる安全なアクセス"
+      ]
+    },
+    {
+      "title": "Student Experience",
+      "title_ja": "生徒向け機能",
+      "details": [
+        "View-only access for all students",
+        "No need to visit match locations in hot weather",
+        "Real-time match status and location",
+        "Easy-to-read schedules and progression",
+        "Playoff qualification tracking"
+      ],
+      "details_ja": [
+        "全生徒向け閲覧専用アクセス",
+        "暑い中試合場所に行く必要なし",
+        "リアルタイム試合状況と場所確認",
+        "見やすいスケジュールと進行状況",
+        "プレーオフ進出状況の追跡"
+      ]
+    },
+    {
+      "title": "Security Design",
+      "title_ja": "セキュリティ設計",
+      "details": [
+        "Two-tier authorization: Admin staff & General students",
+        "No personal information stored (school policy compliance)",
+        "Firebase Authentication system",
+        "Simple permission structure for easy handover",
+        "Safe for student-led operations"
+      ],
+      "details_ja": [
+        "2層の権限管理：運営スタッフ・一般生徒",
+        "個人情報非保存（学校方針準拠）",
+        "Firebase Authenticationシステム",
+        "引き継ぎしやすいシンプルな権限構造",
+        "生徒主体運営に適した安全設計"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/celeritas/1cc65ccb-b9aa-4535-a266-708c00925508.png",
+    "/assets/celeritas/096ed6d6-a4a0-4060-9ad0-6423a11b5da4.png",
+    "/assets/celeritas/8b5ab6a4-8ea3-40c5-9a2d-0ecc745661ec.png"
+  ],
+  "highlights": [
+    {
+      "title": "Concurrent Connections",
+      "title_ja": "最大同時接続数",
+      "value": "~150",
+      "description": "Peak concurrent users during school event",
+      "description_ja": "学校行事時のピーク同時接続数"
+    },
+    {
+      "title": "Production Success",
+      "title_ja": "本番稼働",
+      "value": "100%",
+      "description": "Zero incidents during live operation",
+      "description_ja": "本番稼働時のインシデントゼロ"
+    },
+    {
+      "title": "User Satisfaction",
+      "title_ja": "ユーザー満足度",
+      "value": "Very High",
+      "description": "Overwhelming support from staff, students, and teachers",
+      "description_ja": "運営スタッフ・生徒・教師から絶大な支持"
+    },
+    {
+      "title": "Workload Reduction",
+      "title_ja": "業務負荷削減",
+      "value": "Significant",
+      "description": "Eliminated manual tasks and late-night work for organizers",
+      "description_ja": "運営スタッフの手作業と夜間残業を解消"
+    }
+  ],
+  "architecture": {
+    "diagrams": [
+      {
+        "description": "Static site hosting on any platform with Firebase Realtime Database for data synchronization. Conflict resolution via version control system (_version field). ExcelJS for official record exports.",
+        "description_ja": "任意のプラットフォームでの静的サイトホスティング、Firebase Realtime Databaseによるデータ同期。バージョン管理システム（_versionフィールド）によるコンフリクト解決。ExcelJSによる公式記録エクスポート。"
+      }
+    ]
+  },
+  "problemSolution": {
+    "problems": [
+      {
+        "category": "Student Council",
+        "category_ja": "生徒会",
+        "issues": [
+          "Manual creation overload and task concentration",
+          "Short preparation period (right after sports festival)",
+          "Staff working until 8 PM due to workload",
+          "Frequent mistakes from insufficient verification",
+          "Latest manual location unknown",
+          "Poor handover process (right after 3rd-year retirement)"
+        ],
+        "issues_ja": [
+          "マニュアル作成などのタスク過多と作業集中",
+          "準備期間の短さ（体育祭直後）",
+          "作業負荷で夜8時まで残業",
+          "確認不足による頻繁なミス",
+          "最新マニュアルの所在不明",
+          "引き継ぎ不備（3年生引退直後）"
+        ]
+      },
+      {
+        "category": "General Students",
+        "category_ja": "一般生徒",
+        "issues": [
+          "Difficult to check match status (need to go to match location in heat)",
+          "Unknown progress and delay times",
+          "Hard-to-read schedules",
+          "Difficult to track playoff qualification"
+        ],
+        "issues_ja": [
+          "試合状況確認が困難（暑い中、試合場所まで行く必要）",
+          "進行状況・遅延時間が不明",
+          "予定表が見づらい",
+          "プレーオフ進出状況の把握困難"
+        ]
+      }
+    ],
+    "solutions": [
+      "Cloud management with real-time data updates",
+      "Automated schedule generation and Excel exports",
+      "Real-time score updates visible to all students",
+      "Built-in help pages to reduce handover burden",
+      "Simple authorization design for easy management",
+      "Successful beta testing with feedback incorporation"
+    ],
+    "solutions_ja": [
+      "クラウド管理とリアルタイムデータ更新",
+      "自動スケジュール生成とExcelエクスポート",
+      "全生徒が閲覧可能なリアルタイムスコア更新",
+      "引き継ぎ負担軽減のための操作ヘルプページ内蔵",
+      "管理しやすいシンプルな権限設計",
+      "フィードバックを取り入れたベータテスト成功"
+    ]
+  },
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/Stasshe/Celeritas-sports-event-web-manager"
+    }
+  ]
+}
