@@ -18,6 +18,7 @@ export interface Project {
     details_ja: string[];
   }[];
   images: string[];
+  coverImage?: string;
   highlights?: {
     title: string;
     title_ja: string;

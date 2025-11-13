@@ -57,6 +57,7 @@ class ProjectData {
       ...project,
       title: project.title_ja,
       description: project.description_ja,
+      coverImage: project.coverImage,
       features: project.features.map(feature => ({
         ...feature,
         title: feature.title_ja,

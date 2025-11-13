@@ -110,14 +110,28 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
             ←Return to Works
           </Link>
         </motion.div>
-        <Header
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h1>{workContent.title}</motion.h1>
-          <motion.p>{workContent.description}</motion.p>
-        </Header>
+        {workContent.coverImage ? (
+          <Cover
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{ backgroundImage: `url(${workContent.coverImage})` }}
+          >
+            <CoverOverlay>
+              <motion.h1>{workContent.title}</motion.h1>
+              <motion.p>{workContent.description}</motion.p>
+            </CoverOverlay>
+          </Cover>
+        ) : (
+          <Header
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h1>{workContent.title}</motion.h1>
+            <motion.p>{workContent.description}</motion.p>
+          </Header>
+        )}
 
         {workContent.highlights && (
           <HighlightsSection>
@@ -137,17 +151,19 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
         )}
 
         <ImageGallery>
-          {workContent.images.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.2 }}
-              onClick={() => setSelectedImage(image)}
-            >
-              <GalleryImage src={image} alt={`${workContent.title} screenshot ${index + 1}`} />
-            </motion.div>
-          ))}
+          {workContent.images
+            .filter(img => img !== workContent.coverImage)
+            .map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.2 }}
+                onClick={() => setSelectedImage(image)}
+              >
+                <GalleryImage src={image} alt={`${workContent.title} screenshot ${index + 1}`} />
+              </motion.div>
+            ))}
         </ImageGallery>
 
         {workContent.architecture && (
@@ -320,6 +336,43 @@ const Header = styled(motion.div)`
     opacity: 0.8;
     max-width: 800px;
     margin: 0 auto;
+  }
+`;
+
+const Cover = styled(motion.div)`
+  height: 360px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+`;
+
+const CoverOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45));
+  color: #fff;
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 900px;
+    text-align: center;
   }
 `;
 

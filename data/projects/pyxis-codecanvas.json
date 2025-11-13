@@ -5,6 +5,7 @@
   "description": "A lightweight, browser-based IDE designed for iPad with 1-second startup, supporting 18 languages. Features Git integration, Node.js/TypeScript runtime, Markdown/Mermaid/LaTeX support, and live reload for web development.",
   "description_ja": "iPad向けに設計された1秒起動の軽量ブラウザIDEで、18ヶ国語対応。Git統合、Node.js/TypeScriptランタイム、Markdown/Mermaid/LaTeXサポート、ライブリロード機能を搭載。",
   "featured": true,
+  "coverImage": "/assets/pyxis/IMG_0021.png",
   "techStack": [
     "Next.js 15",
     "React 19",
