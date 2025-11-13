@@ -3,6 +3,8 @@ import { ProjectContent, WorkContent } from '../types/content';
 // プロジェクト名（.jsonを除く）をリストにする
 const projectNames = [
   'lists',
+  'pyxis-codecanvas',
+  'celeritas-sports-event',
   'ventus-talk',
   'prime-cube',
   'shogi-app',

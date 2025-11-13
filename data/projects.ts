@@ -27,6 +27,8 @@ export interface Project {
 
 export const projects = [
   require('./projects/lists.json'),
+  require('./projects/pyxis-codecanvas.json'),
+  require('./projects/celeritas-sports-event.json'),
   require('./projects/edu-open-4step.json'),
   require('./projects/shogi-app.json'),
   require('./projects/bookmarklet-developer.json'),
