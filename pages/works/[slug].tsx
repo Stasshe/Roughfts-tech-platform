@@ -99,6 +99,10 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
     return parts;
   };
 
+  // カバー画像の決定: 明示的な coverImage があればそれを使い、なければ images[0] を使う
+  const coverSrc: string | null = workContent.coverImage || (workContent.images && workContent.images.length ? workContent.images[0] : null);
+  const hasExplicitCover = !!workContent.coverImage;
+
   return (
     <Layout>
       <WorkContainer>
@@ -110,12 +114,12 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
             ←Return to Works
           </Link>
         </motion.div>
-        {workContent.coverImage ? (
+        {coverSrc ? (
           <Cover
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            style={{ backgroundImage: `url(${workContent.coverImage})` }}
+            style={{ backgroundImage: `url(${coverSrc})` }}
           >
             <CoverOverlay>
               <motion.h1>{workContent.title}</motion.h1>
@@ -152,7 +156,7 @@ const WorkDetailPage = ({ workContent: initialWorkContent }: WorkDetailPageProps
 
         <ImageGallery>
           {workContent.images
-            .filter(img => img !== workContent.coverImage)
+            .filter(img => (hasExplicitCover ? img !== workContent.coverImage : true))
             .map((image, index) => (
               <motion.div
                 key={index}
