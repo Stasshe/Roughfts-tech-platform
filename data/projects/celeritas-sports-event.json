@@ -4,6 +4,7 @@
   "title_ja": "Celeritas - スポーツ祭運営Webシステム",
   "description": "A comprehensive web management system for school sports events, solving operational challenges for both student organizers and participants. Features real-time score updates, schedule management, and tournament brackets with Firebase Realtime Database integration.",
   "description_ja": "学校のスポーツ祭運営の課題を解決する総合Webシステム。リアルタイムスコア更新、スケジュール管理、トーナメント表示をFirebase Realtime Databaseで実現。生徒会と一般生徒の双方にメリットを提供。",
+  "featured": true,
   "techStack": [
     "React v18",
     "TypeScript",
