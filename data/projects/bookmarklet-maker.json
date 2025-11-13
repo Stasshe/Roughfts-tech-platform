@@ -1,0 +1,61 @@
+{
+  "id": "bookmarklet-maker",
+  "slug": "bookmarklet-maker",
+  "title": "BookMarkLet Maker",
+  "title_ja": "ブックマークレットメーカー",
+  "description": "Create, edit and manage bookmarklets with an intuitive web UI. Generate minified bookmarklet code, preview it, and copy it to your browser bookmarks quickly.",
+  "description_ja": "直感的なWeb UIでブックマークレットを作成・編集・管理するツール。生成したコードは最適化・縮小され、すぐにブックマークへ保存できます。",
+  "date": "2024-09-01",
+  "featured": false,
+  "tags": ["bookmarklet", "tool", "javascript", "web"],
+  "techStack": [
+    "React",
+    "TypeScript",
+    "Next.js",
+    "Vercel"
+  ],
+  "features": [
+    {
+      "title": "Visual editor",
+      "title_ja": "ビジュアルエディタ",
+      "details": [
+        "Drag & drop code snippets",
+        "Live preview on target pages",
+        "Export minified bookmarklet code"
+      ],
+      "details_ja": [
+        "コードスニペットのドラッグ＆ドロップ",
+        "ターゲットページでのライブプレビュー",
+        "最適化されたブックマークレットコードをエクスポート"
+      ]
+    },
+    {
+      "title": "Management",
+      "title_ja": "管理機能",
+      "details": [
+        "Save and edit created bookmarklets",
+        "Organize by tags and categories"
+      ],
+      "details_ja": [
+        "作成したブックマークレットの保存・編集",
+        "タグやカテゴリによる整理"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/bookmarklet-maker/IMG_0148.png",
+    "/assets/bookmarklet-maker/IMG_0149.png"
+  ],
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/Stasshe/BookMarkLetMaker",
+      "title": "GitHub"
+    },
+    {
+      "type": "live",
+      "url": "https://bookmarklet-maker.vercel.app/",
+      "title": "Live demo"
+    }
+  ]
+}

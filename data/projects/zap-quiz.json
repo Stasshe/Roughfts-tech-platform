@@ -1,0 +1,87 @@
+{
+  "id": "zap-quiz",
+  "title": "Zap!-Quiz",
+  "title_ja": "Zap!-Quiz",
+  "version": "1.4.2",
+  "description": "Zap!-Quiz is a real-time multiplayer online quiz application supporting buzzer-style and free-text questions, official curated quizzes (e.g. world/japanese history) and user-generated quizzes.",
+  "description_ja": "Zap!-Quizは、早押し形式や記述式に対応したリアルタイムマルチプレイヤーオンラインクイズアプリです。公式の体系的な問題とユーザー作成クイズの両方に対応します。",
+  "featured": false,
+  "coverImage": "/assets/zap-quiz/screenshot.png",
+  "techStack": [
+    "Next.js 15",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS",
+    "Firebase (Firestore, Authentication)",
+    "framer-motion",
+    "zustand",
+    "katex",
+    "js-yaml"
+  ],
+  "features": [
+    {
+      "title": "Real-time Multiplayer",
+      "title_ja": "リアルタイムマルチプレイヤー",
+      "details": [
+        "Buzzer-style fastest-responder system",
+        "Room leader model for stable game progression",
+        "Realtime synchronization via Firestore"
+      ],
+      "details_ja": [
+        "早押し（最速回答者）システム",
+        "ルームリーダーモデルによる安定した進行",
+        "Firestoreによるリアルタイム同期"
+      ]
+    },
+    {
+      "title": "Flexible Question Types",
+      "title_ja": "多様な出題形式",
+      "details": [
+        "Buzzer / multiple-choice / free-text answers",
+        "Support for multiple-correct forms (tolerant matching)"
+      ],
+      "details_ja": [
+        "早押し・選択式・記述式に対応",
+        "複数の正答パターン（表記ゆれ対応）を登録可能"
+      ]
+    },
+    {
+      "title": "Official & User Content",
+      "title_ja": "公式コンテンツとユーザー作成",
+      "details": [
+        "Curated official quizzes (world history, Japanese history)",
+        "User-generated quizzes with easy editor"
+      ],
+      "details_ja": [
+        "世界史・日本史などの体系的な公式問題",
+        "ユーザーが簡単にクイズを作成・共有可能"
+      ]
+    }
+  ],
+  "images": [
+    "/assets/zap-quiz/IMG_0146.png",
+    "/assets/zap-quiz/IMG_0147.png"
+  ],
+  "highlights": [
+    {
+      "title": "Realtime",
+      "title_ja": "リアルタイム",
+      "value": "Firestore sync",
+      "description": "Realtime game state and statistics",
+      "description_ja": "ゲーム状態と統計を即時に同期"
+    },
+    {
+      "title": "Architecture",
+      "title_ja": "アーキテクチャ",
+      "value": "Room leader model",
+      "description": "Distributed room leader based progression",
+      "description_ja": "分散型のルームリーダーモデルで安定した進行"
+    }
+  ],
+  "links": [
+    {
+      "type": "github",
+      "url": "https://github.com/Stasshe/Zap-Quiz"
+    }
+  ]
+}

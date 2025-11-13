@@ -37,6 +37,8 @@ export const projects = [
   require('./projects/kanji-journey.json'),
   require('./projects/prime-cube.json'),
   require('./projects/ventus-talk.json'),
+  require('./projects/bookmarklet-maker.json'),
+  require('./projects/zap-quiz.json'),
   require('./projects/python-filter.json'),
   require('./projects/novnc-virtual-browser.json')
 ];

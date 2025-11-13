@@ -11,6 +11,8 @@ const projectNames = [
   'edu-open-4step',
   'python-filter',
   'kanji-journey',
+  'zap-quiz',
+  'bookmarklet-maker',
   'bookmarklet-youtube',
   'bookmarklet-scraping',
   'bookmarklet-developer',
