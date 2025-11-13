@@ -210,7 +210,7 @@
   "architecture": {
     "diagrams": [
       {
-        "image": "/assets/pyxis/architecture-flow.svg",
+        "image": "/assets/pyxis/docs/pyxis-all.svg",
         "description": "Complete processing flow showing data management, file system operations, runtime execution, and extension system integration.",
         "description_ja": "データ管理、ファイルシステム操作、ランタイム実行、拡張機能システム統合を示す完全な処理フロー。"
       }
